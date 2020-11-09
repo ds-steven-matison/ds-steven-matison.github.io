@@ -1,0 +1,36 @@
+I"<h1 id="about-me">About Me</h1>
+
+<p><img src="/assets/images/SRM.png" alt="SRM" height="100" width="100" style="float: left; padding: 10px" /></p>
+
+<p>My name is Steven Matison and I am a Data Architect at DataStax. I began my journey at Datastax on 9/28/2020. 
+I am currently working on the following keytags: cassandra, astra, graph, graphql, nifi, nosqlbench, java, maven, stargate</p>
+
+<div style="clear: both"></div>
+
+<h1 id="find-me">Find Me</h1>
+
+<p>You can find me on Slacks:</p>
+<ul>
+  <li>@steven.matison datastax.slack.com</li>
+  <li>@steven.matison asf.slack.com</li>
+  <li>@steven.matison apachenifi.slack.com</li>
+  <li>@steven.matison nosqlbench.slack.com</li>
+</ul>
+
+<p>You can find me on Stacks:</p>
+<ul>
+  <li>https://stackoverflow.com/users/14215291/steven-matison</li>
+  <li>https://stackoverflow.com/users/4253286/steven-matison</li>
+</ul>
+
+<p>You can find me on Communities:</p>
+<ul>
+  <li>DataStax Community</li>
+  <li>Cloudera Community</li>
+</ul>
+
+<p>You can find me on Twitter:</p>
+<ul>
+  <li>@DsMatison</li>
+</ul>
+:ET

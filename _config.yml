@@ -1,5 +1,5 @@
-title: Architect theme
-description: Architect is a theme for GitHub Pages.
-show_downloads: true
+title: Data Architect
+description: A blog for my projects at Datastax
+show_downloads: false
 google_analytics:
 theme: jekyll-theme-architect

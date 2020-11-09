@@ -2,122 +2,31 @@
 layout: default
 ---
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
+# About Me
 
-[Link to another page](./another-page.html).
+![SRM](/assets/images/SRM.png){:height="100" width="100" style="float: left; padding: 10px"}
+ 
+My name is Steven Matison and I am a Data Architect at DataStax. I began my journey at Datastax on 9/28/2020. 
+I am currently working on the following keytags: cassandra, astra, graph, graphql, nifi, nosqlbench, java, maven, stargate
 
-There should be whitespace between paragraphs.
+<div style="clear: both"></div>
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+# Find Me
 
-# Header 1
+You can find me on Slacks:
+*   [@steven.matison on DataStax Slack](https://datastax.slack.com)
+*   [@steven.matison on ASF Slack](https://asf.slack.com)
+*   [@steven.matison on Apache NiFi Slack](https://apachenifi.slack.com)
+*   [@steven.matison on NoSqlBench Slack](https://nosqlbench.slack.com)
 
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+You can find me on Stacks:
+*   [ds-steven-matison](https://stackoverflow.com/users/14215291/ds-steven-matison)
+*   [steven-matison](https://stackoverflow.com/users/4253286/steven-matison)
 
-## Header 2
+You can find me on Communities:
+*   [DataStax Community](https://community.datastax.com/users/3254/ds-steven-matison.html)
+*   [Cloudera Community](https://community.cloudera.com/t5/user/viewprofilepage/user-id/60150)
 
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
+You can find me on Twitter:
+*   [@DsMatison](https://twitter.com/DsMatison)
 
-### Header 3
-
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
-```
-
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
-
-#### Header 4
-
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-
-##### Header 5
-
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
-
-###### Header 6
-
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-
-### There's a horizontal rule below this.
-
-* * *
-
-### Here is an unordered list:
-
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
-
-### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
-
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
-### Small image
-
-![Octocat](https://github.githubassets.com/images/icons/emoji/octocat.png)
-
-### Large image
-
-![Branching](https://guides.github.com/activities/hello-world/branching.png)
-
-
-### Definition lists can be used with HTML syntax.
-
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
-
-```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
-
-```
-The final element.
-```
