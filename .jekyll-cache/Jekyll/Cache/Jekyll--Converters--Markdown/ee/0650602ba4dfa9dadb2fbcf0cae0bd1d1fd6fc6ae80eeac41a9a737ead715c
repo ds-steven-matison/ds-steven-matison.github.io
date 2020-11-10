@@ -1,0 +1,84 @@
+I"@<h1 id="about-me">About Me</h1>
+
+<p><img src="/assets/images/SRM.png" alt="SRM" height="100" width="100" style="float: left; padding: 10px" /></p>
+
+<p>My name is Steven Matison and I am a Data Architect at DataStax. I began my journey at Datastax on 9/28/2020. 
+I am currently working in the following technologies: cassandra, astra, stargate, graph, graphql, nosqlbench, java, maven, docker,
+ansible, kubernetes, spark, nifi, kafka.</p>
+
+<div style="clear: both"></div>
+<h1 id="recent-posts">Recent Posts</h1>
+<div class="mui-container">
+    <div class="home mui-row">
+  <div class="mui-col-md-6">
+  
+    <article class="mui-panel">
+      <div class="bg-holder bg-deep-purple" style="">
+        <h2 class="post-list-title">
+          <a class="post-link" href="/2015/07/12/demo-post.html">Demo Post</a>
+        </h2>
+        
+        <a href="http://bitwiser.in/bitwiser-material/2015/07/12/demo-post.html" class="overlay"></a>
+      </div>
+      <div class="post-data">
+        <p class="post-excerpt">This demo page has been used from http://jasonm23.github.io/markdown-css-themes/.
+
+</p>
+        <div class="post-meta">
+            <time datetime="2015-07-12T01:55"><i class="fa fa-calendar"></i>July 12, 2015</time>
+        </div>
+        
+      </div>
+    </article>
+  
+    <article class="mui-panel">
+      <div class="bg-holder bg-purple" style="">
+        <h2 class="post-list-title">
+          <a class="post-link" href="/2015/07/12/color-choices.html">Color Choices</a>
+        </h2>
+        
+        <a href="http://bitwiser.in/bitwiser-material/2015/07/12/color-choices.html" class="overlay"></a>
+      </div>
+      <div class="post-data">
+        <p class="post-excerpt">Any of the following color values can be used as the value of color in the front matter of the blog post.
+
+    grey
+
+
+    orange
+
+
+</p>
+        <div class="post-meta">
+            <time datetime="2015-07-12T01:54"><i class="fa fa-calendar"></i>July 12, 2015</time>
+        </div>
+        
+      </div>
+    </article>
+  
+    <article class="mui-panel">
+      <div class="bg-holder bg-deep-purple" style="background:url(http://s3-ap-southeast-1.amazonaws.com/monster-machine/images/horssghonr-1436272011-Midas.jpg) no-repeat center center">
+        <h2 class="post-list-title">
+          <a class="post-link" href="/jekyll/update/2015/07/11/welcome-to-jekyll.html">Welcome to Jekyll!</a>
+        </h2>
+        <div class="img-overlay"></div>
+        <a href="http://bitwiser.in/bitwiser-material/jekyll/update/2015/07/11/welcome-to-jekyll.html" class="overlay"></a>
+      </div>
+      <div class="post-data">
+        <p class="post-excerpt">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.
+
+</p>
+        <div class="post-meta">
+            <time datetime="2015-07-11T13:50"><i class="fa fa-calendar"></i>July 11, 2015</time>
+        </div>
+        
+      </div>
+    </article>
+  
+</div>
+
+</div>
+
+    </div>
+
+:ET
