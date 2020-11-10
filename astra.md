@@ -2,6 +2,7 @@
 layout: default
 title: Datastax Astra
 description: A blog all about Datastax Astra Service
+permalink: /astra/
 ---
 
 Text can be **bold**, _italic_, or ~~strikethrough~~.
