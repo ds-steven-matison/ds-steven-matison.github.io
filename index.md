@@ -14,7 +14,7 @@ ansible, kubernetes, spark, nifi, kafka.
 
 <div style="clear: both"></div>
 <p>&nbsp;</p>
-# Recent Posts
+# Current Projects
 <p>&nbsp;</p>
 {% include front_page_articles.html %}
 
