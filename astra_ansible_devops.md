@@ -121,7 +121,6 @@ When you create a database above, the keyspace above will be automatically creat
   vars:
     astra_api_url: "https://api.astra.datastax.com/v2/databases/[cluster_id]/keyspaces/newKeyspace"
     astra_auth_token: "[token from devops_auth_post]"
-
   tasks:
     - name: add keyspace
       uri:

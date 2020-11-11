@@ -46,14 +46,182 @@
         <section id="main-content">
           <h1 id="asta-data-api">Asta Data API</h1>
 
-<p>The Astra Data API allows Astra users to</p>
+<p>The Astra Data API allows Astra users to take database level actions against tables, rows, and columns.  In order to use the Data API you will need some info from the DevOps API or the Astra UI.  You will need <span style="color: #d14;">[cluster_id]</span>, <span style="color: #d14;">[cluster_region]</span>, and the username and password for your database.</p>
 
 <h2 id="data-auth-post">Data Auth Post</h2>
 
-<p>Coming Soon</p>
+<p>Add your <span style="color: #d14;">[cluster_id]</span>, <span style="color: #d14;">[cluster_region]</span>, username and password then run the playbook and grab the authToken from the response.  You will use this token for <span style="color: #d14;">[token from data_auth_post]</span> in all playbook demos below.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
+  <span class="nx">connection</span><span class="p">:</span> <span class="nx">local</span>
+  <span class="nx">gather_facts</span><span class="p">:</span> <span class="nx">no</span>
+  <span class="nx">vars</span><span class="p">:</span>
+    <span class="nx">astra_rest_api_url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://[cluster_id]-[cluster_region].apps.astra.datastax.com/api/rest</span><span class="dl">"</span>
+    <span class="nx">astra_auth_request_body</span><span class="p">:</span>
+      <span class="nx">username</span><span class="p">:</span> <span class="dl">"</span><span class="s2">username</span><span class="dl">"</span>
+      <span class="nx">password</span><span class="p">:</span> <span class="dl">"</span><span class="s2">password</span><span class="dl">"</span>
+  <span class="nx">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">create</span> <span class="nx">auth</span>
+      <span class="nx">uri</span><span class="p">:</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_rest_api_url }}/v1/auth</span><span class="dl">"</span>
+        <span class="nx">method</span><span class="p">:</span> <span class="nx">POST</span>
+        <span class="nx">headers</span><span class="p">:</span>
+          <span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+        <span class="nx">body</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_auth_request_body | to_json }}</span><span class="dl">"</span>
+        <span class="nx">status_code</span><span class="p">:</span> <span class="mi">201</span>
+      <span class="nx">register</span><span class="p">:</span> <span class="nx">request_auth</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">debug</span>
+      <span class="nx">debug</span><span class="p">:</span>
+        <span class="kd">var</span><span class="p">:</span> <span class="nx">request_auth</span>
+</code></pre></div></div>
+
+<h2 id="data-get-keyspaces">Data Get Keyspaces</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
+  <span class="nx">connection</span><span class="p">:</span> <span class="nx">local</span>
+  <span class="nx">gather_facts</span><span class="p">:</span> <span class="nx">no</span>
+  <span class="nx">vars</span><span class="p">:</span>
+    <span class="nx">astra_rest_api_url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://[cluster_id]-[cluster_region].apps.astra.datastax.com/api/rest</span><span class="dl">"</span>
+    <span class="nx">astra_auth_token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[token from data_auth_post]</span><span class="dl">"</span>
+  <span class="nx">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="kd">get</span> <span class="nx">keyspaces</span>
+      <span class="nx">uri</span><span class="p">:</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_rest_api_url }}/v1/keyspaces</span><span class="dl">"</span>
+        <span class="nx">method</span><span class="p">:</span> <span class="nx">GET</span>
+        <span class="nx">headers</span><span class="p">:</span>
+          <span class="nx">Accept</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">X</span><span class="o">-</span><span class="nx">Cassandra</span><span class="o">-</span><span class="nx">Token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_auth_token }}</span><span class="dl">"</span>
+        <span class="nx">status_code</span><span class="p">:</span> <span class="mi">200</span>
+      <span class="nx">register</span><span class="p">:</span> <span class="nx">response_keyspaces</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">debug</span>
+      <span class="nx">debug</span><span class="p">:</span>
+        <span class="kd">var</span><span class="p">:</span> <span class="nx">response_keyspaces</span>
+</code></pre></div></div>
+
+<h2 id="data-create-table">Data Create Table</h2>
+
+<p>Creating a table requires the <span style="color: #d14;">[keyspace for table]</span> as well as the schema level information required for the table structure columns, key, and partition.  In the demo below I create a basic table just to show functionality.  Please refer to documentation for complete capability for complicated data models.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
+  <span class="nx">connection</span><span class="p">:</span> <span class="nx">local</span>
+  <span class="nx">gather_facts</span><span class="p">:</span> <span class="nx">no</span>
+  <span class="nx">vars</span><span class="p">:</span>
+    <span class="nx">astra_rest_api_url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://[cluster_id]-[cluster_region].apps.astra.datastax.com/api/rest</span><span class="dl">"</span>
+    <span class="nx">astra_auth_token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[token from data_auth_post]</span><span class="dl">"</span>
+    <span class="nx">astra_keyspace</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[keyspace for table]</span><span class="dl">"</span>
+    <span class="nx">astra_create_table</span><span class="p">:</span> 
+      <span class="nx">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">table_name</span><span class="dl">"</span>
+      <span class="nx">columnDefinitions</span><span class="p">:</span>
+        <span class="o">-</span> 
+          <span class="nx">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span>
+          <span class="nx">typeDefinition</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text</span><span class="dl">"</span>
+        <span class="o">-</span> 
+          <span class="nx">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span>
+          <span class="nx">typeDefinition</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text</span><span class="dl">"</span>
+      <span class="nx">primaryKey</span><span class="p">:</span> 
+        <span class="nx">partitionKey</span><span class="p">:</span>
+          <span class="o">-</span> <span class="nx">id</span>           
+  <span class="nx">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">create</span> <span class="nx">table</span>
+      <span class="nx">uri</span><span class="p">:</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_rest_api_url }}/v1/keyspaces/{{ astra_keyspace }}/tables</span><span class="dl">"</span>
+        <span class="nx">method</span><span class="p">:</span> <span class="nx">POST</span>
+        <span class="nx">headers</span><span class="p">:</span>
+          <span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">Accept</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">X</span><span class="o">-</span><span class="nx">Cassandra</span><span class="o">-</span><span class="nx">Token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_auth_token }}</span><span class="dl">"</span>
+        <span class="nx">body</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_create_table | to_json }}</span><span class="dl">"</span>
+        <span class="nx">status_code</span><span class="p">:</span> <span class="mi">201</span>
+      <span class="nx">register</span><span class="p">:</span> <span class="nx">response_table</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">debug</span>
+      <span class="nx">debug</span><span class="p">:</span>
+        <span class="kd">var</span><span class="p">:</span> <span class="nx">response_table</span>
+</code></pre></div></div>
+
+<h2 id="data-get-tables">Data Get Tables</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
+  <span class="nx">connection</span><span class="p">:</span> <span class="nx">local</span>
+  <span class="nx">gather_facts</span><span class="p">:</span> <span class="nx">no</span>
+  <span class="nx">vars</span><span class="p">:</span>
+    <span class="nx">astra_rest_api_url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://[cluster_id]-[cluster_region].apps.astra.datastax.com/api/rest</span><span class="dl">"</span>
+    <span class="nx">astra_auth_token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[token from data_auth_post]</span><span class="dl">"</span>
+    <span class="nx">astra_keyspace</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[keyspace for table]</span><span class="dl">"</span>
+  <span class="nx">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="kd">get</span> <span class="nx">tables</span>
+      <span class="nx">uri</span><span class="p">:</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_rest_api_url }}/v1/keyspaces/{{ astra_keyspace }}/tables</span><span class="dl">"</span>
+        <span class="nx">method</span><span class="p">:</span> <span class="nx">GET</span>
+        <span class="nx">headers</span><span class="p">:</span>
+          <span class="nx">Accept</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">X</span><span class="o">-</span><span class="nx">Cassandra</span><span class="o">-</span><span class="nx">Token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_auth_token }}</span><span class="dl">"</span>
+        <span class="nx">status_code</span><span class="p">:</span> <span class="mi">200</span>
+      <span class="nx">register</span><span class="p">:</span> <span class="nx">response_tables</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">debug</span>
+      <span class="nx">debug</span><span class="p">:</span>
+        <span class="kd">var</span><span class="p">:</span> <span class="nx">response_tables</span>
+</code></pre></div></div>
+
+<h2 id="data-get-table">Data Get Table</h2>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
 </code></pre></div></div>
+
+<h2 id="data-delete-table">Data Delete Table</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+</code></pre></div></div>
+
+<h2 id="data-add-rows">Data Add Rows</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+</code></pre></div></div>
+
+<h2 id="data-submit-queries">Data Submit Queries</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+</code></pre></div></div>
+
+<h2 id="data-retrieve-rows">Data Retrieve Rows</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+</code></pre></div></div>
+
+<h2 id="data-update-rows">Data Update Rows</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+</code></pre></div></div>
+
+<h2 id="data-delete-rows">Data Delete Rows</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+</code></pre></div></div>
+
+<h2 id="data-retrieve-columns">Data Retrieve Columns</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+</code></pre></div></div>
+
+<h2 id="data-add-column">Data Add Column</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+</code></pre></div></div>
+
+<h2 id="data-retrieve-column">Data Retrieve Column</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+</code></pre></div></div>
+
+<h2 id="data-update-column">Data Update Column</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+</code></pre></div></div>
+
+<h2 id="data-delete-column">Data Delete Column</h2>
 
         </section>
 
