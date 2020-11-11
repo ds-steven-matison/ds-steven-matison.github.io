@@ -5,122 +5,63 @@ description: A blog all about Datastax Astra Service
 permalink: /astra/
 ---
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
+# What is Astra?
 
-[Link to another page](./another-page.html).
+Astra is a Database As A Service provided by [Datastax](https://datastax.com) which allows creation of cassandra clusters on GCP, AWS, and Azure.  To get started with a new Astra Account click [here](https://astra.datastax.com/register).   You can complete your entire developer experience in the UI but for the sake of this blog I am going to show you how to use APIs and connect applications and services to Astra without using the UI as a main interface.  If you are looking for other examples of applications that integrate with Astra go [here](https://docs.astra.datastax.com/docs/sample-apps).  Documentation for astra can be found [here](https://docs.astra.datastax.com/docs/).  API Reference Documentation is found [here](https://docs.astra.datastax.com/reference).
 
-There should be whitespace between paragraphs.
+# Working with Astra
+<p>&nbsp;</p>
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+<div class="mui-container">
+    <div class="home mui-row">
 
-# Header 1
+      <div class="mui-col-md-2">
+        <article class="mui-panel">
+          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
+            <span class="post-list-title">
+              <a class="post-link" href="/astra/postman/">Postman</a>
+            </span>
+            <div class="img-overlay"></div>
+            <a href="/astra/postman/" class="overlay"></a>
+          </div>
+          <div class="post-data">
+            <p class="post-excerpt">Postman Tile</p>
+            <p><b>tags:</b> devops api, data api, get auth, create database, create keyspaces, add tables</p>
+          </div>
+        </article>
+    </div>
 
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+    <div class="mui-col-md-2">
+        <article class="mui-panel">
+          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
+            <span class="post-list-title">
+              <a class="post-link" href="/astra/ansible/">Ansible</a>
+            </span>
+            <div class="img-overlay"></div>
+            <a href="/astra/ansible/" class="overlay"></a>
+          </div>
+          <div class="post-data">
+            <p class="post-excerpt">Ansible Tile</p>
+            <p><b>tags:</b> create database, keyspaces, tables</p>
+          </div>
+        </article>
+    </div>
 
-## Header 2
+        <div class="mui-col-md-2">
+        <article class="mui-panel">
+          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
+            <span class="post-list-title">
+              <a class="post-link" href="/astra/nifi/">NiFi</a>
+            </span>
+            <div class="img-overlay"></div>
+            <a href="/astra/nifi/" class="overlay"></a>
+          </div>
+          <div class="post-data">
+            <p class="post-excerpt">NiFi Tile</p>
+            <p><b>tags:</b> Astra Native Cassandra Processors, Astra with InvokeHttp, Astra DistributedMapCache</p>
+          </div>
+        </article>
+    </div>
 
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
-
-### Header 3
-
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
-```
-
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
-
-#### Header 4
-
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-
-##### Header 5
-
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
-
-###### Header 6
-
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-
-### There's a horizontal rule below this.
-
-* * *
-
-### Here is an unordered list:
-
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
-
-### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
-
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
-### Small image
-
-![Octocat](https://github.githubassets.com/images/icons/emoji/octocat.png)
-
-### Large image
-
-![Branching](https://guides.github.com/activities/hello-world/branching.png)
-
-
-### Definition lists can be used with HTML syntax.
-
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
-
-```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
-
-```
-The final element.
-```
+  </div>
+</div>
