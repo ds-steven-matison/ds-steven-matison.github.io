@@ -4,6 +4,9 @@ description: A blog for my projects at Datastax
 layout: default
 ---
 
+
+![WARNING](/assets/images/warning.png){:height="50" width="50" align="absmiddle" style="padding: 10px"} Blog building in-progress, come back again soon as updates are happening on all areas.
+
 # About Me
 
 ![SRM](/assets/images/SRM.png){:height="100" width="100" style="float: left; padding: 10px"}

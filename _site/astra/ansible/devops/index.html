@@ -115,7 +115,7 @@
 
 <h2 id="devops-get-databases">DevOps Get Databases</h2>
 
-<p>In order to leverage api actions against a database, you need the database’s Cluster ID.  You can find this in the Astra UI or you can use this playbook to get the id.  You will need this ID for all <span style="color: #d14;">[cluster_id]</span> instances in further playbooks.</p>
+<p>In order to leverage api actions against a database, you need the database’s Cluster ID.  You can find this in the Astra UI or you can use this playbook to get the id.  You will need this ID for all <span style="color: #d14;">[astra database id]</span> instances in further playbooks.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
 <span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
@@ -169,37 +169,195 @@
 
 <h2 id="devops-reset-database-password">DevOps Reset Database Password</h2>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
+  <span class="nx">connection</span><span class="p">:</span> <span class="nx">local</span>
+  <span class="nx">gather_facts</span><span class="p">:</span> <span class="nx">no</span>
+  <span class="nx">vars</span><span class="p">:</span>
+    <span class="nx">astra_api_url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://api.astra.datastax.com/v2/databases</span><span class="dl">"</span>
+    <span class="nx">astra_auth_token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[token from devops_auth_post]</span><span class="dl">"</span>
+    <span class="nx">astra_database_id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[astra database id]</span><span class="dl">"</span>
+    <span class="nx">astra_user_password</span><span class="p">:</span>
+      <span class="nx">username</span><span class="p">:</span> <span class="dl">"</span><span class="s2">username</span><span class="dl">"</span>
+      <span class="nx">password</span><span class="p">:</span> <span class="dl">"</span><span class="s2">password</span><span class="dl">"</span>
+  <span class="nx">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">reset</span> <span class="nx">password</span>
+      <span class="nx">uri</span><span class="p">:</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_api_url }}/{{ astra_database_id }}/resetPassword</span><span class="dl">"</span>
+        <span class="nx">method</span><span class="p">:</span> <span class="nx">POST</span>
+        <span class="nx">headers</span><span class="p">:</span>
+          <span class="nx">Accept</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {{ astra_auth_token }}</span><span class="dl">"</span>
+        <span class="nx">body</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_user_password | to_json }}</span><span class="dl">"</span>
+        <span class="nx">status_code</span><span class="p">:</span> <span class="mi">202</span>
+      <span class="nx">register</span><span class="p">:</span> <span class="nx">response_password</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">debug</span>
+      <span class="nx">debug</span><span class="p">:</span>
+        <span class="kd">var</span><span class="p">:</span> <span class="nx">response_password</span>
 </code></pre></div></div>
 
 <h2 id="devops-resize-database">DevOps Resize Database</h2>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
+  <span class="nx">connection</span><span class="p">:</span> <span class="nx">local</span>
+  <span class="nx">gather_facts</span><span class="p">:</span> <span class="nx">no</span>
+  <span class="nx">vars</span><span class="p">:</span>
+    <span class="nx">astra_api_url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://api.astra.datastax.com/v2/databases</span><span class="dl">"</span>
+    <span class="nx">astra_auth_token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[token from devops_auth_post]</span><span class="dl">"</span>
+    <span class="nx">astra_database_id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[astra database id]</span><span class="dl">"</span>
+    <span class="nx">astra_resize_database</span><span class="p">:</span>
+      <span class="nx">capacityUnits</span><span class="p">:</span> <span class="mi">3</span>
+  <span class="nx">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">resize</span> <span class="nx">database</span>
+      <span class="nx">uri</span><span class="p">:</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_api_url }}/{{ astra_database_id }}/resize</span><span class="dl">"</span>
+        <span class="nx">method</span><span class="p">:</span> <span class="nx">POST</span>
+        <span class="nx">headers</span><span class="p">:</span>
+          <span class="nx">Accept</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {{ astra_auth_token }}</span><span class="dl">"</span>
+        <span class="nx">body</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_resize_database | to_json }}</span><span class="dl">"</span>
+        <span class="nx">status_code</span><span class="p">:</span> <span class="mi">202</span>
+      <span class="nx">register</span><span class="p">:</span> <span class="nx">response_resize</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">debug</span>
+      <span class="nx">debug</span><span class="p">:</span>
+        <span class="kd">var</span><span class="p">:</span> <span class="nx">response_resize</span>
 </code></pre></div></div>
 
 <h2 id="devops-park-database">DevOps Park Database</h2>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
+  <span class="nx">connection</span><span class="p">:</span> <span class="nx">local</span>
+  <span class="nx">gather_facts</span><span class="p">:</span> <span class="nx">no</span>
+  <span class="nx">vars</span><span class="p">:</span>
+    <span class="nx">astra_api_url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://api.astra.datastax.com/v2/databases</span><span class="dl">"</span>
+    <span class="nx">astra_auth_token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[token from devops_auth_post]</span><span class="dl">"</span>
+    <span class="nx">astra_database_id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[astra database id]</span><span class="dl">"</span>
+  <span class="nx">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">park</span> <span class="nx">database</span>
+      <span class="nx">uri</span><span class="p">:</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_api_url }}/{{ astra_database_id }}/park</span><span class="dl">"</span>
+        <span class="nx">method</span><span class="p">:</span> <span class="nx">POST</span>
+        <span class="nx">headers</span><span class="p">:</span>
+          <span class="nx">Accept</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {{ astra_auth_token }}</span><span class="dl">"</span>
+        <span class="nx">body</span><span class="p">:</span> <span class="dl">""</span>
+        <span class="nx">status_code</span><span class="p">:</span> <span class="mi">202</span>
+      <span class="nx">register</span><span class="p">:</span> <span class="nx">response_park</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">debug</span>
+      <span class="nx">debug</span><span class="p">:</span>
+        <span class="kd">var</span><span class="p">:</span> <span class="nx">response_park</span>
 </code></pre></div></div>
 
 <h2 id="devops-unpark-database">DevOps Unpark Database</h2>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
+  <span class="nx">connection</span><span class="p">:</span> <span class="nx">local</span>
+  <span class="nx">gather_facts</span><span class="p">:</span> <span class="nx">no</span>
+  <span class="nx">vars</span><span class="p">:</span>
+    <span class="nx">astra_api_url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://api.astra.datastax.com/v2/databases</span><span class="dl">"</span>
+    <span class="nx">astra_auth_token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[token from devops_auth_post]</span><span class="dl">"</span>
+    <span class="nx">astra_database_id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[astra database id]</span><span class="dl">"</span>
+  <span class="nx">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">unpark</span> <span class="nx">database</span>
+      <span class="nx">uri</span><span class="p">:</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_api_url }}/{{ astra_database_id }}/unpark</span><span class="dl">"</span>
+        <span class="nx">method</span><span class="p">:</span> <span class="nx">POST</span>
+        <span class="nx">headers</span><span class="p">:</span>
+          <span class="nx">Accept</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {{ astra_auth_token }}</span><span class="dl">"</span>
+        <span class="nx">body</span><span class="p">:</span> <span class="dl">""</span>
+        <span class="nx">status_code</span><span class="p">:</span> <span class="mi">202</span>
+      <span class="nx">register</span><span class="p">:</span> <span class="nx">response_unpark</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">debug</span>
+      <span class="nx">debug</span><span class="p">:</span>
+        <span class="kd">var</span><span class="p">:</span> <span class="nx">response_unpark</span>
 </code></pre></div></div>
 
 <h2 id="devops-terminate-database">DevOps Terminate Database</h2>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
+  <span class="nx">connection</span><span class="p">:</span> <span class="nx">local</span>
+  <span class="nx">gather_facts</span><span class="p">:</span> <span class="nx">no</span>
+  <span class="nx">vars</span><span class="p">:</span>
+    <span class="nx">astra_api_url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://api.astra.datastax.com/v2/databases</span><span class="dl">"</span>
+    <span class="nx">astra_auth_token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[token from devops_auth_post]</span><span class="dl">"</span>
+    <span class="nx">astra_database_id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[astra database id]</span><span class="dl">"</span>
+  <span class="nx">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">terminate</span> <span class="nx">database</span>
+      <span class="nx">uri</span><span class="p">:</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_api_url }}/{{ astra_database_id }}/terminate</span><span class="dl">"</span>
+        <span class="nx">method</span><span class="p">:</span> <span class="nx">POST</span>
+        <span class="nx">headers</span><span class="p">:</span>
+          <span class="nx">Accept</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {{ astra_auth_token }}</span><span class="dl">"</span>
+        <span class="nx">body</span><span class="p">:</span> <span class="dl">""</span>
+        <span class="nx">status_code</span><span class="p">:</span> <span class="mi">202</span>
+      <span class="nx">register</span><span class="p">:</span> <span class="nx">response_terminate</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">debug</span>
+      <span class="nx">debug</span><span class="p">:</span>
+        <span class="kd">var</span><span class="p">:</span> <span class="nx">response_terminate</span>
 </code></pre></div></div>
 
 <h2 id="devops-get-secure-bundle-url">DevOps Get Secure Bundle URL</h2>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
+  <span class="nx">connection</span><span class="p">:</span> <span class="nx">local</span>
+  <span class="nx">gather_facts</span><span class="p">:</span> <span class="nx">no</span>
+  <span class="nx">vars</span><span class="p">:</span>
+    <span class="nx">astra_api_url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://api.astra.datastax.com/v2/databases</span><span class="dl">"</span>
+    <span class="nx">astra_auth_token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[token from devops_auth_post]</span><span class="dl">"</span>
+    <span class="nx">astra_database_id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[astra database id]</span><span class="dl">"</span>
+  <span class="nx">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="kd">get</span> <span class="nx">bundle</span>
+      <span class="nx">uri</span><span class="p">:</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_api_url }}/{{ astra_database_id }}/secureBundleURL</span><span class="dl">"</span>
+        <span class="nx">method</span><span class="p">:</span> <span class="nx">POST</span>
+        <span class="nx">headers</span><span class="p">:</span>
+          <span class="nx">Accept</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {{ astra_auth_token }}</span><span class="dl">"</span>
+        <span class="nx">body</span><span class="p">:</span> <span class="dl">""</span>
+        <span class="nx">status_code</span><span class="p">:</span> <span class="mi">200</span>
+      <span class="nx">register</span><span class="p">:</span> <span class="nx">response_bundle</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">debug</span>
+      <span class="nx">debug</span><span class="p">:</span>
+        <span class="kd">var</span><span class="p">:</span> <span class="nx">response_bundle</span>
 </code></pre></div></div>
 
 <h2 id="devops-get-supported-regions">DevOps Get Supported Regions</h2>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
+  <span class="nx">connection</span><span class="p">:</span> <span class="nx">local</span>
+  <span class="nx">gather_facts</span><span class="p">:</span> <span class="nx">no</span>
+  <span class="nx">vars</span><span class="p">:</span>
+    <span class="nx">astra_api_url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://api.astra.datastax.com/v2/availableRegions</span><span class="dl">"</span>
+    <span class="nx">astra_auth_token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[token from devops_auth_post]</span><span class="dl">"</span>
+  <span class="nx">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="k">return</span> <span class="nx">regions</span>
+      <span class="nx">uri</span><span class="p">:</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_api_url }}</span><span class="dl">"</span>
+        <span class="nx">method</span><span class="p">:</span> <span class="nx">GET</span>
+        <span class="nx">headers</span><span class="p">:</span>
+          <span class="nx">Accept</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {{ astra_auth_token }}</span><span class="dl">"</span>
+        <span class="nx">body</span><span class="p">:</span> <span class="dl">""</span>
+        <span class="nx">status_code</span><span class="p">:</span> <span class="mi">200</span>
+      <span class="nx">register</span><span class="p">:</span> <span class="nx">response_regions</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">debug</span>
+      <span class="nx">debug</span><span class="p">:</span>
+        <span class="kd">var</span><span class="p">:</span> <span class="nx">response_regions</span>
 </code></pre></div></div>
 
         </section>

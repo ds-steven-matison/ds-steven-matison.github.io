@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Datastax Astra
+title: Astra
 description: A blog all about Datastax Astra Service
 permalink: /astra/
 ---
