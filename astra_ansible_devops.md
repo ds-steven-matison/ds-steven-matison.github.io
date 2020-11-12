@@ -208,7 +208,8 @@ When you create a database above, the keyspace above will be automatically creat
 ## DevOps Unpark Database
 
 {% raw %}
-```js---
+```js
+---
 - hosts: localhost
   connection: local
   gather_facts: no
