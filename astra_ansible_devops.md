@@ -81,7 +81,7 @@ Add your Service Account details to astra_auth_request_body, run the playbook, a
 {% endraw %}
 ## DevOps Get Databases
 
-In order to leverage api actions against a database, you need the database's Cluster ID.  You can find this in the Astra UI or you can use this playbook to get the id.  You will need this ID for all <span style="color: #d14;">[cluster_id]</span> instances in further playbooks.
+In order to leverage api actions against a database, you need the database's Cluster ID.  You can find this in the Astra UI or you can use this playbook to get the id.  You will need this ID for all <span style="color: #d14;">[astra database id]</span> instances in further playbooks.
 
 {% raw %}
 ```js
@@ -141,7 +141,32 @@ When you create a database above, the keyspace above will be automatically creat
 
 {% raw %}
 ```js
-
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    astra_api_url: "https://api.astra.datastax.com/v2/databases"
+    astra_auth_token: "[token from devops_auth_post]"
+    astra_database_id: "[astra database id]"
+    astra_user_password:
+      username: "username"
+      password: "password"
+  tasks:
+    - name: reset password
+      uri:
+        url: "{{ astra_api_url }}/{{ astra_database_id }}/resetPassword"
+        method: POST
+        headers:
+          Accept: "application/json"
+          Content-Type: "application/json"
+          Authorization: "Bearer {{ astra_auth_token }}"
+        body: "{{ astra_user_password | to_json }}"
+        status_code: 202
+      register: response_password
+    - name: debug
+      debug:
+        var: response_password
 ```
 {% endraw %}
 ## DevOps Resize Database
@@ -155,34 +180,142 @@ When you create a database above, the keyspace above will be automatically creat
 
 {% raw %}
 ```js
-
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    astra_api_url: "https://api.astra.datastax.com/v2/databases"
+    astra_auth_token: "[token from devops_auth_post]"
+    astra_database_id: "[astra database id]"
+  tasks:
+    - name: park database
+      uri:
+        url: "{{ astra_api_url }}/{{ astra_database_id }}/park"
+        method: POST
+        headers:
+          Accept: "application/json"
+          Content-Type: "application/json"
+          Authorization: "Bearer {{ astra_auth_token }}"
+        body: ""
+        status_code: 202
+      register: response_park
+    - name: debug
+      debug:
+        var: response_park
 ```
 {% endraw %}
 ## DevOps Unpark Database
 
 {% raw %}
-```js
-
+```js---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    astra_api_url: "https://api.astra.datastax.com/v2/databases"
+    astra_auth_token: "[token from devops_auth_post]"
+    astra_database_id: "[astra database id]"
+  tasks:
+    - name: unpark database
+      uri:
+        url: "{{ astra_api_url }}/{{ astra_database_id }}/unpark"
+        method: POST
+        headers:
+          Accept: "application/json"
+          Content-Type: "application/json"
+          Authorization: "Bearer {{ astra_auth_token }}"
+        body: ""
+        status_code: 202
+      register: response_unpark
+    - name: debug
+      debug:
+        var: response_unpark
 ```
 {% endraw %}
 ## DevOps Terminate Database
 
 {% raw %}
 ```js
-
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    astra_api_url: "https://api.astra.datastax.com/v2/databases"
+    astra_auth_token: "[token from devops_auth_post]"
+    astra_database_id: "[astra database id]"
+  tasks:
+    - name: terminate database
+      uri:
+        url: "{{ astra_api_url }}/{{ astra_database_id }}/terminate"
+        method: POST
+        headers:
+          Accept: "application/json"
+          Content-Type: "application/json"
+          Authorization: "Bearer {{ astra_auth_token }}"
+        body: ""
+        status_code: 202
+      register: response_terminate
+    - name: debug
+      debug:
+        var: response_terminate
 ```
 {% endraw %}
 ## DevOps Get Secure Bundle URL
 
 {% raw %}
 ```js
-
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    astra_api_url: "https://api.astra.datastax.com/v2/databases"
+    astra_auth_token: "[token from devops_auth_post]"
+    astra_database_id: "[astra database id]"
+  tasks:
+    - name: get bundle
+      uri:
+        url: "{{ astra_api_url }}/{{ astra_database_id }}/secureBundleURL"
+        method: POST
+        headers:
+          Accept: "application/json"
+          Content-Type: "application/json"
+          Authorization: "Bearer {{ astra_auth_token }}"
+        body: ""
+        status_code: 200
+      register: response_bundle
+    - name: debug
+      debug:
+        var: response_bundle
 ```
 {% endraw %}
 ## DevOps Get Supported Regions
 
 {% raw %}
 ```js
-
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    astra_api_url: "https://api.astra.datastax.com/v2/availableRegions"
+    astra_auth_token: "[token from devops_auth_post]"
+  tasks:
+    - name: return regions
+      uri:
+        url: "{{ astra_api_url }}"
+        method: GET
+        headers:
+          Accept: "application/json"
+          Content-Type: "application/json"
+          Authorization: "Bearer {{ astra_auth_token }}"
+        body: ""
+        status_code: 200
+      register: response_regions
+    - name: debug
+      debug:
+        var: response_regions
 ```
 {% endraw %}
