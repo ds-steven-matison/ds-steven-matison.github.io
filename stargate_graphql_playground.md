@@ -2,7 +2,7 @@
 layout: default
 title: GraphQL Playground
 description: A blog all about GraphQL Playground
-permalink: /stargate/graphql/playground
+permalink: /stargate/graphql/playground/
 ---
 
 # What is GraphQl Playground?
