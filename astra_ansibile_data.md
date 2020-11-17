@@ -336,9 +336,38 @@ Creating a table requires the <span style="color: #d14;">[keyspace for table]</s
 
 ## Data Update Rows
 
+A quick warning here: you cannot update the Primary Key.
 {% raw %}
 ```js
- 
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    astra_rest_api_url: "https://[cluster_id]-[cluster_region].apps.astra.datastax.com/api/rest"
+    astra_auth_token: "[token from data_auth_post]"
+    astra_keyspace: "[keyspace for table]"
+    astra_table: "[table]"
+    astra_row: 1
+    astra_update_row:
+      changeset:
+        - column: "value"
+          value: "some updated text"
+  tasks:
+    - name: update rows
+      uri:
+        url: "{{ astra_rest_api_url }}/v1/keyspaces/{{ astra_keyspace }}/tables/{{ astra_table }}/rows/{{ astra_row }}"
+        method: PUT
+        headers:
+          Content-Type: "application/json"
+          Accept: "application/json"
+          X-Cassandra-Token: "{{ astra_auth_token }}"
+        body: "{{ astra_update_row | to_json }}"
+        status_code: 200
+      register: response_update
+    - name: debug
+      debug:
+        var: response_update
 ```
 {% endraw %}
 
@@ -346,15 +375,88 @@ Creating a table requires the <span style="color: #d14;">[keyspace for table]</s
 
 {% raw %}
 ```js
- 
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    astra_rest_api_url: "https://[cluster_id]-[cluster_region].apps.astra.datastax.com/api/rest"
+    astra_auth_token: "[token from data_auth_post]"
+    astra_keyspace: "[keyspace for table]"
+    astra_table: "[table]"
+    astra_row: 1
+  tasks:
+    - name: delete rows
+      uri:
+        url: "{{ astra_rest_api_url }}/v1/keyspaces/{{ astra_keyspace }}/tables/{{ astra_table }}/rows/{{ astra_row }}"
+        method: DELETE
+        headers:
+          Accept: "application/json"
+          X-Cassandra-Token: "{{ astra_auth_token }}"
+        status_code: 204
+      register: response_delete
+    - name: debug
+      debug:
+        var: response_delete
 ```
 {% endraw %}
 
-## Data Retrieve Columns
+## Data Get Columns
 
 {% raw %}
 ```js
- 
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    astra_rest_api_url: "https://[cluster_id]-[cluster_region].apps.astra.datastax.com/api/rest"
+    astra_auth_token: "[token from data_auth_post]"
+    astra_keyspace: "[keyspace for table]"
+    astra_table: "[table]"
+  tasks:
+    - name: get columns
+      uri:
+        url: "{{ astra_rest_api_url }}/v1/keyspaces/{{ astra_keyspace }}/tables/{{ astra_table }}/columns"
+        method: GET
+        headers:
+          Accept: "application/json"
+          X-Cassandra-Token: "{{ astra_auth_token }}"
+        status_code: 200
+      register: response_columns
+    - name: debug
+      debug:
+        var: response_columns
+```
+{% endraw %}
+
+## Data Get Column
+
+{% raw %}
+```js
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    astra_rest_api_url: "https://[cluster_id]-[cluster_region].apps.astra.datastax.com/api/rest"
+    astra_auth_token: "[token from data_auth_post]"
+    astra_keyspace: "[keyspace for table]"
+    astra_table: "[table]"
+    astra_column: "value"
+  tasks:
+    - name: get column
+      uri:
+        url: "{{ astra_rest_api_url }}/v1/keyspaces/{{ astra_keyspace }}/tables/{{ astra_table }}/columns/{{ astra_column }}"
+        method: GET
+        headers:
+          Accept: "application/json"
+          X-Cassandra-Token: "{{ astra_auth_token }}"
+        status_code: 200
+      register: response_column
+    - name: debug
+      debug:
+        var: response_column
 ```
 {% endraw %}
 
@@ -362,23 +464,69 @@ Creating a table requires the <span style="color: #d14;">[keyspace for table]</s
 
 {% raw %}
 ```js
- 
-```
-{% endraw %}
-
-## Data Retrieve Column
-
-{% raw %}
-```js
- 
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    astra_rest_api_url: "https://[cluster_id]-[cluster_region].apps.astra.datastax.com/api/rest"
+    astra_auth_token: "[token from data_auth_post]"
+    astra_keyspace: "[keyspace for table]"
+    astra_table: "[table]"
+    astra_add_column:
+      static: false
+      name: "newColumn"
+      typeDefinition: "text"
+  tasks:
+    - name: add column
+      uri:
+        url: "{{ astra_rest_api_url }}/v1/keyspaces/{{ astra_keyspace }}/tables/{{ astra_table }}/columns"
+        method: POST
+        headers:
+          Content-Type: "application/json"
+          Accept: "application/json"
+          X-Cassandra-Token: "{{ astra_auth_token }}"
+        body: "{{ astra_add_column | to_json }}"
+        status_code: 201
+      register: response_column
+    - name: debug
+      debug:
+        var: response_column
 ```
 {% endraw %}
 
 ## Data Update Column
 
+A quick warning here: you can only update the Primary Key.
 {% raw %}
 ```js
- 
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    astra_rest_api_url: "https://[cluster_id]-[cluster_region].apps.astra.datastax.com/api/rest"
+    astra_auth_token: "[token from data_auth_post]"
+    astra_keyspace: "[keyspace for table]"
+    astra_table: "[table]"
+    astra_column: "id"
+    astra_update_column:
+      newName: "updatedid"
+  tasks:
+    - name: update column
+      uri:
+        url: "{{ astra_rest_api_url }}/v1/keyspaces/{{ astra_keyspace }}/tables/{{ astra_table }}/columns/{{ astra_column }}"
+        method: PUT
+        headers:
+          Content-Type: "application/json"
+          Accept: "application/json"
+          X-Cassandra-Token: "{{ astra_auth_token }}"
+        body: "{{ astra_update_column | to_json }}"
+        status_code: 200
+      register: response_column
+    - name: debug
+      debug:
+        var: response_column
 ```
 {% endraw %}
 
@@ -386,6 +534,28 @@ Creating a table requires the <span style="color: #d14;">[keyspace for table]</s
 
 {% raw %}
 ```js
- 
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    astra_rest_api_url: "https://[cluster_id]-[cluster_region].apps.astra.datastax.com/api/rest"
+    astra_auth_token: "[token from data_auth_post]"
+    astra_keyspace: "[keyspace for table]"
+    astra_table: "[table]"
+    astra_column: "newColumn"
+  tasks:
+    - name: delete column
+      uri:
+        url: "{{ astra_rest_api_url }}/v1/keyspaces/{{ astra_keyspace }}/tables/{{ astra_table }}/columns/{{ astra_column }}"
+        method: DELETE
+        headers:
+          Accept: "application/json"
+          X-Cassandra-Token: "{{ astra_auth_token }}"
+        status_code: 204
+      register: response_column
+    - name: debug
+      debug:
+        var: response_column
 ```
 {% endraw %}
