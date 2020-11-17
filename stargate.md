@@ -23,23 +23,4 @@ To give you a head start I have already created and tested everything in Postman
 # Check Out My Github Repo
 Before getting started with Stargate & Postman download, fork, or clone my github repo which contains a Postman Environment and all of the sample calls you will find in the Stargate Documentation.   There is even a folder of sample calls for GraphQl.
 
-<div class="mui-container">
-    <div class="home mui-row">
-
-      <div class="mui-col-md-6">
-        <article class="mui-panel">
-          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
-            <span class="post-list-title">
-              <a class="post-link" href="https://github.com/ds-steven-matison/stargate-postman-demo">GitHub: Stargate Postman Demo</a>
-            </span>
-            <div class="img-overlay"></div>
-            <a href="https://github.com/ds-steven-matison/stargate-postman-demo" class="overlay"></a>
-          </div>
-          <div class="post-data">
-            <p class="post-excerpt">My GitHub repo which contains a Postman Environment and a Postman Collection for all the Stargate APIs.</p>
-            GitHub Repo: <a href="https://github.com/ds-steven-matison/stargate-postman-demo">astra-postman-demo</a>
-          </div>
-        </article>
-    </div>
-  </div>
-</div>
+{% include stargate_postman_repo.html %}

@@ -37,6 +37,11 @@
           <h1> Astra + Ansible </h1>
         </a>
         <h2> Astra Data API with Ansible </h2>
+          <br>
+          <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
+          <a href="/astra/"><button type="button" class="btn btn-primary">Astra</button></a>
+          <a href="/nosqlbench/"><button type="button" class="btn btn-primary">NoSqlBench</button></a>
+          <a href="/stargate/"><button type="button" class="btn btn-primary">Stargate</button></a>
         <a href="" class="button"><small>Follow me on</small> GitHub</a>
       </div>
     </header>
@@ -345,37 +350,209 @@
 
 <h2 id="data-update-rows">Data Update Rows</h2>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+<p>A quick warning here: you cannot update the Primary Key.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
+  <span class="nx">connection</span><span class="p">:</span> <span class="nx">local</span>
+  <span class="nx">gather_facts</span><span class="p">:</span> <span class="nx">no</span>
+  <span class="nx">vars</span><span class="p">:</span>
+    <span class="nx">astra_rest_api_url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://[cluster_id]-[cluster_region].apps.astra.datastax.com/api/rest</span><span class="dl">"</span>
+    <span class="nx">astra_auth_token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[token from data_auth_post]</span><span class="dl">"</span>
+    <span class="nx">astra_keyspace</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[keyspace for table]</span><span class="dl">"</span>
+    <span class="nx">astra_table</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[table]</span><span class="dl">"</span>
+    <span class="nx">astra_row</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="nx">astra_update_row</span><span class="p">:</span>
+      <span class="nx">changeset</span><span class="p">:</span>
+        <span class="o">-</span> <span class="nx">column</span><span class="p">:</span> <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span>
+          <span class="nx">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">some updated text</span><span class="dl">"</span>
+  <span class="nx">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">update</span> <span class="nx">rows</span>
+      <span class="nx">uri</span><span class="p">:</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_rest_api_url }}/v1/keyspaces/{{ astra_keyspace }}/tables/{{ astra_table }}/rows/{{ astra_row }}</span><span class="dl">"</span>
+        <span class="nx">method</span><span class="p">:</span> <span class="nx">PUT</span>
+        <span class="nx">headers</span><span class="p">:</span>
+          <span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">Accept</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">X</span><span class="o">-</span><span class="nx">Cassandra</span><span class="o">-</span><span class="nx">Token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_auth_token }}</span><span class="dl">"</span>
+        <span class="nx">body</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_update_row | to_json }}</span><span class="dl">"</span>
+        <span class="nx">status_code</span><span class="p">:</span> <span class="mi">200</span>
+      <span class="nx">register</span><span class="p">:</span> <span class="nx">response_update</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">debug</span>
+      <span class="nx">debug</span><span class="p">:</span>
+        <span class="kd">var</span><span class="p">:</span> <span class="nx">response_update</span>
 </code></pre></div></div>
 
 <h2 id="data-delete-rows">Data Delete Rows</h2>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
+  <span class="nx">connection</span><span class="p">:</span> <span class="nx">local</span>
+  <span class="nx">gather_facts</span><span class="p">:</span> <span class="nx">no</span>
+  <span class="nx">vars</span><span class="p">:</span>
+    <span class="nx">astra_rest_api_url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://[cluster_id]-[cluster_region].apps.astra.datastax.com/api/rest</span><span class="dl">"</span>
+    <span class="nx">astra_auth_token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[token from data_auth_post]</span><span class="dl">"</span>
+    <span class="nx">astra_keyspace</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[keyspace for table]</span><span class="dl">"</span>
+    <span class="nx">astra_table</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[table]</span><span class="dl">"</span>
+    <span class="nx">astra_row</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="nx">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="k">delete</span> <span class="nx">rows</span>
+      <span class="nx">uri</span><span class="p">:</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_rest_api_url }}/v1/keyspaces/{{ astra_keyspace }}/tables/{{ astra_table }}/rows/{{ astra_row }}</span><span class="dl">"</span>
+        <span class="nx">method</span><span class="p">:</span> <span class="nx">DELETE</span>
+        <span class="nx">headers</span><span class="p">:</span>
+          <span class="nx">Accept</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">X</span><span class="o">-</span><span class="nx">Cassandra</span><span class="o">-</span><span class="nx">Token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_auth_token }}</span><span class="dl">"</span>
+        <span class="nx">status_code</span><span class="p">:</span> <span class="mi">204</span>
+      <span class="nx">register</span><span class="p">:</span> <span class="nx">response_delete</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">debug</span>
+      <span class="nx">debug</span><span class="p">:</span>
+        <span class="kd">var</span><span class="p">:</span> <span class="nx">response_delete</span>
 </code></pre></div></div>
 
-<h2 id="data-retrieve-columns">Data Retrieve Columns</h2>
+<h2 id="data-get-columns">Data Get Columns</h2>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
+  <span class="nx">connection</span><span class="p">:</span> <span class="nx">local</span>
+  <span class="nx">gather_facts</span><span class="p">:</span> <span class="nx">no</span>
+  <span class="nx">vars</span><span class="p">:</span>
+    <span class="nx">astra_rest_api_url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://[cluster_id]-[cluster_region].apps.astra.datastax.com/api/rest</span><span class="dl">"</span>
+    <span class="nx">astra_auth_token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[token from data_auth_post]</span><span class="dl">"</span>
+    <span class="nx">astra_keyspace</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[keyspace for table]</span><span class="dl">"</span>
+    <span class="nx">astra_table</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[table]</span><span class="dl">"</span>
+  <span class="nx">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="kd">get</span> <span class="nx">columns</span>
+      <span class="nx">uri</span><span class="p">:</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_rest_api_url }}/v1/keyspaces/{{ astra_keyspace }}/tables/{{ astra_table }}/columns</span><span class="dl">"</span>
+        <span class="nx">method</span><span class="p">:</span> <span class="nx">GET</span>
+        <span class="nx">headers</span><span class="p">:</span>
+          <span class="nx">Accept</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">X</span><span class="o">-</span><span class="nx">Cassandra</span><span class="o">-</span><span class="nx">Token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_auth_token }}</span><span class="dl">"</span>
+        <span class="nx">status_code</span><span class="p">:</span> <span class="mi">200</span>
+      <span class="nx">register</span><span class="p">:</span> <span class="nx">response_columns</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">debug</span>
+      <span class="nx">debug</span><span class="p">:</span>
+        <span class="kd">var</span><span class="p">:</span> <span class="nx">response_columns</span>
+</code></pre></div></div>
+
+<h2 id="data-get-column">Data Get Column</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
+  <span class="nx">connection</span><span class="p">:</span> <span class="nx">local</span>
+  <span class="nx">gather_facts</span><span class="p">:</span> <span class="nx">no</span>
+  <span class="nx">vars</span><span class="p">:</span>
+    <span class="nx">astra_rest_api_url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://[cluster_id]-[cluster_region].apps.astra.datastax.com/api/rest</span><span class="dl">"</span>
+    <span class="nx">astra_auth_token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[token from data_auth_post]</span><span class="dl">"</span>
+    <span class="nx">astra_keyspace</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[keyspace for table]</span><span class="dl">"</span>
+    <span class="nx">astra_table</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[table]</span><span class="dl">"</span>
+    <span class="nx">astra_column</span><span class="p">:</span> <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span>
+  <span class="nx">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="kd">get</span> <span class="nx">column</span>
+      <span class="nx">uri</span><span class="p">:</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_rest_api_url }}/v1/keyspaces/{{ astra_keyspace }}/tables/{{ astra_table }}/columns/{{ astra_column }}</span><span class="dl">"</span>
+        <span class="nx">method</span><span class="p">:</span> <span class="nx">GET</span>
+        <span class="nx">headers</span><span class="p">:</span>
+          <span class="nx">Accept</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">X</span><span class="o">-</span><span class="nx">Cassandra</span><span class="o">-</span><span class="nx">Token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_auth_token }}</span><span class="dl">"</span>
+        <span class="nx">status_code</span><span class="p">:</span> <span class="mi">200</span>
+      <span class="nx">register</span><span class="p">:</span> <span class="nx">response_column</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">debug</span>
+      <span class="nx">debug</span><span class="p">:</span>
+        <span class="kd">var</span><span class="p">:</span> <span class="nx">response_column</span>
 </code></pre></div></div>
 
 <h2 id="data-add-column">Data Add Column</h2>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
-</code></pre></div></div>
-
-<h2 id="data-retrieve-column">Data Retrieve Column</h2>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
+  <span class="nx">connection</span><span class="p">:</span> <span class="nx">local</span>
+  <span class="nx">gather_facts</span><span class="p">:</span> <span class="nx">no</span>
+  <span class="nx">vars</span><span class="p">:</span>
+    <span class="nx">astra_rest_api_url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://[cluster_id]-[cluster_region].apps.astra.datastax.com/api/rest</span><span class="dl">"</span>
+    <span class="nx">astra_auth_token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[token from data_auth_post]</span><span class="dl">"</span>
+    <span class="nx">astra_keyspace</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[keyspace for table]</span><span class="dl">"</span>
+    <span class="nx">astra_table</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[table]</span><span class="dl">"</span>
+    <span class="nx">astra_add_column</span><span class="p">:</span>
+      <span class="kd">static</span><span class="p">:</span> <span class="kc">false</span>
+      <span class="nx">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">newColumn</span><span class="dl">"</span>
+      <span class="nx">typeDefinition</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text</span><span class="dl">"</span>
+  <span class="nx">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">add</span> <span class="nx">column</span>
+      <span class="nx">uri</span><span class="p">:</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_rest_api_url }}/v1/keyspaces/{{ astra_keyspace }}/tables/{{ astra_table }}/columns</span><span class="dl">"</span>
+        <span class="nx">method</span><span class="p">:</span> <span class="nx">POST</span>
+        <span class="nx">headers</span><span class="p">:</span>
+          <span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">Accept</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">X</span><span class="o">-</span><span class="nx">Cassandra</span><span class="o">-</span><span class="nx">Token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_auth_token }}</span><span class="dl">"</span>
+        <span class="nx">body</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_add_column | to_json }}</span><span class="dl">"</span>
+        <span class="nx">status_code</span><span class="p">:</span> <span class="mi">201</span>
+      <span class="nx">register</span><span class="p">:</span> <span class="nx">response_column</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">debug</span>
+      <span class="nx">debug</span><span class="p">:</span>
+        <span class="kd">var</span><span class="p">:</span> <span class="nx">response_column</span>
 </code></pre></div></div>
 
 <h2 id="data-update-column">Data Update Column</h2>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+<p>A quick warning here: you can only update the Primary Key.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
+  <span class="nx">connection</span><span class="p">:</span> <span class="nx">local</span>
+  <span class="nx">gather_facts</span><span class="p">:</span> <span class="nx">no</span>
+  <span class="nx">vars</span><span class="p">:</span>
+    <span class="nx">astra_rest_api_url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://[cluster_id]-[cluster_region].apps.astra.datastax.com/api/rest</span><span class="dl">"</span>
+    <span class="nx">astra_auth_token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[token from data_auth_post]</span><span class="dl">"</span>
+    <span class="nx">astra_keyspace</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[keyspace for table]</span><span class="dl">"</span>
+    <span class="nx">astra_table</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[table]</span><span class="dl">"</span>
+    <span class="nx">astra_column</span><span class="p">:</span> <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span>
+    <span class="nx">astra_update_column</span><span class="p">:</span>
+      <span class="nx">newName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">updatedid</span><span class="dl">"</span>
+  <span class="nx">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">update</span> <span class="nx">column</span>
+      <span class="nx">uri</span><span class="p">:</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_rest_api_url }}/v1/keyspaces/{{ astra_keyspace }}/tables/{{ astra_table }}/columns/{{ astra_column }}</span><span class="dl">"</span>
+        <span class="nx">method</span><span class="p">:</span> <span class="nx">PUT</span>
+        <span class="nx">headers</span><span class="p">:</span>
+          <span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">Accept</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">X</span><span class="o">-</span><span class="nx">Cassandra</span><span class="o">-</span><span class="nx">Token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_auth_token }}</span><span class="dl">"</span>
+        <span class="nx">body</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_update_column | to_json }}</span><span class="dl">"</span>
+        <span class="nx">status_code</span><span class="p">:</span> <span class="mi">200</span>
+      <span class="nx">register</span><span class="p">:</span> <span class="nx">response_column</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">debug</span>
+      <span class="nx">debug</span><span class="p">:</span>
+        <span class="kd">var</span><span class="p">:</span> <span class="nx">response_column</span>
 </code></pre></div></div>
 
 <h2 id="data-delete-column">Data Delete Column</h2>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="o">-</span> <span class="nx">hosts</span><span class="p">:</span> <span class="nx">localhost</span>
+  <span class="nx">connection</span><span class="p">:</span> <span class="nx">local</span>
+  <span class="nx">gather_facts</span><span class="p">:</span> <span class="nx">no</span>
+  <span class="nx">vars</span><span class="p">:</span>
+    <span class="nx">astra_rest_api_url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://[cluster_id]-[cluster_region].apps.astra.datastax.com/api/rest</span><span class="dl">"</span>
+    <span class="nx">astra_auth_token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[token from data_auth_post]</span><span class="dl">"</span>
+    <span class="nx">astra_keyspace</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[keyspace for table]</span><span class="dl">"</span>
+    <span class="nx">astra_table</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[table]</span><span class="dl">"</span>
+    <span class="nx">astra_column</span><span class="p">:</span> <span class="dl">"</span><span class="s2">newColumn</span><span class="dl">"</span>
+  <span class="nx">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="k">delete</span> <span class="nx">column</span>
+      <span class="nx">uri</span><span class="p">:</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_rest_api_url }}/v1/keyspaces/{{ astra_keyspace }}/tables/{{ astra_table }}/columns/{{ astra_column }}</span><span class="dl">"</span>
+        <span class="nx">method</span><span class="p">:</span> <span class="nx">DELETE</span>
+        <span class="nx">headers</span><span class="p">:</span>
+          <span class="nx">Accept</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+          <span class="nx">X</span><span class="o">-</span><span class="nx">Cassandra</span><span class="o">-</span><span class="nx">Token</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{ astra_auth_token }}</span><span class="dl">"</span>
+        <span class="nx">status_code</span><span class="p">:</span> <span class="mi">204</span>
+      <span class="nx">register</span><span class="p">:</span> <span class="nx">response_column</span>
+    <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">debug</span>
+      <span class="nx">debug</span><span class="p">:</span>
+        <span class="kd">var</span><span class="p">:</span> <span class="nx">response_column</span>
 </code></pre></div></div>
 
 

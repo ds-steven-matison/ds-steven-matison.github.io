@@ -13,23 +13,6 @@ Postman is an amazing tool that every developer should already have in their bac
 
 Before getting started with Astra & Postman download, fork, or clone my github repo which contains a Postman Environment and all of the sample calls you will find in the Astra API Reference.
 
-<div class="mui-container">
-    <div class="home mui-row">
-
-      <div class="mui-col-md-6">
-        <article class="mui-panel">
-          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
-            <span class="post-list-title">
-              <a class="post-link" href="https://github.com/ds-steven-matison/astra-postman-demo">GitHub: Astra Postman Demo</a>
-            </span>
-            <div class="img-overlay"></div>
-            <a href="https://github.com/ds-steven-matison/astra-postman-demo" class="overlay"></a>
-          </div>
-          <div class="post-data">
-            <p class="post-excerpt">My GitHub repo which contains a Postman Environment and a Postman Collection for all calls found within the Astra DevOps and Data APIs.</p>
-            GitHub Repo: <a href="https://github.com/ds-steven-matison/astra-postman-demo">astra-postman-demo</a>
-          </div>
-        </article>
-    </div>
-  </div>
-</div>
+{% include astra_postman_repo.html %}
+<p>&nbsp;</p>
+{% include stargate_postman_repo.html %}

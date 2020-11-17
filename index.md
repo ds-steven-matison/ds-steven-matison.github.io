@@ -2,6 +2,7 @@
 title: Data Architect
 description: A blog for my projects at Datastax
 layout: default
+
 ---
 
 
@@ -17,6 +18,13 @@ ansible, kubernetes, spark, nifi, kafka.
 
 <div style="clear: both"></div>
 <p>&nbsp;</p>
+# Recent Posts
+
+*   <a href="/stargate/graphql/playground/">How To: Import/Export GraphQl Playground Tabs</a>
+*   <a href="/nosqlbench/">My First Contribution to NoSqlBench</a>
+*   <a href="/astra/ansible/">How To: Ansible with Astra</a>
+*   <a href="/astra/postman/">How To: Postman with Astra</a>
+
 # Current Projects
 <p>&nbsp;</p>
 {% include front_page_articles.html %}
