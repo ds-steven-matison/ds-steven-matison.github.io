@@ -22,12 +22,12 @@ Here are few things I learned:
 *	A new tab will not have your auth token and you will need to adjust the url
 
 
-# GraphQL Posts
+# GraphQL Playground Posts
 
 As I create useful markup here, I will move it into specific posts.  
 
 <a name="howto1"></a>
-## How To: Import/Export GraphQl Playground Tabs
+## How To: GraphQl Playground
 
 My first experience with GraphQL Playground went pretty well, but I quickly ran into some issues once i realized that the tabs do not persist.    I had went through documentation and filled my screen with tabs.   Next time I game back to GraphQL they were all gone.  Oops.   This behavior really pushes hard for an import/export feature.  A quick google search later I wound up on an [Open Github Issue #6](https://github.com/graphql/graphql-playground/issues/6). In the comments a user exposes a method to import/export the tabs.  I figured this would be a great first post for my GraphQL Playground blog.
 
@@ -240,4 +240,5 @@ I see the session section corresponding to the two default tabs.  Lets modify th
 Next I inspect the sessions and notice the sessions are different.  If the session is not persisting this means the solution will not work. So i chat up a few internal resources and got linked back to another [GitHub Issue #797](https://github.com/graphql/graphql-playground/issues/797).  Yikes...  To make further progress on this post I am going to have to build my own graphQL UI.  
 
 
-
+![Branching](/assets/images/down-the-rabbit-hole.gif)
+be back later... 

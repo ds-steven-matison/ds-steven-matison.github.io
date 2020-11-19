@@ -24,3 +24,28 @@ To give you a head start I have already created and tested everything in Postman
 Before getting started with Stargate & Postman download, fork, or clone my github repo which contains a Postman Environment and all of the sample calls you will find in the Stargate Documentation.   There is even a folder of sample calls for GraphQl.
 
 {% include stargate_postman_repo.html %}
+
+# GraphQL
+One of the features I like the best about Stargate is the GraphQL capabilities.  I will come back here more with a /graphql/ page and more detail about the graphQL Api later. 
+
+# GraphQl Playground
+Bundled within the docker stargate is an instance of [GraphQL Playground](https://github.com/graphql/graphql-playground).  This UI provides a user interface (IDE UI) to execute GraphQL queries against Stargate GraphQL APIs.
+
+<div class="mui-container">
+    <div class="home mui-row">
+      <div class="mui-col-md-6">
+        <article class="mui-panel">
+          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
+            <span class="post-list-title">
+              <a class="post-link" href="/stargate/graphql/playground/">GraphQL Playground</a>
+            </span>
+            <div class="img-overlay"></div>
+            <a href="/stargate/graphql/playground/" class="overlay"></a>
+          </div>
+          <div class="post-data">
+            <p class="post-excerpt">Bundled within the docker stargate is an instance of GraphQL Playground.  This UI provides an interface to execute GraphQL queries against Stargate & Astra APIs.</p>
+          </div>
+        </article>
+    </div>
+  </div>
+</div>

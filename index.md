@@ -20,10 +20,13 @@ ansible, kubernetes, spark, nifi, kafka.
 <p>&nbsp;</p>
 # Recent Posts
 
-*   <a href="/stargate/graphql/playground/">How To: Import/Export GraphQl Playground Tabs</a>
-*   <a href="/nosqlbench/">My First Contribution to NoSqlBench</a>
-*   <a href="/astra/ansible/">How To: Ansible with Astra</a>
-*   <a href="/astra/postman/">How To: Postman with Astra</a>
+*	<a href="/k8ssandra/">Introducing: K8ssandra</a> - 11/19/2020
+*   <a href="/stargate/graphql/playground/">How To: GraphQl Playground</a> - 11/17/2020
+*   <a href="/nosqlbench/">My First Contribution to NoSqlBench</a> - 11/11/2020
+*   <a href="/astra/ansible/">How To: Ansible with Astra</a> - 11/09/2020
+*	<a href="/stargate/">Introducing: Stargate</a> - 11/06/2020
+*   <a href="/astra/postman/">How To: Postman with Astra</a> - 11/04/2020
+*	<a href="/astra/">Introducing: Astra</a> - 11/02/2020
 
 # Current Projects
 <p>&nbsp;</p>
