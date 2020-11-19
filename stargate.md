@@ -43,7 +43,7 @@ Bundled within the docker stargate is an instance of [GraphQL Playground](https:
             <a href="/stargate/graphql/playground/" class="overlay"></a>
           </div>
           <div class="post-data">
-            <p class="post-excerpt">Bundled within the docker stargate is an instance of GraphQL Playground.  This UI provides an interface to execute GraphQL queries against Stargate & Astra APIs.</p>
+            <p class="post-excerpt">My datastax experiences with GraphQL Playground</p>
           </div>
         </article>
     </div>

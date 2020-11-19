@@ -61,10 +61,11 @@
 
 <p>Here are few things I learned:</p>
 <ul>
-  <li>Your changes in this UI will not persist.  If you want to save your work, see <a href="#howto1"> How To: Import/Export GraphQl Playground Tabs</a></li>
-  <li>Check out HTTP HEADERS (bottom right), you’ll need your auth token, and also notice the case change here from “X-Cassandra-Token” to “x-cassandra-token”.</li>
+  <li>Your changes in this UI will not persist so do not refresh the page.  If you want to save your work, your only option is to use Share Option which creates a <a href="graphqbin.com">graphqbin.com</a> version of your workspace.</li>
+  <li>Check out HTTP HEADERS (bottom right), you’ll need your auth token, and also notice the case change here from “X-Cassandra-Token” to “x-cassandra-token”.  You will have to update this every tab.</li>
   <li>When working on calls, check out the Copy Curl button.  This will expose the exact curl call you are executing under the hood.  I have used this extensively.</li>
-  <li>A new tab will not have your auth token and you will need to adjust the url</li>
+  <li>A new tab will not have your auth token prefilled nd you will need to adjust the url for your API endpoint.</li>
+  <li>Query variables do work.</li>
 </ul>
 
 <h1 id="graphql-playground-posts">GraphQL Playground Posts</h1>
@@ -74,7 +75,7 @@
 <p><a name="howto1"></a></p>
 <h2 id="how-to-graphql-playground">How To: GraphQl Playground</h2>
 
-<p>My first experience with GraphQL Playground went pretty well, but I quickly ran into some issues once i realized that the tabs do not persist.    I had went through documentation and filled my screen with tabs.   Next time I game back to GraphQL they were all gone.  Oops.   This behavior really pushes hard for an import/export feature.  A quick google search later I wound up on an <a href="https://github.com/graphql/graphql-playground/issues/6">Open Github Issue #6</a>. In the comments a user exposes a method to import/export the tabs.  I figured this would be a great first post for my GraphQL Playground blog.</p>
+<p>My first experience with GraphQL Playground went pretty well, but I quickly ran into some issues once i realized that the tabs do not persist.    I had previously went through testing some of the Stargate API documentation and filled my screen with some operational tabs.   Next time I game back to GraphQL they were all gone.  Oops.   This behavior really pushes hard for an import/export feature.  A quick google search later I wound up on an <a href="https://github.com/graphql/graphql-playground/issues/6">Open Github Issue #6</a>. In the comments a user exposes a method to import/export the tabs.  I figured this would be a great first post for my GraphQL Playground blog.</p>
 
 <p>First I install the Google Chome Extension for <a href="https://chrome.google.com/webstore/detail/localstorage-manager/fkhoimdhngkiicbjobkinobjkoefhkap/related">Local Storage Handler</a> and download the graphql-playground object.  It is a huge minimized json object but you can click the popup button to make it more human readable:</p>
 
