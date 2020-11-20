@@ -20,7 +20,7 @@ kubectl get serviceinstances devdb
 kubectl apply -f astra-service-binding.yaml
 ```
 
-## Contents of astra.yml
+## Contents of astra.yaml
 
 ```js
 apiVersion: servicecatalog.k8s.io/v1beta1
@@ -38,7 +38,7 @@ spec:
   servicePlanExternalName: developer
 ```
 
-## Contents of astra-service-broker.yaml
+## Contents of astra-service-binding.yaml
 
 ```js
 apiVersion: servicecatalog.k8s.io/v1beta1
