@@ -13,8 +13,24 @@ Astra is a Database As A Service provided by [Datastax](https://datastax.com) wh
 <p>&nbsp;</p>
 
 <div class="mui-container">
-    <div class="home mui-row">
-
+  <div class="home mui-row">
+    <div class="mui-col-md-2">
+        <article class="mui-panel">
+          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
+            <span class="post-list-title">
+              <a class="post-link" href="/astra/service/broker/">Astra Service Broker</a>
+            </span>
+            <div class="img-overlay"></div>
+            <a href="/astra/service/broker/" class="overlay"></a>
+          </div>
+          <div class="post-data">
+            <p class="post-excerpt">Astr Service Broker Tile</p>
+            <p><b>tags:</b> kubernetes, astra, service, broker, devops, automation </p>
+          </div>
+        </article>
+      </div>
+  </div>
+  <div class="home mui-row">
       <div class="mui-col-md-2">
         <article class="mui-panel">
           <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
@@ -29,9 +45,8 @@ Astra is a Database As A Service provided by [Datastax](https://datastax.com) wh
             <p><b>tags:</b> devops api, data api, get auth, create database, create keyspaces, add tables</p>
           </div>
         </article>
-    </div>
-
-    <div class="mui-col-md-2">
+      </div>
+      <div class="mui-col-md-2">
         <article class="mui-panel">
           <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
             <span class="post-list-title">
@@ -45,9 +60,8 @@ Astra is a Database As A Service provided by [Datastax](https://datastax.com) wh
             <p><b>tags:</b> create database, keyspaces, tables</p>
           </div>
         </article>
-    </div>
-
-        <div class="mui-col-md-2">
+      </div>
+      <div class="mui-col-md-2">
         <article class="mui-panel">
           <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
             <span class="post-list-title">
@@ -61,7 +75,6 @@ Astra is a Database As A Service provided by [Datastax](https://datastax.com) wh
             <p><b>tags:</b> Astra Native Cassandra Processors, Astra with InvokeHttp, Astra DistributedMapCache</p>
           </div>
         </article>
-    </div>
-
-  </div>
+      </div>
+    </div>     
 </div>
