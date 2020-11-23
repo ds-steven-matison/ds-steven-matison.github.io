@@ -5,7 +5,7 @@ description: How use deploy Astra Multi Cloud
 permalink: /astra/multi/cloud/
 ---
 
-# How To: Astra Service Br
+# How To: Astra Multi Cloud
 In the previous article [How To: Astra Service Broker](/astra/service/broker/) I showed you how to setup your environment and spin up a devdb in Astra free tier using the Astra Kubernetes Service Broker.  In this next how to I am going to show you how to spin up 3 production C10 instances in Astra.  One on [AWS](https://aws.amazon.com/), one on [Azure](https://azure.microsoft.com/), and one on [GCP](https://console.cloud.google.com).  Contents of the yamls are below, or check out my [github](https://github.com/ds-steven-matison/astra-service-broker-demo).
 
 ## Create the Instances
