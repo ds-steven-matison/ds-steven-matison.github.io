@@ -112,7 +112,7 @@ spec:
   externalID: b946701e-c773-4332-8935-8212e8bdb412
   instanceRef:
     name: devdb-gcp
-    secretName: devdb
+    secretName: devdb-gcp
 ---
 apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ServiceBinding
@@ -122,7 +122,7 @@ spec:
   externalID: b946701e-c773-4332-8935-8212e8bdb412
   instanceRef:
     name: devdb-aws
-    secretName: devdb
+    secretName: devdb-gcp
 ---
 apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ServiceBinding
@@ -132,8 +132,8 @@ spec:
   externalID: b946701e-c773-4332-8935-8212e8bdb412
   instanceRef:
     name: devdb-azure
-    secretName: devdb
+    secretName: devdb-gcp
 ```
 ## What's Next?
 
-Check out some more [kubectl](/kubectl/) commands that you need to learn for managing your Astra instances.
+Check out some more [kubectl](/kubernetes/kubectl/) commands that you need to learn for managing your Astra instances.

@@ -78,4 +78,6 @@ spec:
 
 # What's Next
 
+Check out my next article in this series: [How To: Astra Multi Cloud](https://ds-steven-matison.github.io/astra/multi/cloud) where I show you how to use the concepts above to create a Production Cluster in Azure, AWS, and GCP!!
+
 From the DevOps side this Astra Service Broker is just the tip of the iceberg.  Check out [Demo Spring Application](https://github.com/spring-petclinic/spring-petclinic-reactive/) which demonstrates how to role out an application using the database and security credentials exposed above.   If you are looking for more information about the Astra Service Broker check out the documentation [here](https://docs.astra.datastax.com/docs/astra-service-broker).
