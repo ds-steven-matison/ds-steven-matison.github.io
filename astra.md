@@ -14,7 +14,7 @@ Astra is a Database As A Service provided by [Datastax](https://datastax.com) wh
 
 <div class="mui-container">
   <div class="home mui-row">
-    <div class="mui-col-md-2">
+      <div class="mui-col-md-2">
         <article class="mui-panel">
           <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
             <span class="post-list-title">
@@ -24,8 +24,23 @@ Astra is a Database As A Service provided by [Datastax](https://datastax.com) wh
             <a href="/astra/service/broker/" class="overlay"></a>
           </div>
           <div class="post-data">
-            <p class="post-excerpt">Astr Service Broker Tile</p>
-            <p><b>tags:</b> kubernetes, astra, service, broker, devops, automation </p>
+            <p class="post-excerpt">Astra Service Broker Tile</p>
+            <p><b>tags:</b> astra, service, broker, devops, automation, kubernetes, helm</p>
+          </div>
+        </article>
+      </div>
+      <div class="mui-col-md-2">
+        <article class="mui-panel">
+          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
+            <span class="post-list-title">
+              <a class="post-link" href="/astra/multi/cloud/">Astra Multi Cloud</a>
+            </span>
+            <div class="img-overlay"></div>
+            <a href="/astra/multi/cloud/" class="overlay"></a>
+          </div>
+          <div class="post-data">
+            <p class="post-excerpt">Astra Multi Cloud</p>
+            <p><b>tags:</b> astra, database,service, multi, cloud, aws, azure, gcp </p>
           </div>
         </article>
       </div>

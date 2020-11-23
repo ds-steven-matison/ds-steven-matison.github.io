@@ -51,19 +51,41 @@
         <section id="main-content">
           <h1 id="how-to-astra-service-broker">How To: Astra Service Broker</h1>
 
-<p>Following Christopher Bradfords blog post over at Datastax: <a href="https://www.datastax.com/blog/2020/11/announcing-astra-service-broker-tradeoff-free-cassandra-kubernetes">Announcing the Astra Service Broker: Tradeoff-Free Cassandra in Kubernetes</a> I was able to create a database on Astra in 8 commands using kubernetes and service account json object for my astra account. I had some challenges along the way but learned some great stuff today.  Check out the final command flow and the 2 source documents below.</p>
+<p>Following Christopher Bradfords blog post over at Datastax: <a href="https://www.datastax.com/blog/2020/11/announcing-astra-service-broker-tradeoff-free-cassandra-kubernetes">Announcing the Astra Service Broker: Tradeoff-Free Cassandra in Kubernetes</a> I was able to create a database on Astra in 6 commands using kubernetes and service account json object for my astra account. I had some challenges along the way but learned some great stuff today.  Check out the setup requirements, create cluster command flow, and the 3 source documents below.</p>
 
+<h2 id="environment-setup-requirements">Environment Setup Requirements</h2>
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">brew</span> <span class="nx">install</span> <span class="nx">k3d</span>
-<span class="nx">k3d</span> <span class="nx">cluster</span> <span class="nx">create</span>
-<span class="nx">helm</span> <span class="nx">install</span> <span class="nx">catalog</span> <span class="nx">svc</span><span class="o">-</span><span class="nx">cat</span><span class="o">/</span><span class="nx">catalog</span> <span class="o">--</span><span class="nx">namespace</span> <span class="nx">catalog</span> <span class="o">--</span><span class="nx">create</span><span class="o">-</span><span class="nx">namespace</span>
-<span class="nx">kubectl</span> <span class="nx">create</span> <span class="nx">secret</span> <span class="nx">generic</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">creds</span> <span class="o">--</span><span class="k">from</span><span class="o">-</span><span class="nx">literal</span><span class="o">=</span><span class="nx">username</span><span class="o">=</span><span class="nx">unused</span> <span class="o">--</span><span class="k">from</span><span class="o">-</span><span class="nx">literal</span><span class="o">=</span><span class="nx">password</span><span class="o">=</span><span class="s2">`</span><span class="err">echo '[Astra Service Account Credential JSON]'| base64</span><span class="s2">`</span>
-<span class="nx">svcat</span> <span class="nx">register</span> <span class="nx">astra</span> <span class="o">--</span><span class="nx">url</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//broker.astra.datastax.com/ --basic-secret astra-creds</span>
-<span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">astra</span><span class="p">.</span><span class="nx">yaml</span>
-<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">serviceinstances</span> <span class="nx">devdb</span>
-<span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">service</span><span class="o">-</span><span class="nx">binding</span><span class="p">.</span><span class="nx">yaml</span>
+<span class="nx">brew</span> <span class="nx">install</span> <span class="nx">kubernetes</span><span class="o">-</span><span class="nx">service</span><span class="o">-</span><span class="nx">catalog</span><span class="o">-</span><span class="nx">client</span>
+<span class="nx">brew</span> <span class="nx">install</span> <span class="nx">helm</span>
+<span class="nx">helm</span> <span class="nx">repo</span> <span class="nx">add</span> <span class="nx">svc</span><span class="o">-</span><span class="nx">cat</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//svc-catalog-charts.storage.googleapis.com</span>
+<span class="nx">helm</span> <span class="nx">repo</span> <span class="nx">update</span>
 </code></pre></div></div>
 
-<h2 id="contents-of-astrayml">Contents of astra.yml</h2>
+<h2 id="create-cluster--get-access-credentials">Create Cluster &amp; Get Access Credentials</h2>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">k3d</span> <span class="nx">cluster</span> <span class="nx">create</span>
+<span class="nx">helm</span> <span class="nx">install</span> <span class="nx">catalog</span> <span class="nx">svc</span><span class="o">-</span><span class="nx">cat</span><span class="o">/</span><span class="nx">catalog</span> <span class="o">--</span><span class="nx">namespace</span> <span class="nx">catalog</span> <span class="o">--</span><span class="nx">create</span><span class="o">-</span><span class="nx">namespace</span>
+<span class="nx">kubectl</span> <span class="nx">create</span> <span class="nx">secret</span> <span class="nx">generic</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">creds</span> <span class="o">--</span><span class="k">from</span><span class="o">-</span><span class="nx">literal</span><span class="o">=</span><span class="nx">username</span><span class="o">=</span><span class="nx">unused</span> <span class="o">--</span><span class="k">from</span><span class="o">-</span><span class="nx">literal</span><span class="o">=</span><span class="nx">password</span><span class="o">=</span><span class="s2">`</span><span class="err">echo '[Astra Service Account Credential JSON]'| base64</span><span class="s2">`</span>
+<span class="nx">kubectl</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">service</span><span class="o">-</span><span class="nx">broker</span><span class="p">.</span><span class="nx">yaml</span>
+<span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">service</span><span class="o">-</span><span class="nx">instance</span><span class="p">.</span><span class="nx">yaml</span>
+<span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">service</span><span class="o">-</span><span class="nx">binding</span><span class="p">.</span><span class="nx">yaml</span>
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">secrets</span> <span class="nx">devdb</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">yaml</span>
+</code></pre></div></div>
+
+<h2 id="contents-of-astra-service-brokeryaml">Contents of astra-service-broker.yaml</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">apiVersion</span><span class="p">:</span> <span class="nx">servicecatalog</span><span class="p">.</span><span class="nx">k8s</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">v1beta1</span>
+<span class="nx">kind</span><span class="p">:</span> <span class="nx">ServiceBroker</span>
+<span class="nx">metadata</span><span class="p">:</span>
+  <span class="nx">name</span><span class="p">:</span> <span class="nx">astra</span>
+<span class="nx">spec</span><span class="p">:</span>
+  <span class="nx">authInfo</span><span class="p">:</span>
+    <span class="nx">basic</span><span class="p">:</span>
+      <span class="nx">secretRef</span><span class="p">:</span>
+        <span class="nx">name</span><span class="p">:</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">creds</span>
+  <span class="nx">url</span><span class="p">:</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//broker.astra.datastax.com/</span>
+</code></pre></div></div>
+
+<h2 id="contents-of-astra-service-instanceyaml">Contents of astra-service-instance.yaml</h2>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">apiVersion</span><span class="p">:</span> <span class="nx">servicecatalog</span><span class="p">.</span><span class="nx">k8s</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">v1beta1</span>
 <span class="nx">kind</span><span class="p">:</span> <span class="nx">ServiceInstance</span>
@@ -80,7 +102,7 @@
   <span class="nx">servicePlanExternalName</span><span class="p">:</span> <span class="nx">developer</span>
 </code></pre></div></div>
 
-<h2 id="contents-of-astra-service-brokeryaml">Contents of astra-service-broker.yaml</h2>
+<h2 id="contents-of-astra-service-bindingyaml">Contents of astra-service-binding.yaml</h2>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">apiVersion</span><span class="p">:</span> <span class="nx">servicecatalog</span><span class="p">.</span><span class="nx">k8s</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">v1beta1</span>
 <span class="nx">kind</span><span class="p">:</span> <span class="nx">ServiceBinding</span>
@@ -89,9 +111,13 @@
 <span class="nx">spec</span><span class="p">:</span>
   <span class="nx">externalID</span><span class="p">:</span> <span class="nx">b946701e</span><span class="o">-</span><span class="nx">c773</span><span class="o">-</span><span class="mi">4332</span><span class="o">-</span><span class="mi">8935</span><span class="o">-</span><span class="mi">8212</span><span class="nx">e8bdb412</span>
   <span class="nx">instanceRef</span><span class="p">:</span>
-  <span class="nx">name</span><span class="p">:</span> <span class="nx">devdb</span>
-  <span class="nx">secretName</span><span class="p">:</span> <span class="nx">devdb</span>
+    <span class="nx">name</span><span class="p">:</span> <span class="nx">devdb</span>
+    <span class="nx">secretName</span><span class="p">:</span> <span class="nx">devdb</span>
 </code></pre></div></div>
+
+<h1 id="whats-next">What’s Next</h1>
+
+<p>From the DevOps side this Astra Service Broker is just the tip of the iceberg.  Check out <a href="https://github.com/spring-petclinic/spring-petclinic-reactive/">Demo Spring Application</a> which demonstrates how to role out an application using the database and security credentials exposed above.   If you are looking for more information about the Astra Service Broker check out the documentation <a href="https://docs.astra.datastax.com/docs/astra-service-broker">here</a>.</p>
 
         </section>
 

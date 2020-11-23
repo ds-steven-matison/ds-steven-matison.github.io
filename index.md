@@ -19,6 +19,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
 <p>&nbsp;</p>
 # Recent Posts
 
+*	<a href="/astra/multi/cloud/">How To: Astra Multi Cloud</a> - 11/23/2020
 *	<a href="/astra/service/broker/">How To: Astra Service Broker</a> - 11/20/2020
 *	<a href="/k8ssandra/">Introducing: K8ssandra</a> - 11/19/2020
 *   <a href="/stargate/graphql/playground/">How To: GraphQl Playground</a> - 11/17/2020
