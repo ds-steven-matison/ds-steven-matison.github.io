@@ -20,16 +20,6 @@ serviceinstance.servicecatalog.k8s.io/devdb-azure created
 
 ![Astra Multi Cloud](/assets/images/astra-multi-cloud-provisioning.png)
 
-## Bind the Instances
-
-```js
-kubectl apply -f astra-service-binding.yaml
-
-servicebinding.servicecatalog.k8s.io/devdb-gcp created
-servicebinding.servicecatalog.k8s.io/devdb-aws created
-servicebinding.servicecatalog.k8s.io/devdb-azure created
-```
-
 ## Check Instance Status
 
 ```js
@@ -43,6 +33,16 @@ devdb-aws     ServiceClass/astra-database   C10    Ready          40m
 
 At 40 minutes I can see all 3 Databases Active in Astra:
 ![Astra Multi Cloud](/assets/images/astra-multi-cloud-deployed.png)
+
+## Bind the Instances
+
+```js
+kubectl apply -f astra-service-binding.yaml
+
+servicebinding.servicecatalog.k8s.io/devdb-gcp created
+servicebinding.servicecatalog.k8s.io/devdb-aws created
+servicebinding.servicecatalog.k8s.io/devdb-azure created
+```
 
 ## Check Binding Status
 
