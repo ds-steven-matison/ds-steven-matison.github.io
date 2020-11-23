@@ -7,17 +7,7 @@ permalink: /astra/service/broker/
 
 # How To: Astra Service Broker
 
-Following Christopher Bradfords blog post over at Datastax: [Announcing the Astra Service Broker: Tradeoff-Free Cassandra in Kubernetes](https://www.datastax.com/blog/2020/11/announcing-astra-service-broker-tradeoff-free-cassandra-kubernetes) I was able to create a database on Astra in 6 commands using kubernetes and service account json object for my astra account. I had some challenges along the way but learned some great stuff today.  Check out the final command flow, setup requirements, and the 3 source documents below.
-
-```js
-k3d cluster create
-helm install catalog svc-cat/catalog --namespace catalog --create-namespace
-kubectl create secret generic astra-creds --from-literal=username=unused --from-literal=password=`echo '[Astra Service Account Credential JSON]'| base64`
-kubectl create -f astra-service-broker.yaml
-kubectl apply -f astra-service-instance.yaml
-kubectl apply -f astra-service-binding.yaml
-kubectl get secrets devdb -o yaml
-```
+Following Christopher Bradfords blog post over at Datastax: [Announcing the Astra Service Broker: Tradeoff-Free Cassandra in Kubernetes](https://www.datastax.com/blog/2020/11/announcing-astra-service-broker-tradeoff-free-cassandra-kubernetes) I was able to create a database on Astra in 6 commands using kubernetes and service account json object for my astra account. I had some challenges along the way but learned some great stuff today.  Check out the setup requirements, create cluster command flow, and the 3 source documents below.
 
 ## Environment Setup Requirements
 ```js
@@ -26,7 +16,17 @@ brew install kubernetes-service-catalog-client
 brew install helm
 helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
 helm repo update
+```
+
+## Create Cluster & Get Access Credentials
+```js
+k3d cluster create
 helm install catalog svc-cat/catalog --namespace catalog --create-namespace
+kubectl create secret generic astra-creds --from-literal=username=unused --from-literal=password=`echo '[Astra Service Account Credential JSON]'| base64`
+kubectl create -f astra-service-broker.yaml
+kubectl apply -f astra-service-instance.yaml
+kubectl apply -f astra-service-binding.yaml
+kubectl get secrets devdb -o yaml
 ```
 
 ## Contents of astra-service-broker.yaml
