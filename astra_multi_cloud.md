@@ -2,7 +2,7 @@
 layout: default
 title: Astra Multi Cloud
 description: How use deploy Astra Multi Cloud
-permalink: /astra/multi/Cloud/
+permalink: /astra/multi/cloud/
 ---
 
 # How To: Astra Service Br
