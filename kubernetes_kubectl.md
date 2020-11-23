@@ -2,7 +2,7 @@
 layout: default
 title: Kubectl
 description: A blog all about kubectl
-permalink: /kubernetes/kubectl
+permalink: /kubernetes/kubectl/
 ---
 
 # What is Kubectl?
