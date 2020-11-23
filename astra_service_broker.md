@@ -13,7 +13,7 @@ Following Christopher Bradfords blog post over at Datastax: [Announcing the Astr
 k3d cluster create
 helm install catalog svc-cat/catalog --namespace catalog --create-namespace
 kubectl create secret generic astra-creds --from-literal=username=unused --from-literal=password=`echo '[Astra Service Account Credential JSON]'| base64`
-kubectl apply -f astra-service-broker.yaml
+kubectl create -f astra-service-broker.yaml
 kubectl apply -f astra-service-instance.yaml
 kubectl apply -f astra-service-binding.yaml
 kubectl get secrets devdb -o yaml
@@ -27,6 +27,21 @@ brew install helm
 helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
 helm repo update
 helm install catalog svc-cat/catalog --namespace catalog --create-namespace
+```
+
+## Contents of astra-service-broker.yaml
+
+```js
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceBroker
+metadata:
+  name: astra
+spec:
+  authInfo:
+    basic:
+      secretRef:
+        name: astra-creds
+  url: https://broker.astra.datastax.com/
 ```
 
 ## Contents of astra-service-instance.yaml
@@ -47,21 +62,6 @@ spec:
   servicePlanExternalName: developer
 ```
 
-## Contents of astra-service-broker.yaml
-
-```js
-apiVersion: servicecatalog.k8s.io/v1beta1
-kind: ServiceBroker
-metadata:
-  name: astra
-spec:
-  authInfo:
-    basic:
-      secretRef:
-        name: astra-creds
-  url: https://broker.astra.datastax.com/
-```
-
 ## Contents of astra-service-binding.yaml
 
 ```js
@@ -72,8 +72,8 @@ metadata:
 spec:
   externalID: b946701e-c773-4332-8935-8212e8bdb412
   instanceRef:
-  name: devdb
-  secretName: devdb
+    name: devdb
+    secretName: devdb
 ```
 
 # What's Next
