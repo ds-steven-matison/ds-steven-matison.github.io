@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Astra Multi Cloud
-description: How use deploy Astra Multi Cloud
+description: How to deploy Astra Multi Cloud
 permalink: /astra/multi/cloud/
 ---
 
