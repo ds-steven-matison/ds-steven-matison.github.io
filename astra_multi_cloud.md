@@ -18,6 +18,8 @@ serviceinstance.servicecatalog.k8s.io/devdb-azure created
 ```
 ![WARNING](/assets/images/warning.png){:height="50" width="50" align="absmiddle" style="padding: 10px"} Magic is happening here, be patient.  My times were in excess of 20 minutes "provisioning".
 
+![Astra Multi Cloud](/assets/images/astra-multi-cloud-provisioning.png)
+
 ## Bind the Instances
 
 ```js
@@ -47,12 +49,12 @@ At 40 minutes I can see all 3 Databases Active in Astra:
 ```js
 kubectl get servicebindings                    
 
-NAME          SERVICE-INSTANCE   SECRET-NAME   STATUS   AGE
-devdb-gcp     devdb-gcp          devdb-gcp     Failed   46m
-devdb-aws     devdb-aws          devdb-aws     Failed   46m
-devdb-azure   devdb-azure        devdb-azure   Failed   46m
+NAME          SERVICE-INSTANCE   SECRET-NAME   STATUS                  AGE
+devdb-gcp     devdb-gcp          devdb-gcp     ErrorInstanceNotReady   9m44s
+devdb-aws     devdb-aws          devdb-aws     ErrorInstanceNotReady   9m44s
+devdb-azure   devdb-azure        devdb-azure   ErrorInstanceNotReady   9m44s
 ```
-![WARNING](/assets/images/warning.png){:height="50" width="50" align="absmiddle" style="padding: 10px"} I need to do some work here.  The blog and documentation was ambigious with "devdb" so i need to resolve the correct binding.
+![WARNING](/assets/images/warning.png){:height="50" width="50" align="absmiddle" style="padding: 10px"} Again be patient here, rolling out all 3 cloud clusters is about 40 minutes.
 
 ## Astra Service Instance YAML
 
