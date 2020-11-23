@@ -56,6 +56,15 @@ devdb-azure   devdb-azure        devdb-azure   ErrorInstanceNotReady   9m44s
 ```
 ![WARNING](/assets/images/warning.png){:height="50" width="50" align="absmiddle" style="padding: 10px"} Again be patient here, rolling out all 3 cloud clusters is about 40 minutes.
 
+
+## Get Instance Access Credentials
+
+```js
+kubectl get secrets devdb-gcp -o yaml
+kubectl get secrets devdb-aws -o yaml
+kubectl get secrets devdb-azure -o yaml
+```
+
 ## Astra Service Instance YAML
 
 ```js
