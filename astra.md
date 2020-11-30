@@ -44,6 +44,21 @@ Astra is a Database As A Service provided by [Datastax](https://datastax.com) wh
           </div>
         </article>
       </div>
+      <div class="mui-col-md-2">
+        <article class="mui-panel">
+          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
+            <span class="post-list-title">
+              <a class="post-link" href="/nosqlbench/astra/">NoSqlBench with Astra</a>
+            </span>
+            <div class="img-overlay"></div>
+            <a href="/nosqlbench/astra/" class="overlay"></a>
+          </div>
+          <div class="post-data">
+            <p class="post-excerpt">How To: NoSqlBench with Astra</p>
+            <p><b>tags:</b> nosqlbench, astra, benchmarking, testing</p>
+          </div>
+        </article>
+      </div>
   </div>
   <div class="home mui-row">
       <div class="mui-col-md-2">
