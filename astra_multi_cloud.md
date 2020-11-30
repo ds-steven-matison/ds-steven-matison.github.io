@@ -123,7 +123,7 @@ spec:
   externalID: b946701e-c773-4332-8935-8212e8bdb412
   instanceRef:
     name: devdb-gcp
-    secretName: devdb-gcp
+  secretName: devdb-gcp
 ---
 apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ServiceBinding
@@ -133,7 +133,7 @@ spec:
   externalID: b946701e-c773-4332-8935-8212e8bdb412
   instanceRef:
     name: devdb-aws
-    secretName: devdb-gcp
+  secretName: devdb-gcp
 ---
 apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ServiceBinding
@@ -143,7 +143,7 @@ spec:
   externalID: b946701e-c773-4332-8935-8212e8bdb412
   instanceRef:
     name: devdb-azure
-    secretName: devdb-gcp
+  secretName: devdb-gcp
 ```
 ## What's Next?
 

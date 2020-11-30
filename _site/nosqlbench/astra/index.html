@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=" media="screen" type="text/css">
+    <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
+    <link rel="stylesheet" href="/assets/css/mui.css">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>NoSqlBench + Astra | Data Architect</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="NoSqlBench + Astra" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="How to use NoSqlBench with Astra" />
+<meta property="og:description" content="How to use NoSqlBench with Astra" />
+<link rel="canonical" href="http://localhost:4000/nosqlbench/astra/" />
+<meta property="og:url" content="http://localhost:4000/nosqlbench/astra/" />
+<meta property="og:site_name" content="Data Architect" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="NoSqlBench + Astra" />
+<script type="application/ld+json">
+{"url":"http://localhost:4000/nosqlbench/astra/","headline":"NoSqlBench + Astra","description":"How to use NoSqlBench with Astra","@type":"WebPage","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <a href="http://localhost:4000/">
+          <h1> NoSqlBench + Astra </h1>
+        </a>
+        <h2> How to use NoSqlBench with Astra </h2>
+          <br>
+          <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
+          <a href="/astra/"><button type="button" class="btn btn-primary">Astra</button></a>
+          <a href="/nosqlbench/"><button type="button" class="btn btn-primary">NoSqlBench</button></a>
+          <a href="/stargate/"><button type="button" class="btn btn-primary">Stargate</button></a>
+        <a href="" class="button"><small>Follow me on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1 id="how-to-nosqlbench-with-astra">How To: NoSqlBench with Astra</h1>
+<p>In a previous article <a href="/astra/service/broker/">How To: Astra Service Broker</a> I showed you how to setup your environment and spin up a devdb in Astra free tier using the Astra Kubernetes Service Broker.  In this next how to I am going to show you how you can use NoSQLBench to test loading data to Astra.  For this how to I used Astra UI to create demo cluster, keyspace, and user.</p>
+
+<h2 id="before-getting-started">Before Getting Started</h2>
+
+<ol>
+  <li>Be sure you have a working NoSQLBench (nb or nb.jar).  You can find information about how to get started with NoSQLBench on my <a href="/nosqlbench/">NoSQLBench Blog</a>.</li>
+  <li>Make sure your Astra secure bundle is available to your nosqlbench instance.  In this example I downloaded the bundle from Astra UI then copied to /tmp.</li>
+</ol>
+
+<h2 id="start-astra-benchmarking-with-nosqlbench">Start Astra Benchmarking with NoSQLBench</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">nb</span> <span class="nx">run</span> <span class="nx">cql</span><span class="o">-</span><span class="nx">iot</span> <span class="nx">astra</span> <span class="err">\</span>    
+    <span class="nx">username</span><span class="o">=</span><span class="nx">demo</span> <span class="o">\</span>
+    <span class="nx">password</span><span class="o">=</span><span class="nx">demo2020</span> <span class="o">\</span>
+    <span class="nx">keyspace</span><span class="o">=</span><span class="nx">demo</span> <span class="o">\</span>
+    <span class="nx">secureconnectbundle</span><span class="o">=</span><span class="sr">/tmp/</span><span class="nx">secure</span><span class="o">-</span><span class="nx">connect</span><span class="o">-</span><span class="nx">demo</span><span class="p">.</span><span class="nx">zip</span>      
+</code></pre></div></div>
+
+<p>or</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">java</span> <span class="o">-</span><span class="nx">jar</span> <span class="nx">nb</span><span class="p">.</span><span class="nx">jar</span> <span class="nx">cql</span><span class="o">-</span><span class="nx">iot</span> <span class="nx">astra</span> <span class="err">\</span>    
+    <span class="nx">username</span><span class="o">=</span><span class="nx">demo</span> <span class="o">\</span>
+    <span class="nx">password</span><span class="o">=</span><span class="nx">demo2020</span> <span class="o">\</span>
+    <span class="nx">keyspace</span><span class="o">=</span><span class="nx">demo</span> <span class="o">\</span>
+    <span class="nx">secureconnectbundle</span><span class="o">=</span><span class="sr">/tmp/</span><span class="nx">secure</span><span class="o">-</span><span class="nx">connect</span><span class="o">-</span><span class="nx">demo</span><span class="p">.</span><span class="nx">zip</span>      
+</code></pre></div></div>
+
+<h2 id="sample-output">Sample Output</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Logging</span> <span class="nx">to</span> <span class="nx">logs</span><span class="o">/</span><span class="nx">scenario_20201130_132903_455</span><span class="p">.</span><span class="nx">log</span>
+<span class="nx">cqliot_astra_schema</span><span class="p">:</span> <span class="mf">100.00</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=1 max=1</span><span class="se">)</span><span class="sr"> </span><span class="se">(</span><span class="sr">last report</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">0.37</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=36756 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">0.88</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=88159 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">1.40</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=139760 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">1.92</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=192445 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">2.44</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=243613 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">2.97</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=297122 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">3.51</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=350615 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">4.02</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=402398 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">4.45</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=444902 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">4.99</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=499381 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">5.53</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=552956 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">6.08</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=607688 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">6.56</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=656076 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">7.04</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=704018 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">7.55</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=754986 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">8.10</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=809898 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">8.89</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=888542 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">8.89</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=888542 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">9.19</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=919438 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">9.71</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=970703 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">10.25</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=1025088 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">10.71</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=1070983 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">11.20</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=1120478 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">11.68</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=1168035 max=10000000</span><span class="err">)
+</span><span class="nx">cqliot_astra_rampup</span><span class="p">:</span> <span class="mf">12.19</span><span class="o">%</span><span class="sr">/Stopped </span><span class="se">(</span><span class="sr">details: min=0 cycle=1219462 max=10000000</span><span class="err">)
+</span></code></pre></div></div>
+
+<h2 id="view-iot-data-created-in-studio">View IOT Data Created in Studio</h2>
+
+<p><img src="/assets/images/nosqlbench_astra_iot_studio.png" alt="Nosqlbench Astra Iot" /></p>
+
+<h2 id="check-out-health-tab">Check Out Health Tab</h2>
+
+<p><img src="/assets/images/nosqlbench_astra_iot_health.png" alt="Nosqlbench Astra Iot Health" /></p>
+
+<h2 id="whats-next">What’s Next?</h2>
+
+<p>Be sure to check out other Astra workloads (cql-tabular and cql-keyvalue).  In a future blog I will show you now to create your own workloads.   For now you can find more information about other included astra workloads with the following command:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">nb</span> <span class="o">--</span><span class="nx">list</span><span class="o">-</span><span class="nx">scenarios</span>
+</code></pre></div></div>
+
+        </section>
+
+        <aside id="sidebar">
+	
+
+<h1 id="find-me">Find Me</h1>
+
+You can find me on Slacks:
+<ul>
+  <li><a href="https://datastax.slack.com" target="_blank" rel="noopener">DataStax Slack</a></li>
+  <li><a href="https://the-asf.slack.com" target="_blank" rel="noopener">The ASF Slack</a></li>
+  <li><a href="https://apachenifi.slack.com" target="_blank" rel="noopener">Apache NiFi Slack</a></li>
+  <li><a href="https://nosqlbench.slack.com" target="_blank" rel="noopener">NoSqlBench Slack</a></li>
+</ul>
+
+You can find me on Stacks:
+<ul>
+  <li><a href="https://stackoverflow.com/users/14215291/ds-steven-matison" target="_blank" rel="noopener">ds-steven-matison</a></li>
+  <li><a href="https://stackoverflow.com/users/4253286/steven-matison" target="_blank" rel="noopener">steven-matison</a></li>
+</ul>
+
+You can find me on Communities:
+<ul>
+  <li><a href="https://community.datastax.com/users/3254/ds-steven-matison.html" target="_blank" rel="noopener">DataStax Community</a></li>
+  <li><a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/60150" target="_blank" rel="noopener">Cloudera Community</a></li>
+</ul>
+You can find me on Socials:
+<ul>
+  <li><a href="https://www.linkedin.com/in/steven-matison/" target="_blank" rel="noopener">LinkedIn</a></li>
+  <li><a href="https://twitter.com/DsMatison" target="_blank" rel="noopener">Twitter</a></li>
+</ul>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+    
+  </body>
+</html>

@@ -17,15 +17,15 @@
 <meta name="generator" content="Jekyll v4.1.1" />
 <meta property="og:title" content="Astra Multi Cloud" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="How use deploy Astra Multi Cloud" />
-<meta property="og:description" content="How use deploy Astra Multi Cloud" />
-<link rel="canonical" href="http://localhost:4000/astra/multi/Cloud/" />
-<meta property="og:url" content="http://localhost:4000/astra/multi/Cloud/" />
+<meta name="description" content="How to deploy Astra Multi Cloud" />
+<meta property="og:description" content="How to deploy Astra Multi Cloud" />
+<link rel="canonical" href="http://localhost:4000/astra/multi/cloud/" />
+<meta property="og:url" content="http://localhost:4000/astra/multi/cloud/" />
 <meta property="og:site_name" content="Data Architect" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Astra Multi Cloud" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/astra/multi/Cloud/","description":"How use deploy Astra Multi Cloud","headline":"Astra Multi Cloud","@type":"WebPage","@context":"https://schema.org"}</script>
+{"url":"http://localhost:4000/astra/multi/cloud/","headline":"Astra Multi Cloud","description":"How to deploy Astra Multi Cloud","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -36,7 +36,7 @@
         <a href="http://localhost:4000/">
           <h1> Astra Multi Cloud </h1>
         </a>
-        <h2> How use deploy Astra Multi Cloud </h2>
+        <h2> How to deploy Astra Multi Cloud </h2>
           <br>
           <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
           <a href="/astra/"><button type="button" class="btn btn-primary">Astra</button></a>
@@ -49,7 +49,7 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h1 id="how-to-astra-service-br">How To: Astra Service Br</h1>
+          <h1 id="how-to-astra-multi-cloud">How To: Astra Multi Cloud</h1>
 <p>In the previous article <a href="/astra/service/broker/">How To: Astra Service Broker</a> I showed you how to setup your environment and spin up a devdb in Astra free tier using the Astra Kubernetes Service Broker.  In this next how to I am going to show you how to spin up 3 production C10 instances in Astra.  One on <a href="https://aws.amazon.com/">AWS</a>, one on <a href="https://azure.microsoft.com/">Azure</a>, and one on <a href="https://console.cloud.google.com">GCP</a>.  Contents of the yamls are below, or check out my <a href="https://github.com/ds-steven-matison/astra-service-broker-demo">github</a>.</p>
 
 <h2 id="create-the-instances">Create the Instances</h2>
@@ -61,14 +61,7 @@
 </code></pre></div></div>
 <p><img src="/assets/images/warning.png" alt="WARNING" height="50" width="50" align="absmiddle" style="padding: 10px" /> Magic is happening here, be patient.  My times were in excess of 20 minutes “provisioning”.</p>
 
-<h2 id="bind-the-instances">Bind the Instances</h2>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">service</span><span class="o">-</span><span class="nx">binding</span><span class="p">.</span><span class="nx">yaml</span>
-
-<span class="nx">servicebinding</span><span class="p">.</span><span class="nx">servicecatalog</span><span class="p">.</span><span class="nx">k8s</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">devdb</span><span class="o">-</span><span class="nx">gcp</span> <span class="nx">created</span>
-<span class="nx">servicebinding</span><span class="p">.</span><span class="nx">servicecatalog</span><span class="p">.</span><span class="nx">k8s</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">devdb</span><span class="o">-</span><span class="nx">aws</span> <span class="nx">created</span>
-<span class="nx">servicebinding</span><span class="p">.</span><span class="nx">servicecatalog</span><span class="p">.</span><span class="nx">k8s</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">devdb</span><span class="o">-</span><span class="nx">azure</span> <span class="nx">created</span>
-</code></pre></div></div>
+<p><img src="/assets/images/astra-multi-cloud-provisioning.png" alt="Astra Multi Cloud" /></p>
 
 <h2 id="check-instance-status">Check Instance Status</h2>
 
@@ -83,16 +76,32 @@
 <p>At 40 minutes I can see all 3 Databases Active in Astra:
 <img src="/assets/images/astra-multi-cloud-deployed.png" alt="Astra Multi Cloud" /></p>
 
+<h2 id="bind-the-instances">Bind the Instances</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">service</span><span class="o">-</span><span class="nx">binding</span><span class="p">.</span><span class="nx">yaml</span>
+
+<span class="nx">servicebinding</span><span class="p">.</span><span class="nx">servicecatalog</span><span class="p">.</span><span class="nx">k8s</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">devdb</span><span class="o">-</span><span class="nx">gcp</span> <span class="nx">created</span>
+<span class="nx">servicebinding</span><span class="p">.</span><span class="nx">servicecatalog</span><span class="p">.</span><span class="nx">k8s</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">devdb</span><span class="o">-</span><span class="nx">aws</span> <span class="nx">created</span>
+<span class="nx">servicebinding</span><span class="p">.</span><span class="nx">servicecatalog</span><span class="p">.</span><span class="nx">k8s</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">devdb</span><span class="o">-</span><span class="nx">azure</span> <span class="nx">created</span>
+</code></pre></div></div>
+
 <h2 id="check-binding-status">Check Binding Status</h2>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">servicebindings</span>                    
 
-<span class="nx">NAME</span>          <span class="nx">SERVICE</span><span class="o">-</span><span class="nx">INSTANCE</span>   <span class="nx">SECRET</span><span class="o">-</span><span class="nx">NAME</span>   <span class="nx">STATUS</span>   <span class="nx">AGE</span>
-<span class="nx">devdb</span><span class="o">-</span><span class="nx">gcp</span>     <span class="nx">devdb</span><span class="o">-</span><span class="nx">gcp</span>          <span class="nx">devdb</span><span class="o">-</span><span class="nx">gcp</span>     <span class="nx">Failed</span>   <span class="mi">46</span><span class="nx">m</span>
-<span class="nx">devdb</span><span class="o">-</span><span class="nx">aws</span>     <span class="nx">devdb</span><span class="o">-</span><span class="nx">aws</span>          <span class="nx">devdb</span><span class="o">-</span><span class="nx">aws</span>     <span class="nx">Failed</span>   <span class="mi">46</span><span class="nx">m</span>
-<span class="nx">devdb</span><span class="o">-</span><span class="nx">azure</span>   <span class="nx">devdb</span><span class="o">-</span><span class="nx">azure</span>        <span class="nx">devdb</span><span class="o">-</span><span class="nx">azure</span>   <span class="nx">Failed</span>   <span class="mi">46</span><span class="nx">m</span>
+<span class="nx">NAME</span>          <span class="nx">SERVICE</span><span class="o">-</span><span class="nx">INSTANCE</span>   <span class="nx">SECRET</span><span class="o">-</span><span class="nx">NAME</span>   <span class="nx">STATUS</span>                  <span class="nx">AGE</span>
+<span class="nx">devdb</span><span class="o">-</span><span class="nx">gcp</span>     <span class="nx">devdb</span><span class="o">-</span><span class="nx">gcp</span>          <span class="nx">devdb</span><span class="o">-</span><span class="nx">gcp</span>     <span class="nx">ErrorInstanceNotReady</span>   <span class="mi">9</span><span class="nx">m44s</span>
+<span class="nx">devdb</span><span class="o">-</span><span class="nx">aws</span>     <span class="nx">devdb</span><span class="o">-</span><span class="nx">aws</span>          <span class="nx">devdb</span><span class="o">-</span><span class="nx">aws</span>     <span class="nx">ErrorInstanceNotReady</span>   <span class="mi">9</span><span class="nx">m44s</span>
+<span class="nx">devdb</span><span class="o">-</span><span class="nx">azure</span>   <span class="nx">devdb</span><span class="o">-</span><span class="nx">azure</span>        <span class="nx">devdb</span><span class="o">-</span><span class="nx">azure</span>   <span class="nx">ErrorInstanceNotReady</span>   <span class="mi">9</span><span class="nx">m44s</span>
 </code></pre></div></div>
-<p><img src="/assets/images/warning.png" alt="WARNING" height="50" width="50" align="absmiddle" style="padding: 10px" /> I need to do some work here.  The blog and documentation was ambigious with “devdb” so i need to resolve the correct binding.</p>
+<p><img src="/assets/images/warning.png" alt="WARNING" height="50" width="50" align="absmiddle" style="padding: 10px" /> Again be patient here, rolling out all 3 cloud clusters is about 40 minutes.</p>
+
+<h2 id="get-instance-access-credentials">Get Instance Access Credentials</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">secrets</span> <span class="nx">devdb</span><span class="o">-</span><span class="nx">gcp</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">yaml</span>
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">secrets</span> <span class="nx">devdb</span><span class="o">-</span><span class="nx">aws</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">yaml</span>
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">secrets</span> <span class="nx">devdb</span><span class="o">-</span><span class="nx">azure</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">yaml</span>
+</code></pre></div></div>
 
 <h2 id="astra-service-instance-yaml">Astra Service Instance YAML</h2>
 
@@ -150,7 +159,7 @@
   <span class="nx">externalID</span><span class="p">:</span> <span class="nx">b946701e</span><span class="o">-</span><span class="nx">c773</span><span class="o">-</span><span class="mi">4332</span><span class="o">-</span><span class="mi">8935</span><span class="o">-</span><span class="mi">8212</span><span class="nx">e8bdb412</span>
   <span class="nx">instanceRef</span><span class="p">:</span>
     <span class="nx">name</span><span class="p">:</span> <span class="nx">devdb</span><span class="o">-</span><span class="nx">gcp</span>
-    <span class="nx">secretName</span><span class="p">:</span> <span class="nx">devdb</span>
+  <span class="nx">secretName</span><span class="p">:</span> <span class="nx">devdb</span><span class="o">-</span><span class="nx">gcp</span>
 <span class="o">---</span>
 <span class="nx">apiVersion</span><span class="p">:</span> <span class="nx">servicecatalog</span><span class="p">.</span><span class="nx">k8s</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">v1beta1</span>
 <span class="nx">kind</span><span class="p">:</span> <span class="nx">ServiceBinding</span>
@@ -160,7 +169,7 @@
   <span class="nx">externalID</span><span class="p">:</span> <span class="nx">b946701e</span><span class="o">-</span><span class="nx">c773</span><span class="o">-</span><span class="mi">4332</span><span class="o">-</span><span class="mi">8935</span><span class="o">-</span><span class="mi">8212</span><span class="nx">e8bdb412</span>
   <span class="nx">instanceRef</span><span class="p">:</span>
     <span class="nx">name</span><span class="p">:</span> <span class="nx">devdb</span><span class="o">-</span><span class="nx">aws</span>
-    <span class="nx">secretName</span><span class="p">:</span> <span class="nx">devdb</span>
+  <span class="nx">secretName</span><span class="p">:</span> <span class="nx">devdb</span><span class="o">-</span><span class="nx">gcp</span>
 <span class="o">---</span>
 <span class="nx">apiVersion</span><span class="p">:</span> <span class="nx">servicecatalog</span><span class="p">.</span><span class="nx">k8s</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">v1beta1</span>
 <span class="nx">kind</span><span class="p">:</span> <span class="nx">ServiceBinding</span>
@@ -170,11 +179,11 @@
   <span class="nx">externalID</span><span class="p">:</span> <span class="nx">b946701e</span><span class="o">-</span><span class="nx">c773</span><span class="o">-</span><span class="mi">4332</span><span class="o">-</span><span class="mi">8935</span><span class="o">-</span><span class="mi">8212</span><span class="nx">e8bdb412</span>
   <span class="nx">instanceRef</span><span class="p">:</span>
     <span class="nx">name</span><span class="p">:</span> <span class="nx">devdb</span><span class="o">-</span><span class="nx">azure</span>
-    <span class="nx">secretName</span><span class="p">:</span> <span class="nx">devdb</span>
+  <span class="nx">secretName</span><span class="p">:</span> <span class="nx">devdb</span><span class="o">-</span><span class="nx">gcp</span>
 </code></pre></div></div>
 <h2 id="whats-next">What’s Next?</h2>
 
-<p>Check out some more <a href="/kubectl/">kubectl</a> commands that you need to learn for managing your Astra instances.</p>
+<p>Check out some more <a href="/kubernetes/kubectl/">kubectl</a> commands that you need to learn for managing your Astra instances.</p>
 
         </section>
 
