@@ -25,7 +25,7 @@ For the purpose of this NoSQLBench blog, I am going to dive right into actually 
           </div>
           <div class="post-data">
             <p class="post-excerpt">My First Contribution to NoSqlBench</p>
-            <p><b>tags:</b>ebdse, graph, java, driver, migration</p>
+            <p><b>tags:</b> ebdse, graph, java, driver, migration</p>
           </div>
         </article>
       </div>

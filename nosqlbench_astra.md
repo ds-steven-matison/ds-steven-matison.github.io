@@ -76,7 +76,7 @@ cqliot_astra_rampup: 12.19%/Stopped (details: min=0 cycle=1219462 max=10000000)
 
 ## What's Next?
 
-Be sure to check out other Astra workloads (cql-tabular and cql-keyvalue).  In a future blog I will show you now to create your own workloads.   For now you can find more information about other included astra workloads with the following command:
+Be sure to check out other Astra workloads (cql-tabular and cql-keyvalue).  In a future blog I will show you how to create your own workloads.   For now you can find more information about other included astra workloads with the following command (look for "astra" in output):
 
 ```js
 nb --list-scenarios
