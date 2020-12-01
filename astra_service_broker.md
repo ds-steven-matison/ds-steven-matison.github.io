@@ -73,7 +73,7 @@ spec:
   externalID: b946701e-c773-4332-8935-8212e8bdb412
   instanceRef:
     name: devdb
-    secretName: devdb
+  secretName: devdb
 ```
 
 # What's Next
