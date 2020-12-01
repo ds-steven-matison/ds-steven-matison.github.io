@@ -1,5 +1,5 @@
 ---
-title: Data Architect
+title: DataStax Data Architect
 description: A blog for my projects at Datastax
 layout: default
 
