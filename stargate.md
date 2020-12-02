@@ -10,6 +10,12 @@ permalink: /stargate/
 Stargate is an open source api framework for data which makes the database administration task for any application more accessible by adding developer level support for all turnkey database operations.  Check out the [Stargate Website](https://stargate.io/), the [Stargate Github](https://github.com/stargate/stargate), and the [Stargate Documentation](https://stargate.io/docs/stargate/0.1/quickstart/quickstart.html).  If you are chatty they even have a 
 [Discord](https://discord.com/invite/33mKDHHFUE).
 
+# Why use Stargate?
+
+Mostly because it is a portal to another future data world,  I use Stargate specifically for two futuristic use cases:
+*   GraphQL + Cassandra
+*   JSON Document Database.   
+
 # Learning Stargate
 
 The best way for me to learn any new API is to read the documentation and build the samples.  Stargate was no exception with 3 different APIs I need to learn:

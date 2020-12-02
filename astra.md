@@ -7,7 +7,11 @@ permalink: /astra/
 
 # What is Astra?
 
-Astra is a Database As A Service provided by [Datastax](https://datastax.com) which allows creation of cassandra clusters on GCP, AWS, and Azure.  To get started with a new Astra Account click [here](https://astra.datastax.com/register).   You can complete your entire developer experience in the UI but for the sake of this blog I am going to show you how to use APIs and connect applications and services to Astra without using the UI as a main interface.  If you are looking for other examples of applications that integrate with Astra go [here](https://docs.astra.datastax.com/docs/sample-apps).  Documentation for astra can be found [here](https://docs.astra.datastax.com/docs/).  API Reference Documentation is found [here](https://docs.astra.datastax.com/reference).
+Astra is a Database As A Service provided by [Datastax](https://datastax.com) which allows creation of cassandra clusters on GCP, AWS, and Azure. To get started with a new Astra Account click [here](https://astra.datastax.com/register) and you can have a free 5GB Astra cluster online in less than a few minutes.  You can complete your entire developer experience in the UI but for the sake of this blog I am going to show you how to use APIs and connect applications and services to Astra without using the UI as a main interface.  If you are looking for other examples of applications that integrate with Astra go [here](https://docs.astra.datastax.com/docs/sample-apps).  Documentation for astra can be found [here](https://docs.astra.datastax.com/docs/).  API Reference Documentation is found [here](https://docs.astra.datastax.com/reference).
+
+# Why use Astra?
+
+Astra's main goal is to meet developers were they are comfortable (with many APIs), to make developing apps against cassandra easier (faster TTM), and remove all the pain of creating and administrating cassandra clusters.  I personal like to use Astra because it provides a single layer to create cassandra clusters in all three major cloud providers (GCP,AZURE,AWS).  You can check out more about my experience with multiple cloud instance of astra [here](/astra/multi/cloud/).
 
 # Working with Astra
 <p>&nbsp;</p>

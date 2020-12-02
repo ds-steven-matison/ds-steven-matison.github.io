@@ -9,6 +9,10 @@ permalink: /nosqlbench/
 
 NoSQLBench is an open source, pluggable, nosql benchmarking and testing suite that was recently released to the open source cassandra community by DataStax.  You can read all about noSQLBench over on the DataStax blog [here](https://www.datastax.com/blog/nosqlbench).  Be sure to check out the noSQLBench [GitHub Repo](https://github.com/nosqlbench/nosqlbench) and [Docs](http://docs.nosqlbench.io/). 
 
+# Why use NoSQLBench?
+  
+How many times have you been involved in an application or database related project without any test data?   For me, the answer is A LOT, TONS, MANY.  Getting sample or test data, and/or building a system to create/deliver the data was traditionally a bigger lift than the original project.  This means little to no testing gets done.   Then we march to production without any benchmarking, load testing, and performance tuning.  Not anymore for me.  My future projects and evaluations of cassandra clusters will always include sample data, load generation, benchmarking, and performance tuning using NoSQL Bench.
+
 # Working with NoSQLBench
 For the purpose of this NoSQLBench blog, I am going to dive right into actually contributing and using NoSQLBench.
 

@@ -25,7 +25,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="GraphQL Playground" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/stargate/graphql/playground/","description":"A blog all about GraphQL Playground","headline":"GraphQL Playground","@type":"WebPage","@context":"https://schema.org"}</script>
+{"url":"http://localhost:4000/stargate/graphql/playground/","headline":"GraphQL Playground","description":"A blog all about GraphQL Playground","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -53,6 +53,10 @@
 
 <p>Bundled within the docker stargate is an instance of GraphQL Playground.  This UI provides an interface to execute GraphQL queries against Stargate &amp; Astra APIs.</p>
 
+<h1 id="why-use-graphql-playground">Why use GraphQL Playground?</h1>
+
+<p>This is a great tool to quickly get started testing GraphQL queries.  It also comes with a great share feature allowing you to share your work with team members.</p>
+
 <h1 id="working-with-graphql-playground">Working with GraphQL Playground</h1>
 
 <p>With Stargate Docker running you can access GraphQL Playground with the following Url:</p>
@@ -69,223 +73,26 @@
 </ul>
 
 <h1 id="graphql-playground-posts">GraphQL Playground Posts</h1>
-
-<p>As I create useful markup here, I will move it into specific posts.</p>
-
-<p><a name="howto1"></a></p>
-<h2 id="how-to-graphql-playground">How To: GraphQl Playground</h2>
-
-<p>My first experience with GraphQL Playground went pretty well, but I quickly ran into some issues once i realized that the tabs do not persist.    I had previously went through testing some of the Stargate API documentation and filled my screen with some operational tabs.   Next time I game back to GraphQL they were all gone.  Oops.   This behavior really pushes hard for an import/export feature.  A quick google search later I wound up on an <a href="https://github.com/graphql/graphql-playground/issues/6">Open Github Issue #6</a>. In the comments a user exposes a method to import/export the tabs.  I figured this would be a great first post for my GraphQL Playground blog.</p>
-
-<p>First I install the Google Chome Extension for <a href="https://chrome.google.com/webstore/detail/localstorage-manager/fkhoimdhngkiicbjobkinobjkoefhkap/related">Local Storage Handler</a> and download the graphql-playground object.  It is a huge minimized json object but you can click the popup button to make it more human readable:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">❮</span>
-<span class="p">{</span>
-    <span class="dl">"</span><span class="s2">workspaces</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-        <span class="dl">""</span><span class="p">:</span> <span class="p">{</span>
-            <span class="dl">"</span><span class="s2">docs</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-                <span class="dl">"</span><span class="s2">ckhmat9ju00003h5oum6jf1mf</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="dl">"</span><span class="s2">navStack</span><span class="dl">"</span><span class="p">:</span> <span class="p">[],</span>
-                    <span class="dl">"</span><span class="s2">docsOpen</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                    <span class="dl">"</span><span class="s2">docsWidth</span><span class="dl">"</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
-                    <span class="dl">"</span><span class="s2">activeTabIdx</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-                    <span class="dl">"</span><span class="s2">keyMove</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span>
-                <span class="p">}</span>
-            <span class="p">},</span>
-            <span class="dl">"</span><span class="s2">sessions</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-                <span class="dl">"</span><span class="s2">sessions</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="dl">"</span><span class="s2">ckhmat9ju00003h5oum6jf1mf</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ckhmat9ju00003h5oum6jf1mf</span><span class="dl">"</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">query</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2"># Write your query or mutation here</span><span class="se">\n</span><span class="dl">"</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">variables</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">responses</span><span class="dl">"</span><span class="p">:</span> <span class="p">[],</span>
-                        <span class="dl">"</span><span class="s2">endpoint</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">hasMutation</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">hasSubscription</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">hasQuery</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">queryTypes</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-                            <span class="dl">"</span><span class="s2">firstOperationName</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-                            <span class="dl">"</span><span class="s2">subscription</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                            <span class="dl">"</span><span class="s2">query</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                            <span class="dl">"</span><span class="s2">mutation</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span>
-                        <span class="p">},</span>
-                        <span class="dl">"</span><span class="s2">subscriptionActive</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">date</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2020-11-17T18:16:39.066Z</span><span class="dl">"</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">starred</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">queryRunning</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">operations</span><span class="dl">"</span><span class="p">:</span> <span class="p">[],</span>
-                        <span class="dl">"</span><span class="s2">isReloadingSchema</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">isSchemaPendingUpdate</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">responseExtensions</span><span class="dl">"</span><span class="p">:</span> <span class="p">{},</span>
-                        <span class="dl">"</span><span class="s2">queryVariablesActive</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">endpointUnreachable</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">editorFlex</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">variableEditorOpen</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">variableEditorHeight</span><span class="dl">"</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">responseTracingOpen</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">responseTracingHeight</span><span class="dl">"</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">docExplorerWidth</span><span class="dl">"</span><span class="p">:</span> <span class="mi">350</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">variableToType</span><span class="dl">"</span><span class="p">:</span> <span class="p">{},</span>
-                        <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">isFile</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span>
-                    <span class="p">}</span>
-                <span class="p">},</span>
-                <span class="dl">"</span><span class="s2">selectedSessionId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ckhmat9ju00003h5oum6jf1mf</span><span class="dl">"</span><span class="p">,</span>
-                <span class="dl">"</span><span class="s2">sessionCount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span>
-            <span class="p">},</span>
-            <span class="dl">"</span><span class="s2">sharing</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-                <span class="dl">"</span><span class="s2">history</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-                <span class="dl">"</span><span class="s2">allTabs</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-                <span class="dl">"</span><span class="s2">shareUrl</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span>
-            <span class="p">},</span>
-            <span class="dl">"</span><span class="s2">history</span><span class="dl">"</span><span class="p">:</span> <span class="p">{}</span>
-        <span class="p">},</span>
-        <span class="dl">"</span><span class="s2">/graphql-schema</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-            <span class="dl">"</span><span class="s2">docs</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-                <span class="dl">"</span><span class="s2">ckhmat9ju00003h5oum6jf1mf</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="dl">"</span><span class="s2">navStack</span><span class="dl">"</span><span class="p">:</span> <span class="p">[],</span>
-                    <span class="dl">"</span><span class="s2">docsOpen</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                    <span class="dl">"</span><span class="s2">docsWidth</span><span class="dl">"</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
-                    <span class="dl">"</span><span class="s2">activeTabIdx</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-                    <span class="dl">"</span><span class="s2">keyMove</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span>
-                <span class="p">},</span>
-                <span class="dl">"</span><span class="s2">ckhmat9oe00013h5o792k7kqp</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="dl">"</span><span class="s2">navStack</span><span class="dl">"</span><span class="p">:</span> <span class="p">[],</span>
-                    <span class="dl">"</span><span class="s2">docsOpen</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                    <span class="dl">"</span><span class="s2">docsWidth</span><span class="dl">"</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
-                    <span class="dl">"</span><span class="s2">activeTabIdx</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-                    <span class="dl">"</span><span class="s2">keyMove</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span>
-                <span class="p">}</span>
-            <span class="p">},</span>
-            <span class="dl">"</span><span class="s2">sessions</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-                <span class="dl">"</span><span class="s2">sessions</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="dl">"</span><span class="s2">ckhmat9oe00013h5o792k7kqp</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ckhmat9oe00013h5o792k7kqp</span><span class="dl">"</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">query</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{ keyspaces{ name } }</span><span class="dl">"</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">variables</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">responses</span><span class="dl">"</span><span class="p">:</span> <span class="p">[],</span>
-                        <span class="dl">"</span><span class="s2">endpoint</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/graphql-schema</span><span class="dl">"</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">hasMutation</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">hasSubscription</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">hasQuery</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">queryTypes</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-                            <span class="dl">"</span><span class="s2">firstOperationName</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-                            <span class="dl">"</span><span class="s2">subscription</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                            <span class="dl">"</span><span class="s2">query</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                            <span class="dl">"</span><span class="s2">mutation</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span>
-                        <span class="p">},</span>
-                        <span class="dl">"</span><span class="s2">subscriptionActive</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">date</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2020-11-17T18:16:39.066Z</span><span class="dl">"</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">starred</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">queryRunning</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">operations</span><span class="dl">"</span><span class="p">:</span> <span class="p">[],</span>
-                        <span class="dl">"</span><span class="s2">isReloadingSchema</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">isSchemaPendingUpdate</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">responseExtensions</span><span class="dl">"</span><span class="p">:</span> <span class="p">{},</span>
-                        <span class="dl">"</span><span class="s2">queryVariablesActive</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">endpointUnreachable</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">editorFlex</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">variableEditorOpen</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">variableEditorHeight</span><span class="dl">"</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">responseTracingOpen</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">responseTracingHeight</span><span class="dl">"</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">docExplorerWidth</span><span class="dl">"</span><span class="p">:</span> <span class="mi">350</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">variableToType</span><span class="dl">"</span><span class="p">:</span> <span class="p">{},</span>
-                        <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{</span><span class="se">\n</span><span class="s2">  </span><span class="se">\"</span><span class="s2">x-cassandra-token</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">populate_me</span><span class="se">\"\n</span><span class="s2">}</span><span class="dl">"</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">isFile</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">graphql-schema</span><span class="dl">"</span>
-                    <span class="p">},</span>
-                    <span class="dl">"</span><span class="s2">ckhmat9oe00023h5oatstmmiv</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ckhmat9oe00023h5oatstmmiv</span><span class="dl">"</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">query</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2"># Write your query or mutation here</span><span class="se">\n</span><span class="dl">"</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">variables</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">responses</span><span class="dl">"</span><span class="p">:</span> <span class="p">[],</span>
-                        <span class="dl">"</span><span class="s2">endpoint</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/graphql/system</span><span class="dl">"</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">hasMutation</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">hasSubscription</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">hasQuery</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">queryTypes</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-                            <span class="dl">"</span><span class="s2">firstOperationName</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-                            <span class="dl">"</span><span class="s2">subscription</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                            <span class="dl">"</span><span class="s2">query</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                            <span class="dl">"</span><span class="s2">mutation</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span>
-                        <span class="p">},</span>
-                        <span class="dl">"</span><span class="s2">subscriptionActive</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">date</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2020-11-17T18:16:39.066Z</span><span class="dl">"</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">starred</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">queryRunning</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">operations</span><span class="dl">"</span><span class="p">:</span> <span class="p">[],</span>
-                        <span class="dl">"</span><span class="s2">isReloadingSchema</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">isSchemaPendingUpdate</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">responseExtensions</span><span class="dl">"</span><span class="p">:</span> <span class="p">{},</span>
-                        <span class="dl">"</span><span class="s2">queryVariablesActive</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">endpointUnreachable</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">editorFlex</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">variableEditorOpen</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">variableEditorHeight</span><span class="dl">"</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">responseTracingOpen</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">responseTracingHeight</span><span class="dl">"</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">docExplorerWidth</span><span class="dl">"</span><span class="p">:</span> <span class="mi">350</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">variableToType</span><span class="dl">"</span><span class="p">:</span> <span class="p">{},</span>
-                        <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{</span><span class="se">\n</span><span class="s2">  </span><span class="se">\"</span><span class="s2">x-cassandra-token</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">populate_me</span><span class="se">\"\n</span><span class="s2">}</span><span class="dl">"</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">isFile</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                        <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">graphql</span><span class="dl">"</span>
-                    <span class="p">}</span>
-                <span class="p">},</span>
-                <span class="dl">"</span><span class="s2">selectedSessionId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ckhmat9oe00013h5o792k7kqp</span><span class="dl">"</span><span class="p">,</span>
-                <span class="dl">"</span><span class="s2">sessionCount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span>
-            <span class="p">},</span>
-            <span class="dl">"</span><span class="s2">sharing</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-                <span class="dl">"</span><span class="s2">history</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-                <span class="dl">"</span><span class="s2">allTabs</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-                <span class="dl">"</span><span class="s2">shareUrl</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span>
-            <span class="p">},</span>
-            <span class="dl">"</span><span class="s2">history</span><span class="dl">"</span><span class="p">:</span> <span class="p">{}</span>
-        <span class="p">}</span>
-    <span class="p">},</span>
-    <span class="dl">"</span><span class="s2">selectedWorkspace</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/graphql-schema</span><span class="dl">"</span><span class="p">,</span>
-    <span class="dl">"</span><span class="s2">settingsString</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-        <span class="dl">"</span><span class="s2">editor.cursorShape</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">line</span><span class="dl">"</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">editor.fontFamily</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">'Source Code Pro', 'Consolas', 'Inconsolata', 'Droid Sans Mono', 'Monaco', monospace</span><span class="dl">"</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">editor.fontSize</span><span class="dl">"</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">editor.reuseHeaders</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">editor.theme</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">dark</span><span class="dl">"</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">general.betaUpdates</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">prettier.printWidth</span><span class="dl">"</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">prettier.tabWidth</span><span class="dl">"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">prettier.useTabs</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">request.credentials</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">omit</span><span class="dl">"</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">schema.disableComments</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">schema.polling.enable</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">schema.polling.endpointFilter</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">*localhost*</span><span class="dl">"</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">schema.polling.interval</span><span class="dl">"</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">tracing.hideTracingResponse</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">tracing.tracingSupported</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span>
-    <span class="p">},</span>
-    <span class="dl">"</span><span class="s2">stateInjected</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="dl">"</span><span class="s2">appHistory</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-        <span class="dl">"</span><span class="s2">items</span><span class="dl">"</span><span class="p">:</span> <span class="p">{}</span>
-    <span class="p">},</span>
-    <span class="dl">"</span><span class="s2">general</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-        <span class="dl">"</span><span class="s2">historyOpen</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">fixedEndpoint</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">endpoint</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">configString</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">envVars</span><span class="dl">"</span><span class="p">:</span> <span class="p">{}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>I see the session section corresponding to the two default tabs.  Lets modify those, add the auth token, and re-import this back to GraphQL Playground.  This will be a great basic test of export/import exposed by the original poster.   I tried quite a few attempts and although I am able to edit the object, import, and see the changed values, nothing in the UI changes.  If i reload, nothing indicates a change and I do not see the new object values.  If if i refresh the page I am stuck back with the default workbook.</p>
-
-<p>Next I inspect the sessions and notice the sessions are different.  If the session is not persisting this means the solution will not work. So i chat up a few internal resources and got linked back to another <a href="https://github.com/graphql/graphql-playground/issues/797">GitHub Issue #797</a>.  Yikes…  To make further progress on this post I am going to have to build my own graphQL UI.</p>
-
-<p><img src="/assets/images/down-the-rabbit-hole.gif" alt="Branching" />
-be back later…</p>
+<p>&nbsp;</p>
+<div class="mui-container">
+  <div class="home mui-row">
+      <div class="mui-col-md-2">
+        <article class="mui-panel">
+          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
+            <span class="post-list-title">
+              <a class="post-link" href="/stargate/graphql/playground/day/1/">GraphQl Day 1</a>
+            </span>
+            <div class="img-overlay"></div>
+            <a href="/stargate/graphql/playground/day/1/" class="overlay"></a>
+          </div>
+          <div class="post-data">
+            <p class="post-excerpt">My first day working in the GraphQL Playground UI</p>
+            <p><b>tags:</b> graphql, playground, export, tabs, testing, ui</p>
+          </div>
+        </article>
+      </div>
+  </div>
+</div>
 
         </section>
 
