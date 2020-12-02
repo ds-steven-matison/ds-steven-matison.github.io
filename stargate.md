@@ -14,7 +14,7 @@ Stargate is an open source api framework for data which makes the database admin
 
 Mostly because it is a portal to another future data world,  I use Stargate specifically for two futuristic use cases:
 *   GraphQL + Cassandra
-*   JSON Document Database.   
+*   JSON Document Database   
 
 # Learning Stargate
 
