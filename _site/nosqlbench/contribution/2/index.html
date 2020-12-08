@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=" media="screen" type="text/css">
+    <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
+    <link rel="stylesheet" href="/assets/css/mui.css">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>NoSQLBench Contribution 2 | Data Architect</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="NoSQLBench Contribution 2" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Working on NoSqlBench Documentation" />
+<meta property="og:description" content="Working on NoSqlBench Documentation" />
+<link rel="canonical" href="http://localhost:4000/nosqlbench/contribution/2/" />
+<meta property="og:url" content="http://localhost:4000/nosqlbench/contribution/2/" />
+<meta property="og:site_name" content="Data Architect" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="NoSQLBench Contribution 2" />
+<script type="application/ld+json">
+{"url":"http://localhost:4000/nosqlbench/contribution/2/","description":"Working on NoSqlBench Documentation","headline":"NoSQLBench Contribution 2","@type":"WebPage","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <a href="http://localhost:4000/">
+          <h1> NoSQLBench Contribution 2 </h1>
+        </a>
+        <h2> Working on NoSqlBench Documentation </h2>
+          <br>
+          <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
+          <a href="/astra/"><button type="button" class="btn btn-primary">Astra</button></a>
+          <a href="/nosqlbench/"><button type="button" class="btn btn-primary">NoSqlBench</button></a>
+          <a href="/stargate/"><button type="button" class="btn btn-primary">Stargate</button></a>
+        <a href="" class="button"><small>Follow me on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1 id="contributing-to-nosqlbench-documentation">Contributing to NoSQLBench Documentation</h1>
+
+<p>When I first got started with nosqlbench I spent some time going through the <a href="https://github.com/nosqlbench/nosqlbench/issues">Github Issues</a>.  I find this a great way to get started with any project contribution.  It is also a great way to get an understanding of current issues and areas already identified for improvement.   I was able to quickly take note several issues I could have an impact on in the future.</p>
+
+<p>One such issue I personally ran into while working on my blog post <a href="/nosqlbench/astra/">How To: NoSqlBench with Astra</a> was <a href="https://github.com/nosqlbench/nosqlbench/issues/198">GitHub Issue #198</a>.  While trying to connect nosqlbench to astra I had to infer settings based on command line help doc reference to “securebundle” but there is some work to do there too.   I got the info I needed from a co-worker but it also happened to already be in #198.</p>
+
+<p>I quickly added the Astra example to current cql document page (<a href="https://github.com/ds-steven-matison/nosqlbench/commit/909e7609ffdd20fa6a139207d545a7e89a949632">commit</a>) and made a quick comment on the issue.   I am not sure this is the right place for that content, and maybe a separate Astra page is going to be more appropriate.  More here later once I get feedback.</p>
+
+<h1 id="nosqlbench-slack-community">NoSQLBench Slack Community</h1>
+
+<p>While monitoring <a href="https://nosqlbench.slack.com/">NoSqlBench Slack</a> a member was looking for command line settings for SSL.  I knew I have seen these in my short time here on the project, but I was able to confirm the users experience:  404.   Oops, thats pretty brutal.  A quick dig and I was able to find some references internally but nothing in the doc.   Another co-worker quickly responded with following command topic:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">java</span> <span class="o">-</span><span class="nx">jar</span> <span class="nx">help</span> <span class="nx">ssl</span>
+</code></pre></div></div>
+
+<h1 id="solving-documentation-issues">Solving Documentation Issues</h1>
+
+<ol>
+  <li>Nothing in command line help topics to indicate we can execute ssl command above:  Issue 237</li>
+  <li>The link in cql.md to deeper ssl documentation was a 404: Issue 238</li>
+  <li>Other examples(6) across the code base were a 404 too: Issue 238</li>
+</ol>
+
+<h2 id="github-issue-237">GitHub Issue #237</h2>
+
+<p>To begin to solve #1 I create a new <a href="https://github.com/nosqlbench/nosqlbench/issues/237">GitHub Issue #237</a>.  An issue is a great way to start discussion with other contributors.  In this case my <a href="https://github.com/ds-steven-matison/nosqlbench/commit/bf51056fce58b7b8ee540d0490d1db1d16c5f49c">commit</a> was easy, but I want to keep the discussion open and not execute a PR until I can get feedback from the community about other help topics I can add at the same time.  On my local fork I built the project again and confirm this new ssl topic is now showing up:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">java</span> <span class="o">-</span><span class="nx">jar</span> <span class="nx">nb</span><span class="p">.</span><span class="nx">jar</span> <span class="nx">help</span> <span class="nx">topics</span>         
+<span class="err">#</span> <span class="nb">global</span> <span class="nx">help</span> <span class="nx">topics</span>
+<span class="o">-</span> <span class="nx">commandline</span>
+<span class="o">-</span> <span class="nx">cli</span><span class="o">-</span><span class="nx">scripting</span>
+<span class="o">-</span> <span class="nx">ssl</span>
+</code></pre></div></div>
+
+<h3 id="github-issue-238">GitHub Issue #238</h3>
+
+<p>I had already created <a href="https://github.com/nosqlbench/nosqlbench/issues/238">GitHub Issue #238</a> even before I got started working on documentation improvements.  To solve #2 &amp; #3 I dig into the source code and locate all examples of: “Additional parameters may need to be provided”.  This results in multiple instances that look like this:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nx">Additional</span> <span class="nx">parameters</span> <span class="nx">may</span> <span class="nx">need</span> <span class="nx">to</span> <span class="nx">be</span> <span class="nx">provided</span><span class="p">](</span><span class="nx">ssl</span><span class="p">.</span><span class="nx">md</span><span class="p">).</span>
+<span class="p">[</span><span class="nx">Additional</span> <span class="nx">parameters</span> <span class="nx">may</span> <span class="nx">need</span> <span class="nx">to</span> <span class="nx">be</span> <span class="nx">provided</span><span class="p">](..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="nx">driver</span><span class="o">-</span><span class="nx">cql</span><span class="o">/</span><span class="nx">src</span><span class="o">/</span><span class="nx">main</span><span class="o">/</span><span class="nx">resources</span><span class="o">/</span><span class="nx">ssl</span><span class="p">.</span><span class="nx">md</span><span class="p">).</span>
+<span class="nx">etc</span>
+</code></pre></div></div>
+
+<p>In the first example, html link is rendered as: http://docs.nosqlbench.io/services/docs/drivers/ssl.mdundefined with an undefined appended on the end.  That should be rendered as: http://docs.nosqlbench.io/#/docs/drivers/ssl.md, but for some reason the latter is still a 404.  If I look at the <a href="http://docs.nosqlbench.io/#/docs/drivers/cql.md">parent page</a> the ssl doc page should actually be:  http://docs.nosqlbench.io/#/docs/drivers/ssl.md.  Oddly enough this is a 404 too.</p>
+
+<p>In the next one, and others similar to it, html link is rendered as: http://docs.nosqlbench.io/driver-cql/src/main/resources/ssl.md
+but should be rendered as “/docs/drivers/ssl.md”.  The code base relative path and the URL path are quite different here.  I am also questioning the # in the URL.   If I can get rendering issues sorted out I should be able to change all instances to:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nx">Additional</span> <span class="nx">parameters</span> <span class="nx">may</span> <span class="nx">need</span> <span class="nx">to</span> <span class="nx">be</span> <span class="nx">provided</span><span class="p">](</span><span class="sr">/docs/</span><span class="nx">drivers</span><span class="o">/</span><span class="nx">ssl</span><span class="p">.</span><span class="nx">md</span><span class="p">).</span>
+</code></pre></div></div>
+
+<p>This concludes my time for today on this topic, but I will be sure to come back and update once I have had time to discuss each issue internally, make further improvements, and get closer to a PR.</p>
+
+
+        </section>
+
+        <aside id="sidebar">
+	
+
+<h1 id="find-me">Find Me</h1>
+
+You can find me on Slacks:
+<ul>
+  <li><a href="https://datastax.slack.com" target="_blank" rel="noopener">DataStax Slack</a></li>
+  <li><a href="https://the-asf.slack.com" target="_blank" rel="noopener">The ASF Slack</a></li>
+  <li><a href="https://apachenifi.slack.com" target="_blank" rel="noopener">Apache NiFi Slack</a></li>
+  <li><a href="https://nosqlbench.slack.com" target="_blank" rel="noopener">NoSqlBench Slack</a></li>
+</ul>
+
+You can find me on Stacks:
+<ul>
+  <li><a href="https://stackoverflow.com/users/14215291/ds-steven-matison" target="_blank" rel="noopener">ds-steven-matison</a></li>
+  <li><a href="https://stackoverflow.com/users/4253286/steven-matison" target="_blank" rel="noopener">steven-matison</a></li>
+</ul>
+
+You can find me on Communities:
+<ul>
+  <li><a href="https://community.datastax.com/users/3254/ds-steven-matison.html" target="_blank" rel="noopener">DataStax Community</a></li>
+  <li><a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/60150" target="_blank" rel="noopener">Cloudera Community</a></li>
+</ul>
+You can find me on Socials:
+<ul>
+  <li><a href="https://www.linkedin.com/in/steven-matison/" target="_blank" rel="noopener">LinkedIn</a></li>
+  <li><a href="https://twitter.com/DsMatison" target="_blank" rel="noopener">Twitter</a></li>
+</ul>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+    
+  </body>
+</html>
