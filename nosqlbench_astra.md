@@ -16,21 +16,21 @@ In a previous article [How To: Astra Service Broker](/astra/service/broker/) I s
 ## Start Astra Benchmarking with NoSQLBench
 
 ```js
-nb run cql-iot astra \    
+nb run cql-iot astra \
     username=demo \
     password=demo2020 \
     keyspace=demo \
-    secureconnectbundle=/tmp/secure-connect-demo.zip      
+    secureconnectbundle=/tmp/secure-connect-demo.zip
 ```
 
 or
 
 ```js
-java -jar nb.jar cql-iot astra \    
+java -jar nb.jar cql-iot astra \
     username=demo \
     password=demo2020 \
     keyspace=demo \
-    secureconnectbundle=/tmp/secure-connect-demo.zip      
+    secureconnectbundle=/tmp/secure-connect-demo.zip
 ```
 
 ## Sample Output
