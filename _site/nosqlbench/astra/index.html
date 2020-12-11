@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CTPEBJMK1C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-CTPEBJMK1C');
+    </script>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -61,20 +70,20 @@
 
 <h2 id="start-astra-benchmarking-with-nosqlbench">Start Astra Benchmarking with NoSQLBench</h2>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">nb</span> <span class="nx">run</span> <span class="nx">cql</span><span class="o">-</span><span class="nx">iot</span> <span class="nx">astra</span> <span class="err">\</span>    
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">nb</span> <span class="nx">run</span> <span class="nx">cql</span><span class="o">-</span><span class="nx">iot</span> <span class="nx">astra</span> <span class="o">\</span>
     <span class="nx">username</span><span class="o">=</span><span class="nx">demo</span> <span class="o">\</span>
     <span class="nx">password</span><span class="o">=</span><span class="nx">demo2020</span> <span class="o">\</span>
     <span class="nx">keyspace</span><span class="o">=</span><span class="nx">demo</span> <span class="o">\</span>
-    <span class="nx">secureconnectbundle</span><span class="o">=</span><span class="sr">/tmp/</span><span class="nx">secure</span><span class="o">-</span><span class="nx">connect</span><span class="o">-</span><span class="nx">demo</span><span class="p">.</span><span class="nx">zip</span>      
+    <span class="nx">secureconnectbundle</span><span class="o">=</span><span class="sr">/tmp/</span><span class="nx">secure</span><span class="o">-</span><span class="nx">connect</span><span class="o">-</span><span class="nx">demo</span><span class="p">.</span><span class="nx">zip</span>
 </code></pre></div></div>
 
 <p>or</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">java</span> <span class="o">-</span><span class="nx">jar</span> <span class="nx">nb</span><span class="p">.</span><span class="nx">jar</span> <span class="nx">cql</span><span class="o">-</span><span class="nx">iot</span> <span class="nx">astra</span> <span class="err">\</span>    
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">java</span> <span class="o">-</span><span class="nx">jar</span> <span class="nx">nb</span><span class="p">.</span><span class="nx">jar</span> <span class="nx">cql</span><span class="o">-</span><span class="nx">iot</span> <span class="nx">astra</span> <span class="o">\</span>
     <span class="nx">username</span><span class="o">=</span><span class="nx">demo</span> <span class="o">\</span>
     <span class="nx">password</span><span class="o">=</span><span class="nx">demo2020</span> <span class="o">\</span>
     <span class="nx">keyspace</span><span class="o">=</span><span class="nx">demo</span> <span class="o">\</span>
-    <span class="nx">secureconnectbundle</span><span class="o">=</span><span class="sr">/tmp/</span><span class="nx">secure</span><span class="o">-</span><span class="nx">connect</span><span class="o">-</span><span class="nx">demo</span><span class="p">.</span><span class="nx">zip</span>      
+    <span class="nx">secureconnectbundle</span><span class="o">=</span><span class="sr">/tmp/</span><span class="nx">secure</span><span class="o">-</span><span class="nx">connect</span><span class="o">-</span><span class="nx">demo</span><span class="p">.</span><span class="nx">zip</span>
 </code></pre></div></div>
 
 <h2 id="sample-output">Sample Output</h2>
