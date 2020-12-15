@@ -33,6 +33,13 @@ bundle
 bundle exec jekyll serve
 ```
 
+# Exclude Pages
+
+If you want to exclude pages from your sitemap use this syntax in the front matter for your page:
+```js
+sitemap: false
+```
+
 # Confirm Sitemap Exists:
 
 You should see a new file sitemap.xml in your local /site/ folder.  And this url should now work:
