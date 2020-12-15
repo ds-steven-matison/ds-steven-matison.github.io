@@ -6,7 +6,7 @@ permalink: /blog/create/github/page/
 ---
 
 # How To: Create a GitHub.io Page
-I have made tons of websites, in many different website frameworks.  I have made many repositories and used github repos to hold website applications for manual and automated deployments.  When I set out to create a blog for my experiences and projects at Datastax I found [GitHub Pages](https://pages.github.com/).
+I have made tons of websites, in many different website frameworks.  I have made many repositories and used github repos to hold website applications for manual and automated deployments.  When I set out to create a blog for my experiences and projects at Datastax I found [GitHub Pages](https://pages.github.com/).  This is by far the easiest way to role out a webpage with no concern to traditional friction to creating a "website".
 
 ## Let's Get Started
 
