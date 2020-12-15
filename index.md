@@ -26,6 +26,8 @@ I am currently working in the following technologies: cassandra, astra, stargate
 
 # Recent Posts
 
+*   <a href="/blog/jekyll/sitemap/">How To: Add Jekyll Sitemap Generator</a> - 12/15/2020
+*   <a href="/blog/create/github/page/">How To: Create A GitHub.io Page</a> - 12/14/2020
 *   <a href="/nosqlbench/contribution/2/">Documentation work with NoSqlBench</a> - 12/08/2020
 *	<a href="/nosqlbench/astra/">How To: NoSqlBench with Astra</a> - 11/30/2020
 *	<a href="/astra/multi/cloud/">How To: Astra Multi Cloud</a> - 11/23/2020

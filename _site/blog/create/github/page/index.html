@@ -22,19 +22,19 @@
     <![endif]-->
 
 <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>GraphQL | Data Architect</title>
+<title>GitHub Page | Data Architect</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="GraphQL" />
+<meta property="og:title" content="GitHub Page" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="A blog all about GraphQL" />
-<meta property="og:description" content="A blog all about GraphQL" />
-<link rel="canonical" href="http://localhost:4000/stargate/graphql/" />
-<meta property="og:url" content="http://localhost:4000/stargate/graphql/" />
+<meta name="description" content="Create Your Own GitHub.io Page" />
+<meta property="og:description" content="Create Your Own GitHub.io Page" />
+<link rel="canonical" href="http://localhost:4000/blog/create/github/page/" />
+<meta property="og:url" content="http://localhost:4000/blog/create/github/page/" />
 <meta property="og:site_name" content="Data Architect" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="GraphQL" />
+<meta property="twitter:title" content="GitHub Page" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/stargate/graphql/","headline":"GraphQL","description":"A blog all about GraphQL","@type":"WebPage","@context":"https://schema.org"}</script>
+{"url":"http://localhost:4000/blog/create/github/page/","headline":"GitHub Page","description":"Create Your Own GitHub.io Page","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -43,9 +43,9 @@
     <header>
       <div class="inner">
         <a href="http://localhost:4000/">
-          <h1> GraphQL </h1>
+          <h1> GitHub Page </h1>
         </a>
-        <h2> A blog all about GraphQL </h2>
+        <h2> Create Your Own GitHub.io Page </h2>
           <br>
           <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
           <a href="/astra/"><button type="button" class="btn btn-primary">Astra</button></a>
@@ -58,23 +58,30 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h1 id="what-is-graphql">What is GraphQl?</h1>
+          <h1 id="how-to-create-a-githubio-page">How To: Create a GitHub.io Page</h1>
+<p>I have made tons of websites, in many different website frameworks.  I have made many repositories and used github repos to hold website applications for manual and automated deployments.  When I set out to create a blog for my experiences and projects at Datastax I found <a href="https://pages.github.com/">GitHub Pages</a>.</p>
 
-<p>GraphQL is a data query and manipulation language for APIs. GraphQL was developed internally by Facebook in 2012 before being publicly released in 2015. For more information about graphQL go <a href="https://graphql.org/">here</a>.  My experience with GraphQL started years ago with Neo4j, ArrangoDB, and OrientDB.  For the sake of my blog, my focus for GraphQL will be based on <a href="https://docs.astra.datastax.com/docs/using-the-astra-graphql-api">Astra GraphQL API</a> and the inherit GraphQL capabilities.   These capabilities are impressive, but do not confuse GraphQL capability to mean Astra or Stargate is a Graph Database.  Additionally, some of the advanced GraphQL features are not inclusive, yet.</p>
+<h2 id="lets-get-started">Let’s Get Started</h2>
 
-<h1 id="why-use-graphql">Why use GraphQL?</h1>
+<p>First create a repo on your GitHub in the format of your “username.github.io”.  For example my repo is: <a href="https://github.com/ds-steven-matison/ds-steven-matison.github.io">ds-steven-matison.github.io</a>. Next, clone your repo, add your website index.html, commit, and visit your GitHub Page by visiting your custom url.  Your repo will now automatically update your website upon future commits.  Amazing: no need to sync website to webserver.  No FTP!!! No need to manage IPs, DNS, or SSL.  Thank you GitHub!!</p>
 
-<p>Having spent years in sql, mysql, several to many database clients, uis, and tools I am firm believer in making data access easier.  GraphQL provides that method to easily interact with your data and it brings powerful concepts not found in other query languages.  It is very easy to develop directly against the GraphQL Api for inserts, updates, and deletes without requiring a backend for the application.   Additionally with GraphQL being able to query and join multiple data sets and the results being returned in a JSON Object there are little to no additional client side manipulations of results needed.</p>
+<h2 id="using-jekyll-with-github-pages">Using Jekyll With GitHub Pages</h2>
 
-<h1 id="working-with-graphql">Working with GraphQL</h1>
+<p>For my blog I chose to use Jekyll and a Jekyll theme: <a href="https://jekyllthemes.io/theme/architect-theme">Architect</a>.   You can find more themes <a href="https://jekyllthemes.io/github-pages-themes">here</a>.   To use the jekyll them, download it, add to your repo, commit, and check your blog to confirm its operational with the base theme.  Next, begin to modify your pages to suit your personal style.</p>
 
-<p>GraphQl Samples</p>
+<h2 id="some-very-cool-jekyll-features">Some Very Cool Jekyll Features</h2>
 
-<p>GraphQL Postman</p>
+<ol>
+  <li>Your main site template is in /layouts/default.html.  You can update your main site framework in this file.</li>
+  <li>All of your pages are defined in the header of the .md file.  Check out template.md for markdown examples.</li>
+  <li>You can work locally on your blog with the url http://localhost:4000 by executing: <b><i>bundle exec jekyll serve</i></b> in your root repo folder.  Use this while doing rapid page building and editing cycles.</li>
+  <li>Updates to markdown (.md) files will automatically update your localhost version of the site.  Just save, and refresh.  When done commit, and viola your GitHub Page is auto updated just a few moments later.</li>
+  <li>Html includes are possible using folder /includes/ and following syntax: <b><i>{ % include content.html % }</i></b>. Just be sure to remove spaces between %s and {}s.  I had to add that so it would not include in this page.</li>
+</ol>
 
-<h1 id="whats-next">What’s Next</h1>
+<h2 id="whats-next">What’s Next?</h2>
 
-<p>Check out my blog on <a href="/stargate/graphql/playground/">GraphQL Playground</a> for more GraphQL fun.</p>
+<p>Check out <a href="/blog/jekyll/sitemap/">How To: Add Jekyll Sitemap Generator</a>.  Be sure to reach out to me to share your blog or if you have any questions, issues, or feedback from creating your GitHub Jekyll Theme Page!!</p>
 
         </section>
 

@@ -22,19 +22,19 @@
     <![endif]-->
 
 <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Astra + NiFi | Data Architect</title>
+<title>Jekyll Sitemap | Data Architect</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Astra + NiFi" />
+<meta property="og:title" content="Jekyll Sitemap" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="How to leverage Astra with NiFi" />
-<meta property="og:description" content="How to leverage Astra with NiFi" />
-<link rel="canonical" href="http://localhost:4000/astra/nifi/" />
-<meta property="og:url" content="http://localhost:4000/astra/nifi/" />
+<meta name="description" content="Add Jekyll Sitemap Generator" />
+<meta property="og:description" content="Add Jekyll Sitemap Generator" />
+<link rel="canonical" href="http://localhost:4000/blog/jekyll/sitemap/" />
+<meta property="og:url" content="http://localhost:4000/blog/jekyll/sitemap/" />
 <meta property="og:site_name" content="Data Architect" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Astra + NiFi" />
+<meta property="twitter:title" content="Jekyll Sitemap" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/astra/nifi/","headline":"Astra + NiFi","description":"How to leverage Astra with NiFi","@type":"WebPage","@context":"https://schema.org"}</script>
+{"url":"http://localhost:4000/blog/jekyll/sitemap/","headline":"Jekyll Sitemap","description":"Add Jekyll Sitemap Generator","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -43,9 +43,9 @@
     <header>
       <div class="inner">
         <a href="http://localhost:4000/">
-          <h1> Astra + NiFi </h1>
+          <h1> Jekyll Sitemap </h1>
         </a>
-        <h2> How to leverage Astra with NiFi </h2>
+        <h2> Add Jekyll Sitemap Generator </h2>
           <br>
           <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
           <a href="/astra/"><button type="button" class="btn btn-primary">Astra</button></a>
@@ -58,11 +58,44 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h1 id="what-is-nifi">What is NiFi?</h1>
+          <h1 id="how-to-add-jekyll-sitemap-generator">How To: Add Jekyll Sitemap Generator</h1>
+<p>In my previous blog <a href="/blog/create/github/page/">How To: Create A GitHub.io Page</a> I showed you how to great your GitHub.io page.   In this blog i am going to show you how to use a <a href="https://github.com/jekyll/jekyll-sitemap">Jekyll Sitemap Generator</a> to add a sitemap to your page.   I am using <a href="http://analytics.google.com/">Google Analytics</a> and <a href="https://search.google.com/search-console">Google Search</a> to monitor traffic and SEO results.  Since google wants a sitemap and I do not want to manage it, automating this part of the blog is now needed.</p>
 
-<p>If there is anything I love more than Astra, Postman, and Ansible, its <a href="http://nifi.apache.org/">NiFi</a>.  Apache NiFi is a software project from the Apache Software Foundation designed to automate the flow of data between software systems.  It is super powerful tool I have been using for a few years to develope data flows and data pipelines.  With NiFi I can do just about anything without writing a single line of code.   You can use NiFi’s invokeHttp processor for any Astra API calls.  You can also use native NiFi Cassandra Processors (QueryCassandraRecord, PutCassandraRecord, and PutCassandraQL) against Astra.</p>
+<h1 id="update-configyml">Update config.yml</h1>
 
-<p>More coming soon here…</p>
+<p>&nbsp;</p>
+<p>Just add:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">plugins</span><span class="p">:</span>
+  <span class="o">-</span> <span class="nx">jekyll</span><span class="o">-</span><span class="nx">sitemap</span>
+</code></pre></div></div>
+
+<h1 id="update-gemfile">Update Gemfile</h1>
+
+<p>&nbsp;</p>
+<p>Just add:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">gem</span> <span class="dl">'</span><span class="s1">jekyll-sitemap</span><span class="dl">'</span>
+</code></pre></div></div>
+
+<h1 id="run-bundle">Run Bundle</h1>
+
+<p>In your root folder execute the command:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">bundle</span>
+<span class="nx">bundle</span> <span class="nx">exec</span> <span class="nx">jekyll</span> <span class="nx">serve</span>
+</code></pre></div></div>
+
+<h1 id="confirm-sitemap-exists">Confirm Sitemap Exists:</h1>
+
+<p>You should see a new file sitemap.xml in your local /site/ folder.  And this url should now work:</p>
+
+<p><a href="http://localhost:4000/sitemap.xml">http://localhost:4000/sitemap.xml</a></p>
+
+<p>After commit your changes to your repo be sure to check your github.io page.  For example my site map is now:</p>
+
+<p><a href="https://ds-steven-matison.github.io/sitemap.xml">https://ds-steven-matison.github.io/sitemap.xml</a></p>
+
+<h2 id="whats-next">What’s Next?</h2>
+
+<p>Be sure to reach out to me to share your blog or if you have any questions, issues, or feedback from creating your GitHub Jekyll Theme Page!!</p>
 
         </section>
 
