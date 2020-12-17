@@ -25,6 +25,9 @@
 <loc>http://localhost:4000/astra/service/broker/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/blog/contribute/opensource/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/blog/create/github/page/</loc>
 </url>
 <url>
