@@ -51,3 +51,4 @@ For the purpose of this NoSQLBench blog, I am going to dive right into actually 
   </div>
 </div>
 
+{% include nosqlbench_help.html %}

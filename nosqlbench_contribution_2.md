@@ -61,3 +61,4 @@ but should be rendered as "/docs/drivers/ssl.md".  The code base relative path a
 
 This concludes my time for today on this topic, but I will be sure to come back and update once I have had time to discuss each issue internally, make further improvements, and get closer to a PR.   
 
+{% include nosqlbench_help.html %}

@@ -85,3 +85,5 @@ select count(*) from graph_wheels.device_e;
 select count(*) from graph_wheels.session_e;
 select count(*) from graph_wheels.device_p;
 ```
+
+{% include nosqlbench_help.html %}

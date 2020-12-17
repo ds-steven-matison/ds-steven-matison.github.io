@@ -81,3 +81,5 @@ Be sure to check out other Astra workloads (cql-tabular and cql-keyvalue).  In a
 ```js
 nb --list-scenarios
 ```
+
+{% include nosqlbench_help.html %}
