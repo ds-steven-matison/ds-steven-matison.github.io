@@ -19,7 +19,7 @@ You can leverage Astra with PHP in three ways:
 
 1.	Convert the PHP insert/update/delete/select to curl.
 2.	Minimally convert code and implement the driver.
-3.	Stop using php server side and use rest api. <b><i>#winning</i></b> 
+3.	Stop using php server side and use rest api with js/jquery. <b><i>#winning</i></b> 
 
 # What Environment?
 
