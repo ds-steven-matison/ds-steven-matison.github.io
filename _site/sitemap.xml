@@ -13,6 +13,9 @@
 <loc>http://localhost:4000/astra/ansible/devops/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/astra/drivers/php/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/astra/multi/cloud/</loc>
 </url>
 <url>
