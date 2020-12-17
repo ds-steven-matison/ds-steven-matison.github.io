@@ -344,3 +344,5 @@ When you create a database above, the keyspace above will be automatically creat
         var: response_regions
 ```
 {% endraw %}
+
+{% include astra_help.html %}

@@ -16,3 +16,5 @@ Before getting started with Astra & Postman download, fork, or clone my github r
 {% include astra_postman_repo.html %}
 <p>&nbsp;</p>
 {% include stargate_postman_repo.html %}
+
+{% include astra_help.html %}

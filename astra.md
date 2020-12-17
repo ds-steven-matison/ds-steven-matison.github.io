@@ -112,3 +112,5 @@ Astra's main goal is to meet developers were they are comfortable (with many API
       </div>
     </div>     
 </div>
+
+{% include astra_help.html %}

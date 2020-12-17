@@ -148,3 +148,5 @@ spec:
 ## What's Next?
 
 Check out some more [kubectl](/kubernetes/kubectl/) commands that you need to learn for managing your Astra instances.
+
+{% include astra_help.html %}

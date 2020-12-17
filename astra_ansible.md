@@ -82,3 +82,4 @@ There are 2 different Astra APIs.  The DevOps API for creating databases, keyspa
   </div>
 </div>
 
+{% include astra_help.html %}

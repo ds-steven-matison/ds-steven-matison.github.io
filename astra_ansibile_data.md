@@ -559,3 +559,5 @@ A quick warning here: you can only update the Primary Key.
         var: response_column
 ```
 {% endraw %}
+
+{% include astra_help.html %}
