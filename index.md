@@ -19,6 +19,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
 <p>&nbsp;</p>
 # DataStax News
 
+*	[Serverless Beta on Astra](https://www.datastax.com/astradb/serverless) - 12/17/2020
 *   [Featured On Astra](https://docs.astra.datastax.com/docs/integrations) - 12/10/2020
 <br>&nbsp; My How To posts for [Astra + NoSqlBench](/nosqlbench/astra/) and [Astra Service Broker](/astra/service/broker/) were featured as [Astra Ecosystem Examples](https://docs.astra.datastax.com/docs/integrations) on the official doc site.
 *   <a href="https://stargate.io/2020/12/09/announcing-stargate-10-ga-rest-graphql-schemaless-json-for-your-cassandra-development.html">Release: Stargate 1.0</a> - 12/09/2020
