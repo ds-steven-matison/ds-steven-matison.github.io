@@ -55,3 +55,5 @@ Bundled within the docker stargate is an instance of [GraphQL Playground](https:
     </div>
   </div>
 </div>
+
+{% include stargate_help.html %}

@@ -221,3 +221,5 @@ Next I inspect the sessions and notice the sessions are different.  If the sessi
 
 ![Branching](/assets/images/down-the-rabbit-hole.gif)
 be back later... 
+
+{% include stargate_help.html %}

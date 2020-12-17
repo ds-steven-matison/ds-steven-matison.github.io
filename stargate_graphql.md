@@ -22,3 +22,5 @@ GraphQL Postman
 # What's Next
 
 Check out my blog on [GraphQL Playground](/stargate/graphql/playground/) for more GraphQL fun.
+
+{% include stargate_help.html %}

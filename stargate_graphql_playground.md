@@ -47,3 +47,5 @@ Here are few things I learned:
         </article>
       </div>
   </div>
+
+  {% include stargate_help.html %}
