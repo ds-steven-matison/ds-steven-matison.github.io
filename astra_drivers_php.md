@@ -120,7 +120,7 @@ function register($_INPUT) {
 }
 ```
 
-Notice anything different other than inherit differnces for cassandra driver?  Yup, no mysql_insert_id() here and uuid() function in the insert.  When migrating a legacy app to cassandra, not only do you have to think outside of the box for data modeling, you also have to be mindful in the application layer.  To solve this problem, I completely removed the dependency on a user id in the application.  We dont need no stinking incremental ids in cassandra!!
+Notice anything different other than inherit differences for the cassandra driver?  Yup, no mysql_insert_id() here and uuid() function in the insert.  When migrating a legacy app to cassandra, not only do you have to think outside of the box for data modeling, you also have to be mindful in the application layer.  To solve this problem, I completely removed the dependency on a user id in the application.  We dont need no stinking incremental ids in cassandra!!
 
 # What's Next?
 
