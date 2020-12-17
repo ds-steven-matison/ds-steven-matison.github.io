@@ -124,7 +124,7 @@ Notice anything different other than inherit differnces for cassandra driver?  Y
 
 # What's Next?
 
-Are you still using PHP?  Reach out, I can show you how to modernize your application experience with futureproof modern and serverless applications.  If you cant modernize your app and you want to migrate to Astra,  I can help out with that too.  
+Are you still using PHP?  Reach out, I can show you how to modernize your application experience with futureproof modern and serverless applications.  If you cant modernize your app completely and you want to migrate to Astra using this Legacy PHP Driver,  I can help out with that too.  
 
 
 {% include astra_help.html %}
