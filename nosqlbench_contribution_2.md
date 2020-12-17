@@ -40,6 +40,8 @@ java -jar nb.jar help topics
 - ssl
 ```
 
+Update 12/17/2020: It took me some time, but I was able to get the above change and another [Issue #198](https://github.com/nosqlbench/nosqlbench/issues/198) into a [PR #243](https://github.com/nosqlbench/nosqlbench/pull/243).  My first contribution to documentation is now complete and I am able to close 2 issues.
+
 ### GitHub Issue #238
 
 I had already created [GitHub Issue #238](https://github.com/nosqlbench/nosqlbench/issues/238) even before I got started working on documentation improvements.  To solve #2 & #3 I dig into the source code and locate all examples of: "Additional parameters may need to be provided".  This results in multiple instances that look like this:
