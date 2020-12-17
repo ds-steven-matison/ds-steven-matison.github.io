@@ -40,7 +40,7 @@ java -jar nb.jar help topics
 - ssl
 ```
 
-Update 12/17/2020: It took me some time, but I was able to get the above change and another [Issue #198](https://github.com/nosqlbench/nosqlbench/issues/198) into a [PR #243](https://github.com/nosqlbench/nosqlbench/pull/243).  My first contribution to documentation is now complete and I am able to close 2 issues.
+Update 12/17/2020: It took me some time, but I was able to get the above change and another [Issue #198](https://github.com/nosqlbench/nosqlbench/issues/198) into a [PR #243](https://github.com/nosqlbench/nosqlbench/pull/243).  My first contribution to documentation is now complete and I am able to close 2 issues.  A short time later my PR is [merging](https://github.com/nosqlbench/nosqlbench/commit/7c96de632c64be1252a2f0d65026126351f54983) and on its way to release.
 
 ### GitHub Issue #238
 
