@@ -5,6 +5,7 @@ description: A blog all about GraphQL Playground
 permalink: /stargate/graphql/playground/day/1/
 ---
 
+{% include under_construction.html %}
 
 # How To: Export GraphQl Playground Tabs
 

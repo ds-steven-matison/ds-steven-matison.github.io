@@ -5,6 +5,8 @@ description: A blog all about GraphQL Playground
 permalink: /stargate/graphql/playground/
 ---
 
+{% include under_construction.html %}
+
 # What is GraphQl Playground?
 
 Bundled within the docker stargate is an instance of GraphQL Playground.  This UI provides an interface to execute GraphQL queries against Stargate & Astra APIs.
@@ -47,5 +49,6 @@ Here are few things I learned:
         </article>
       </div>
   </div>
+</div>
 
-  {% include stargate_help.html %}
+{% include stargate_help.html %}

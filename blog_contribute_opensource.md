@@ -5,8 +5,6 @@ description: How to get started contributing to open source
 permalink: /blog/contribute/opensource/
 ---
 
-{% include under_construction.html %}
-
 # How To: Contribute to Open Source
 
 During the entire span of my career and even in my personal use of computers and technology I have consistently used Open Source Software over any licensed products.  Once question I often get asked is:  
