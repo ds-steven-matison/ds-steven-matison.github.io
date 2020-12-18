@@ -19,10 +19,12 @@ I am currently working in the following technologies: cassandra, astra, stargate
 <p>&nbsp;</p>
 # DataStax News
 
-*	[Serverless on Astra](https://www.datastax.com/astradb/serverless) - 12/17/2020
-<br>&nbsp; Beta for GCP check out an elastic cassandra database that scales with your workload.
+*	[Fresh DataStax Branding](https://datastax.com/) - 12/17/2020
+<br>&nbsp; Today DataStax released some fresh, spacey, super nerdy cool brandings. Check out [Astra](https://datastax.com/products/datastax-astra), [Vector](https://datastax.com/products/vector), [DSE](https://datastax.com/products/datastax-enterprise), [Luna](https://datastax.com/products/luna).
 *   [Featured On Astra](https://docs.astra.datastax.com/docs/integrations) - 12/10/2020
 <br>&nbsp; My How To posts for [Astra + NoSqlBench](/nosqlbench/astra/) and [Astra Service Broker](/astra/service/broker/) were featured as [Astra Ecosystem Examples](https://docs.astra.datastax.com/docs/integrations) on the official doc site.
+*	[Serverless on Astra](https://www.datastax.com/astradb/serverless) - 12/09/2020
+<br>&nbsp; Beta for GCP check out an elastic cassandra database that scales with your workload.
 *   <a href="https://stargate.io/2020/12/09/announcing-stargate-10-ga-rest-graphql-schemaless-json-for-your-cassandra-development.html">Release: Stargate 1.0</a> - 12/09/2020
 <br>&nbsp; This is an exciting nerdy launch week here with Spacex, ULA, Virgin Galactic, and [Stargate 1.0](/stargate/) launching into orbit.
 
