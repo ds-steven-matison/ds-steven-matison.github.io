@@ -22,9 +22,8 @@ The cass-operator is available on the following Kubernetes Engines:
 
 I am now currently working on validating, documementing, and deploying on [IKS](https://www.ibm.com/cloud/kubernetes-service) - IBM Cloud Kubernetes Service.
 
-
 # What's Next?
 
 Stay tuned for more updates and additional cass operator topics here.
 
-{% include astra_help.html %}
+{% include kubernetes_help.html %}
