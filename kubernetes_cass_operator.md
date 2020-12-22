@@ -20,7 +20,7 @@ The cass-operator is available on the following Kubernetes Engines:
 3.  [AKS](https://azure.microsoft.com/) - Azure Kubernetes Service
 4.  [PKS](https://docs.pivotal.io/pks/1-6/index.html) - Pivotal Container Service
 
-I am now currently working on validating, documementing, and deploying on [IKS](https://www.ibm.com/cloud/kubernetes-service) - IBM Cloud Kubernetes Service.
+I am now currently working on validating, documementing, and deploying on [IKS](https://www.ibm.com/cloud/kubernetes-service) - IBM Cloud Kubernetes Service.  Check out my [How To: Cass-Operator on IKS](/kubernetes/cass-operator/iks/) post for more details.
 
 # What's Next?
 

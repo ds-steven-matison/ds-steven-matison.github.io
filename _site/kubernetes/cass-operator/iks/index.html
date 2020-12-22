@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CTPEBJMK1C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-CTPEBJMK1C');
+    </script>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=" media="screen" type="text/css">
+    <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
+    <link rel="stylesheet" href="/assets/css/mui.css">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Cass-Operator + IKS | Data Architect</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Cass-Operator + IKS" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A blog all about Cass-Operator and IKS" />
+<meta property="og:description" content="A blog all about Cass-Operator and IKS" />
+<link rel="canonical" href="http://localhost:4000/kubernetes/cass-operator/iks/" />
+<meta property="og:url" content="http://localhost:4000/kubernetes/cass-operator/iks/" />
+<meta property="og:site_name" content="Data Architect" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Cass-Operator + IKS" />
+<script type="application/ld+json">
+{"url":"http://localhost:4000/kubernetes/cass-operator/iks/","headline":"Cass-Operator + IKS","description":"A blog all about Cass-Operator and IKS","@type":"WebPage","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <a href="http://localhost:4000/">
+          <h1> Cass-Operator + IKS </h1>
+        </a>
+        <h2> A blog all about Cass-Operator and IKS </h2>
+          <br>
+          <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
+          <a href="/astra/"><button type="button" class="btn btn-primary">Astra</button></a>
+          <a href="/nosqlbench/"><button type="button" class="btn btn-primary">NoSqlBench</button></a>
+          <a href="/stargate/"><button type="button" class="btn btn-primary">Stargate</button></a>
+        <a href="" class="button"><small>Follow me on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <p><img src="/assets/images/warning.png" alt="WARNING" height="50" width="50" align="absmiddle" style="padding: 10px" /> Blog building in-progress, come back again soon as updates are happening here.</p>
+
+<h1 id="how-to-cass-operator-on-iks">How To: Cass-Operator on IKS</h1>
+
+<p>In the previous article I introduced the <a href="/kubernetes/cass-operator/">Cass Operator</a>.  In this article I am going to jump right in feet first and expose how you can complete the documeted steps for GKE but in the IKS Platform.   Now the main point here with a unified system (k8s) is the adminstrative effort should be almost identical across platforms (gke,eks,aks,pks,etc).  Ping me to talk about the differences.</p>
+
+<h1 id="what-is-iks">What is IKS?</h1>
+
+<p>IKS is <a href="https://www.ibm.com/cloud/kubernetes-service">IBM Cloud’s Kubernetes Engine</a>.  I was recently given the opportunity to test out <a href="https://github.com/datastax/cass-operator">Cass-Operator</a> on GKE and then had an internal ping to support the Cass Operator on IKS.  Challenge Accepted!   This post is me exposing the steps I had to take to get Cassandra DSE rolled out on IKS.</p>
+
+<h1 id="creating-kubernetes-cluster-on-iks">Creating Kubernetes Cluster on IKS</h1>
+
+<p>The <a href="https://cloud.ibm.com/">IBM Cloud UI</a> was super easy to use.  I was able to get a Kubernetes Cluster up and running pretty easy and with some free credits.  I was even easily able to get my terminal connected.  I wont go into detail here as you can easily find this information after you create your cluster.   With a cluster created and your environment setup, the rest is almost too easy.</p>
+
+<h1 id="what-commands-did-i-run">What Commands Did I Run?</h1>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ibmcloud</span> <span class="nx">login</span> <span class="o">-</span><span class="nx">u</span> <span class="o">&lt;</span><span class="nx">username</span><span class="o">&gt;</span> <span class="o">-</span><span class="nx">p</span> <span class="o">&lt;</span><span class="nx">password</span><span class="o">&gt;</span> <span class="o">-</span><span class="nx">a</span> <span class="nx">cloud</span><span class="p">.</span><span class="nx">ibm</span><span class="p">.</span><span class="nx">com</span> <span class="o">-</span><span class="nx">r</span> <span class="nx">us</span><span class="o">-</span><span class="nx">south</span>
+<span class="nx">ibmcloud</span> <span class="nx">ks</span> <span class="nx">cluster</span> <span class="nx">config</span> <span class="o">--</span><span class="nx">cluster</span> <span class="nx">mycluster</span><span class="o">-</span><span class="nx">dal12</span><span class="o">-</span><span class="nx">b3c</span><span class="p">.</span><span class="mi">4</span><span class="nx">x16</span>
+<span class="nx">kubectl</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//raw.githubusercontent.com/datastax/cass-operator/master/docs/user/cass-operator-manifests-v1.18.yaml</span>
+<span class="nx">kubectl</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//raw.githubusercontent.com/ds-steven-matison/cass-operator/master/operator/k8s-flavors/iks/storage-block.yaml</span>
+<span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span>  <span class="nx">https</span><span class="p">:</span><span class="c1">//raw.githubusercontent.com/ds-steven-matison/cass-operator/master/operator/example-cassdc-yaml/dse-6.8.x/example-cassdc-minimal2.yaml</span>
+<span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="kd">get</span> <span class="nx">pods</span>
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">secret</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">yaml</span> <span class="nx">cluster1</span><span class="o">-</span><span class="nx">superuser</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span>
+<span class="nx">echo</span> <span class="dl">'</span><span class="s1">password string</span><span class="dl">'</span> <span class="o">|</span> <span class="nx">base64</span> <span class="o">-</span><span class="nx">d</span>
+<span class="nx">kubectl</span> <span class="nx">exec</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="o">-</span><span class="nx">i</span> <span class="o">-</span><span class="nx">t</span> <span class="o">-</span><span class="nx">c</span> <span class="nx">cassandra</span> <span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">0</span> <span class="o">--</span> <span class="nx">cqlsh</span> <span class="o">-</span><span class="nx">u</span> <span class="nx">cluster1</span><span class="o">-</span><span class="nx">superuser</span> <span class="o">-</span><span class="nx">p</span> <span class="o">&lt;</span><span class="nx">password</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<h1 id="whats-next">What’s Next?</h1>
+
+<p>My progress here has helped create a new contribution to the cass-operator repo: <a href="https://github.com/datastax/cass-operator/pull/344">PR 344</a>.  Soon we should see the documentation updated with IKS as a supported platform.   Stay tuned for more updates here and additional IKS cass operator topics as I dig in even more with the Datastax Cassandra Operator on IKS.</p>
+
+<h1 id="how-can-i-help-you-with-kubernetes">How can I help you with Kubernetes?</h1>
+
+<p><img src="/assets/images/SRM.png" alt="SRM" height="100" width="100" style="float: left; padding: 10px" /></p>
+
+<p>Find me over on the <a href="https://community.datastax.com/index.html">DataStax Community</a> to ask me any questions about Cassandra and Kubernetes.  Also let’s chat if you have something kewl you did with Cassandra and Kubernetes and you want me to feature it in my blog.  Look below or to the right for more ways to find me.</p>
+
+        </section>
+
+        <aside id="sidebar">
+	
+
+<h1 id="find-me">Find Me</h1>
+
+You can find me on Slacks:
+<ul>
+  <li><a href="https://datastax.slack.com" target="_blank" rel="noopener">DataStax Slack</a></li>
+  <li><a href="https://the-asf.slack.com" target="_blank" rel="noopener">The ASF Slack</a></li>
+  <li><a href="https://apachenifi.slack.com" target="_blank" rel="noopener">Apache NiFi Slack</a></li>
+  <li><a href="https://nosqlbench.slack.com" target="_blank" rel="noopener">NoSqlBench Slack</a></li>
+  <li><a href="https://datastax.slack.com/archives/CP189L0HF" target="_blank" rel="noopener">Astra Slack</a></li>
+</ul>
+
+You can find me on Stacks:
+<ul>
+  <li><a href="https://stackoverflow.com/users/14215291/ds-steven-matison" target="_blank" rel="noopener">ds-steven-matison</a></li>
+  <li><a href="https://stackoverflow.com/users/4253286/steven-matison" target="_blank" rel="noopener">steven-matison</a></li>
+</ul>
+
+You can find me on Communities:
+<ul>
+  <li><a href="https://community.datastax.com/users/3254/ds-steven-matison.html" target="_blank" rel="noopener">DataStax Community</a></li>
+  <li><a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/60150" target="_blank" rel="noopener">Cloudera Community</a></li>
+</ul>
+You can find me on Socials:
+<ul>
+  <li><a href="https://www.linkedin.com/in/steven-matison/" target="_blank" rel="noopener">LinkedIn</a></li>
+  <li><a href="https://twitter.com/DsMatison" target="_blank" rel="noopener">Twitter</a></li>
+</ul>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</p>
+          <script src="https://efreecode.com/js.js" id="eXF-dsmatiso-0" async defer></script>
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>
