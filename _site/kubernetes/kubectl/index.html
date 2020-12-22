@@ -34,7 +34,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Kubectl" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/kubernetes/kubectl/","headline":"Kubectl","description":"A blog all about kubectl","@type":"WebPage","@context":"https://schema.org"}</script>
+{"@type":"WebPage","url":"http://localhost:4000/kubernetes/kubectl/","description":"A blog all about kubectl","headline":"Kubectl","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -60,7 +60,9 @@
         <section id="main-content">
           <h1 id="what-is-kubectl">What is Kubectl?</h1>
 
-<p>For now learn the manual:</p>
+<p>The kubectl, pronounced “kube-cuddle”, is the command line tool to control your Kubernetes clusters.  Be sure to study the official <a href="https://kubernetes.io/docs/home/">kubernetes.io</a> documentation for kubectl <a href="https://kubernetes.io/docs/reference/kubectl/overview/">here</a>.</p>
+
+<p>First lets learn to read the manual:</p>
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span>
 <span class="nx">kubectl</span> <span class="nx">controls</span> <span class="nx">the</span> <span class="nx">Kubernetes</span> <span class="nx">cluster</span> <span class="nx">manager</span><span class="p">.</span>
 
@@ -130,6 +132,80 @@
 <span class="nx">Use</span> <span class="dl">"</span><span class="s2">kubectl &lt;command&gt; --help</span><span class="dl">"</span> <span class="k">for</span> <span class="nx">more</span> <span class="nx">information</span> <span class="nx">about</span> <span class="nx">a</span> <span class="nx">given</span> <span class="nx">command</span><span class="p">.</span>
 <span class="nx">Use</span> <span class="dl">"</span><span class="s2">kubectl options</span><span class="dl">"</span> <span class="k">for</span> <span class="nx">a</span> <span class="nx">list</span> <span class="k">of</span> <span class="nb">global</span> <span class="nx">command</span><span class="o">-</span><span class="nx">line</span> <span class="nx">options</span> <span class="p">(</span><span class="nx">applies</span> <span class="nx">to</span> <span class="nx">all</span> <span class="nx">commands</span><span class="p">).</span>
 </code></pre></div></div>
+
+<h1 id="how-do-i-use-kubectl">How Do I Use kubectl?</h1>
+
+<p>I am working with kubectl as I learn more about <a href="/kubernetes/cass-operator/">kubernetes</a>, <a href="/k8ssandra/">k8ssandra</a>, and <a href="/astra/service/broker/">Astra Service Broker</a>.  Normally I keep a personal document of commands I can reference quickly, but now with this blog, I can use this page for those future references.  Now so can you!</p>
+
+<p>Check out some commands I have used recently:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span> <span class="nx">version</span>
+
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">pods</span> <span class="o">--</span><span class="nx">all</span><span class="o">-</span><span class="nx">namespaces</span>
+
+<span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="o">&lt;</span><span class="nx">namespace</span><span class="o">&gt;</span> <span class="kd">get</span> <span class="nx">pods</span>
+
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">nodes</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">wide</span>
+
+<span class="nx">kubctl</span> <span class="kd">get</span> <span class="nx">secrets</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span>
+
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">secrets</span> <span class="nx">devdb</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">yaml</span>
+
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">serviceinstances</span>
+
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">serviceinstances</span> <span class="nx">devdb</span>
+
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">servicebindings</span>
+
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">events</span>
+
+<span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="kd">get</span> <span class="nx">events</span>
+
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">pvc</span>
+
+<span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="kd">get</span> <span class="nx">pvc</span>
+
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">storageclasses</span>
+
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">sc</span>
+
+<span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="kd">get</span> <span class="nx">pods</span> <span class="o">--</span><span class="nx">selector</span> <span class="nx">name</span><span class="o">=</span><span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">yaml</span>
+
+<span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="kd">get</span> <span class="nx">pods</span>
+
+<span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="nx">exec</span> <span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">2</span> <span class="o">--</span> <span class="nx">keytool</span> <span class="o">-</span><span class="nx">list</span> <span class="o">-</span><span class="nx">keystore</span> <span class="nx">keystore</span><span class="p">.</span><span class="nx">jks</span> <span class="o">-</span><span class="nx">storepass</span> <span class="nx">dc1</span>
+
+<span class="nx">kubectl</span> <span class="nx">logs</span> <span class="o">-</span><span class="nx">n</span> <span class="o">&lt;</span><span class="nx">namespace</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">pod</span><span class="o">&gt;</span>
+
+<span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="nx">logs</span> <span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="nx">rack1</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">0</span> <span class="nx">server</span><span class="o">-</span><span class="nx">system</span><span class="o">-</span><span class="nx">logger</span>
+
+<span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="o">&lt;</span><span class="nx">namespace</span><span class="o">&gt;</span> <span class="nx">logs</span> <span class="o">&lt;</span><span class="nx">pod</span><span class="o">&gt;</span> <span class="nx">server</span><span class="o">-</span><span class="nx">system</span><span class="o">-</span><span class="nx">logger</span>
+
+<span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="o">&lt;</span><span class="nx">namespace</span><span class="o">&gt;</span> <span class="nx">exec</span> <span class="o">&lt;</span><span class="nx">pod</span><span class="o">&gt;</span> <span class="o">--</span> <span class="nx">keytool</span> <span class="o">-</span><span class="nx">list</span> <span class="o">-</span><span class="nx">keystore</span> <span class="nx">keystore</span><span class="p">.</span><span class="nx">jks</span> <span class="o">-</span><span class="nx">storepass</span> <span class="nx">dc1</span>
+
+<span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="nx">logs</span> <span class="o">&lt;</span><span class="nx">pod</span><span class="o">&gt;</span> <span class="nx">server</span><span class="o">-</span><span class="nx">system</span><span class="o">-</span><span class="nx">logger</span>
+
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">serviceinstances</span> <span class="nx">devdb</span>
+
+<span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">service</span><span class="o">-</span><span class="nx">binding</span><span class="p">.</span><span class="nx">yaml</span>
+
+<span class="nx">kubectl</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">service</span><span class="o">-</span><span class="nx">broker</span><span class="p">.</span><span class="nx">yaml</span>
+
+<span class="nx">kubectl</span> <span class="k">delete</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">service</span><span class="o">-</span><span class="nx">broker</span><span class="p">.</span><span class="nx">yaml</span>
+
+<span class="nx">kubectl</span> <span class="k">delete</span> <span class="nx">servicebinding</span> <span class="nx">devdb</span><span class="o">-</span><span class="nx">azure</span>
+
+<span class="nx">kubectl</span> <span class="k">delete</span> <span class="nx">serviceinstance</span> <span class="nx">devdb</span><span class="o">-</span><span class="nx">azure</span>
+</code></pre></div></div>
+<h1 id="whats-next">What’s Next?</h1>
+
+<p>Have some commands I am missing?  I would love to see what you got.  Reach out and lets talk kubectl!</p>
+
+<h1 id="how-can-i-help-you-with-kubernetes">How can I help you with Kubernetes?</h1>
+
+<p><img src="/assets/images/SRM.png" alt="SRM" height="100" width="100" style="float: left; padding: 10px" /></p>
+
+<p>Find me over on the <a href="https://community.datastax.com/index.html">DataStax Community</a> to ask me any questions about Cassandra and Kubernetes.  Also let’s chat if you have something kewl you did with Cassandra and Kubernetes and you want me to feature it in my blog.  Look below or to the right for more ways to find me.</p>
 
         </section>
 

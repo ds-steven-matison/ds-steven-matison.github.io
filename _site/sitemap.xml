@@ -43,6 +43,9 @@
 <loc>http://localhost:4000/k8ssandra/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/kubernetes/cass-operator/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/kubernetes/kubectl/</loc>
 </url>
 <url>

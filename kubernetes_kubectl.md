@@ -7,7 +7,9 @@ permalink: /kubernetes/kubectl/
 
 # What is Kubectl?
 
-For now learn the manual:
+The kubectl, pronounced "kube-cuddle", is the command line tool to control your Kubernetes clusters.  Be sure to study the official [kubernetes.io](https://kubernetes.io/docs/home/) documentation for kubectl [here](https://kubernetes.io/docs/reference/kubectl/overview/).
+
+First lets learn to read the manual:
 ```js 
 kubectl
 kubectl controls the Kubernetes cluster manager.
@@ -78,3 +80,74 @@ Usage:
 Use "kubectl <command> --help" for more information about a given command.
 Use "kubectl options" for a list of global command-line options (applies to all commands).
 ```
+
+# How Do I Use kubectl?
+
+I am working with kubectl as I learn more about [kubernetes](/kubernetes/cass-operator/), [k8ssandra](/k8ssandra/), and [Astra Service Broker](/astra/service/broker/).  Normally I keep a personal document of commands I can reference quickly, but now with this blog, I can use this page for those future references.  Now so can you!
+
+Check out some commands I have used recently:
+
+```js
+kubectl version
+
+kubectl get pods --all-namespaces
+
+kubectl -n <namespace> get pods
+
+kubectl get nodes -o wide
+
+kubctl get secrets -n cass-operator
+
+kubectl get secrets devdb -o yaml
+
+kubectl get serviceinstances
+
+kubectl get serviceinstances devdb
+
+kubectl get servicebindings
+
+kubectl get events
+
+kubectl -n cass-operator get events
+
+kubectl get pvc
+
+kubectl -n cass-operator get pvc
+
+kubectl get storageclasses
+
+kubectl get sc
+
+kubectl -n cass-operator get pods --selector name=cass-operator -o yaml
+
+kubectl -n cass-operator get pods
+
+kubectl -n cass-operator exec cluster1-dc1-default-sts-2 -- keytool -list -keystore keystore.jks -storepass dc1
+
+kubectl logs -n <namespace> <pod>
+
+kubectl -n cass-operator logs cluster1-dc1-rack1-sts-0 server-system-logger
+
+kubectl -n <namespace> logs <pod> server-system-logger
+
+kubectl -n <namespace> exec <pod> -- keytool -list -keystore keystore.jks -storepass dc1
+
+kubectl -n cass-operator logs <pod> server-system-logger
+
+kubectl get serviceinstances devdb
+
+kubectl apply -f astra-service-binding.yaml
+
+kubectl create -f astra-service-broker.yaml
+
+kubectl delete -f astra-service-broker.yaml
+
+kubectl delete servicebinding devdb-azure
+
+kubectl delete serviceinstance devdb-azure
+```
+# What's Next?
+
+Have some commands I am missing?  I would love to see what you got.  Reach out and lets talk kubectl!
+
+{% include kubernetes_help.html %}

@@ -30,6 +30,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
 
 # Recent Posts
 
+*	[Introducing: Kubectl](/kubernetes/kubectl/) - 12/22/2020
 *	[Introducing: Cass-Operator](/kubernetes/cass-operator/) - 12/18/2020
 *	[How To: PHP with Astra](/astra/drivers/php/) - 12/17/2020
 *   <a href="/blog/contribute/opensource/">How To: Contribute to Open Source</a> - 12/16/2020
