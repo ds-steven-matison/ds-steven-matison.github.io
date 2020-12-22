@@ -24,7 +24,10 @@ The [IBM Cloud UI](https://cloud.ibm.com/) was super easy to use.  I was able to
 ```js
 ibmcloud login -u <username> -p <password> -a cloud.ibm.com -r us-south
 ibmcloud ks cluster config --cluster mycluster-dal12-b3c.4x16
+helm repo add iks-charts https://icr.io/helm/iks-charts
+helm repo update
 kubectl create -f https://raw.githubusercontent.com/datastax/cass-operator/master/docs/user/cass-operator-manifests-v1.18.yaml
+helm install block-storage-plugin iks-charts/ibmcloud-block-storage-plugin -n cass-operator
 kubectl create -f https://raw.githubusercontent.com/ds-steven-matison/cass-operator/master/operator/k8s-flavors/iks/storage-block.yaml
 kubectl -n cass-operator create -f  https://raw.githubusercontent.com/ds-steven-matison/cass-operator/master/operator/example-cassdc-yaml/dse-6.8.x/example-cassdc-minimal2.yaml
 kubectl -n cass-operator get pods
