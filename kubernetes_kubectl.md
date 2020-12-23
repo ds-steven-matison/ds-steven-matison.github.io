@@ -96,7 +96,7 @@ kubectl -n <namespace> get pods
 
 kubectl get nodes -o wide
 
-kubctl get secrets -n cass-operator
+kubectl get secrets -n cass-operator
 
 kubectl get secrets devdb -o yaml
 
@@ -118,6 +118,8 @@ kubectl get storageclasses
 
 kubectl get sc
 
+kubectl get deployments --namespace=monitoring
+
 kubectl -n cass-operator get pods --selector name=cass-operator -o yaml
 
 kubectl -n cass-operator get pods
@@ -130,9 +132,13 @@ kubectl -n cass-operator logs cluster1-dc1-rack1-sts-0 server-system-logger
 
 kubectl -n <namespace> logs <pod> server-system-logger
 
-kubectl -n <namespace> exec <pod> -- keytool -list -keystore keystore.jks -storepass dc1
+kubectl logs -n cass-operator cluster1-dc1-default-sts-0 -c server-config-init
 
-kubectl -n cass-operator logs <pod> server-system-logger
+kubectl logs -n cass-operator cluster1-dc1-default-sts-0 -c server-system-logger
+
+kubectl logs -n cass-operator cluster1-dc1-default-sts-0 -c cassandra
+
+kubectl -n <namespace> exec <pod> -- keytool -list -keystore keystore.jks -storepass dc1
 
 kubectl get serviceinstances devdb
 
@@ -145,6 +151,13 @@ kubectl delete -f astra-service-broker.yaml
 kubectl delete servicebinding devdb-azure
 
 kubectl delete serviceinstance devdb-azure
+
+kubectl exec -n cass-operator -i -t -c cassandra cluster1-dc1-default-sts-0 -- cqlsh -u cluster1-superuser -p <password>
+
+kubectl port-forward prometheus-deployment-54686956bd-nhz2s 8080:9090 -n monitoring
+
+kubectl -n cass-operator exec --stdin cluster1-dc1-default-sts-0 -- /bin/bash
+
 ```
 # What's Next?
 
