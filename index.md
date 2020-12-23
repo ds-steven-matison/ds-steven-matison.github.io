@@ -42,6 +42,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
 *	<a href="/astra/multi/cloud/">How To: Astra Multi Cloud</a> - 11/23/2020
 *	<a href="/astra/service/broker/">How To: Astra Service Broker</a> - 11/20/2020
 *	<a href="/k8ssandra/">Introducing: K8ssandra</a> - 11/19/2020
+*   <a href="/kubernetes/">Introducing: Kubernetes</a> - 11/18/2020
 *	<a href="/stargate/graphql/playground/day/1/">How To: Export GraphQl Playground Tabs</a> - 11/17/2020
 *   <a href="/stargate/graphql/playground/">Introducing: GraphQl Playground</a> - 11/16/2020
 *   <a href="/stargate/graphql/">Introducing: GraphQl</a> - 11/13/2020

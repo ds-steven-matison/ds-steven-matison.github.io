@@ -34,7 +34,7 @@ Some great examples of Open Source Software are below:
 
 # What is JIRA?
 
-[Jira](https://www.atlassian.com/software/jira) is a project and project issue tracking software from Atlassian.  More specifically in the ASF ecosystem, the [ASF Jira](https://issues.apache.org/) is a huge platform used by ASF project contributors to track progress on bugs, features, and releases.  
+[Jira](https://www.atlassian.com/software/jira) is a project and project issue tracking software from Atlassian.  More specifically in the ASF ecosystem, the [ASF Jira](https://issues.apache.org/) is a huge platform used by ASF project contributors to track progress on bugs, features, and releases.  Working in JIRA is a great start but be sure to check out the [ASF Community](http://community.apache.org/) too.
 
 # How to Get Started?
 

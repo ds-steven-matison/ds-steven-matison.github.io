@@ -49,6 +49,7 @@
           <br>
           <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
           <a href="/astra/"><button type="button" class="btn btn-primary">Astra</button></a>
+          <a href="/kubernetes/"><button type="button" class="btn btn-primary">Kubernetes</button></a>
           <a href="/nosqlbench/"><button type="button" class="btn btn-primary">NoSqlBench</button></a>
           <a href="/stargate/"><button type="button" class="btn btn-primary">Stargate</button></a>
         <a href="" class="button"><small>Follow me on</small> GitHub</a>
@@ -76,7 +77,10 @@
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ibmcloud</span> <span class="nx">login</span> <span class="o">-</span><span class="nx">u</span> <span class="o">&lt;</span><span class="nx">username</span><span class="o">&gt;</span> <span class="o">-</span><span class="nx">p</span> <span class="o">&lt;</span><span class="nx">password</span><span class="o">&gt;</span> <span class="o">-</span><span class="nx">a</span> <span class="nx">cloud</span><span class="p">.</span><span class="nx">ibm</span><span class="p">.</span><span class="nx">com</span> <span class="o">-</span><span class="nx">r</span> <span class="nx">us</span><span class="o">-</span><span class="nx">south</span>
 <span class="nx">ibmcloud</span> <span class="nx">ks</span> <span class="nx">cluster</span> <span class="nx">config</span> <span class="o">--</span><span class="nx">cluster</span> <span class="nx">mycluster</span><span class="o">-</span><span class="nx">dal12</span><span class="o">-</span><span class="nx">b3c</span><span class="p">.</span><span class="mi">4</span><span class="nx">x16</span>
+<span class="nx">helm</span> <span class="nx">repo</span> <span class="nx">add</span> <span class="nx">iks</span><span class="o">-</span><span class="nx">charts</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//icr.io/helm/iks-charts</span>
+<span class="nx">helm</span> <span class="nx">repo</span> <span class="nx">update</span>
 <span class="nx">kubectl</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//raw.githubusercontent.com/datastax/cass-operator/master/docs/user/cass-operator-manifests-v1.18.yaml</span>
+<span class="nx">helm</span> <span class="nx">install</span> <span class="nx">block</span><span class="o">-</span><span class="nx">storage</span><span class="o">-</span><span class="nx">plugin</span> <span class="nx">iks</span><span class="o">-</span><span class="nx">charts</span><span class="o">/</span><span class="nx">ibmcloud</span><span class="o">-</span><span class="nx">block</span><span class="o">-</span><span class="nx">storage</span><span class="o">-</span><span class="nx">plugin</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span>
 <span class="nx">kubectl</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//raw.githubusercontent.com/ds-steven-matison/cass-operator/master/operator/k8s-flavors/iks/storage-block.yaml</span>
 <span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span>  <span class="nx">https</span><span class="p">:</span><span class="c1">//raw.githubusercontent.com/ds-steven-matison/cass-operator/master/operator/example-cassdc-yaml/dse-6.8.x/example-cassdc-minimal2.yaml</span>
 <span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="kd">get</span> <span class="nx">pods</span>
@@ -109,6 +113,7 @@ You can find me on Slacks:
   <li><a href="https://apachenifi.slack.com" target="_blank" rel="noopener">Apache NiFi Slack</a></li>
   <li><a href="https://nosqlbench.slack.com" target="_blank" rel="noopener">NoSqlBench Slack</a></li>
   <li><a href="https://datastax.slack.com/archives/CP189L0HF" target="_blank" rel="noopener">Astra Slack</a></li>
+  <li><a href="https://join.slack.com/t/ibm-cloud-success/shared_invite/zt-ki1gmwe9-M0bFaI_nMSAF1RzDMqw_wg" target="_blank" rel="noopener">IBM Cloud Slack</a></li>
 </ul>
 
 You can find me on Stacks:
