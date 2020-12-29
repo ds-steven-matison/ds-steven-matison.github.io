@@ -89,9 +89,181 @@
 <span class="nx">kubectl</span> <span class="nx">exec</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="o">-</span><span class="nx">i</span> <span class="o">-</span><span class="nx">t</span> <span class="o">-</span><span class="nx">c</span> <span class="nx">cassandra</span> <span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">0</span> <span class="o">--</span> <span class="nx">cqlsh</span> <span class="o">-</span><span class="nx">u</span> <span class="nx">cluster1</span><span class="o">-</span><span class="nx">superuser</span> <span class="o">-</span><span class="nx">p</span> <span class="o">&lt;</span><span class="nx">password</span><span class="o">&gt;</span>
 </code></pre></div></div>
 
+<h1 id="what-were-the-sharp-edges">What Were The Sharp Edges?</h1>
+
+<ul>
+  <li>IBM IKS documentation is vast volumes of text</li>
+  <li>Major functional system differences based on before or after Dec 1, 2020</li>
+  <li>The DataStax Kubernetes Operator for Apache Cassandra is BETA</li>
+  <li>The differences between documentation (GKE) and IKS are related to storage and networking</li>
+</ul>
+
+<h1 id="what-are-lessons-learned">What Are Lessons Learned?</h1>
+
+<ul>
+  <li>I had to learn how to connect my local environment to IBM Cloud and IKS using IBM Cloud sdk (easy).</li>
+  <li>I also had to learn to navigate the vast volumes of text at IBM.</li>
+  <li>I needed to utilize the IBM Cloud slack community help to resolve some friction.</li>
+</ul>
+
+<h1 id="how-do-i-access-the-pods-terminal">How do I access the PODS terminal?</h1>
+
+<p>These are my raw working notes, take a look at how I ask myself a question, and then record the information I need to answer it.</p>
+
+<p>Links I used:</p>
+<ol>
+  <li><a href="https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/">https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/</a></li>
+  <li><a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#exec">https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#exec</a></li>
+</ol>
+
+<p>I can execute some commands to get Pod Names:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">~</span> <span class="o">%</span> <span class="nx">ibmcloud</span> <span class="nx">ks</span> <span class="nx">worker</span> <span class="nx">ls</span> <span class="o">--</span><span class="nx">cluster</span> <span class="nx">mycluster</span><span class="o">-</span><span class="nx">dal12</span><span class="o">-</span><span class="nx">b3c</span><span class="p">.</span><span class="mi">4</span><span class="nx">x16</span>
+<span class="nx">OK</span>
+<span class="nx">ID</span>                                                       <span class="nx">Public</span> <span class="nx">IP</span>      <span class="nx">Private</span> <span class="nx">IP</span>      <span class="nx">Flavor</span>               <span class="nx">State</span>    <span class="nx">Status</span>   <span class="nx">Zone</span>    <span class="nx">Version</span>   
+<span class="nx">kube</span><span class="o">-</span><span class="nx">bvhjafed0aiosshvvo8g</span><span class="o">-</span><span class="nx">myclusterda</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="mi">000001</span><span class="nx">bc</span>   <span class="mf">169.47</span><span class="p">.</span><span class="mf">64.82</span>   <span class="mf">10.185</span><span class="p">.</span><span class="mf">96.183</span>   <span class="nx">b3c</span><span class="p">.</span><span class="mi">4</span><span class="nx">x16</span><span class="p">.</span><span class="nx">encrypted</span>   <span class="nx">normal</span>   <span class="nx">Ready</span>    <span class="nx">dal12</span>   <span class="mf">1.18</span><span class="p">.</span><span class="mi">13</span><span class="nx">_1536</span>   
+<span class="nx">kube</span><span class="o">-</span><span class="nx">bvhjafed0aiosshvvo8g</span><span class="o">-</span><span class="nx">myclusterda</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="mi">00000259</span>   <span class="mf">169.47</span><span class="p">.</span><span class="mf">64.84</span>   <span class="mf">10.185</span><span class="p">.</span><span class="mf">96.165</span>   <span class="nx">b3c</span><span class="p">.</span><span class="mi">4</span><span class="nx">x16</span><span class="p">.</span><span class="nx">encrypted</span>   <span class="nx">normal</span>   <span class="nx">Ready</span>    <span class="nx">dal12</span>   <span class="mf">1.18</span><span class="p">.</span><span class="mi">13</span><span class="nx">_1536</span>   
+<span class="nx">kube</span><span class="o">-</span><span class="nx">bvhjafed0aiosshvvo8g</span><span class="o">-</span><span class="nx">myclusterda</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="mi">000003</span><span class="nx">a0</span>   <span class="mf">169.47</span><span class="p">.</span><span class="mf">64.86</span>   <span class="mf">10.185</span><span class="p">.</span><span class="mf">96.186</span>   <span class="nx">b3c</span><span class="p">.</span><span class="mi">4</span><span class="nx">x16</span><span class="p">.</span><span class="nx">encrypted</span>   <span class="nx">normal</span>   <span class="nx">Ready</span>    <span class="nx">dal12</span>   <span class="mf">1.18</span><span class="p">.</span><span class="mi">13</span><span class="nx">_1536</span> 
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">~</span> <span class="o">%</span> <span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="kd">get</span> <span class="nx">pods</span>                                                                                        
+<span class="nx">NAME</span>                             <span class="nx">READY</span>   <span class="nx">STATUS</span>    <span class="nx">RESTARTS</span>   <span class="nx">AGE</span>
+<span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span><span class="o">-</span><span class="mi">557</span><span class="nx">f6689df</span><span class="o">-</span><span class="nx">qftdf</span>   <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="nx">Running</span>   <span class="mi">0</span>          <span class="mi">14</span><span class="nx">m</span>
+<span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">0</span>       <span class="mi">2</span><span class="o">/</span><span class="mi">2</span>     <span class="nx">Running</span>   <span class="mi">0</span>          <span class="mi">11</span><span class="nx">m</span>
+<span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">1</span>       <span class="mi">2</span><span class="o">/</span><span class="mi">2</span>     <span class="nx">Running</span>   <span class="mi">0</span>          <span class="mi">11</span><span class="nx">m</span>
+<span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">2</span>       <span class="mi">2</span><span class="o">/</span><span class="mi">2</span>     <span class="nx">Running</span>   <span class="mi">0</span>          <span class="mi">11</span><span class="nx">m</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">~</span> <span class="o">%</span> <span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="kd">get</span> <span class="nx">pod</span> <span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">0</span>                                                         
+<span class="nx">NAME</span>                         <span class="nx">READY</span>   <span class="nx">STATUS</span>    <span class="nx">RESTARTS</span>   <span class="nx">AGE</span>
+<span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">0</span>   <span class="mi">2</span><span class="o">/</span><span class="mi">2</span>     <span class="nx">Running</span>   <span class="mi">0</span>          <span class="mi">12</span><span class="nx">m</span>
+</code></pre></div></div>
+
+<p>I can use bash on the pod:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">~</span> <span class="o">%</span> <span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="nx">exec</span> <span class="o">--</span><span class="nx">stdin</span> <span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">0</span> <span class="o">--</span> <span class="sr">/bin/</span><span class="nx">bash</span>
+<span class="nx">Defaulting</span> <span class="nx">container</span> <span class="nx">name</span> <span class="nx">to</span> <span class="nx">cassandra</span><span class="p">.</span>
+<span class="nx">Use</span> <span class="dl">'</span><span class="s1">kubectl describe pod/cluster1-dc1-default-sts-0 -n cass-operator</span><span class="dl">'</span> <span class="nx">to</span> <span class="nx">see</span> <span class="nx">all</span> <span class="k">of</span> <span class="nx">the</span> <span class="nx">containers</span> <span class="k">in</span> <span class="k">this</span> <span class="nx">pod</span><span class="p">.</span>
+</code></pre></div></div>
+<p>!! the bash commands are limited<br />
+!! I can see the file system and find /config/cassandra.yaml but cannot edit</p>
+
+<p>I can run nodetool status:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Datacenter</span><span class="p">:</span> <span class="nx">dc1</span>
+<span class="o">===============</span>
+<span class="nx">Status</span><span class="o">=</span><span class="nx">Up</span><span class="o">/</span><span class="nx">Down</span>
+<span class="o">|</span><span class="sr">/ State=Normal/</span><span class="nx">Leaving</span><span class="o">/</span><span class="nx">Joining</span><span class="o">/</span><span class="nx">Moving</span><span class="o">/</span><span class="nx">Stopped</span>
+<span class="o">--</span>  <span class="nx">Address</span>         <span class="nx">Load</span>       <span class="nx">Tokens</span>       <span class="nx">Owns</span> <span class="p">(</span><span class="nx">effective</span><span class="p">)</span>  <span class="nx">Host</span> <span class="nx">ID</span>                               <span class="nx">Rack</span>
+<span class="nx">UN</span>  <span class="mf">172.30</span><span class="p">.</span><span class="mf">67.15</span>    <span class="mf">165.11</span> <span class="nx">KiB</span>  <span class="mi">1</span>            <span class="mf">100.0</span><span class="o">%</span>            <span class="mi">49923960</span><span class="o">-</span><span class="mi">3</span><span class="nx">bb4</span><span class="o">-</span><span class="mi">4</span><span class="nx">aae</span><span class="o">-</span><span class="nx">ae6e</span><span class="o">-</span><span class="mi">19</span><span class="nx">d1a9ff7809</span>  <span class="k">default</span>
+<span class="nx">UN</span>  <span class="mf">172.30</span><span class="p">.</span><span class="mf">163.68</span>   <span class="mf">143.49</span> <span class="nx">KiB</span>  <span class="mi">1</span>            <span class="mf">100.0</span><span class="o">%</span>            <span class="mi">133</span><span class="nx">c50a9</span><span class="o">-</span><span class="nx">df68</span><span class="o">-</span><span class="mi">481</span><span class="nx">b</span><span class="o">-</span><span class="mi">8344</span><span class="o">-</span><span class="mi">6</span><span class="nx">a63140d5e57</span>  <span class="k">default</span>
+<span class="nx">UN</span>  <span class="mf">172.30</span><span class="p">.</span><span class="mf">234.133</span>  <span class="mf">111.8</span> <span class="nx">KiB</span>  <span class="mi">1</span>            <span class="mf">100.0</span><span class="o">%</span>            <span class="nx">e1ce2f35</span><span class="o">-</span><span class="mi">90</span><span class="nx">cb</span><span class="o">-</span><span class="mi">4594</span><span class="o">-</span><span class="nx">aa3b</span><span class="o">-</span><span class="nx">b2ee2ed47860</span>  <span class="k">default</span>
+</code></pre></div></div>
+
+<p>I can run dsetool:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">dsetool</span> <span class="nx">insights_config</span> <span class="o">--</span><span class="nx">show_config</span>
+<span class="p">{</span>
+  <span class="dl">"</span><span class="s2">mode</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">ENABLED_WITH_LOCAL_STORAGE</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">config_refresh_interval_in_seconds</span><span class="dl">"</span> <span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">metric_sampling_interval_in_seconds</span><span class="dl">"</span> <span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">data_dir_max_size_in_mb</span><span class="dl">"</span> <span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">node_system_info_report_period</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">PT1H</span><span class="dl">"</span>
+<span class="p">}</span>
+
+<span class="nx">dsetool</span> <span class="nx">insights_filters</span>
+<span class="p">[</span><span class="nx">simple</span> <span class="nx">commands</span><span class="p">]:</span>
+  <span class="o">--</span><span class="nx">show_filters</span>
+  <span class="o">--</span><span class="nx">remove_all_filters</span>
+<span class="p">[</span><span class="nx">filtering</span> <span class="nx">actions</span><span class="p">]:</span>
+  <span class="o">--</span><span class="nx">add</span>
+  <span class="o">--</span><span class="nx">remove</span>
+  <span class="o">--</span><span class="nx">allow</span>
+  <span class="o">--</span><span class="nx">deny</span>
+  <span class="o">--</span><span class="nb">global</span>
+  <span class="o">--</span><span class="nx">insights_only</span>
+ <span class="o">&lt;</span><span class="nx">regex</span><span class="o">&gt;</span>
+
+<span class="p">[</span><span class="nx">examples</span><span class="p">]:</span>
+ <span class="nx">insights_filters</span> <span class="o">--</span><span class="nx">add</span> <span class="o">--</span><span class="nb">global</span> <span class="o">--</span><span class="nx">deny</span> <span class="p">.</span><span class="o">*</span><span class="nx">KeyspaceMetrics</span><span class="p">.</span><span class="o">*</span>
+ <span class="nx">insights_filters</span> <span class="o">--</span><span class="nx">add</span> <span class="o">--</span><span class="nx">insights_only</span> <span class="o">--</span><span class="nx">deny</span> <span class="p">.</span><span class="o">*</span><span class="nx">gc</span><span class="p">.</span><span class="o">*</span>
+ <span class="nx">insights_filters</span> <span class="o">--</span><span class="nx">remove_all_filters</span>
+</code></pre></div></div>
+
+<p>I can find metrics and log locations:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">cd</span> <span class="o">/</span><span class="kd">var</span><span class="sr">/lib/</span><span class="nx">cassandra</span><span class="o">/</span><span class="nx">insights_data</span>
+<span class="nx">ls</span>
+<span class="nx">insights</span>
+
+<span class="nx">cd</span> <span class="o">/</span><span class="kd">var</span><span class="sr">/log/</span><span class="nx">cassandra</span>
+<span class="nx">ls</span>
+<span class="nx">audit</span>
+<span class="nx">debug</span><span class="p">.</span><span class="nx">log</span>
+<span class="nx">dse</span><span class="o">-</span><span class="nx">collectd</span><span class="p">.</span><span class="nx">log</span>
+<span class="nx">dse</span><span class="o">-</span><span class="nx">collectd</span><span class="p">.</span><span class="nx">pid</span>
+<span class="nx">gc</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="nx">current</span>
+<span class="nx">gremlin</span><span class="p">.</span><span class="nx">log</span>
+<span class="nx">system</span><span class="p">.</span><span class="nx">log</span>
+</code></pre></div></div>
+
+<h1 id="how-to-install-promethus">How To: Install Promethus?</h1>
+
+<p><a href="https://prometheus.io/">https://prometheus.io/</a></p>
+
+<h2 id="prometheus-method-1">Prometheus Method 1</h2>
+
+<p>https://devopscube.com/setup-prometheus-monitoring-on-kubernetes/</p>
+
+<p>https://raw.githubusercontent.com/bibinwilson/kubernetes-prometheus/master/clusterRole.yaml</p>
+
+<p>https://raw.githubusercontent.com/bibinwilson/kubernetes-prometheus/master/config-map.yaml</p>
+
+<p><a href="#">See Cass Op Term History - IKS Day 4 prometheus 1</a></p>
+
+<p>Port fwd localhost:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span> <span class="nx">port</span><span class="o">-</span><span class="nx">forward</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">deployment</span><span class="o">-</span><span class="mi">54686956</span><span class="nx">bd</span><span class="o">-</span><span class="nx">nhz2s</span> <span class="mi">8080</span><span class="p">:</span><span class="mi">9090</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">monitoring</span>
+</code></pre></div></div>
+
+<p>Then this works:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://localhost:8080/graph?g0.expr=&amp;g0.tab=1&amp;g0.stacked=0&amp;g0.range_input=1h
+</code></pre></div></div>
+
+<p>Also exposed on public worker IP:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://169.47.64.82:30000/graph?g0.expr=&amp;g0.tab=1&amp;g0.stacked=0&amp;g0.range_input=1h
+</code></pre></div></div>
+
+<h2 id="prometheus-method-2">Prometheus Method 2</h2>
+<p>https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/</p>
+
+<p>I completed the helm steps here:</p>
+
+<p>https://kubernetes.github.io/ingress-nginx/deploy/</p>
+
+<ul>
+  <li>!! this Ingres installs as default namespace<br /></li>
+  <li>!! needs to be ingress-nginx</li>
+</ul>
+
+<p>This works:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://169.47.64.84:32165/graph
+</code></pre></div></div>
+
+<p>Graphana works too:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://169.47.64.84:32393/login
+admin / admin admin2020
+</code></pre></div></div>
+
+<p><a href="#">See Cass Op Term History - IKS Day 4 prometheus 2</a></p>
+
 <h1 id="whats-next">What’s Next?</h1>
 
-<p>My progress here has helped create a new contribution to the cass-operator repo: <a href="https://github.com/datastax/cass-operator/pull/344">PR 344</a>.  Soon we should see the documentation updated with IKS as a supported platform.   Stay tuned for more updates here and additional IKS cass operator topics as I dig in even more with the Datastax Cassandra Operator on IKS.</p>
+<p>My progress here has helped create a new contribution to the cass-operator repo: <a href="https://github.com/datastax/cass-operator/pull/344">PR 344</a>.  Soon we should see the documentation updated with IKS as a supported platform.  Additionally my lessons learned and the required differences for IKS will be added to documentation.  Stay tuned for more updates here and additional IKS cass operator topics as I dig in even more with the Datastax Cassandra Operator on IKS.  I am currently working on Backups, Ingress, Metrics sections to be posted soon.</p>
 
 <h1 id="how-can-i-help-you-with-kubernetes">How can I help you with Kubernetes?</h1>
 
