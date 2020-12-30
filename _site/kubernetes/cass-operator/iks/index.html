@@ -145,8 +145,8 @@
 <span class="nx">Defaulting</span> <span class="nx">container</span> <span class="nx">name</span> <span class="nx">to</span> <span class="nx">cassandra</span><span class="p">.</span>
 <span class="nx">Use</span> <span class="dl">'</span><span class="s1">kubectl describe pod/cluster1-dc1-default-sts-0 -n cass-operator</span><span class="dl">'</span> <span class="nx">to</span> <span class="nx">see</span> <span class="nx">all</span> <span class="k">of</span> <span class="nx">the</span> <span class="nx">containers</span> <span class="k">in</span> <span class="k">this</span> <span class="nx">pod</span><span class="p">.</span>
 </code></pre></div></div>
-<p>!! the bash commands are limited<br />
-!! I can see the file system and find /config/cassandra.yaml but cannot edit</p>
+<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" />  the bash commands are limited<br />
+<img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" />  I can see the file system and find /config/cassandra.yaml but cannot edit</p>
 
 <p>I can run nodetool status:</p>
 
@@ -207,48 +207,131 @@
 <span class="nx">system</span><span class="p">.</span><span class="nx">log</span>
 </code></pre></div></div>
 
-<h1 id="how-to-install-promethus">How To: Install Promethus?</h1>
+<h1 id="how-to-install-prometheus">How To: Install Prometheus?</h1>
 
-<p><a href="https://prometheus.io/">https://prometheus.io/</a></p>
+<p>Prometheus is a free software application used for event monitoring and alerting. It records real-time metrics in a time series database built using a HTTP pull model, with flexible queries and real-time alerting.  You can find more information at <a href="https://prometheus.io/">https://prometheus.io/</a>.</p>
 
 <h2 id="prometheus-method-1">Prometheus Method 1</h2>
 
-<p>https://devopscube.com/setup-prometheus-monitoring-on-kubernetes/</p>
+<p>The first method I used to install Prometheus on IBM IKS is an post I found by Bibin Wilson.  You can read How to Setup Prometheus Monitoring On Kubernetes Cluster here:</p>
+<ul>
+  <li><a href="https://devopscube.com/setup-prometheus-monitoring-on-kubernetes/">https://devopscube.com/setup-prometheus-monitoring-on-kubernetes/</a></li>
+</ul>
 
-<p>https://raw.githubusercontent.com/bibinwilson/kubernetes-prometheus/master/clusterRole.yaml</p>
+<p>Sources of files used in commands:</p>
+<ul>
+  <li><a href="https://raw.githubusercontent.com/bibinwilson/kubernetes-prometheus/master/clusterRole.yaml">https://raw.githubusercontent.com/bibinwilson/kubernetes-prometheus/master/clusterRole.yaml</a></li>
+  <li><a href="[https://raw.githubusercontent.com/bibinwilson/kubernetes-prometheus/master/config-map.yaml">https://raw.githubusercontent.com/bibinwilson/kubernetes-prometheus/master/config-map.yaml</a></li>
+</ul>
 
-<p>https://raw.githubusercontent.com/bibinwilson/kubernetes-prometheus/master/config-map.yaml</p>
+<p>The prometheus-deployment.yaml:</p>
 
-<p><a href="#">See Cass Op Term History - IKS Day 4 prometheus 1</a></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">apiVersion</span><span class="p">:</span> <span class="nx">apps</span><span class="o">/</span><span class="nx">v1</span>
+<span class="nx">kind</span><span class="p">:</span> <span class="nx">Deployment</span>
+<span class="nx">metadata</span><span class="p">:</span>
+  <span class="nx">name</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">deployment</span>
+  <span class="nx">namespace</span><span class="p">:</span> <span class="nx">monitoring</span>
+  <span class="nx">labels</span><span class="p">:</span>
+    <span class="nx">app</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">server</span>
+<span class="nx">spec</span><span class="p">:</span>
+  <span class="nx">replicas</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="nx">selector</span><span class="p">:</span>
+    <span class="nx">matchLabels</span><span class="p">:</span>
+      <span class="nx">app</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">server</span>
+  <span class="nx">template</span><span class="p">:</span>
+    <span class="nx">metadata</span><span class="p">:</span>
+      <span class="nx">labels</span><span class="p">:</span>
+        <span class="nx">app</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">server</span>
+    <span class="nx">spec</span><span class="p">:</span>
+      <span class="nx">containers</span><span class="p">:</span>
+        <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">prometheus</span>
+          <span class="nx">image</span><span class="p">:</span> <span class="nx">prom</span><span class="o">/</span><span class="nx">prometheus</span>
+          <span class="nx">args</span><span class="p">:</span>
+            <span class="o">-</span> <span class="dl">"</span><span class="s2">--config.file=/etc/prometheus/prometheus.yml</span><span class="dl">"</span>
+            <span class="o">-</span> <span class="dl">"</span><span class="s2">--storage.tsdb.path=/prometheus/</span><span class="dl">"</span>
+          <span class="nx">ports</span><span class="p">:</span>
+            <span class="o">-</span> <span class="nx">containerPort</span><span class="p">:</span> <span class="mi">9090</span>
+          <span class="nx">volumeMounts</span><span class="p">:</span>
+            <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">config</span><span class="o">-</span><span class="nx">volume</span>
+              <span class="nx">mountPath</span><span class="p">:</span> <span class="o">/</span><span class="nx">etc</span><span class="o">/</span><span class="nx">prometheus</span><span class="o">/</span>
+            <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">storage</span><span class="o">-</span><span class="nx">volume</span>
+              <span class="nx">mountPath</span><span class="p">:</span> <span class="o">/</span><span class="nx">prometheus</span><span class="o">/</span>
+      <span class="nx">volumes</span><span class="p">:</span>
+        <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">config</span><span class="o">-</span><span class="nx">volume</span>
+          <span class="nx">configMap</span><span class="p">:</span>
+            <span class="nx">defaultMode</span><span class="p">:</span> <span class="mi">420</span>
+            <span class="nx">name</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">server</span><span class="o">-</span><span class="nx">conf</span>
+  
+        <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">storage</span><span class="o">-</span><span class="nx">volume</span>
+          <span class="nx">emptyDir</span><span class="p">:</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<p>The prometheus-service.yaml:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">apiVersion</span><span class="p">:</span> <span class="nx">v1</span>
+<span class="nx">kind</span><span class="p">:</span> <span class="nx">Service</span>
+<span class="nx">metadata</span><span class="p">:</span>
+  <span class="nx">name</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">service</span>
+  <span class="nx">namespace</span><span class="p">:</span> <span class="nx">monitoring</span>
+  <span class="nx">annotations</span><span class="p">:</span>
+      <span class="nx">prometheus</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">scrape</span><span class="p">:</span> <span class="dl">'</span><span class="s1">true</span><span class="dl">'</span>
+      <span class="nx">prometheus</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">port</span><span class="p">:</span>   <span class="dl">'</span><span class="s1">9090</span><span class="dl">'</span>
+<span class="nx">spec</span><span class="p">:</span>
+  <span class="nx">selector</span><span class="p">:</span> 
+    <span class="nx">app</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">server</span>
+  <span class="nx">type</span><span class="p">:</span> <span class="nx">NodePort</span>  
+  <span class="nx">ports</span><span class="p">:</span>
+    <span class="o">-</span> <span class="nx">port</span><span class="p">:</span> <span class="mi">8080</span>
+      <span class="nx">targetPort</span><span class="p">:</span> <span class="mi">9090</span> 
+      <span class="nx">nodePort</span><span class="p">:</span> <span class="mi">30000</span>
+</code></pre></div></div>
+
+<p>The terminal commands I ran:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">clusterRole</span><span class="p">.</span><span class="nx">yaml</span>
+<span class="nx">nano</span> <span class="nx">config</span><span class="o">-</span><span class="nx">map</span><span class="p">.</span><span class="nx">yaml</span>
+<span class="nx">kubectl</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">config</span><span class="o">-</span><span class="nx">map</span><span class="p">.</span><span class="nx">yaml</span>
+<span class="nx">kubectl</span> <span class="nx">create</span> <span class="nx">namespace</span> <span class="nx">monitoring</span>
+<span class="nx">kubectl</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">config</span><span class="o">-</span><span class="nx">map</span><span class="p">.</span><span class="nx">yaml</span>
+<span class="nx">nano</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">deployment</span><span class="p">.</span><span class="nx">yaml</span>
+<span class="nx">kubectl</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">deployment</span><span class="p">.</span><span class="nx">yaml</span>
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">deployments</span> <span class="o">--</span><span class="nx">namespace</span><span class="o">=</span><span class="nx">monitoring</span>
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">pods</span> <span class="o">--</span><span class="nx">namespace</span><span class="o">=</span><span class="nx">monitoring</span>
+<span class="nx">nano</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">service</span><span class="p">.</span><span class="nx">yaml</span>
+<span class="nx">kubectl</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">service</span><span class="p">.</span><span class="nx">yaml</span> <span class="o">--</span><span class="nx">namespace</span><span class="o">=</span><span class="nx">monitoring</span>
+</code></pre></div></div>
 
 <p>Port fwd localhost:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span> <span class="nx">port</span><span class="o">-</span><span class="nx">forward</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">deployment</span><span class="o">-</span><span class="mi">54686956</span><span class="nx">bd</span><span class="o">-</span><span class="nx">nhz2s</span> <span class="mi">8080</span><span class="p">:</span><span class="mi">9090</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">monitoring</span>
 </code></pre></div></div>
 
-<p>Then this works:</p>
+<p>Then this Prometheus UI works:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://localhost:8080/graph?g0.expr=&amp;g0.tab=1&amp;g0.stacked=0&amp;g0.range_input=1h
 </code></pre></div></div>
 
-<p>Also exposed on public worker IP:</p>
+<p>Also the UI is exposed on public worker IP:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://169.47.64.82:30000/graph?g0.expr=&amp;g0.tab=1&amp;g0.stacked=0&amp;g0.range_input=1h
 </code></pre></div></div>
 
 <h2 id="prometheus-method-2">Prometheus Method 2</h2>
-<p>https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/</p>
+
+<p>The second method I used to install Prometheus on IBM IKS is an official documentation post I found on <a href="https://kubernetes.github.io/">https://kubernetes.github.io/</a>.  You can read more about Prometheus and Grafana installation here:</p>
+
+<ul>
+  <li><a href="https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/">https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/</a></li>
+</ul>
 
 <p>I completed the helm steps here:</p>
 
-<p>https://kubernetes.github.io/ingress-nginx/deploy/</p>
+<p>  <a href="https://kubernetes.github.io/ingress-nginx/deploy/">https://kubernetes.github.io/ingress-nginx/deploy/</a></p>
 
-<ul>
-  <li>!! this Ingres installs as default namespace<br /></li>
-  <li>!! needs to be ingress-nginx</li>
-</ul>
+<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" />  this Ingres installs as default namespace<br />
+<img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" />  needs to be ingress-nginx</p>
 
-<p>This works:</p>
+<p>After install Promethus UI works:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://169.47.64.84:32165/graph
 </code></pre></div></div>
@@ -256,14 +339,30 @@
 <p>Graphana works too:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://169.47.64.84:32393/login
-admin / admin admin2020
+admin / admin
 </code></pre></div></div>
 
-<p><a href="#">See Cass Op Term History - IKS Day 4 prometheus 2</a></p>
+<p>The terminal commands I ran:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span> <span class="nx">create</span> <span class="nx">namespace</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">svc</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
+<span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">--</span><span class="nx">kustomize</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">kubernetes</span><span class="o">/</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">deploy</span><span class="o">/</span><span class="nx">prometheus</span><span class="o">/</span>
+<span class="nx">helm</span> <span class="nx">install</span> <span class="nx">my</span><span class="o">-</span><span class="nx">release</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
+<span class="nx">POD_NAME</span><span class="o">=</span><span class="nx">$</span><span class="p">(</span><span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">pods</span> <span class="o">-</span><span class="nx">l</span> <span class="nx">app</span><span class="p">.</span><span class="nx">kubernetes</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">name</span><span class="o">=</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">jsonpath</span><span class="o">=</span><span class="dl">'</span><span class="s1">{.items[0].metadata.name}</span><span class="dl">'</span><span class="p">)</span><span class="o">\</span>
+<span class="nx">kubectl</span> <span class="nx">exec</span> <span class="o">-</span><span class="nx">it</span> <span class="nx">$POD_NAME</span> <span class="o">--</span> <span class="sr">/nginx-ingress-controller --versio</span><span class="err">n
+</span><span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">pods</span> <span class="o">--</span><span class="nx">all</span><span class="o">-</span><span class="nx">namespaces</span>
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">svc</span> <span class="o">-</span><span class="nx">n</span> <span class="k">default</span>
+<span class="nx">helm</span> <span class="nx">install</span> <span class="nx">my</span><span class="o">-</span><span class="nx">release</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
+<span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">--</span><span class="nx">kustomize</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">kubernetes</span><span class="o">/</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">deploy</span><span class="o">/</span><span class="nx">prometheus</span><span class="o">/</span>
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">svc</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">nodes</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">wide</span>
+<span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">--</span><span class="nx">kustomize</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">kubernetes</span><span class="o">/</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">deploy</span><span class="o">/</span><span class="nx">grafana</span><span class="o">/</span>
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">svc</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
+</code></pre></div></div>
 
 <h1 id="whats-next">What’s Next?</h1>
 
-<p>My progress here has helped create a new contribution to the cass-operator repo: <a href="https://github.com/datastax/cass-operator/pull/344">PR 344</a>.  Soon we should see the documentation updated with IKS as a supported platform.  Additionally my lessons learned and the required differences for IKS will be added to documentation.  Stay tuned for more updates here and additional IKS cass operator topics as I dig in even more with the Datastax Cassandra Operator on IKS.  I am currently working on Backups, Ingress, Metrics sections to be posted soon.</p>
+<p>Stay tuned for more updates here and additional IKS cass operator topics as I dig in even more with the Datastax Cassandra Operator on IKS.  I am currently working on Backups, Ingress, Metrics sections to be posted soon.  Soon we should see the Cass Operator documentation updated with IKS as a supported platform.  Additionally my lessons learned and the required differences for IKS will be used to contribue to the Cassandra Operator Knowledge base.</p>
 
 <h1 id="how-can-i-help-you-with-kubernetes">How can I help you with Kubernetes?</h1>
 

@@ -90,8 +90,8 @@ I can use bash on the pod:
 Defaulting container name to cassandra.
 Use 'kubectl describe pod/cluster1-dc1-default-sts-0 -n cass-operator' to see all of the containers in this pod.
 ```
-!! the bash commands are limited<br>
-!! I can see the file system and find /config/cassandra.yaml but cannot edit
+![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"}  the bash commands are limited<br>
+![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"}  I can see the file system and find /config/cassandra.yaml but cannot edit
 
 I can run nodetool status:
 
@@ -155,20 +155,98 @@ gremlin.log
 system.log
 ```
 
-# How To: Install Promethus?
+# How To: Install Prometheus?
 
-[https://prometheus.io/](https://prometheus.io/)
+ Prometheus is a free software application used for event monitoring and alerting. It records real-time metrics in a time series database built using a HTTP pull model, with flexible queries and real-time alerting.  You can find more information at [https://prometheus.io/](https://prometheus.io/).
 
 ## Prometheus Method 1
 
-https://devopscube.com/setup-prometheus-monitoring-on-kubernetes/
+The first method I used to install Prometheus on IBM IKS is an post I found by Bibin Wilson.  You can read How to Setup Prometheus Monitoring On Kubernetes Cluster here:
+*  [https://devopscube.com/setup-prometheus-monitoring-on-kubernetes/](https://devopscube.com/setup-prometheus-monitoring-on-kubernetes/)
 
-https://raw.githubusercontent.com/bibinwilson/kubernetes-prometheus/master/clusterRole.yaml
+Sources of files used in commands:
+*  [https://raw.githubusercontent.com/bibinwilson/kubernetes-prometheus/master/clusterRole.yaml](https://raw.githubusercontent.com/bibinwilson/kubernetes-prometheus/master/clusterRole.yaml)
+*  [https://raw.githubusercontent.com/bibinwilson/kubernetes-prometheus/master/config-map.yaml]([https://raw.githubusercontent.com/bibinwilson/kubernetes-prometheus/master/config-map.yaml)
 
-https://raw.githubusercontent.com/bibinwilson/kubernetes-prometheus/master/config-map.yaml
+The prometheus-deployment.yaml:
 
-[See Cass Op Term History - IKS Day 4 prometheus 1](#)
+```js
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-deployment
+  namespace: monitoring
+  labels:
+    app: prometheus-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-server
+  template:
+    metadata:
+      labels:
+        app: prometheus-server
+    spec:
+      containers:
+        - name: prometheus
+          image: prom/prometheus
+          args:
+            - "--config.file=/etc/prometheus/prometheus.yml"
+            - "--storage.tsdb.path=/prometheus/"
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - name: prometheus-config-volume
+              mountPath: /etc/prometheus/
+            - name: prometheus-storage-volume
+              mountPath: /prometheus/
+      volumes:
+        - name: prometheus-config-volume
+          configMap:
+            defaultMode: 420
+            name: prometheus-server-conf
+  
+        - name: prometheus-storage-volume
+          emptyDir: {}
+```
 
+The prometheus-service.yaml:
+
+```js
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-service
+  namespace: monitoring
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port:   '9090'
+spec:
+  selector: 
+    app: prometheus-server
+  type: NodePort  
+  ports:
+    - port: 8080
+      targetPort: 9090 
+      nodePort: 30000
+```
+
+The terminal commands I ran:
+
+```js
+kubectl create -f clusterRole.yaml
+nano config-map.yaml
+kubectl create -f config-map.yaml
+kubectl create namespace monitoring
+kubectl create -f config-map.yaml
+nano prometheus-deployment.yaml
+kubectl create -f prometheus-deployment.yaml
+kubectl get deployments --namespace=monitoring
+kubectl get pods --namespace=monitoring
+nano prometheus-service.yaml
+kubectl create -f prometheus-service.yaml --namespace=monitoring
+```
 
 Port fwd localhost:
 
@@ -176,41 +254,57 @@ Port fwd localhost:
 kubectl port-forward prometheus-deployment-54686956bd-nhz2s 8080:9090 -n monitoring
 ```
 
-Then this works:
+Then this Prometheus UI works:
 
 	http://localhost:8080/graph?g0.expr=&g0.tab=1&g0.stacked=0&g0.range_input=1h
 
-Also exposed on public worker IP:
+Also the UI is exposed on public worker IP:
 
 	http://169.47.64.82:30000/graph?g0.expr=&g0.tab=1&g0.stacked=0&g0.range_input=1h
 
-	
-
 ## Prometheus Method 2
-https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/
+
+The second method I used to install Prometheus on IBM IKS is an official documentation post I found on [https://kubernetes.github.io/](https://kubernetes.github.io/).  You can read more about Prometheus and Grafana installation here:
+
+*  [https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/](https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/)
 
 I completed the helm steps here:
 
-https://kubernetes.github.io/ingress-nginx/deploy/
+&nbsp; [https://kubernetes.github.io/ingress-nginx/deploy/](https://kubernetes.github.io/ingress-nginx/deploy/)
 
-*	!! this Ingres installs as default namespace<br>
-*	!! needs to be ingress-nginx
+![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"}  this Ingres installs as default namespace<br>
+![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"}  needs to be ingress-nginx
 
-This works:
+After install Promethus UI works:
 
 	http://169.47.64.84:32165/graph
 
 Graphana works too:
 
 	http://169.47.64.84:32393/login
-	admin / admin admin2020
+	admin / admin
 
-[See Cass Op Term History - IKS Day 4 prometheus 2](#)
+The terminal commands I ran:
 
-	
+```js
+kubectl create namespace ingress-nginx
+kubectl get svc -n ingress-nginx
+kubectl apply --kustomize github.com/kubernetes/ingress-nginx/deploy/prometheus/
+helm install my-release ingress-nginx/ingress-nginx
+POD_NAME=$(kubectl get pods -l app.kubernetes.io/name=ingress-nginx -o jsonpath='{.items[0].metadata.name}')\
+kubectl exec -it $POD_NAME -- /nginx-ingress-controller --version
+kubectl get pods --all-namespaces
+kubectl get svc -n default
+helm install my-release ingress-nginx/ingress-nginx -n ingress-nginx
+kubectl apply --kustomize github.com/kubernetes/ingress-nginx/deploy/prometheus/
+kubectl get svc -n ingress-nginx
+kubectl get nodes -o wide
+kubectl apply --kustomize github.com/kubernetes/ingress-nginx/deploy/grafana/
+kubectl get svc -n ingress-nginx
+```
 
 # What's Next?
 
-My progress here has helped create a new contribution to the cass-operator repo: [PR 344](https://github.com/datastax/cass-operator/pull/344).  Soon we should see the documentation updated with IKS as a supported platform.  Additionally my lessons learned and the required differences for IKS will be added to documentation.  Stay tuned for more updates here and additional IKS cass operator topics as I dig in even more with the Datastax Cassandra Operator on IKS.  I am currently working on Backups, Ingress, Metrics sections to be posted soon.
+Stay tuned for more updates here and additional IKS cass operator topics as I dig in even more with the Datastax Cassandra Operator on IKS.  I am currently working on Backups, Ingress, Metrics sections to be posted soon.  Soon we should see the Cass Operator documentation updated with IKS as a supported platform.  Additionally my lessons learned and the required differences for IKS will be used to contribue to the Cassandra Operator Knowledge base.  
 
 {% include kubernetes_help.html %}
