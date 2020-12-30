@@ -19,6 +19,8 @@ I am currently working in the following technologies: cassandra, astra, stargate
 <p>&nbsp;</p>
 # DataStax News
 
+*	[Cassandra 4.0-beta4 Released](https://gitbox.apache.org/repos/asf?p=cassandra.git;a=blob_plain;f=CHANGES.txt;hb=refs/tags/cassandra-4.0-beta4) - 12/30/2020
+<br>&nbsp; [Cassandra](http://cassandra.apache.org/) is getting closer and closer to 4.0 Stable Release.  Download [here](http://cassandra.apache.org/download/) and check out jira [here](https://issues.apache.org/jira/browse/CASSANDRA).  
 *	[Fresh DataStax Branding](https://datastax.com/) - 12/17/2020
 <br>&nbsp; Today DataStax released some fresh, spacey, super nerdy cool brandings. Check out [Astra](https://datastax.com/products/datastax-astra), [Vector](https://datastax.com/products/vector), [DSE](https://datastax.com/products/datastax-enterprise), [Luna](https://datastax.com/products/luna).
 *   [Featured On Astra](https://docs.astra.datastax.com/docs/integrations) - 12/10/2020
