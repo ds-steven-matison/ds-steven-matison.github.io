@@ -51,7 +51,7 @@ kubectl exec -n cass-operator -i -t -c cassandra cluster1-dc1-default-sts-0 -- c
 
 # How do I access the PODS terminal?
 
-These are my raw working notes, take a look at how I ask myself a question, and then record the information I need to answer it.  
+These are my raw working notes, take a look at how record the information I need to answer questions I ask myself while learning Kubernetes.  With good notes I can then easily copy paste the information and quickyl translate to markdown.
 
 Links I used:
 1.	[https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/](https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/)
