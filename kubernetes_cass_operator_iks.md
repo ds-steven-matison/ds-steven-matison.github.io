@@ -275,15 +275,6 @@ I completed the helm steps here:
 ![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"}  this Ingres installs as default namespace<br>
 ![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"}  needs to be ingress-nginx
 
-After install Promethus UI works:
-
-	http://169.47.64.84:32165/graph
-
-Graphana works too:
-
-	http://169.47.64.84:32393/login
-	admin / admin
-
 The terminal commands I ran:
 
 ```js
@@ -302,6 +293,15 @@ kubectl get nodes -o wide
 kubectl apply --kustomize github.com/kubernetes/ingress-nginx/deploy/grafana/
 kubectl get svc -n ingress-nginx
 ```
+
+After install Promethus UI works:
+
+	http://169.47.64.84:32165/graph
+
+Graphana works too:
+
+	http://169.47.64.84:32393/login
+	admin / admin
 
 # What's Next?
 

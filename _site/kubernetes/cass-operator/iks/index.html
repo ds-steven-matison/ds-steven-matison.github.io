@@ -331,17 +331,6 @@
 <p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" />  this Ingres installs as default namespace<br />
 <img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" />  needs to be ingress-nginx</p>
 
-<p>After install Promethus UI works:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://169.47.64.84:32165/graph
-</code></pre></div></div>
-
-<p>Graphana works too:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://169.47.64.84:32393/login
-admin / admin
-</code></pre></div></div>
-
 <p>The terminal commands I ran:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span> <span class="nx">create</span> <span class="nx">namespace</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
@@ -358,6 +347,17 @@ admin / admin
 <span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">nodes</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">wide</span>
 <span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">--</span><span class="nx">kustomize</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">kubernetes</span><span class="o">/</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">deploy</span><span class="o">/</span><span class="nx">grafana</span><span class="o">/</span>
 <span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">svc</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
+</code></pre></div></div>
+
+<p>After install Promethus UI works:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://169.47.64.84:32165/graph
+</code></pre></div></div>
+
+<p>Graphana works too:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://169.47.64.84:32393/login
+admin / admin
 </code></pre></div></div>
 
 <h1 id="whats-next">What’s Next?</h1>
