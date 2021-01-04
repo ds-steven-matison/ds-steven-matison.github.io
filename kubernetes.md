@@ -44,10 +44,10 @@ permalink: /kubernetes/
         <article class="mui-panel">
           <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
             <span class="post-list-title">
-              <a class="post-link" href="/kubectl/">Kubectl</a>
+              <a class="post-link" href="/kubernetes/kubectl/">Kubectl</a>
             </span>
             <div class="img-overlay"></div>
-            <a href="/kubectl/" class="overlay"></a>
+            <a href="/kubernetes/kubectl/" class="overlay"></a>
           </div>
           <div class="post-data">
             <p class="post-excerpt">Kubectl</p>
