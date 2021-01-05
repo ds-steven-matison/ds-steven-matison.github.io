@@ -303,6 +303,141 @@ Graphana works too:
 	http://169.47.64.84:32393/login
 	admin / admin
 
+
+# How To: Backup Cassandra on IKS
+
+Backups in the kubernetes ecosystem is quite a bit different than traditional cassandra administration.  At first glance it may seem like a complicated tasks, but i am going to expose just how easy it is.   My prefered method to move towards a lengthy technical goal is to start with small working technical base, and slowly iterate towards what I need.   In order to do backups on IKS I have to accomplish a few things:
+
+1.  I need to enable backups in my cassandra cluster yaml
+2.  I need to create a backup store (location) via CQL
+3.  I need to create a backup configuration (timing) via CQL
+
+First,  the documentation here was a little confusing in how to enable backups.  At first look the config is documented as:
+
+```js
+  config:
+    backup_service:
+      enabled: true
+```
+
+However I had to get information from internal resource that it is actually:
+
+```js
+  config:
+    cassandra-yaml:
+      backup_service:
+        enabled: true
+```
+
+With backups enabled in my cluster, I take the path of least resistance and create a backup store on local file system.  I do not want to backup like this, but what i want to do is learn the backup process without fighting cloud storage access, authorization, and configuration.  With the local file system method working I then tackle a backup store on IBMs cloud storage which is basically S3.   The details of both of these are included in next sub sections.
+
+## How do I backup to File System?
+
+  The complete documenation for backups starts [here](https://docs.datastax.com/en/dse/6.8/dse-admin/datastax_enterprise/operations/opsBackupRestoreCreateBackupStore.html).
+
+{% raw %}
+![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"}  MAC users be warned, copy/pasting single quoted text often turns to ’quoted’ which will cause an error in cql.
+{% endraw %}
+
+First I need a backup store:
+
+```js
+CREATE BACKUP STORE store_name
+USING 'FSBlobStore' WITH settings = {'path':'/tmp'};
+```
+
+Next I need to create a BACKUP CONFIGURATION which sets the timing for the backup using cron expression:
+
+```js
+CREATE BACKUP CONFIGURATION config_name 
+    OF keyspace
+    TO STORE backup_store    
+    WITH frequency = 'cron expression'
+    AND enabled = true;
+```
+
+Before I can do that I need to create the keyspace to backup:
+
+```js
+CREATE KEYSPACE IF NOT EXISTS demo WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy', 'dc1' : 3 };
+```
+
+For my first test that BACKUP CONFIGURATION and frequency cron statement looks like:
+
+```js
+CREATE BACKUP CONFIGURATION config_name 
+OF demo
+TO STORE store_name   
+WITH frequency = '0 17 * * *'
+AND enabled = true;
+```
+
+Now I am expecting to see some kind of backup at 1pm and I realize the pod time is probably different:
+
+```js  
+uptime
+  17:13:04 up  4:50,  0 users,  load average: 0.22, 0.30, 0.66
+```
+
+![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"}  server time is off
+
+So I drop my first config with this command: 
+
+```js
+DROP BACKUP CONFIGURATION config_name;
+```
+
+And I redo it with the correct hour:
+
+```js
+CREATE BACKUP CONFIGURATION config_name 
+OF demo
+TO STORE store_name   
+WITH frequency = '0 18 * * *'
+AND enabled = true;
+```
+
+Next I needed to create something to backup: 
+
+```js
+CREATE TABLE videos ( 
+video_id timeuuid, 
+added_date timestamp, 
+description text,
+title text, 
+user_id uuid,
+PRIMARY KEY (video_id)
+);
+
+INSERT INTO videos (video_id,added_date,description,title,user_id) VALUES (now(),dateof(now()),'description',uuid());
+```
+
+And now I wait until the top of the hour, and validate the backup exists by logging into pod with bash:
+
+```js
+kubectl -n cass-operator exec --stdin cluster1-dc1-default-sts-0 -- /bin/bash                                                                                       
+Defaulting container name to cassandra.
+Use 'kubectl describe pod/cluster1-dc1-default-sts-0 -n cass-operator' to see all of the containers in this pod.
+uptime
+ 17:51:07 up  5:28,  0 users,  load average: 0.18, 0.45, 0.58
+cd /tmp/dse
+ls
+dse.EJT1Kqc3C
+ls
+dse.EJT1Kqc3C
+snapshots
+cd /tmp/dse/snapshots
+ls
+15df1d07-c385-4b4c-a673-add1741ebe16
+
+```
+
+I now have a working foundation for moving forward with IBM Cloud Storage
+
+## How do I backup to S3 on IKS?
+
+Coming next...
+
 # What's Next?
 
 Stay tuned for more updates here and additional IKS cass operator topics as I dig in even more with the Datastax Cassandra Operator on IKS.  I am currently working on Backups, Ingress, Metrics sections to be posted soon.  Soon we should see the Cass Operator documentation updated with IKS as a supported platform.  Additionally my lessons learned and the required differences for IKS will be used to contribue to the Cassandra Operator Knowledge base.  

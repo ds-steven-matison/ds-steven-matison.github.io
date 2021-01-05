@@ -360,6 +360,129 @@
 admin / admin
 </code></pre></div></div>
 
+<h1 id="how-to-backup-cassandra-on-iks">How To: Backup Cassandra on IKS</h1>
+
+<p>Backups in the kubernetes ecosystem is quite a bit different than traditional cassandra administration.  At first glance it may seem like a complicated tasks, but i am going to expose just how easy it is.   My prefered method to move towards a lengthy technical goal is to start with small working technical base, and slowly iterate towards what I need.   In order to do backups on IKS I have to accomplish a few things:</p>
+
+<ol>
+  <li>I need to enable backups in my cassandra cluster yaml</li>
+  <li>I need to create a backup store (location) via CQL</li>
+  <li>I need to create a backup configuration (timing) via CQL</li>
+</ol>
+
+<p>First,  the documentation here was a little confusing in how to enable backups.  At first look the config is documented as:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">config</span><span class="p">:</span>
+    <span class="nx">backup_service</span><span class="p">:</span>
+      <span class="nx">enabled</span><span class="p">:</span> <span class="kc">true</span>
+</code></pre></div></div>
+
+<p>However I had to get information from internal resource that it is actually:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">config</span><span class="p">:</span>
+    <span class="nx">cassandra</span><span class="o">-</span><span class="nx">yaml</span><span class="p">:</span>
+      <span class="nx">backup_service</span><span class="p">:</span>
+        <span class="nx">enabled</span><span class="p">:</span> <span class="kc">true</span>
+</code></pre></div></div>
+
+<p>With backups enabled in my cluster, I take the path of least resistance and create a backup store on local file system.  I do not want to backup like this, but what i want to do is learn the backup process without fighting cloud storage access, authorization, and configuration.  With the local file system method working I then tackle a backup store on IBMs cloud storage which is basically S3.   The details of both of these are included in next sub sections.</p>
+
+<h2 id="how-do-i-backup-to-file-system">How do I backup to File System?</h2>
+
+<p>The complete documenation for backups starts <a href="https://docs.datastax.com/en/dse/6.8/dse-admin/datastax_enterprise/operations/opsBackupRestoreCreateBackupStore.html">here</a>.</p>
+
+<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" />  MAC users be warned, copy/pasting single quoted text often turns to ’quoted’ which will cause an error in cql.</p>
+
+<p>First I need a backup store:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">BACKUP</span> <span class="nx">STORE</span> <span class="nx">store_name</span>
+<span class="nx">USING</span> <span class="dl">'</span><span class="s1">FSBlobStore</span><span class="dl">'</span> <span class="nx">WITH</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">/tmp</span><span class="dl">'</span><span class="p">};</span>
+</code></pre></div></div>
+
+<p>Next I need to create a BACKUP CONFIGURATION which sets the timing for the backup using cron expression:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">BACKUP</span> <span class="nx">CONFIGURATION</span> <span class="nx">config_name</span> 
+    <span class="nx">OF</span> <span class="nx">keyspace</span>
+    <span class="nx">TO</span> <span class="nx">STORE</span> <span class="nx">backup_store</span>    
+    <span class="nx">WITH</span> <span class="nx">frequency</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">cron expression</span><span class="dl">'</span>
+    <span class="nx">AND</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Before I can do that I need to create the keyspace to backup:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">KEYSPACE</span> <span class="nx">IF</span> <span class="nx">NOT</span> <span class="nx">EXISTS</span> <span class="nx">demo</span> <span class="nx">WITH</span> <span class="nx">REPLICATION</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">'</span><span class="s1">class</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">NetworkTopologyStrategy</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">dc1</span><span class="dl">'</span> <span class="p">:</span> <span class="mi">3</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<p>For my first test that BACKUP CONFIGURATION and frequency cron statement looks like:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">BACKUP</span> <span class="nx">CONFIGURATION</span> <span class="nx">config_name</span> 
+<span class="nx">OF</span> <span class="nx">demo</span>
+<span class="nx">TO</span> <span class="nx">STORE</span> <span class="nx">store_name</span>   
+<span class="nx">WITH</span> <span class="nx">frequency</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">0 17 * * *</span><span class="dl">'</span>
+<span class="nx">AND</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Now I am expecting to see some kind of backup at 1pm and I realize the pod time is probably different:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">uptime</span>
+  <span class="mi">17</span><span class="p">:</span><span class="mi">13</span><span class="p">:</span><span class="mi">04</span> <span class="nx">up</span>  <span class="mi">4</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span>  <span class="mi">0</span> <span class="nx">users</span><span class="p">,</span>  <span class="nx">load</span> <span class="nx">average</span><span class="p">:</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.66</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" />  server time is off</p>
+
+<p>So I drop my first config with this command:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">DROP</span> <span class="nx">BACKUP</span> <span class="nx">CONFIGURATION</span> <span class="nx">config_name</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>And I redo it with the correct hour:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">BACKUP</span> <span class="nx">CONFIGURATION</span> <span class="nx">config_name</span> 
+<span class="nx">OF</span> <span class="nx">demo</span>
+<span class="nx">TO</span> <span class="nx">STORE</span> <span class="nx">store_name</span>   
+<span class="nx">WITH</span> <span class="nx">frequency</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">0 18 * * *</span><span class="dl">'</span>
+<span class="nx">AND</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Next I needed to create something to backup:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">videos</span> <span class="p">(</span> 
+<span class="nx">video_id</span> <span class="nx">timeuuid</span><span class="p">,</span> 
+<span class="nx">added_date</span> <span class="nx">timestamp</span><span class="p">,</span> 
+<span class="nx">description</span> <span class="nx">text</span><span class="p">,</span>
+<span class="nx">title</span> <span class="nx">text</span><span class="p">,</span> 
+<span class="nx">user_id</span> <span class="nx">uuid</span><span class="p">,</span>
+<span class="nx">PRIMARY</span> <span class="nx">KEY</span> <span class="p">(</span><span class="nx">video_id</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="nx">videos</span> <span class="p">(</span><span class="nx">video_id</span><span class="p">,</span><span class="nx">added_date</span><span class="p">,</span><span class="nx">description</span><span class="p">,</span><span class="nx">title</span><span class="p">,</span><span class="nx">user_id</span><span class="p">)</span> <span class="nx">VALUES</span> <span class="p">(</span><span class="nx">now</span><span class="p">(),</span><span class="nx">dateof</span><span class="p">(</span><span class="nx">now</span><span class="p">()),</span><span class="dl">'</span><span class="s1">description</span><span class="dl">'</span><span class="p">,</span><span class="nx">uuid</span><span class="p">());</span>
+</code></pre></div></div>
+
+<p>And now I wait until the top of the hour, and validate the backup exists by logging into pod with bash:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="nx">exec</span> <span class="o">--</span><span class="nx">stdin</span> <span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">0</span> <span class="o">--</span> <span class="sr">/bin/</span><span class="nx">bash</span>                                                                                       
+<span class="nx">Defaulting</span> <span class="nx">container</span> <span class="nx">name</span> <span class="nx">to</span> <span class="nx">cassandra</span><span class="p">.</span>
+<span class="nx">Use</span> <span class="dl">'</span><span class="s1">kubectl describe pod/cluster1-dc1-default-sts-0 -n cass-operator</span><span class="dl">'</span> <span class="nx">to</span> <span class="nx">see</span> <span class="nx">all</span> <span class="k">of</span> <span class="nx">the</span> <span class="nx">containers</span> <span class="k">in</span> <span class="k">this</span> <span class="nx">pod</span><span class="p">.</span>
+<span class="nx">uptime</span>
+ <span class="mi">17</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mi">07</span> <span class="nx">up</span>  <span class="mi">5</span><span class="p">:</span><span class="mi">28</span><span class="p">,</span>  <span class="mi">0</span> <span class="nx">users</span><span class="p">,</span>  <span class="nx">load</span> <span class="nx">average</span><span class="p">:</span> <span class="mf">0.18</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.58</span>
+<span class="nx">cd</span> <span class="o">/</span><span class="nx">tmp</span><span class="o">/</span><span class="nx">dse</span>
+<span class="nx">ls</span>
+<span class="nx">dse</span><span class="p">.</span><span class="nx">EJT1Kqc3C</span>
+<span class="nx">ls</span>
+<span class="nx">dse</span><span class="p">.</span><span class="nx">EJT1Kqc3C</span>
+<span class="nx">snapshots</span>
+<span class="nx">cd</span> <span class="o">/</span><span class="nx">tmp</span><span class="o">/</span><span class="nx">dse</span><span class="o">/</span><span class="nx">snapshots</span>
+<span class="nx">ls</span>
+<span class="mi">15</span><span class="nx">df1d07</span><span class="o">-</span><span class="nx">c385</span><span class="o">-</span><span class="mi">4</span><span class="nx">b4c</span><span class="o">-</span><span class="nx">a673</span><span class="o">-</span><span class="nx">add1741ebe16</span>
+
+</code></pre></div></div>
+
+<p>I now have a working foundation for moving forward with IBM Cloud Storage</p>
+
+<h2 id="how-do-i-backup-to-s3-on-iks">How do I backup to S3 on IKS?</h2>
+
+<p>Coming next…</p>
+
 <h1 id="whats-next">What’s Next?</h1>
 
 <p>Stay tuned for more updates here and additional IKS cass operator topics as I dig in even more with the Datastax Cassandra Operator on IKS.  I am currently working on Backups, Ingress, Metrics sections to be posted soon.  Soon we should see the Cass Operator documentation updated with IKS as a supported platform.  Additionally my lessons learned and the required differences for IKS will be used to contribue to the Cassandra Operator Knowledge base.</p>
@@ -403,7 +526,12 @@ You can find me on Socials:
   <li><a href="https://www.linkedin.com/in/steven-matison/" target="_blank" rel="noopener">LinkedIn</a></li>
   <li><a href="https://twitter.com/DsMatison" target="_blank" rel="noopener">Twitter</a></li>
 </ul>
-
+You can find me on Discords:
+<ul>
+  <li><a href="https://discord.gg/4e4UNVjD" target="_blank" rel="noopener">Stargate</a></li>
+  <li><a href="https://discord.gg/pPjPcZN" target="_blank" rel="noopener">FOTCR</a></li>
+  <li><a href="https://discord.gg/F24HwnCR" target="_blank" rel="noopener">GraphQL</a></li>
+</ul>
           <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</p>
           <script src="https://efreecode.com/js.js" id="eXF-dsmatiso-0" async defer></script>
         </aside>
