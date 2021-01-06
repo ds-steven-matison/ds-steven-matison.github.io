@@ -436,10 +436,120 @@ I now have a working foundation for moving forward with IBM Cloud Storage
 
 ## How do I backup to S3 on IKS?
 
-Coming next...
+I need to follow the same process above just changing the store location from local file system to the cloud storage solution.  This should be possible in GKE, AWK, and AKS.  For IKS I should be able to use the S3Object storage class.  According to [IBM Cloud Object Storage Documentation](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-compatibility-api): 
+
+  “It uses IBM Cloud® Identity and Access Management for authentication and authorization, and supports a subset of the S3 API for easy migration of applications to IBM Cloud.”
+
+  https://docs.datastax.com/en/dse/6.8/dse-admin/datastax_enterprise/operations/opsBackupRestoreCreateBackupStore.html
+
+```js
+CREATE BACKUP STORE store_name 
+USING 'S3BlobStore' WITH settings = {'bucket': 'amazon_bucket_name',
+                                              'region': 'amazon_region'};
+```
+  ![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} The sample needs to be expanded with settings found on this page:
+    https://docs.datastax.com/en/dse/6.8/dse-admin/datastax_enterprise/operations/opsCqlCreateBackupStore.html
+
+```js
+CREATE BACKUP STORE s3_store
+USING 'S3BlobStore' WITH settings = {'bucket': 'my_s3_bucket', 
+                                     'region': 'us-west-1',
+                                     'retention_time':'1w'
+                                     'retention_number' : 4};
+```
+
+ibmcloud resource service-instance-create test_s3_store cloud-object-storage lite global
+  ! No resource group targeted. Use 'ibmcloud target -g RESOURCE_GROUP' to target a resource group.
+  
+    This page allows create cloud object store in the UI:
+      https://cloud.ibm.com/catalog/services/cloud-object-storage
+
+        ![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} Bucket name must be unique across entire IBM platform
+
+```js
+Bucket. Name: mybucket-x12242020
+
+Service Credentials:
+  Service credentials-1
+{
+  "apikey": "qTRJYcPvz1T7FSevgjKR8fTw2qfeRs-GqUYb3UXDkYyP",
+  "endpoints": "https://control.cloud-object-storage.cloud.ibm.com/v2/endpoints",
+  "iam_apikey_description": "Auto-generated for key 44941bb8-4066-4ee0-9a30-9b3ee89595f9",
+  "iam_apikey_name": "Service credentials-1",
+  "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+  "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/ea8f5c5aedc847438f0ad4c3e0381891::serviceid:ServiceId-56a8bfdf-1e88-4c48-8b04-46524ff8db3a",
+  "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/ea8f5c5aedc847438f0ad4c3e0381891:2f9ad15b-d78c-44b4-ba98-ed7b58ee8382::"
+}
+```
+      ![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} I had to look at some IBM Docs to try and decide what values map to S3 values.  
+
+  With all my info ready I can now create the cluster, get into cql, create my backup store, and backup configuration:
+    https://docs.datastax.com/en/dse/6.8/dse-admin/datastax_enterprise/operations/opsBackupRestoreManaging.html
+
+      ![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} I ran into this issue yesterday too,  you must allow some time for the cassandra cql service to be ready:
+      ![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} maybe like 10 minutes from pod creation time.
+
+```js
+Connection error: ('Unable to connect to any servers', {'127.0.0.1:9042': AuthenticationFailed('Failed to authenticate to 127.0.0.1:9042: Error from server: code=0100 [Bad credentials] message="Failed to login. Please re-try."',)})
+command terminated with exit code 1
+```
+      - second time after a pause:
+```js
+Connected to cluster1 at 127.0.0.1:9042.
+[cqlsh 6.8.0 | DSE 6.8.4 | CQL spec 3.4.5 | DSE protocol v2]
+Use HELP for help.
+cluster1-superuser@cqlsh> 
+```
+      - Now I can execute my CQL:
+        ![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} I had some conflicts with cql (documented sample was missing some commas, so was mine
+
+```js
+CREATE KEYSPACE IF NOT EXISTS demo WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy', 'dc1' : 3 };
+
+use demo;
+
+CREATE TABLE videos ( 
+video_id timeuuid, 
+added_date timestamp, 
+description text,
+title text, 
+user_id uuid,
+PRIMARY KEY (video_id)
+);
+
+INSERT INTO videos (video_id,added_date,description,title,user_id) VALUES (now(),dateof(now()),'description','title',uuid());
+```
+  ![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} - The function 'dateof' is deprecated. Use the function 'toTimestamp' instead.
+
+```js
+CREATE BACKUP STORE s3_store
+USING 'S3BlobStore' WITH settings = {'bucket': 'mybucket-x12242020', 
+'endpoint': 'https://control.cloud-object-storage.cloud.ibm.com/v2/endpoints',
+'access_key': 'qTRJYcPvz1T7FSevgjKR8fTw2qfeRs-GqUYb3UXDkYyP',
+'secret_key': '2f9ad15b-d78c-44b4-ba98-ed7b58ee8382',
+'retention_time':'1w',
+'retention_number' : 4};
+````
+
+```js
+CREATE BACKUP CONFIGURATION s3_backup 
+OF demo
+TO STORE s3_store   
+WITH frequency = '0 15 * * *'
+AND enabled = true;
+````
+
+    - I am now waiting until 10am to see if this worked or if there was an error
+      ! how am I going to see the error???
+
+```js
+cluster1-superuser@cqlsh> VERIFY BACKUP STORE s3_store;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="Unable to write '64123c16-6d84-4ec4-ad3a-f0bc9c513687/d576d2ff-9c24-4fa1-be44-1c9d82189cea' blob due to service could not be contacted for a response"  
+```
+
 
 # What's Next?
 
-Stay tuned for more updates here and additional IKS cass operator topics as I dig in even more with the Datastax Cassandra Operator on IKS.  I am currently working on Backups, Ingress, Metrics sections to be posted soon.  Soon we should see the Cass Operator documentation updated with IKS as a supported platform.  Additionally my lessons learned and the required differences for IKS will be used to contribue to the Cassandra Operator Knowledge base.  
+Stay tuned for more updates here and additional IKS cass operator topics as I dig in even more with the Datastax Cassandra Operator on IKS.  I am currently working on current content updates and new Ingress and Metrics sections to be posted soon.  Additionally my lessons learned and the required differences for IKS will be used to contribue to the Cassandra Operator Knowledge base.  Later we should see the Cass Operator documentation updated with IKS as a supported platform.  
 
 {% include kubernetes_help.html %}
