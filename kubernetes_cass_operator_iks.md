@@ -440,15 +440,14 @@ I need to follow the same process above just changing the store location from lo
 
   “It uses IBM Cloud® Identity and Access Management for authentication and authorization, and supports a subset of the S3 API for easy migration of applications to IBM Cloud.”
 
-  https://docs.datastax.com/en/dse/6.8/dse-admin/datastax_enterprise/operations/opsBackupRestoreCreateBackupStore.html
+I am following the steps [here](https://docs.datastax.com/en/dse/6.8/dse-admin/datastax_enterprise/operations/opsBackupRestoreCreateBackupStore.html)
 
 ```js
 CREATE BACKUP STORE store_name 
 USING 'S3BlobStore' WITH settings = {'bucket': 'amazon_bucket_name',
                                               'region': 'amazon_region'};
 ```
-  ![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} The sample needs to be expanded with settings found on this page:
-    https://docs.datastax.com/en/dse/6.8/dse-admin/datastax_enterprise/operations/opsCqlCreateBackupStore.html
+  ![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} The sample needs to be expanded with settings found on this page [here](https://docs.datastax.com/en/dse/6.8/dse-admin/datastax_enterprise/operations/opsCqlCreateBackupStore.html)
 
 ```js
 CREATE BACKUP STORE s3_store
@@ -458,19 +457,21 @@ USING 'S3BlobStore' WITH settings = {'bucket': 'my_s3_bucket',
                                      'retention_number' : 4};
 ```
 
-ibmcloud resource service-instance-create test_s3_store cloud-object-storage lite global
-  ! No resource group targeted. Use 'ibmcloud target -g RESOURCE_GROUP' to target a resource group.
-  
-    This page allows create cloud object store in the UI:
-      https://cloud.ibm.com/catalog/services/cloud-object-storage
-
-        ![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} Bucket name must be unique across entire IBM platform
+I tried to create cloud object from terminal:
 
 ```js
-Bucket. Name: mybucket-x12242020
+ibmcloud resource service-instance-create test_s3_store cloud-object-storage lite global
+```
 
-Service Credentials:
-  Service credentials-1
+![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} No resource group targeted. Use 'ibmcloud target -g RESOURCE_GROUP' to target a resource group.
+  
+This page allows create cloud object store in the UI:
+
+[https://cloud.ibm.com/catalog/services/cloud-object-storage](https://cloud.ibm.com/catalog/services/cloud-object-storage)
+
+![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} Bucket name must be unique across entire IBM platform
+
+```js
 {
   "apikey": "qTRJYcPvz1T7FSevgjKR8fTw2qfeRs-GqUYb3UXDkYyP",
   "endpoints": "https://control.cloud-object-storage.cloud.ibm.com/v2/endpoints",
@@ -481,27 +482,27 @@ Service Credentials:
   "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/ea8f5c5aedc847438f0ad4c3e0381891:2f9ad15b-d78c-44b4-ba98-ed7b58ee8382::"
 }
 ```
-      ![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} I had to look at some IBM Docs to try and decide what values map to S3 values.  
+![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} I had to look at some IBM Docs to try and decide what values map to S3 values.  
 
   With all my info ready I can now create the cluster, get into cql, create my backup store, and backup configuration:
     https://docs.datastax.com/en/dse/6.8/dse-admin/datastax_enterprise/operations/opsBackupRestoreManaging.html
-
-      ![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} I ran into this issue yesterday too,  you must allow some time for the cassandra cql service to be ready:
-      ![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} maybe like 10 minutes from pod creation time.
 
 ```js
 Connection error: ('Unable to connect to any servers', {'127.0.0.1:9042': AuthenticationFailed('Failed to authenticate to 127.0.0.1:9042: Error from server: code=0100 [Bad credentials] message="Failed to login. Please re-try."',)})
 command terminated with exit code 1
 ```
-      - second time after a pause:
+![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} I ran into this issue yesterday too. You must allow some time for the cassandra cql service to be ready.  It took maybe like 10 minutes from pod creation time for cql to respond.
+
+A second time after a pause:
+
 ```js
 Connected to cluster1 at 127.0.0.1:9042.
 [cqlsh 6.8.0 | DSE 6.8.4 | CQL spec 3.4.5 | DSE protocol v2]
 Use HELP for help.
 cluster1-superuser@cqlsh> 
 ```
-      - Now I can execute my CQL:
-        ![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} I had some conflicts with cql (documented sample was missing some commas, so was mine
+
+Now I can execute my CQL:
 
 ```js
 CREATE KEYSPACE IF NOT EXISTS demo WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy', 'dc1' : 3 };
@@ -519,7 +520,11 @@ PRIMARY KEY (video_id)
 
 INSERT INTO videos (video_id,added_date,description,title,user_id) VALUES (now(),dateof(now()),'description','title',uuid());
 ```
-  ![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} - The function 'dateof' is deprecated. Use the function 'toTimestamp' instead.
+![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} The function 'dateof' is deprecated. Use the function 'toTimestamp' instead.
+
+![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} I had some conflicts with cql (documented sample was missing some commas).
+
+Next I create my BACKUP STORE with the S3 settings I tried to infer above:
 
 ```js
 CREATE BACKUP STORE s3_store
@@ -531,6 +536,8 @@ USING 'S3BlobStore' WITH settings = {'bucket': 'mybucket-x12242020',
 'retention_number' : 4};
 ````
 
+And then create a BACKUP CONFIGURATION:
+
 ```js
 CREATE BACKUP CONFIGURATION s3_backup 
 OF demo
@@ -539,14 +546,47 @@ WITH frequency = '0 15 * * *'
 AND enabled = true;
 ````
 
-    - I am now waiting until 10am to see if this worked or if there was an error
-      ! how am I going to see the error???
+I am now waiting until 10am (local time) to see if this worked or if there was an error.  How am I going to see the error???
 
 ```js
 cluster1-superuser@cqlsh> VERIFY BACKUP STORE s3_store;
 InvalidRequest: Error from server: code=2200 [Invalid query] message="Unable to write '64123c16-6d84-4ec4-ad3a-f0bc9c513687/d576d2ff-9c24-4fa1-be44-1c9d82189cea' blob due to service could not be contacted for a response"  
 ```
 
+![WARNING](/assets/images/error.png){:height="24" width="24" align="absmiddle" style="padding: 10px"} I need to do some more work with access & authorization to the bucket.
+
+At this point I was able to jump ahead and find the solution by sharing the information I had learned.  In doing so my team member exposed he knew a way to create the bucket credentials which would provide key and secret similar to S3.  
+
+When creating a Cloud Object Storage Service Credential click on Advanced and toggle "Include HMAC Credential":
+
+!![hmac](/assets/images/iks_hmac.png)
+
+Now the service credential has what we need:
+
+```js
+{
+  "apikey": "blO2SevY-YLoAaO6U1fWiqtZHAl3PhCMUlKlc2DxaQcB",
+  "cos_hmac_keys": {
+    "access_key_id": "af0ffc17c93d4e3a8730f746916fa5f3",
+    "secret_access_key": "1bd2ccaf7927abf2d6f35330ab15dee367349396950f54ac"
+  },
+  "endpoints": "https://control.cloud-object-storage.cloud.ibm.com/v2/endpoints",
+  "iam_apikey_description": "Auto-generated for key af0ffc17-c93d-4e3a-8730-f746916fa5f3",
+  "iam_apikey_name": "Service credentials-1",
+  "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+  "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/ea8f5c5aedc847438f0ad4c3e0381891::serviceid:ServiceId-1e5e50b9-860f-41aa-b32e-4450feb8cc7b",
+  "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/ea8f5c5aedc847438f0ad4c3e0381891:2f9ad15b-d78c-44b4-ba98-ed7b58ee8382::"
+}
+```
+Using the access_key_id and secret_access_key values in the BACKUP STORE we are now able to successfully complete backing up Cassandra on IKS with IBM Cloud Storage.
+
+```js
+CREATE BACKUP STORE s3_store
+USING 'S3BlobStore' WITH settings = {'bucket': 'XXXXXXXXXX',
+'endpoint': 'XXXXXXXX',
+'access_key': 'XXXXXXXXXXXXXXXXXXXX',
+'secret_key': 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'};
+```
 
 # What's Next?
 

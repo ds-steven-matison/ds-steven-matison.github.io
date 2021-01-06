@@ -481,11 +481,149 @@ admin / admin
 
 <h2 id="how-do-i-backup-to-s3-on-iks">How do I backup to S3 on IKS?</h2>
 
-<p>Coming next…</p>
+<p>I need to follow the same process above just changing the store location from local file system to the cloud storage solution.  This should be possible in GKE, AWK, and AKS.  For IKS I should be able to use the S3Object storage class.  According to <a href="https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-compatibility-api">IBM Cloud Object Storage Documentation</a>:</p>
+
+<p>“It uses IBM Cloud® Identity and Access Management for authentication and authorization, and supports a subset of the S3 API for easy migration of applications to IBM Cloud.”</p>
+
+<p>I am following the steps <a href="https://docs.datastax.com/en/dse/6.8/dse-admin/datastax_enterprise/operations/opsBackupRestoreCreateBackupStore.html">here</a></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">BACKUP</span> <span class="nx">STORE</span> <span class="nx">store_name</span> 
+<span class="nx">USING</span> <span class="dl">'</span><span class="s1">S3BlobStore</span><span class="dl">'</span> <span class="nx">WITH</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span><span class="dl">'</span><span class="s1">bucket</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">amazon_bucket_name</span><span class="dl">'</span><span class="p">,</span>
+                                              <span class="dl">'</span><span class="s1">region</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">amazon_region</span><span class="dl">'</span><span class="p">};</span>
+</code></pre></div></div>
+<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" /> The sample needs to be expanded with settings found on this page <a href="https://docs.datastax.com/en/dse/6.8/dse-admin/datastax_enterprise/operations/opsCqlCreateBackupStore.html">here</a></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">BACKUP</span> <span class="nx">STORE</span> <span class="nx">s3_store</span>
+<span class="nx">USING</span> <span class="dl">'</span><span class="s1">S3BlobStore</span><span class="dl">'</span> <span class="nx">WITH</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span><span class="dl">'</span><span class="s1">bucket</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">my_s3_bucket</span><span class="dl">'</span><span class="p">,</span> 
+                                     <span class="dl">'</span><span class="s1">region</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">us-west-1</span><span class="dl">'</span><span class="p">,</span>
+                                     <span class="dl">'</span><span class="s1">retention_time</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">1w</span><span class="dl">'</span>
+                                     <span class="dl">'</span><span class="s1">retention_number</span><span class="dl">'</span> <span class="p">:</span> <span class="mi">4</span><span class="p">};</span>
+</code></pre></div></div>
+
+<p>I tried to create cloud object from terminal:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ibmcloud</span> <span class="nx">resource</span> <span class="nx">service</span><span class="o">-</span><span class="nx">instance</span><span class="o">-</span><span class="nx">create</span> <span class="nx">test_s3_store</span> <span class="nx">cloud</span><span class="o">-</span><span class="nx">object</span><span class="o">-</span><span class="nx">storage</span> <span class="nx">lite</span> <span class="nb">global</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" /> No resource group targeted. Use ‘ibmcloud target -g RESOURCE_GROUP’ to target a resource group.</p>
+
+<p>This page allows create cloud object store in the UI:</p>
+
+<p><a href="https://cloud.ibm.com/catalog/services/cloud-object-storage">https://cloud.ibm.com/catalog/services/cloud-object-storage</a></p>
+
+<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" /> Bucket name must be unique across entire IBM platform</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">apikey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">qTRJYcPvz1T7FSevgjKR8fTw2qfeRs-GqUYb3UXDkYyP</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">endpoints</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://control.cloud-object-storage.cloud.ibm.com/v2/endpoints</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">iam_apikey_description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Auto-generated for key 44941bb8-4066-4ee0-9a30-9b3ee89595f9</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">iam_apikey_name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Service credentials-1</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">iam_role_crn</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">crn:v1:bluemix:public:iam::::serviceRole:Writer</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">iam_serviceid_crn</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">crn:v1:bluemix:public:iam-identity::a/ea8f5c5aedc847438f0ad4c3e0381891::serviceid:ServiceId-56a8bfdf-1e88-4c48-8b04-46524ff8db3a</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">resource_instance_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">crn:v1:bluemix:public:cloud-object-storage:global:a/ea8f5c5aedc847438f0ad4c3e0381891:2f9ad15b-d78c-44b4-ba98-ed7b58ee8382::</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" /> I had to look at some IBM Docs to try and decide what values map to S3 values.</p>
+
+<p>With all my info ready I can now create the cluster, get into cql, create my backup store, and backup configuration:
+    https://docs.datastax.com/en/dse/6.8/dse-admin/datastax_enterprise/operations/opsBackupRestoreManaging.html</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Connection</span> <span class="nx">error</span><span class="p">:</span> <span class="p">(</span><span class="dl">'</span><span class="s1">Unable to connect to any servers</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span><span class="dl">'</span><span class="s1">127.0.0.1:9042</span><span class="dl">'</span><span class="p">:</span> <span class="nx">AuthenticationFailed</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to authenticate to 127.0.0.1:9042: Error from server: code=0100 [Bad credentials] message="Failed to login. Please re-try."</span><span class="dl">'</span><span class="p">,)})</span>
+<span class="nx">command</span> <span class="nx">terminated</span> <span class="kd">with</span> <span class="nx">exit</span> <span class="nx">code</span> <span class="mi">1</span>
+</code></pre></div></div>
+<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" /> I ran into this issue yesterday too. You must allow some time for the cassandra cql service to be ready.  It took maybe like 10 minutes from pod creation time for cql to respond.</p>
+
+<p>A second time after a pause:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Connected</span> <span class="nx">to</span> <span class="nx">cluster1</span> <span class="nx">at</span> <span class="mf">127.0</span><span class="p">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">9042</span><span class="p">.</span>
+<span class="p">[</span><span class="nx">cqlsh</span> <span class="mf">6.8</span><span class="p">.</span><span class="mi">0</span> <span class="o">|</span> <span class="nx">DSE</span> <span class="mf">6.8</span><span class="p">.</span><span class="mi">4</span> <span class="o">|</span> <span class="nx">CQL</span> <span class="nx">spec</span> <span class="mf">3.4</span><span class="p">.</span><span class="mi">5</span> <span class="o">|</span> <span class="nx">DSE</span> <span class="nx">protocol</span> <span class="nx">v2</span><span class="p">]</span>
+<span class="nx">Use</span> <span class="nx">HELP</span> <span class="k">for</span> <span class="nx">help</span><span class="p">.</span>
+<span class="nx">cluster1</span><span class="o">-</span><span class="nx">superuser</span><span class="p">@</span><span class="nd">cqlsh</span><span class="o">&gt;</span> 
+</code></pre></div></div>
+
+<p>Now I can execute my CQL:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">KEYSPACE</span> <span class="nx">IF</span> <span class="nx">NOT</span> <span class="nx">EXISTS</span> <span class="nx">demo</span> <span class="nx">WITH</span> <span class="nx">REPLICATION</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">'</span><span class="s1">class</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">NetworkTopologyStrategy</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">dc1</span><span class="dl">'</span> <span class="p">:</span> <span class="mi">3</span> <span class="p">};</span>
+
+<span class="nx">use</span> <span class="nx">demo</span><span class="p">;</span>
+
+<span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">videos</span> <span class="p">(</span> 
+<span class="nx">video_id</span> <span class="nx">timeuuid</span><span class="p">,</span> 
+<span class="nx">added_date</span> <span class="nx">timestamp</span><span class="p">,</span> 
+<span class="nx">description</span> <span class="nx">text</span><span class="p">,</span>
+<span class="nx">title</span> <span class="nx">text</span><span class="p">,</span> 
+<span class="nx">user_id</span> <span class="nx">uuid</span><span class="p">,</span>
+<span class="nx">PRIMARY</span> <span class="nx">KEY</span> <span class="p">(</span><span class="nx">video_id</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="nx">videos</span> <span class="p">(</span><span class="nx">video_id</span><span class="p">,</span><span class="nx">added_date</span><span class="p">,</span><span class="nx">description</span><span class="p">,</span><span class="nx">title</span><span class="p">,</span><span class="nx">user_id</span><span class="p">)</span> <span class="nx">VALUES</span> <span class="p">(</span><span class="nx">now</span><span class="p">(),</span><span class="nx">dateof</span><span class="p">(</span><span class="nx">now</span><span class="p">()),</span><span class="dl">'</span><span class="s1">description</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">title</span><span class="dl">'</span><span class="p">,</span><span class="nx">uuid</span><span class="p">());</span>
+</code></pre></div></div>
+<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" /> The function ‘dateof’ is deprecated. Use the function ‘toTimestamp’ instead.</p>
+
+<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" /> I had some conflicts with cql (documented sample was missing some commas).</p>
+
+<p>Next I create my BACKUP STORE with the S3 settings I tried to infer above:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">BACKUP</span> <span class="nx">STORE</span> <span class="nx">s3_store</span>
+<span class="nx">USING</span> <span class="dl">'</span><span class="s1">S3BlobStore</span><span class="dl">'</span> <span class="nx">WITH</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span><span class="dl">'</span><span class="s1">bucket</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">mybucket-x12242020</span><span class="dl">'</span><span class="p">,</span> 
+<span class="dl">'</span><span class="s1">endpoint</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://control.cloud-object-storage.cloud.ibm.com/v2/endpoints</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">access_key</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">qTRJYcPvz1T7FSevgjKR8fTw2qfeRs-GqUYb3UXDkYyP</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">secret_key</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2f9ad15b-d78c-44b4-ba98-ed7b58ee8382</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">retention_time</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">1w</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">retention_number</span><span class="dl">'</span> <span class="p">:</span> <span class="mi">4</span><span class="p">};</span>
+</code></pre></div></div>
+
+<p>And then create a BACKUP CONFIGURATION:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">BACKUP</span> <span class="nx">CONFIGURATION</span> <span class="nx">s3_backup</span> 
+<span class="nx">OF</span> <span class="nx">demo</span>
+<span class="nx">TO</span> <span class="nx">STORE</span> <span class="nx">s3_store</span>   
+<span class="nx">WITH</span> <span class="nx">frequency</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">0 15 * * *</span><span class="dl">'</span>
+<span class="nx">AND</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>I am now waiting until 10am (local time) to see if this worked or if there was an error.  How am I going to see the error???</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">cluster1</span><span class="o">-</span><span class="nx">superuser</span><span class="p">@</span><span class="nd">cqlsh</span><span class="o">&gt;</span> <span class="nx">VERIFY</span> <span class="nx">BACKUP</span> <span class="nx">STORE</span> <span class="nx">s3_store</span><span class="p">;</span>
+<span class="nl">InvalidRequest</span><span class="p">:</span> <span class="nb">Error</span> <span class="k">from</span> <span class="nx">server</span><span class="p">:</span> <span class="nx">code</span><span class="o">=</span><span class="mi">2200</span> <span class="p">[</span><span class="nx">Invalid</span> <span class="nx">query</span><span class="p">]</span> <span class="nx">message</span><span class="o">=</span><span class="dl">"</span><span class="s2">Unable to write '64123c16-6d84-4ec4-ad3a-f0bc9c513687/d576d2ff-9c24-4fa1-be44-1c9d82189cea' blob due to service could not be contacted for a response</span><span class="dl">"</span>  
+</code></pre></div></div>
+
+<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" /> I need to do some more work with access &amp; authorization to the bucket.</p>
+
+<p>At this point I was able to jump ahead and find the solution by sharing the information I had learned.  In doing so my team member exposed he knew a way to create the bucket credentials which would provide key and secret similar to S3.</p>
+
+<p>When creating a Cloud Object Storage Service Credential click on Advanced and toggle “Include HMAC Credential”:</p>
+
+<p>!<img src="/assets/images/iks_hmac.png" alt="hmac" /></p>
+
+<p>Now the service credential has what we need:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">apikey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">blO2SevY-YLoAaO6U1fWiqtZHAl3PhCMUlKlc2DxaQcB</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">cos_hmac_keys</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">access_key_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">af0ffc17c93d4e3a8730f746916fa5f3</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">secret_access_key</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1bd2ccaf7927abf2d6f35330ab15dee367349396950f54ac</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">endpoints</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://control.cloud-object-storage.cloud.ibm.com/v2/endpoints</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">iam_apikey_description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Auto-generated for key af0ffc17-c93d-4e3a-8730-f746916fa5f3</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">iam_apikey_name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Service credentials-1</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">iam_role_crn</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">crn:v1:bluemix:public:iam::::serviceRole:Writer</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">iam_serviceid_crn</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">crn:v1:bluemix:public:iam-identity::a/ea8f5c5aedc847438f0ad4c3e0381891::serviceid:ServiceId-1e5e50b9-860f-41aa-b32e-4450feb8cc7b</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">resource_instance_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">crn:v1:bluemix:public:cloud-object-storage:global:a/ea8f5c5aedc847438f0ad4c3e0381891:2f9ad15b-d78c-44b4-ba98-ed7b58ee8382::</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>Using the access_key_id and secret_access_key values in the BACKUP STORE we are now able to successfully complete backing up Cassandra on IKS with IBM Cloud Storage.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">BACKUP</span> <span class="nx">STORE</span> <span class="nx">s3_store</span>
+<span class="nx">USING</span> <span class="dl">'</span><span class="s1">S3BlobStore</span><span class="dl">'</span> <span class="nx">WITH</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span><span class="dl">'</span><span class="s1">bucket</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">XXXXXXXXXX</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">endpoint</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">XXXXXXXX</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">access_key</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">XXXXXXXXXXXXXXXXXXXX</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">secret_key</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span><span class="dl">'</span><span class="p">};</span>
+</code></pre></div></div>
 
 <h1 id="whats-next">What’s Next?</h1>
 
-<p>Stay tuned for more updates here and additional IKS cass operator topics as I dig in even more with the Datastax Cassandra Operator on IKS.  I am currently working on Backups, Ingress, Metrics sections to be posted soon.  Soon we should see the Cass Operator documentation updated with IKS as a supported platform.  Additionally my lessons learned and the required differences for IKS will be used to contribue to the Cassandra Operator Knowledge base.</p>
+<p>Stay tuned for more updates here and additional IKS cass operator topics as I dig in even more with the Datastax Cassandra Operator on IKS.  I am currently working on current content updates and new Ingress and Metrics sections to be posted soon.  Additionally my lessons learned and the required differences for IKS will be used to contribue to the Cassandra Operator Knowledge base.  Later we should see the Cass Operator documentation updated with IKS as a supported platform.</p>
 
 <h1 id="how-can-i-help-you-with-kubernetes">How can I help you with Kubernetes?</h1>
 
