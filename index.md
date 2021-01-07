@@ -19,6 +19,8 @@ I am currently working in the following technologies: cassandra, astra, stargate
 <p>&nbsp;</p>
 # DataStax News
 
+*	[Holiday Hackathon](https://datastaxastra.hackerearth.com/) - 1/7/2020
+<br>&nbsp; going off til 1/18/2020 with top prize $10,000.  Please sign up [here](https://datastaxastra.hackerearth.com/).
 *	[Cassandra 4.0-beta4 Released](https://gitbox.apache.org/repos/asf?p=cassandra.git;a=blob_plain;f=CHANGES.txt;hb=refs/tags/cassandra-4.0-beta4) - 12/30/2020
 <br>&nbsp; [Cassandra](http://cassandra.apache.org/) is getting closer and closer to 4.0 Stable Release.  Download [here](http://cassandra.apache.org/download/) and check out jira [here](https://issues.apache.org/jira/browse/CASSANDRA).  
 *	[Fresh DataStax Branding](https://datastax.com/) - 12/17/2020
