@@ -75,7 +75,7 @@
 
 <h1 id="what-commands-did-i-run">What Commands Did I Run?</h1>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ibmcloud</span> <span class="nx">login</span> <span class="o">-</span><span class="nx">u</span> <span class="o">&lt;</span><span class="nx">username</span><span class="o">&gt;</span> <span class="o">-</span><span class="nx">p</span> <span class="o">&lt;</span><span class="nx">password</span><span class="o">&gt;</span> <span class="o">-</span><span class="nx">a</span> <span class="nx">cloud</span><span class="p">.</span><span class="nx">ibm</span><span class="p">.</span><span class="nx">com</span> <span class="o">-</span><span class="nx">r</span> <span class="nx">us</span><span class="o">-</span><span class="nx">south</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ibmcloud</span> <span class="nx">login</span> <span class="o">-</span><span class="nx">u</span> <span class="o">&lt;</span><span class="nx">username</span><span class="o">&gt;</span> <span class="o">-</span><span class="nx">p</span> <span class="o">&lt;</span><span class="nx">password</span><span class="o">&gt;</span> <span class="o">-</span><span class="nx">a</span> <span class="nx">cloud</span><span class="p">.</span><span class="nx">ibm</span><span class="p">.</span><span class="nx">com</span> <span class="o">-</span><span class="nx">r</span> <span class="nx">us</span><span class="o">-</span><span class="nx">south</span> <span class="o">-</span><span class="nx">g</span> <span class="k">default</span>
 <span class="nx">ibmcloud</span> <span class="nx">ks</span> <span class="nx">cluster</span> <span class="nx">config</span> <span class="o">--</span><span class="nx">cluster</span> <span class="nx">mycluster</span><span class="o">-</span><span class="nx">dal12</span><span class="o">-</span><span class="nx">b3c</span><span class="p">.</span><span class="mi">4</span><span class="nx">x16</span>
 <span class="nx">helm</span> <span class="nx">repo</span> <span class="nx">add</span> <span class="nx">iks</span><span class="o">-</span><span class="nx">charts</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//icr.io/helm/iks-charts</span>
 <span class="nx">helm</span> <span class="nx">repo</span> <span class="nx">update</span>
@@ -92,538 +92,78 @@
 <h1 id="what-were-the-sharp-edges">What Were The Sharp Edges?</h1>
 
 <ul>
-  <li>IBM IKS documentation is vast volumes of text</li>
+  <li>IBM IKS documentation is vast volumes of information</li>
   <li>Major functional system differences based on before or after Dec 1, 2020</li>
   <li>The DataStax Kubernetes Operator for Apache Cassandra is BETA</li>
   <li>The differences between documentation (GKE) and IKS are related to storage and networking</li>
+  <li>More major differences between Classic and VPC IKS Clusters</li>
 </ul>
 
 <h1 id="what-are-lessons-learned">What Are Lessons Learned?</h1>
 
 <ul>
-  <li>I had to learn how to connect my local environment to IBM Cloud and IKS using IBM Cloud sdk (easy).</li>
-  <li>I also had to learn to navigate the vast volumes of text at IBM.</li>
-  <li>I needed to utilize the IBM Cloud slack community help to resolve some friction.</li>
+  <li>I had to learn how to connect my local environment to IBM Cloud and IKS using IBM Cloud SDK.</li>
+  <li>I had to learn to navigate the vast volumes of text at <a href="https://cloud.ibm.com/docs">IBM Cloud Docs</a>.</li>
+  <li>I needed to utilize the <a href="https://join.slack.com/t/ibm-cloud-success/shared_invite/zt-ki1gmwe9-M0bFaI_nMSAF1RzDMqw_wg">IBM Cloud Slack Community</a> help to resolve some friction.</li>
 </ul>
 
-<h1 id="how-do-i-access-the-pods-terminal">How do I access the PODS terminal?</h1>
-
-<p>These are my raw working notes, take a look at how record the information I need to answer questions I ask myself while learning Kubernetes.  With good notes I can then easily copy paste the information and quickyl translate to markdown.</p>
-
-<p>Links I used:</p>
-<ol>
-  <li><a href="https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/">https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/</a></li>
-  <li><a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#exec">https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#exec</a></li>
-</ol>
-
-<p>I can execute some commands to get Pod Names:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">~</span> <span class="o">%</span> <span class="nx">ibmcloud</span> <span class="nx">ks</span> <span class="nx">worker</span> <span class="nx">ls</span> <span class="o">--</span><span class="nx">cluster</span> <span class="nx">mycluster</span><span class="o">-</span><span class="nx">dal12</span><span class="o">-</span><span class="nx">b3c</span><span class="p">.</span><span class="mi">4</span><span class="nx">x16</span>
-<span class="nx">OK</span>
-<span class="nx">ID</span>                                                       <span class="nx">Public</span> <span class="nx">IP</span>      <span class="nx">Private</span> <span class="nx">IP</span>      <span class="nx">Flavor</span>               <span class="nx">State</span>    <span class="nx">Status</span>   <span class="nx">Zone</span>    <span class="nx">Version</span>   
-<span class="nx">kube</span><span class="o">-</span><span class="nx">bvhjafed0aiosshvvo8g</span><span class="o">-</span><span class="nx">myclusterda</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="mi">000001</span><span class="nx">bc</span>   <span class="mf">169.47</span><span class="p">.</span><span class="mf">64.82</span>   <span class="mf">10.185</span><span class="p">.</span><span class="mf">96.183</span>   <span class="nx">b3c</span><span class="p">.</span><span class="mi">4</span><span class="nx">x16</span><span class="p">.</span><span class="nx">encrypted</span>   <span class="nx">normal</span>   <span class="nx">Ready</span>    <span class="nx">dal12</span>   <span class="mf">1.18</span><span class="p">.</span><span class="mi">13</span><span class="nx">_1536</span>   
-<span class="nx">kube</span><span class="o">-</span><span class="nx">bvhjafed0aiosshvvo8g</span><span class="o">-</span><span class="nx">myclusterda</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="mi">00000259</span>   <span class="mf">169.47</span><span class="p">.</span><span class="mf">64.84</span>   <span class="mf">10.185</span><span class="p">.</span><span class="mf">96.165</span>   <span class="nx">b3c</span><span class="p">.</span><span class="mi">4</span><span class="nx">x16</span><span class="p">.</span><span class="nx">encrypted</span>   <span class="nx">normal</span>   <span class="nx">Ready</span>    <span class="nx">dal12</span>   <span class="mf">1.18</span><span class="p">.</span><span class="mi">13</span><span class="nx">_1536</span>   
-<span class="nx">kube</span><span class="o">-</span><span class="nx">bvhjafed0aiosshvvo8g</span><span class="o">-</span><span class="nx">myclusterda</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="mi">000003</span><span class="nx">a0</span>   <span class="mf">169.47</span><span class="p">.</span><span class="mf">64.86</span>   <span class="mf">10.185</span><span class="p">.</span><span class="mf">96.186</span>   <span class="nx">b3c</span><span class="p">.</span><span class="mi">4</span><span class="nx">x16</span><span class="p">.</span><span class="nx">encrypted</span>   <span class="nx">normal</span>   <span class="nx">Ready</span>    <span class="nx">dal12</span>   <span class="mf">1.18</span><span class="p">.</span><span class="mi">13</span><span class="nx">_1536</span> 
-</code></pre></div></div>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">~</span> <span class="o">%</span> <span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="kd">get</span> <span class="nx">pods</span>                                                                                        
-<span class="nx">NAME</span>                             <span class="nx">READY</span>   <span class="nx">STATUS</span>    <span class="nx">RESTARTS</span>   <span class="nx">AGE</span>
-<span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span><span class="o">-</span><span class="mi">557</span><span class="nx">f6689df</span><span class="o">-</span><span class="nx">qftdf</span>   <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="nx">Running</span>   <span class="mi">0</span>          <span class="mi">14</span><span class="nx">m</span>
-<span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">0</span>       <span class="mi">2</span><span class="o">/</span><span class="mi">2</span>     <span class="nx">Running</span>   <span class="mi">0</span>          <span class="mi">11</span><span class="nx">m</span>
-<span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">1</span>       <span class="mi">2</span><span class="o">/</span><span class="mi">2</span>     <span class="nx">Running</span>   <span class="mi">0</span>          <span class="mi">11</span><span class="nx">m</span>
-<span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">2</span>       <span class="mi">2</span><span class="o">/</span><span class="mi">2</span>     <span class="nx">Running</span>   <span class="mi">0</span>          <span class="mi">11</span><span class="nx">m</span>
-</code></pre></div></div>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">~</span> <span class="o">%</span> <span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="kd">get</span> <span class="nx">pod</span> <span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">0</span>                                                         
-<span class="nx">NAME</span>                         <span class="nx">READY</span>   <span class="nx">STATUS</span>    <span class="nx">RESTARTS</span>   <span class="nx">AGE</span>
-<span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">0</span>   <span class="mi">2</span><span class="o">/</span><span class="mi">2</span>     <span class="nx">Running</span>   <span class="mi">0</span>          <span class="mi">12</span><span class="nx">m</span>
-</code></pre></div></div>
-
-<p>I can use bash on the pod:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">~</span> <span class="o">%</span> <span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="nx">exec</span> <span class="o">--</span><span class="nx">stdin</span> <span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">0</span> <span class="o">--</span> <span class="sr">/bin/</span><span class="nx">bash</span>
-<span class="nx">Defaulting</span> <span class="nx">container</span> <span class="nx">name</span> <span class="nx">to</span> <span class="nx">cassandra</span><span class="p">.</span>
-<span class="nx">Use</span> <span class="dl">'</span><span class="s1">kubectl describe pod/cluster1-dc1-default-sts-0 -n cass-operator</span><span class="dl">'</span> <span class="nx">to</span> <span class="nx">see</span> <span class="nx">all</span> <span class="k">of</span> <span class="nx">the</span> <span class="nx">containers</span> <span class="k">in</span> <span class="k">this</span> <span class="nx">pod</span><span class="p">.</span>
-</code></pre></div></div>
-<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" />  the bash commands are limited<br />
-<img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" />  I can see the file system and find /config/cassandra.yaml but cannot edit</p>
-
-<p>I can run nodetool status:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Datacenter</span><span class="p">:</span> <span class="nx">dc1</span>
-<span class="o">===============</span>
-<span class="nx">Status</span><span class="o">=</span><span class="nx">Up</span><span class="o">/</span><span class="nx">Down</span>
-<span class="o">|</span><span class="sr">/ State=Normal/</span><span class="nx">Leaving</span><span class="o">/</span><span class="nx">Joining</span><span class="o">/</span><span class="nx">Moving</span><span class="o">/</span><span class="nx">Stopped</span>
-<span class="o">--</span>  <span class="nx">Address</span>         <span class="nx">Load</span>       <span class="nx">Tokens</span>       <span class="nx">Owns</span> <span class="p">(</span><span class="nx">effective</span><span class="p">)</span>  <span class="nx">Host</span> <span class="nx">ID</span>                               <span class="nx">Rack</span>
-<span class="nx">UN</span>  <span class="mf">172.30</span><span class="p">.</span><span class="mf">67.15</span>    <span class="mf">165.11</span> <span class="nx">KiB</span>  <span class="mi">1</span>            <span class="mf">100.0</span><span class="o">%</span>            <span class="mi">49923960</span><span class="o">-</span><span class="mi">3</span><span class="nx">bb4</span><span class="o">-</span><span class="mi">4</span><span class="nx">aae</span><span class="o">-</span><span class="nx">ae6e</span><span class="o">-</span><span class="mi">19</span><span class="nx">d1a9ff7809</span>  <span class="k">default</span>
-<span class="nx">UN</span>  <span class="mf">172.30</span><span class="p">.</span><span class="mf">163.68</span>   <span class="mf">143.49</span> <span class="nx">KiB</span>  <span class="mi">1</span>            <span class="mf">100.0</span><span class="o">%</span>            <span class="mi">133</span><span class="nx">c50a9</span><span class="o">-</span><span class="nx">df68</span><span class="o">-</span><span class="mi">481</span><span class="nx">b</span><span class="o">-</span><span class="mi">8344</span><span class="o">-</span><span class="mi">6</span><span class="nx">a63140d5e57</span>  <span class="k">default</span>
-<span class="nx">UN</span>  <span class="mf">172.30</span><span class="p">.</span><span class="mf">234.133</span>  <span class="mf">111.8</span> <span class="nx">KiB</span>  <span class="mi">1</span>            <span class="mf">100.0</span><span class="o">%</span>            <span class="nx">e1ce2f35</span><span class="o">-</span><span class="mi">90</span><span class="nx">cb</span><span class="o">-</span><span class="mi">4594</span><span class="o">-</span><span class="nx">aa3b</span><span class="o">-</span><span class="nx">b2ee2ed47860</span>  <span class="k">default</span>
-</code></pre></div></div>
-
-<p>I can run dsetool:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">dsetool</span> <span class="nx">insights_config</span> <span class="o">--</span><span class="nx">show_config</span>
-<span class="p">{</span>
-  <span class="dl">"</span><span class="s2">mode</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">ENABLED_WITH_LOCAL_STORAGE</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">config_refresh_interval_in_seconds</span><span class="dl">"</span> <span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">metric_sampling_interval_in_seconds</span><span class="dl">"</span> <span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">data_dir_max_size_in_mb</span><span class="dl">"</span> <span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">node_system_info_report_period</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">PT1H</span><span class="dl">"</span>
-<span class="p">}</span>
-
-<span class="nx">dsetool</span> <span class="nx">insights_filters</span>
-<span class="p">[</span><span class="nx">simple</span> <span class="nx">commands</span><span class="p">]:</span>
-  <span class="o">--</span><span class="nx">show_filters</span>
-  <span class="o">--</span><span class="nx">remove_all_filters</span>
-<span class="p">[</span><span class="nx">filtering</span> <span class="nx">actions</span><span class="p">]:</span>
-  <span class="o">--</span><span class="nx">add</span>
-  <span class="o">--</span><span class="nx">remove</span>
-  <span class="o">--</span><span class="nx">allow</span>
-  <span class="o">--</span><span class="nx">deny</span>
-  <span class="o">--</span><span class="nb">global</span>
-  <span class="o">--</span><span class="nx">insights_only</span>
- <span class="o">&lt;</span><span class="nx">regex</span><span class="o">&gt;</span>
-
-<span class="p">[</span><span class="nx">examples</span><span class="p">]:</span>
- <span class="nx">insights_filters</span> <span class="o">--</span><span class="nx">add</span> <span class="o">--</span><span class="nb">global</span> <span class="o">--</span><span class="nx">deny</span> <span class="p">.</span><span class="o">*</span><span class="nx">KeyspaceMetrics</span><span class="p">.</span><span class="o">*</span>
- <span class="nx">insights_filters</span> <span class="o">--</span><span class="nx">add</span> <span class="o">--</span><span class="nx">insights_only</span> <span class="o">--</span><span class="nx">deny</span> <span class="p">.</span><span class="o">*</span><span class="nx">gc</span><span class="p">.</span><span class="o">*</span>
- <span class="nx">insights_filters</span> <span class="o">--</span><span class="nx">remove_all_filters</span>
-</code></pre></div></div>
-
-<p>I can find metrics and log locations:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">cd</span> <span class="o">/</span><span class="kd">var</span><span class="sr">/lib/</span><span class="nx">cassandra</span><span class="o">/</span><span class="nx">insights_data</span>
-<span class="nx">ls</span>
-<span class="nx">insights</span>
-
-<span class="nx">cd</span> <span class="o">/</span><span class="kd">var</span><span class="sr">/log/</span><span class="nx">cassandra</span>
-<span class="nx">ls</span>
-<span class="nx">audit</span>
-<span class="nx">debug</span><span class="p">.</span><span class="nx">log</span>
-<span class="nx">dse</span><span class="o">-</span><span class="nx">collectd</span><span class="p">.</span><span class="nx">log</span>
-<span class="nx">dse</span><span class="o">-</span><span class="nx">collectd</span><span class="p">.</span><span class="nx">pid</span>
-<span class="nx">gc</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="nx">current</span>
-<span class="nx">gremlin</span><span class="p">.</span><span class="nx">log</span>
-<span class="nx">system</span><span class="p">.</span><span class="nx">log</span>
-</code></pre></div></div>
-
-<h1 id="how-to-install-prometheus">How To: Install Prometheus?</h1>
-
-<p>Prometheus is a free software application used for event monitoring and alerting. It records real-time metrics in a time series database built using a HTTP pull model, with flexible queries and real-time alerting.  You can find more information at <a href="https://prometheus.io/">https://prometheus.io/</a>.</p>
-
-<h2 id="prometheus-method-1">Prometheus Method 1</h2>
-
-<p>The first method I used to install Prometheus on IBM IKS is an post I found by Bibin Wilson.  You can read How to Setup Prometheus Monitoring On Kubernetes Cluster here:</p>
-<ul>
-  <li><a href="https://devopscube.com/setup-prometheus-monitoring-on-kubernetes/">https://devopscube.com/setup-prometheus-monitoring-on-kubernetes/</a></li>
-</ul>
-
-<p>Sources of files used in commands:</p>
-<ul>
-  <li><a href="https://raw.githubusercontent.com/bibinwilson/kubernetes-prometheus/master/clusterRole.yaml">https://raw.githubusercontent.com/bibinwilson/kubernetes-prometheus/master/clusterRole.yaml</a></li>
-  <li><a href="[https://raw.githubusercontent.com/bibinwilson/kubernetes-prometheus/master/config-map.yaml">https://raw.githubusercontent.com/bibinwilson/kubernetes-prometheus/master/config-map.yaml</a></li>
-</ul>
-
-<p>The prometheus-deployment.yaml:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">apiVersion</span><span class="p">:</span> <span class="nx">apps</span><span class="o">/</span><span class="nx">v1</span>
-<span class="nx">kind</span><span class="p">:</span> <span class="nx">Deployment</span>
-<span class="nx">metadata</span><span class="p">:</span>
-  <span class="nx">name</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">deployment</span>
-  <span class="nx">namespace</span><span class="p">:</span> <span class="nx">monitoring</span>
-  <span class="nx">labels</span><span class="p">:</span>
-    <span class="nx">app</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">server</span>
-<span class="nx">spec</span><span class="p">:</span>
-  <span class="nx">replicas</span><span class="p">:</span> <span class="mi">1</span>
-  <span class="nx">selector</span><span class="p">:</span>
-    <span class="nx">matchLabels</span><span class="p">:</span>
-      <span class="nx">app</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">server</span>
-  <span class="nx">template</span><span class="p">:</span>
-    <span class="nx">metadata</span><span class="p">:</span>
-      <span class="nx">labels</span><span class="p">:</span>
-        <span class="nx">app</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">server</span>
-    <span class="nx">spec</span><span class="p">:</span>
-      <span class="nx">containers</span><span class="p">:</span>
-        <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">prometheus</span>
-          <span class="nx">image</span><span class="p">:</span> <span class="nx">prom</span><span class="o">/</span><span class="nx">prometheus</span>
-          <span class="nx">args</span><span class="p">:</span>
-            <span class="o">-</span> <span class="dl">"</span><span class="s2">--config.file=/etc/prometheus/prometheus.yml</span><span class="dl">"</span>
-            <span class="o">-</span> <span class="dl">"</span><span class="s2">--storage.tsdb.path=/prometheus/</span><span class="dl">"</span>
-          <span class="nx">ports</span><span class="p">:</span>
-            <span class="o">-</span> <span class="nx">containerPort</span><span class="p">:</span> <span class="mi">9090</span>
-          <span class="nx">volumeMounts</span><span class="p">:</span>
-            <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">config</span><span class="o">-</span><span class="nx">volume</span>
-              <span class="nx">mountPath</span><span class="p">:</span> <span class="o">/</span><span class="nx">etc</span><span class="o">/</span><span class="nx">prometheus</span><span class="o">/</span>
-            <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">storage</span><span class="o">-</span><span class="nx">volume</span>
-              <span class="nx">mountPath</span><span class="p">:</span> <span class="o">/</span><span class="nx">prometheus</span><span class="o">/</span>
-      <span class="nx">volumes</span><span class="p">:</span>
-        <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">config</span><span class="o">-</span><span class="nx">volume</span>
-          <span class="nx">configMap</span><span class="p">:</span>
-            <span class="nx">defaultMode</span><span class="p">:</span> <span class="mi">420</span>
-            <span class="nx">name</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">server</span><span class="o">-</span><span class="nx">conf</span>
-  
-        <span class="o">-</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">storage</span><span class="o">-</span><span class="nx">volume</span>
-          <span class="nx">emptyDir</span><span class="p">:</span> <span class="p">{}</span>
-</code></pre></div></div>
-
-<p>The prometheus-service.yaml:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">apiVersion</span><span class="p">:</span> <span class="nx">v1</span>
-<span class="nx">kind</span><span class="p">:</span> <span class="nx">Service</span>
-<span class="nx">metadata</span><span class="p">:</span>
-  <span class="nx">name</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">service</span>
-  <span class="nx">namespace</span><span class="p">:</span> <span class="nx">monitoring</span>
-  <span class="nx">annotations</span><span class="p">:</span>
-      <span class="nx">prometheus</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">scrape</span><span class="p">:</span> <span class="dl">'</span><span class="s1">true</span><span class="dl">'</span>
-      <span class="nx">prometheus</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">port</span><span class="p">:</span>   <span class="dl">'</span><span class="s1">9090</span><span class="dl">'</span>
-<span class="nx">spec</span><span class="p">:</span>
-  <span class="nx">selector</span><span class="p">:</span> 
-    <span class="nx">app</span><span class="p">:</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">server</span>
-  <span class="nx">type</span><span class="p">:</span> <span class="nx">NodePort</span>  
-  <span class="nx">ports</span><span class="p">:</span>
-    <span class="o">-</span> <span class="nx">port</span><span class="p">:</span> <span class="mi">8080</span>
-      <span class="nx">targetPort</span><span class="p">:</span> <span class="mi">9090</span> 
-      <span class="nx">nodePort</span><span class="p">:</span> <span class="mi">30000</span>
-</code></pre></div></div>
-
-<p>The terminal commands I ran:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">clusterRole</span><span class="p">.</span><span class="nx">yaml</span>
-<span class="nx">nano</span> <span class="nx">config</span><span class="o">-</span><span class="nx">map</span><span class="p">.</span><span class="nx">yaml</span>
-<span class="nx">kubectl</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">config</span><span class="o">-</span><span class="nx">map</span><span class="p">.</span><span class="nx">yaml</span>
-<span class="nx">kubectl</span> <span class="nx">create</span> <span class="nx">namespace</span> <span class="nx">monitoring</span>
-<span class="nx">kubectl</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">config</span><span class="o">-</span><span class="nx">map</span><span class="p">.</span><span class="nx">yaml</span>
-<span class="nx">nano</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">deployment</span><span class="p">.</span><span class="nx">yaml</span>
-<span class="nx">kubectl</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">deployment</span><span class="p">.</span><span class="nx">yaml</span>
-<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">deployments</span> <span class="o">--</span><span class="nx">namespace</span><span class="o">=</span><span class="nx">monitoring</span>
-<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">pods</span> <span class="o">--</span><span class="nx">namespace</span><span class="o">=</span><span class="nx">monitoring</span>
-<span class="nx">nano</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">service</span><span class="p">.</span><span class="nx">yaml</span>
-<span class="nx">kubectl</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">service</span><span class="p">.</span><span class="nx">yaml</span> <span class="o">--</span><span class="nx">namespace</span><span class="o">=</span><span class="nx">monitoring</span>
-</code></pre></div></div>
-
-<p>Port fwd localhost:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span> <span class="nx">port</span><span class="o">-</span><span class="nx">forward</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">deployment</span><span class="o">-</span><span class="mi">54686956</span><span class="nx">bd</span><span class="o">-</span><span class="nx">nhz2s</span> <span class="mi">8080</span><span class="p">:</span><span class="mi">9090</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">monitoring</span>
-</code></pre></div></div>
-
-<p>Then this Prometheus UI works:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://localhost:8080/graph?g0.expr=&amp;g0.tab=1&amp;g0.stacked=0&amp;g0.range_input=1h
-</code></pre></div></div>
-
-<p>Also the UI is exposed on public worker IP:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://169.47.64.82:30000/graph?g0.expr=&amp;g0.tab=1&amp;g0.stacked=0&amp;g0.range_input=1h
-</code></pre></div></div>
-
-<h2 id="prometheus-method-2">Prometheus Method 2</h2>
-
-<p>The second method I used to install Prometheus on IBM IKS is an official documentation post I found on <a href="https://kubernetes.github.io/">https://kubernetes.github.io/</a>.  You can read more about Prometheus and Grafana installation here:</p>
-
-<ul>
-  <li><a href="https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/">https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/</a></li>
-</ul>
-
-<p>I completed the helm steps here:</p>
-
-<p>  <a href="https://kubernetes.github.io/ingress-nginx/deploy/">https://kubernetes.github.io/ingress-nginx/deploy/</a></p>
-
-<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" />  this Ingres installs as default namespace<br />
-<img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" />  needs to be ingress-nginx</p>
-
-<p>The terminal commands I ran:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span> <span class="nx">create</span> <span class="nx">namespace</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
-<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">svc</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
-<span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">--</span><span class="nx">kustomize</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">kubernetes</span><span class="o">/</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">deploy</span><span class="o">/</span><span class="nx">prometheus</span><span class="o">/</span>
-<span class="nx">helm</span> <span class="nx">install</span> <span class="nx">my</span><span class="o">-</span><span class="nx">release</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
-<span class="nx">POD_NAME</span><span class="o">=</span><span class="nx">$</span><span class="p">(</span><span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">pods</span> <span class="o">-</span><span class="nx">l</span> <span class="nx">app</span><span class="p">.</span><span class="nx">kubernetes</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">name</span><span class="o">=</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">jsonpath</span><span class="o">=</span><span class="dl">'</span><span class="s1">{.items[0].metadata.name}</span><span class="dl">'</span><span class="p">)</span><span class="o">\</span>
-<span class="nx">kubectl</span> <span class="nx">exec</span> <span class="o">-</span><span class="nx">it</span> <span class="nx">$POD_NAME</span> <span class="o">--</span> <span class="sr">/nginx-ingress-controller --versio</span><span class="err">n
-</span><span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">pods</span> <span class="o">--</span><span class="nx">all</span><span class="o">-</span><span class="nx">namespaces</span>
-<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">svc</span> <span class="o">-</span><span class="nx">n</span> <span class="k">default</span>
-<span class="nx">helm</span> <span class="nx">install</span> <span class="nx">my</span><span class="o">-</span><span class="nx">release</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
-<span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">--</span><span class="nx">kustomize</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">kubernetes</span><span class="o">/</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">deploy</span><span class="o">/</span><span class="nx">prometheus</span><span class="o">/</span>
-<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">svc</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
-<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">nodes</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">wide</span>
-<span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">--</span><span class="nx">kustomize</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">kubernetes</span><span class="o">/</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">deploy</span><span class="o">/</span><span class="nx">grafana</span><span class="o">/</span>
-<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">svc</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
-</code></pre></div></div>
-
-<p>After install Promethus UI works:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://169.47.64.84:32165/graph
-</code></pre></div></div>
-
-<p>Graphana works too:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://169.47.64.84:32393/login
-admin / admin
-</code></pre></div></div>
-
-<h1 id="how-to-backup-cassandra-on-iks">How To: Backup Cassandra on IKS</h1>
-
-<p>Backups in the kubernetes ecosystem is quite a bit different than traditional cassandra administration.  At first glance it may seem like a complicated tasks, but i am going to expose just how easy it is.   My prefered method to move towards a lengthy technical goal is to start with small working technical base, and slowly iterate towards what I need.   In order to do backups on IKS I have to accomplish a few things:</p>
-
-<ol>
-  <li>I need to enable backups in my cassandra cluster yaml</li>
-  <li>I need to create a backup store (location) via CQL</li>
-  <li>I need to create a backup configuration (timing) via CQL</li>
-</ol>
-
-<p>First,  the documentation here was a little confusing in how to enable backups.  At first look the config is documented as:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">config</span><span class="p">:</span>
-    <span class="nx">backup_service</span><span class="p">:</span>
-      <span class="nx">enabled</span><span class="p">:</span> <span class="kc">true</span>
-</code></pre></div></div>
-
-<p>However I had to get information from internal resource that it is actually:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">config</span><span class="p">:</span>
-    <span class="nx">cassandra</span><span class="o">-</span><span class="nx">yaml</span><span class="p">:</span>
-      <span class="nx">backup_service</span><span class="p">:</span>
-        <span class="nx">enabled</span><span class="p">:</span> <span class="kc">true</span>
-</code></pre></div></div>
-
-<p>With backups enabled in my cluster, I take the path of least resistance and create a backup store on local file system.  I do not want to backup like this, but what i want to do is learn the backup process without fighting cloud storage access, authorization, and configuration.  With the local file system method working I then tackle a backup store on IBMs cloud storage which is basically S3.   The details of both of these are included in next sub sections.</p>
-
-<h2 id="how-do-i-backup-to-file-system">How do I backup to File System?</h2>
-
-<p>The complete documenation for backups starts <a href="https://docs.datastax.com/en/dse/6.8/dse-admin/datastax_enterprise/operations/opsBackupRestoreCreateBackupStore.html">here</a>.</p>
-
-<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" />  MAC users be warned, copy/pasting single quoted text often turns to ’quoted’ which will cause an error in cql.</p>
-
-<p>First I need a backup store:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">BACKUP</span> <span class="nx">STORE</span> <span class="nx">store_name</span>
-<span class="nx">USING</span> <span class="dl">'</span><span class="s1">FSBlobStore</span><span class="dl">'</span> <span class="nx">WITH</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">/tmp</span><span class="dl">'</span><span class="p">};</span>
-</code></pre></div></div>
-
-<p>Next I need to create a BACKUP CONFIGURATION which sets the timing for the backup using cron expression:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">BACKUP</span> <span class="nx">CONFIGURATION</span> <span class="nx">config_name</span> 
-    <span class="nx">OF</span> <span class="nx">keyspace</span>
-    <span class="nx">TO</span> <span class="nx">STORE</span> <span class="nx">backup_store</span>    
-    <span class="nx">WITH</span> <span class="nx">frequency</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">cron expression</span><span class="dl">'</span>
-    <span class="nx">AND</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>Before I can do that I need to create the keyspace to backup:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">KEYSPACE</span> <span class="nx">IF</span> <span class="nx">NOT</span> <span class="nx">EXISTS</span> <span class="nx">demo</span> <span class="nx">WITH</span> <span class="nx">REPLICATION</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">'</span><span class="s1">class</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">NetworkTopologyStrategy</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">dc1</span><span class="dl">'</span> <span class="p">:</span> <span class="mi">3</span> <span class="p">};</span>
-</code></pre></div></div>
-
-<p>For my first test that BACKUP CONFIGURATION and frequency cron statement looks like:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">BACKUP</span> <span class="nx">CONFIGURATION</span> <span class="nx">config_name</span> 
-<span class="nx">OF</span> <span class="nx">demo</span>
-<span class="nx">TO</span> <span class="nx">STORE</span> <span class="nx">store_name</span>   
-<span class="nx">WITH</span> <span class="nx">frequency</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">0 17 * * *</span><span class="dl">'</span>
-<span class="nx">AND</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>Now I am expecting to see some kind of backup at 1pm and I realize the pod time is probably different:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">uptime</span>
-  <span class="mi">17</span><span class="p">:</span><span class="mi">13</span><span class="p">:</span><span class="mi">04</span> <span class="nx">up</span>  <span class="mi">4</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span>  <span class="mi">0</span> <span class="nx">users</span><span class="p">,</span>  <span class="nx">load</span> <span class="nx">average</span><span class="p">:</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.66</span>
-</code></pre></div></div>
-
-<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" />  server time is off</p>
-
-<p>So I drop my first config with this command:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">DROP</span> <span class="nx">BACKUP</span> <span class="nx">CONFIGURATION</span> <span class="nx">config_name</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>And I redo it with the correct hour:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">BACKUP</span> <span class="nx">CONFIGURATION</span> <span class="nx">config_name</span> 
-<span class="nx">OF</span> <span class="nx">demo</span>
-<span class="nx">TO</span> <span class="nx">STORE</span> <span class="nx">store_name</span>   
-<span class="nx">WITH</span> <span class="nx">frequency</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">0 18 * * *</span><span class="dl">'</span>
-<span class="nx">AND</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>Next I needed to create something to backup:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">videos</span> <span class="p">(</span> 
-<span class="nx">video_id</span> <span class="nx">timeuuid</span><span class="p">,</span> 
-<span class="nx">added_date</span> <span class="nx">timestamp</span><span class="p">,</span> 
-<span class="nx">description</span> <span class="nx">text</span><span class="p">,</span>
-<span class="nx">title</span> <span class="nx">text</span><span class="p">,</span> 
-<span class="nx">user_id</span> <span class="nx">uuid</span><span class="p">,</span>
-<span class="nx">PRIMARY</span> <span class="nx">KEY</span> <span class="p">(</span><span class="nx">video_id</span><span class="p">)</span>
-<span class="p">);</span>
-
-<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="nx">videos</span> <span class="p">(</span><span class="nx">video_id</span><span class="p">,</span><span class="nx">added_date</span><span class="p">,</span><span class="nx">description</span><span class="p">,</span><span class="nx">title</span><span class="p">,</span><span class="nx">user_id</span><span class="p">)</span> <span class="nx">VALUES</span> <span class="p">(</span><span class="nx">now</span><span class="p">(),</span><span class="nx">dateof</span><span class="p">(</span><span class="nx">now</span><span class="p">()),</span><span class="dl">'</span><span class="s1">description</span><span class="dl">'</span><span class="p">,</span><span class="nx">uuid</span><span class="p">());</span>
-</code></pre></div></div>
-
-<p>And now I wait until the top of the hour, and validate the backup exists by logging into pod with bash:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="nx">exec</span> <span class="o">--</span><span class="nx">stdin</span> <span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">0</span> <span class="o">--</span> <span class="sr">/bin/</span><span class="nx">bash</span>                                                                                       
-<span class="nx">Defaulting</span> <span class="nx">container</span> <span class="nx">name</span> <span class="nx">to</span> <span class="nx">cassandra</span><span class="p">.</span>
-<span class="nx">Use</span> <span class="dl">'</span><span class="s1">kubectl describe pod/cluster1-dc1-default-sts-0 -n cass-operator</span><span class="dl">'</span> <span class="nx">to</span> <span class="nx">see</span> <span class="nx">all</span> <span class="k">of</span> <span class="nx">the</span> <span class="nx">containers</span> <span class="k">in</span> <span class="k">this</span> <span class="nx">pod</span><span class="p">.</span>
-<span class="nx">uptime</span>
- <span class="mi">17</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mi">07</span> <span class="nx">up</span>  <span class="mi">5</span><span class="p">:</span><span class="mi">28</span><span class="p">,</span>  <span class="mi">0</span> <span class="nx">users</span><span class="p">,</span>  <span class="nx">load</span> <span class="nx">average</span><span class="p">:</span> <span class="mf">0.18</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.58</span>
-<span class="nx">cd</span> <span class="o">/</span><span class="nx">tmp</span><span class="o">/</span><span class="nx">dse</span>
-<span class="nx">ls</span>
-<span class="nx">dse</span><span class="p">.</span><span class="nx">EJT1Kqc3C</span>
-<span class="nx">ls</span>
-<span class="nx">dse</span><span class="p">.</span><span class="nx">EJT1Kqc3C</span>
-<span class="nx">snapshots</span>
-<span class="nx">cd</span> <span class="o">/</span><span class="nx">tmp</span><span class="o">/</span><span class="nx">dse</span><span class="o">/</span><span class="nx">snapshots</span>
-<span class="nx">ls</span>
-<span class="mi">15</span><span class="nx">df1d07</span><span class="o">-</span><span class="nx">c385</span><span class="o">-</span><span class="mi">4</span><span class="nx">b4c</span><span class="o">-</span><span class="nx">a673</span><span class="o">-</span><span class="nx">add1741ebe16</span>
-
-</code></pre></div></div>
-
-<p>I now have a working foundation for moving forward with IBM Cloud Storage</p>
-
-<h2 id="how-do-i-backup-to-s3-on-iks">How do I backup to S3 on IKS?</h2>
-
-<p>I need to follow the same process above just changing the store location from local file system to the cloud storage solution.  This should be possible in GKE, AWK, and AKS.  For IKS I should be able to use the S3Object storage class.  According to <a href="https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-compatibility-api">IBM Cloud Object Storage Documentation</a>:</p>
-
-<p>“It uses IBM Cloud® Identity and Access Management for authentication and authorization, and supports a subset of the S3 API for easy migration of applications to IBM Cloud.”</p>
-
-<p>I am following the steps <a href="https://docs.datastax.com/en/dse/6.8/dse-admin/datastax_enterprise/operations/opsBackupRestoreCreateBackupStore.html">here</a></p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">BACKUP</span> <span class="nx">STORE</span> <span class="nx">store_name</span> 
-<span class="nx">USING</span> <span class="dl">'</span><span class="s1">S3BlobStore</span><span class="dl">'</span> <span class="nx">WITH</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span><span class="dl">'</span><span class="s1">bucket</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">amazon_bucket_name</span><span class="dl">'</span><span class="p">,</span>
-                                              <span class="dl">'</span><span class="s1">region</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">amazon_region</span><span class="dl">'</span><span class="p">};</span>
-</code></pre></div></div>
-<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" /> The sample needs to be expanded with settings found on this page <a href="https://docs.datastax.com/en/dse/6.8/dse-admin/datastax_enterprise/operations/opsCqlCreateBackupStore.html">here</a></p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">BACKUP</span> <span class="nx">STORE</span> <span class="nx">s3_store</span>
-<span class="nx">USING</span> <span class="dl">'</span><span class="s1">S3BlobStore</span><span class="dl">'</span> <span class="nx">WITH</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span><span class="dl">'</span><span class="s1">bucket</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">my_s3_bucket</span><span class="dl">'</span><span class="p">,</span> 
-                                     <span class="dl">'</span><span class="s1">region</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">us-west-1</span><span class="dl">'</span><span class="p">,</span>
-                                     <span class="dl">'</span><span class="s1">retention_time</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">1w</span><span class="dl">'</span>
-                                     <span class="dl">'</span><span class="s1">retention_number</span><span class="dl">'</span> <span class="p">:</span> <span class="mi">4</span><span class="p">};</span>
-</code></pre></div></div>
-
-<p>I tried to create cloud object from terminal:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ibmcloud</span> <span class="nx">resource</span> <span class="nx">service</span><span class="o">-</span><span class="nx">instance</span><span class="o">-</span><span class="nx">create</span> <span class="nx">test_s3_store</span> <span class="nx">cloud</span><span class="o">-</span><span class="nx">object</span><span class="o">-</span><span class="nx">storage</span> <span class="nx">lite</span> <span class="nb">global</span>
-</code></pre></div></div>
-
-<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" /> No resource group targeted. Use ‘ibmcloud target -g RESOURCE_GROUP’ to target a resource group.</p>
-
-<p>This page allows create cloud object store in the UI:</p>
-
-<p><a href="https://cloud.ibm.com/catalog/services/cloud-object-storage">https://cloud.ibm.com/catalog/services/cloud-object-storage</a></p>
-
-<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" /> Bucket name must be unique across entire IBM platform</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
-  <span class="dl">"</span><span class="s2">apikey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">qTRJYcPvz1T7FSevgjKR8fTw2qfeRs-GqUYb3UXDkYyP</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">endpoints</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://control.cloud-object-storage.cloud.ibm.com/v2/endpoints</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">iam_apikey_description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Auto-generated for key 44941bb8-4066-4ee0-9a30-9b3ee89595f9</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">iam_apikey_name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Service credentials-1</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">iam_role_crn</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">crn:v1:bluemix:public:iam::::serviceRole:Writer</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">iam_serviceid_crn</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">crn:v1:bluemix:public:iam-identity::a/ea8f5c5aedc847438f0ad4c3e0381891::serviceid:ServiceId-56a8bfdf-1e88-4c48-8b04-46524ff8db3a</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">resource_instance_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">crn:v1:bluemix:public:cloud-object-storage:global:a/ea8f5c5aedc847438f0ad4c3e0381891:2f9ad15b-d78c-44b4-ba98-ed7b58ee8382::</span><span class="dl">"</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" /> I had to look at some IBM Docs to try and decide what values map to S3 values.</p>
-
-<p>With all my info ready I can now create the cluster, get into cql, create my backup store, and backup configuration:
-    https://docs.datastax.com/en/dse/6.8/dse-admin/datastax_enterprise/operations/opsBackupRestoreManaging.html</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Connection</span> <span class="nx">error</span><span class="p">:</span> <span class="p">(</span><span class="dl">'</span><span class="s1">Unable to connect to any servers</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span><span class="dl">'</span><span class="s1">127.0.0.1:9042</span><span class="dl">'</span><span class="p">:</span> <span class="nx">AuthenticationFailed</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to authenticate to 127.0.0.1:9042: Error from server: code=0100 [Bad credentials] message="Failed to login. Please re-try."</span><span class="dl">'</span><span class="p">,)})</span>
-<span class="nx">command</span> <span class="nx">terminated</span> <span class="kd">with</span> <span class="nx">exit</span> <span class="nx">code</span> <span class="mi">1</span>
-</code></pre></div></div>
-<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" /> I ran into this issue yesterday too. You must allow some time for the cassandra cql service to be ready.  It took maybe like 10 minutes from pod creation time for cql to respond.</p>
-
-<p>A second time after a pause:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Connected</span> <span class="nx">to</span> <span class="nx">cluster1</span> <span class="nx">at</span> <span class="mf">127.0</span><span class="p">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">9042</span><span class="p">.</span>
-<span class="p">[</span><span class="nx">cqlsh</span> <span class="mf">6.8</span><span class="p">.</span><span class="mi">0</span> <span class="o">|</span> <span class="nx">DSE</span> <span class="mf">6.8</span><span class="p">.</span><span class="mi">4</span> <span class="o">|</span> <span class="nx">CQL</span> <span class="nx">spec</span> <span class="mf">3.4</span><span class="p">.</span><span class="mi">5</span> <span class="o">|</span> <span class="nx">DSE</span> <span class="nx">protocol</span> <span class="nx">v2</span><span class="p">]</span>
-<span class="nx">Use</span> <span class="nx">HELP</span> <span class="k">for</span> <span class="nx">help</span><span class="p">.</span>
-<span class="nx">cluster1</span><span class="o">-</span><span class="nx">superuser</span><span class="p">@</span><span class="nd">cqlsh</span><span class="o">&gt;</span> 
-</code></pre></div></div>
-
-<p>Now I can execute my CQL:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">KEYSPACE</span> <span class="nx">IF</span> <span class="nx">NOT</span> <span class="nx">EXISTS</span> <span class="nx">demo</span> <span class="nx">WITH</span> <span class="nx">REPLICATION</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">'</span><span class="s1">class</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">NetworkTopologyStrategy</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">dc1</span><span class="dl">'</span> <span class="p">:</span> <span class="mi">3</span> <span class="p">};</span>
-
-<span class="nx">use</span> <span class="nx">demo</span><span class="p">;</span>
-
-<span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">videos</span> <span class="p">(</span> 
-<span class="nx">video_id</span> <span class="nx">timeuuid</span><span class="p">,</span> 
-<span class="nx">added_date</span> <span class="nx">timestamp</span><span class="p">,</span> 
-<span class="nx">description</span> <span class="nx">text</span><span class="p">,</span>
-<span class="nx">title</span> <span class="nx">text</span><span class="p">,</span> 
-<span class="nx">user_id</span> <span class="nx">uuid</span><span class="p">,</span>
-<span class="nx">PRIMARY</span> <span class="nx">KEY</span> <span class="p">(</span><span class="nx">video_id</span><span class="p">)</span>
-<span class="p">);</span>
-
-<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="nx">videos</span> <span class="p">(</span><span class="nx">video_id</span><span class="p">,</span><span class="nx">added_date</span><span class="p">,</span><span class="nx">description</span><span class="p">,</span><span class="nx">title</span><span class="p">,</span><span class="nx">user_id</span><span class="p">)</span> <span class="nx">VALUES</span> <span class="p">(</span><span class="nx">now</span><span class="p">(),</span><span class="nx">dateof</span><span class="p">(</span><span class="nx">now</span><span class="p">()),</span><span class="dl">'</span><span class="s1">description</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">title</span><span class="dl">'</span><span class="p">,</span><span class="nx">uuid</span><span class="p">());</span>
-</code></pre></div></div>
-<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" /> The function ‘dateof’ is deprecated. Use the function ‘toTimestamp’ instead.</p>
-
-<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" /> I had some conflicts with cql (documented sample was missing some commas).</p>
-
-<p>Next I create my BACKUP STORE with the S3 settings I tried to infer above:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">BACKUP</span> <span class="nx">STORE</span> <span class="nx">s3_store</span>
-<span class="nx">USING</span> <span class="dl">'</span><span class="s1">S3BlobStore</span><span class="dl">'</span> <span class="nx">WITH</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span><span class="dl">'</span><span class="s1">bucket</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">mybucket-x12242020</span><span class="dl">'</span><span class="p">,</span> 
-<span class="dl">'</span><span class="s1">endpoint</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://control.cloud-object-storage.cloud.ibm.com/v2/endpoints</span><span class="dl">'</span><span class="p">,</span>
-<span class="dl">'</span><span class="s1">access_key</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">qTRJYcPvz1T7FSevgjKR8fTw2qfeRs-GqUYb3UXDkYyP</span><span class="dl">'</span><span class="p">,</span>
-<span class="dl">'</span><span class="s1">secret_key</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2f9ad15b-d78c-44b4-ba98-ed7b58ee8382</span><span class="dl">'</span><span class="p">,</span>
-<span class="dl">'</span><span class="s1">retention_time</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">1w</span><span class="dl">'</span><span class="p">,</span>
-<span class="dl">'</span><span class="s1">retention_number</span><span class="dl">'</span> <span class="p">:</span> <span class="mi">4</span><span class="p">};</span>
-</code></pre></div></div>
-
-<p>And then create a BACKUP CONFIGURATION:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">BACKUP</span> <span class="nx">CONFIGURATION</span> <span class="nx">s3_backup</span> 
-<span class="nx">OF</span> <span class="nx">demo</span>
-<span class="nx">TO</span> <span class="nx">STORE</span> <span class="nx">s3_store</span>   
-<span class="nx">WITH</span> <span class="nx">frequency</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">0 15 * * *</span><span class="dl">'</span>
-<span class="nx">AND</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>I am now waiting until 10am (local time) to see if this worked or if there was an error.  How am I going to see the error???</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">cluster1</span><span class="o">-</span><span class="nx">superuser</span><span class="p">@</span><span class="nd">cqlsh</span><span class="o">&gt;</span> <span class="nx">VERIFY</span> <span class="nx">BACKUP</span> <span class="nx">STORE</span> <span class="nx">s3_store</span><span class="p">;</span>
-<span class="nl">InvalidRequest</span><span class="p">:</span> <span class="nb">Error</span> <span class="k">from</span> <span class="nx">server</span><span class="p">:</span> <span class="nx">code</span><span class="o">=</span><span class="mi">2200</span> <span class="p">[</span><span class="nx">Invalid</span> <span class="nx">query</span><span class="p">]</span> <span class="nx">message</span><span class="o">=</span><span class="dl">"</span><span class="s2">Unable to write '64123c16-6d84-4ec4-ad3a-f0bc9c513687/d576d2ff-9c24-4fa1-be44-1c9d82189cea' blob due to service could not be contacted for a response</span><span class="dl">"</span>  
-</code></pre></div></div>
-
-<p><img src="/assets/images/error.png" alt="WARNING" height="24" width="24" align="absmiddle" style="padding: 10px" /> I need to do some more work with access &amp; authorization to the bucket.</p>
-
-<p>At this point I was able to jump ahead and find the solution by sharing the information I had learned.  In doing so my team member exposed he knew a way to create the bucket credentials which would provide key and secret similar to S3.</p>
-
-<p>When creating a Cloud Object Storage Service Credential click on Advanced and toggle “Include HMAC Credential”:</p>
-
-<p>!<img src="/assets/images/iks_hmac.png" alt="hmac" /></p>
-
-<p>Now the service credential has what we need:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
-  <span class="dl">"</span><span class="s2">apikey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">blO2SevY-YLoAaO6U1fWiqtZHAl3PhCMUlKlc2DxaQcB</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">cos_hmac_keys</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="dl">"</span><span class="s2">access_key_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">af0ffc17c93d4e3a8730f746916fa5f3</span><span class="dl">"</span><span class="p">,</span>
-    <span class="dl">"</span><span class="s2">secret_access_key</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1bd2ccaf7927abf2d6f35330ab15dee367349396950f54ac</span><span class="dl">"</span>
-  <span class="p">},</span>
-  <span class="dl">"</span><span class="s2">endpoints</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://control.cloud-object-storage.cloud.ibm.com/v2/endpoints</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">iam_apikey_description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Auto-generated for key af0ffc17-c93d-4e3a-8730-f746916fa5f3</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">iam_apikey_name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Service credentials-1</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">iam_role_crn</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">crn:v1:bluemix:public:iam::::serviceRole:Writer</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">iam_serviceid_crn</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">crn:v1:bluemix:public:iam-identity::a/ea8f5c5aedc847438f0ad4c3e0381891::serviceid:ServiceId-1e5e50b9-860f-41aa-b32e-4450feb8cc7b</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">resource_instance_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">crn:v1:bluemix:public:cloud-object-storage:global:a/ea8f5c5aedc847438f0ad4c3e0381891:2f9ad15b-d78c-44b4-ba98-ed7b58ee8382::</span><span class="dl">"</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>Using the access_key_id and secret_access_key values in the BACKUP STORE we are now able to successfully complete backing up Cassandra on IKS with IBM Cloud Storage.</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">CREATE</span> <span class="nx">BACKUP</span> <span class="nx">STORE</span> <span class="nx">s3_store</span>
-<span class="nx">USING</span> <span class="dl">'</span><span class="s1">S3BlobStore</span><span class="dl">'</span> <span class="nx">WITH</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span><span class="dl">'</span><span class="s1">bucket</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">XXXXXXXXXX</span><span class="dl">'</span><span class="p">,</span>
-<span class="dl">'</span><span class="s1">endpoint</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">XXXXXXXX</span><span class="dl">'</span><span class="p">,</span>
-<span class="dl">'</span><span class="s1">access_key</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">XXXXXXXXXXXXXXXXXXXX</span><span class="dl">'</span><span class="p">,</span>
-<span class="dl">'</span><span class="s1">secret_key</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span><span class="dl">'</span><span class="p">};</span>
-</code></pre></div></div>
+<h1 id="cass-operator--iks-how-tos">Cass-Operator + IKS How Tos</h1>
+
+<p>&nbsp;</p>
+
+<div class="mui-container">
+  <div class="home mui-row">
+      <div class="mui-col-md-2">
+        <article class="mui-panel">
+          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
+            <span class="post-list-title">
+              <a class="post-link" href="/kubernetes/cass-operator/iks/access/">IKS Pod Access</a>
+            </span>
+            <div class="img-overlay"></div>
+            <a href="/kubernetes/cass-operator/iks/access/" class="overlay"></a>
+          </div>
+          <div class="post-data">
+            <p class="post-excerpt">Accessing cassandra pods with terminal</p>
+            <p><b>tags:</b> cassandra, kubernetes, k8s, pods, kubectl, bash</p>
+          </div>
+        </article>
+      </div>
+      <div class="mui-col-md-2">
+        <article class="mui-panel">
+          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
+            <span class="post-list-title">
+              <a class="post-link" href="/kubernetes/cass-operator/iks/backups/">IKS Cass Backups</a>
+            </span>
+            <div class="img-overlay"></div>
+            <a href="/kubernetes/cass-operator/iks/backups/" class="overlay"></a>
+          </div>
+          <div class="post-data">
+            <p class="post-excerpt">Backing up cassandra data on IKS</p>
+            <p><b>tags:</b> backup, cassandra, iks, ibm, cloud, storage, s3</p>
+          </div>
+        </article>
+      </div>
+      <div class="mui-col-md-2">
+        <article class="mui-panel">
+          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
+            <span class="post-list-title">
+              <a class="post-link" href="/kubernetes/cass-operator/iks/metrics/">IKS Cass Metrics</a>
+            </span>
+            <div class="img-overlay"></div>
+            <a href="/kubernetes/cass-operator/iks/metrics/" class="overlay"></a>
+          </div>
+          <div class="post-data">
+            <p class="post-excerpt">Prometheus &amp; Graphana Metrics</p>
+            <p><b>tags:</b> graphana, prometheus, iks, cassandra, metrics</p>
+          </div>
+        </article>
+      </div>
+  </div>  
+</div>
 
 <h1 id="whats-next">What’s Next?</h1>
 
-<p>Stay tuned for more updates here and additional IKS cass operator topics as I dig in even more with the Datastax Cassandra Operator on IKS.  I am currently working on current content updates and new Ingress and Metrics sections to be posted soon.  Additionally my lessons learned and the required differences for IKS will be used to contribue to the Cassandra Operator Knowledge base.  Later we should see the Cass Operator documentation updated with IKS as a supported platform.</p>
+<p>Stay tuned for more updates here and additional IKS cass operator topics as I dig in even more with the Datastax Cassandra Operator on IKS.  I am currently working on current content updates and new Ingress sections to be posted soon.  Additionally my lessons learned and the required differences for IKS will be used to contribue to the Cassandra Operator Knowledge base.  Later we should see the Cass Operator documentation updated with IKS as a supported platform.</p>
 
 <h1 id="how-can-i-help-you-with-kubernetes">How can I help you with Kubernetes?</h1>
 
