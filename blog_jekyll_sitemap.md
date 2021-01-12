@@ -52,4 +52,4 @@ After commit your changes to your repo be sure to check your github.io page.  Fo
 
 ## What's Next?
 
-Be sure to reach out to me to share your blog or if you have any questions, issues, or feedback from creating your GitHub Jekyll Theme Page!! 
+Check out [How To: Create a GitHub Page Readme](/blog/github/page/readme/).  Be sure to reach out to me to share your blog or if you have any questions, issues, or feedback from creating your GitHub Jekyll Theme Page!! 

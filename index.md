@@ -34,6 +34,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
 
 # Recent Posts
 
+*	[How To: Create a GitHub Page Readme](/blog/github/page/readme/) - 1/12/2021
 *	[How To: Cassandra Metrics on IKS](/kubernetes/cass-operator/iks/metrics/) - 1/5/2021
 *	[How To: Backup Cassandra on IKS](/kubernetes/cass-operator/iks/backups/) - 1/4/2021
 *	[How To: Access IKS Cassandra PODS Terminal](/kubernetes/cass-operator/iks/access/) - 12/23/2020

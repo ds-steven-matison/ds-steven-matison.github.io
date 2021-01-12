@@ -34,6 +34,9 @@
 <loc>http://localhost:4000/blog/create/github/page/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/blog/github/page/readme/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/blog/jekyll/sitemap/</loc>
 </url>
 <url>
