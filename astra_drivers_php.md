@@ -49,6 +49,13 @@ Node History for Php 7.1 w/ Cassandra on a Centos 7.4 Vagrant VM:
   161  nano /etc/php.ini 
 ```
 
+Add this to php.ini:
+
+```js
+; DataStax PHP Driver for Apache Cassandra
+extension=cassandra.so
+```
+
 With the above environment working for cassandra driver and php I can execute our test script against astra:
 
 ```js
