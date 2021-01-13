@@ -97,7 +97,7 @@ kubectl exec -n cass-operator -i -t -c cassandra cluster1-dc1-default-sts-0 -- c
           </div>
           <div class="post-data">
             <p class="post-excerpt">Prometheus & Graphana Metrics</p>
-            <p><b>tags:</b> graphana, prometheus, iks, cassandra, metrics</p>
+            <p><b>tags:</b> grafana, prometheus, iks, cassandra, metrics</p>
           </div>
         </article>
       </div>

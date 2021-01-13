@@ -9,7 +9,7 @@ permalink: /kubernetes/cass-operator/iks/metrics/
 
 # How To: Cassandra Metrics on IKS
 
-Cassandra Cluster Metrics for kubernetes clusters uses the Metrics Collector to expose metrics to Graphana and Promethesus.  In this post I am going to expose ways to install grapaha and promethesus via kubernetes.  I am also going to go into detail showing how to  install graphana and prometheus using operators and the Cass-Operator Metrics Documentation found [here](https://docs.datastax.com/en/cass-operator/doc/cass-operator/cassOperatorMetricReporterDashboards.html).
+Cassandra Cluster Metrics for kubernetes clusters uses the Metrics Collector to expose metrics to Graphana and Promethesus.  In this post I am going to expose ways to install grapaha and promethesus via kubernetes.  I am also going to go into detail showing how to  install grafana and prometheus using operators and the Cass-Operator Metrics Documentation found [here](https://docs.datastax.com/en/cass-operator/doc/cass-operator/cassOperatorMetricReporterDashboards.html).
 
 # How To: Install Prometheus?
 
