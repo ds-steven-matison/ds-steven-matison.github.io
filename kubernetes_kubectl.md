@@ -90,6 +90,8 @@ Check out some commands I have used recently:
 ```js
 kubectl version
 
+kubectl cluster-info
+
 kubectl get pods --all-namespaces
 
 kubectl -n <namespace> get pods
