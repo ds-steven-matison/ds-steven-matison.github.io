@@ -7,11 +7,11 @@ permalink: /blog/github/page/readme/
 
 # How To: Create a GitHub Page Readme
 
-Back in the day before search engines, when you wanted to make a website you had to go to someone else's website, view source, and take it.  In this typical hacker fashion I have learned how to make a GitHub Page Summary using a readme file.
+Back in the day before search engines, when you wanted to make a website you had to go to someone else's website, view source, and customize it for your own purposes.  If you saw something kewl on a website you would view source and try to do it on your website.  In this view source fashion I have learned how to make a GitHub Page Summary using a simple README.md markdown file.
 
 ## Let's Get Started
 
-Credit where credit is due:  I found this original snippet from [Clun](https://github.com/clun).   All I had to do was copy the source:
+Credit where credit is due:  I found this original snippet from [Clun](https://github.com/clun).  When I saw his github page I was very impressed the ability to customize that profile page.  I was able to quickly figure out how he did it.  All I had to do was copy the source:
 
 ```js
 ### Hi This is Cedrick Lunven, Director of Developer Advocacy @DataStax
@@ -23,7 +23,7 @@ Credit where credit is due:  I found this original snippet from [Clun](https://g
 - ⚡ **Fun fact:** *everything has an end except a sausage that has two ends*
 ```
 
-Next I create the base [repo](https://github.com/ds-steven-matison/ds-steven-matison) (same repo name as my username) in my account, add the README.md source, and modify to suit my needs:
+Next I create the github profile [repo](https://github.com/ds-steven-matison/ds-steven-matison) (same repo name as my username) in my account, add the README.md source, and modify to suit my needs:
 
 ```js
 ### Hi This is Steven Matison, Presales Data Architect @DataStax
