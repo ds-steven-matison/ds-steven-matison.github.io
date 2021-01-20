@@ -23,19 +23,19 @@
     <![endif]-->
 
 <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>GraphQL Playground | Data Architect</title>
+<title>Jekyll Jemoji | Data Architect</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="GraphQL Playground" />
+<meta property="og:title" content="Jekyll Jemoji" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="A blog all about GraphQL Playground" />
-<meta property="og:description" content="A blog all about GraphQL Playground" />
-<link rel="canonical" href="http://localhost:4000/stargate/graphql/playground/" />
-<meta property="og:url" content="http://localhost:4000/stargate/graphql/playground/" />
+<meta name="description" content="Use Emojis in your Jekyll Theme" />
+<meta property="og:description" content="Use Emojis in your Jekyll Theme" />
+<link rel="canonical" href="http://localhost:4000/blog/jekyll/jemoji/" />
+<meta property="og:url" content="http://localhost:4000/blog/jekyll/jemoji/" />
 <meta property="og:site_name" content="Data Architect" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="GraphQL Playground" />
+<meta property="twitter:title" content="Jekyll Jemoji" />
 <script type="application/ld+json">
-{"headline":"GraphQL Playground","url":"http://localhost:4000/stargate/graphql/playground/","description":"A blog all about GraphQL Playground","@type":"WebPage","@context":"https://schema.org"}</script>
+{"headline":"Jekyll Jemoji","url":"http://localhost:4000/blog/jekyll/jemoji/","description":"Use Emojis in your Jekyll Theme","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -44,9 +44,9 @@
     <header>
       <div class="inner">
         <a href="http://localhost:4000/">
-          <h1> GraphQL Playground </h1>
+          <h1> Jekyll Jemoji </h1>
         </a>
-        <h2> A blog all about GraphQL Playground </h2>
+        <h2> Use Emojis in your Jekyll Theme </h2>
           <br>
           <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
           <a href="/astra/"><button type="button" class="btn btn-primary">Astra</button></a>
@@ -60,58 +60,51 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <p><img src="/assets/images/warning.png" alt="WARNING" height="50" width="50" align="absmiddle" style="padding: 10px" /> Blog building in-progress, come back again soon as updates are happening here.</p>
+          <h1 id="how-to-add-emoticons-to-jekyll-theme">How To: Add Emoticons to Jekyll Theme</h1>
+<p>In my previous blog <a href="/blog/jekyll/sitemap/">How To: Add Jekyll Sitemap Generator</a> I showed you how to add a sitemap your GitHub.io page.   In this blog i am going to show you how to use a <a href="https://github.com/jekyll/jemoji">Jemoji</a> to add markdown for emoji icons in you jekyll theme.   Everyone uses icons now in chat and text so why not in my blog too?</p>
 
-<h1 id="what-is-graphql-playground">What is GraphQl Playground?</h1>
+<h1 id="update-configyml">Update config.yml</h1>
 
-<p>Bundled within the docker stargate is an instance of GraphQL Playground.  This UI provides an interface to execute GraphQL queries against Stargate &amp; Astra APIs.</p>
+<p> </p>
+<p>Just add:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">plugins</span><span class="p">:</span>
+  <span class="o">-</span> <span class="nx">jemoji</span>
+</code></pre></div></div>
 
-<h1 id="why-use-graphql-playground">Why use GraphQL Playground?</h1>
+<h1 id="update-gemfile">Update Gemfile</h1>
 
-<p>This is a great tool to quickly get started testing GraphQL queries.  It also comes with a great share feature allowing you to share your work with team members.</p>
+<p> </p>
+<p>Just add:</p>
 
-<h1 id="working-with-graphql-playground">Working with GraphQL Playground</h1>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">gem</span> <span class="dl">'</span><span class="s1">jemoji</span><span class="dl">'</span>
+</code></pre></div></div>
 
-<p>With Stargate Docker running you can access GraphQL Playground with the following Url:</p>
+<h1 id="run-bundle">Run Bundle</h1>
 
-<p><a href="http://localhost:8080/playground">http://localhost:8080/playground</a></p>
+<p>In your root folder execute the command:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">bundle</span>
+<span class="nx">bundle</span> <span class="nx">exec</span> <span class="nx">jekyll</span> <span class="nx">serve</span>
+</code></pre></div></div>
 
-<p>Here are few things I learned:</p>
-<ul>
-  <li>Your changes in this UI will not persist so do not refresh the page.  If you want to save your work, your only option is to use Share Option which creates a <a href="graphqbin.com">graphqbin.com</a> version of your workspace.</li>
-  <li>Check out HTTP HEADERS (bottom right), you’ll need your auth token, and also notice the case change here from “X-Cassandra-Token” to “x-cassandra-token”.  You will have to update this every tab.</li>
-  <li>When working on calls, check out the Copy Curl button.  This will expose the exact curl call you are executing under the hood.  I have used this extensively.</li>
-  <li>A new tab will not have your auth token prefilled nd you will need to adjust the url for your API endpoint.</li>
-  <li>Query variables do work.</li>
-</ul>
+<h1 id="test-the-markdown">Test the Markdown</h1>
 
-<h1 id="graphql-playground-posts">GraphQL Playground Posts</h1>
-<p>&nbsp;</p>
-<div class="mui-container">
-  <div class="home mui-row">
-      <div class="mui-col-md-2">
-        <article class="mui-panel">
-          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
-            <span class="post-list-title">
-              <a class="post-link" href="/stargate/graphql/playground/day/1/">GraphQl Day 1</a>
-            </span>
-            <div class="img-overlay"></div>
-            <a href="/stargate/graphql/playground/day/1/" class="overlay"></a>
-          </div>
-          <div class="post-data">
-            <p class="post-excerpt">My first day working in the GraphQL Playground UI</p>
-            <p><b>tags:</b> graphql, playground, export, tabs, testing, ui</p>
-          </div>
-        </article>
-      </div>
-  </div>
-</div>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">I</span> <span class="nx">give</span> <span class="k">this</span> <span class="nx">plugin</span> <span class="nx">two</span> <span class="p">:</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="o">!</span>
+</code></pre></div></div>
+<p>I give this plugin two <img class="emoji" title=":+1:" alt=":+1:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png" height="20" width="20">!</p>
 
-<h1 id="how-can-i-help-you-with-stargate">How can I help you with Stargate?</h1>
+<h1 id="customizing-emoji-images-locally">Customizing Emoji Images Locally</h1>
 
-<p><img src="/assets/images/SRM.png" alt="SRM" height="100" width="100" style="float: left; padding: 10px" /></p>
+<p>By default the emojis are github cdn provided,  to host your own images just add this to your _config.yml file:</p>
 
-<p>Find me over on the <a href="https://discord.gg/33mKDHHFUE">Stargate Discord</a> to ask me any questions about Stargate.  Also let’s chat if you have something kewl you did with Stargate and you want me to feature it in my blog.  Look below or to the right for more ways to find me.</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">emoji</span><span class="p">:</span>
+  <span class="nx">src</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/assets/images/emoji</span><span class="dl">"</span>
+</code></pre></div></div>
+
+<p>Of course be sure to download all the emojis.  You can find more details <a href="https://github.com/github/gemoji">here</a>.</p>
+
+<h2 id="whats-next">What’s Next?</h2>
+
+<p>Check out <a href="/blog/github/page/readme/">How To: Create a GitHub Page Readme</a>.  Be sure to reach out to me to share your blog or if you have any questions, issues, or feedback from creating your GitHub Jekyll Theme Page!!</p>
 
         </section>
 

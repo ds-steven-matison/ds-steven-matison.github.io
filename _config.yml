@@ -6,3 +6,4 @@ theme: jekyll-theme-architect
 url: "https://ds-steven-matison.github.io" # the base hostname & protocol for your site
 plugins:
   - jekyll-sitemap
+  - jemoji

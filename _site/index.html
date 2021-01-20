@@ -11,6 +11,7 @@
       gtag('config', 'G-CTPEBJMK1C');
     </script>
     <meta charset='utf-8'>
+    <meta name="referrer" content="no-referrer-when-downgrade"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/assets/css/style.css?v=" media="screen" type="text/css">
@@ -34,7 +35,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="DataStax Data Architect" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/","headline":"DataStax Data Architect","description":"A blog for my projects at Datastax","name":"Data Architect","@type":"WebSite","@context":"https://schema.org"}</script>
+{"headline":"DataStax Data Architect","url":"http://localhost:4000/","description":"A blog for my projects at Datastax","name":"Data Architect","@type":"WebSite","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -59,67 +60,103 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <p><img src="/assets/images/warning.png" alt="WARNING" height="50" width="50" align="absmiddle" style="padding: 10px" /> Blog building in-progress, come back again soon as updates are happening here.</p>
+          <p><img src="/assets/images/warning.png" alt="WARNING" height="50" width="50" align="absmiddle" style="padding: 10px"> Blog building in-progress, come back again soon as updates are happening here.</p>
 
 <h1 id="about-me">About Me</h1>
 
-<p><img src="/assets/images/SRM.png" alt="SRM" height="100" width="100" style="float: left; padding: 10px" /></p>
+<p><img src="/assets/images/SRM.png" alt="SRM" height="100" width="100" style="float: left; padding: 10px"></p>
 
 <p>My name is Steven Matison and I am a Data Architect at DataStax. I began my journey at Datastax on 8/28/2020. 
 I am currently working in the following technologies: cassandra, astra, stargate, graph, graphql, nosqlbench, java, maven, docker, ansible, k8ssanrda, kubernetes, spark, nifi, kafka.</p>
 
 <div style="clear: both"></div>
-<p>&nbsp;</p>
+<p> </p>
 <h1 id="datastax-news">DataStax News</h1>
 
 <ul>
-  <li><a href="https://datastaxastra.hackerearth.com/">Holiday Hackathon</a> - 1/7/2020
-<br />  going off til 1/18/2020 with top prize $10,000.  Please sign up <a href="https://datastaxastra.hackerearth.com/">here</a>.</li>
-  <li><a href="https://gitbox.apache.org/repos/asf?p=cassandra.git;a=blob_plain;f=CHANGES.txt;hb=refs/tags/cassandra-4.0-beta4">Cassandra 4.0-beta4 Released</a> - 12/30/2020
-<br />  <a href="http://cassandra.apache.org/">Cassandra</a> is getting closer and closer to 4.0 Stable Release.  Download <a href="http://cassandra.apache.org/download/">here</a> and check out jira <a href="https://issues.apache.org/jira/browse/CASSANDRA">here</a>.</li>
-  <li><a href="https://datastax.com/">Fresh DataStax Branding</a> - 12/17/2020
-<br />  Today DataStax released some fresh, spacey, super nerdy cool brandings. Check out <a href="https://datastax.com/products/datastax-astra">Astra</a>, <a href="https://datastax.com/products/vector">Vector</a>, <a href="https://datastax.com/products/datastax-enterprise">DSE</a>, <a href="https://datastax.com/products/luna">Luna</a>.</li>
-  <li><a href="https://docs.astra.datastax.com/docs/integrations">Featured On Astra</a> - 12/10/2020
-<br />  My How To posts for <a href="/nosqlbench/astra/">Astra + NoSqlBench</a> and <a href="/astra/service/broker/">Astra Service Broker</a> were featured as <a href="https://docs.astra.datastax.com/docs/integrations">Astra Ecosystem Examples</a> on the official doc site.</li>
-  <li><a href="https://www.datastax.com/astradb/serverless">Serverless on Astra</a> - 12/09/2020
-<br />  Beta for GCP check out an elastic cassandra database that scales with your workload.</li>
-  <li><a href="https://stargate.io/2020/12/09/announcing-stargate-10-ga-rest-graphql-schemaless-json-for-your-cassandra-development.html">Release: Stargate 1.0</a> - 12/09/2020
-<br />  This is an exciting nerdy launch week here with Spacex, ULA, Virgin Galactic, and <a href="/stargate/">Stargate 1.0</a> launching into orbit.</li>
+  <li>
+<a href="https://www.elastic.co/blog/why-license-change-AWS">RIP Open Source Elastic</a> - 1/19/2020
+<br>  <img class="emoji" title=":cry:" alt=":cry:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png" height="20" width="20"> one of my favorite stacks, the elk stack, now moves away from open source apache license.</li>
+  <li>
+<a href="https://datastaxastra.hackerearth.com/">Holiday Hackathon</a> - 1/7/2020
+<br>  Going off til 1/18/2020 with top prize $10,000.  Please sign up <a href="https://datastaxastra.hackerearth.com/">here</a>.</li>
+  <li>
+<a href="https://gitbox.apache.org/repos/asf?p=cassandra.git;a=blob_plain;f=CHANGES.txt;hb=refs/tags/cassandra-4.0-beta4">Cassandra 4.0-beta4 Released</a> - 12/30/2020
+<br>  <a href="http://cassandra.apache.org/">Cassandra</a> is getting closer and closer to 4.0 Stable Release.  Download <a href="http://cassandra.apache.org/download/">here</a> and check out jira <a href="https://issues.apache.org/jira/browse/CASSANDRA">here</a>.</li>
+  <li>
+<a href="https://datastax.com/">Fresh DataStax Branding</a> - 12/17/2020
+<br>  Today DataStax released some fresh, spacey, super nerdy cool brandings. Check out <a href="https://datastax.com/products/datastax-astra">Astra</a>, <a href="https://datastax.com/products/vector">Vector</a>, <a href="https://datastax.com/products/datastax-enterprise">DSE</a>, <a href="https://datastax.com/products/luna">Luna</a>.</li>
+  <li>
+<a href="https://docs.astra.datastax.com/docs/integrations">Featured On Astra</a> - 12/10/2020
+<br>  My How To posts for <a href="/nosqlbench/astra/">Astra + NoSqlBench</a> and <a href="/astra/service/broker/">Astra Service Broker</a> were featured as <a href="https://docs.astra.datastax.com/docs/integrations">Astra Ecosystem Examples</a> on the official doc site.</li>
+  <li>
+<a href="https://www.datastax.com/astradb/serverless">Serverless on Astra</a> - 12/09/2020
+<br>  Beta for GCP check out an elastic cassandra database that scales with your workload.</li>
+  <li>
+<a href="https://stargate.io/2020/12/09/announcing-stargate-10-ga-rest-graphql-schemaless-json-for-your-cassandra-development.html">Release: Stargate 1.0</a> - 12/09/2020
+<br>  This is an exciting nerdy launch week here with Spacex, ULA, Virgin Galactic, and <a href="/stargate/">Stargate 1.0</a> launching into orbit.</li>
 </ul>
 
 <h1 id="recent-posts">Recent Posts</h1>
-
 <ul>
-  <li><a href="/blog/github/page/readme/">How To: Create a GitHub Page Readme</a> - 1/12/2021</li>
-  <li><a href="/kubernetes/cass-operator/iks/metrics/">How To: Cassandra Metrics on IKS</a> - 1/5/2021</li>
-  <li><a href="/kubernetes/cass-operator/iks/backups/">How To: Backup Cassandra on IKS</a> - 1/4/2021</li>
-  <li><a href="/kubernetes/cass-operator/iks/access/">How To: Access IKS Cassandra PODS Terminal</a> - 12/23/2020</li>
-  <li><a href="/kubernetes/cass-operator/iks/">How To: Cass-Operator on IKS</a> - 12/22/2020</li>
-  <li><a href="/kubernetes/kubectl/">Introducing: Kubectl</a> - 12/21/2020</li>
-  <li><a href="/kubernetes/cass-operator/">Introducing: Cass-Operator</a> - 12/18/2020</li>
-  <li><a href="/astra/drivers/php/">How To: PHP with Astra</a> - 12/17/2020</li>
-  <li><a href="/blog/contribute/opensource/">How To: Contribute to Open Source</a> - 12/16/2020</li>
-  <li><a href="/blog/jekyll/sitemap/">How To: Add Jekyll Sitemap Generator</a> - 12/15/2020</li>
-  <li><a href="/blog/create/github/page/">How To: Create A GitHub.io Page</a> - 12/14/2020</li>
-  <li><a href="/nosqlbench/contribution/2/">Documentation work with NoSqlBench</a> - 12/08/2020</li>
-  <li><a href="/nosqlbench/astra/">How To: NoSqlBench with Astra</a> - 11/30/2020</li>
-  <li><a href="/astra/multi/cloud/">How To: Astra Multi Cloud</a> - 11/23/2020</li>
-  <li><a href="/astra/service/broker/">How To: Astra Service Broker</a> - 11/20/2020</li>
-  <li><a href="/k8ssandra/">Introducing: K8ssandra</a> - 11/19/2020</li>
-  <li><a href="/kubernetes/">Introducing: Kubernetes</a> - 11/18/2020</li>
-  <li><a href="/stargate/graphql/playground/day/1/">How To: Export GraphQl Playground Tabs</a> - 11/17/2020</li>
-  <li><a href="/stargate/graphql/playground/">Introducing: GraphQl Playground</a> - 11/16/2020</li>
-  <li><a href="/stargate/graphql/">Introducing: GraphQl</a> - 11/13/2020</li>
-  <li><a href="/nosqlbench/contribution/1/">My First Contribution to NoSqlBench</a> - 11/11/2020</li>
-  <li><a href="/nosqlbench/">Introducing: NoSqlBench</a> - 11/10/2020</li>
-  <li><a href="/astra/ansible/">How To: Ansible with Astra</a> - 11/09/2020</li>
-  <li><a href="/stargate/">Introducing: Stargate</a> - 11/06/2020</li>
-  <li><a href="/astra/postman/">How To: Postman with Astra</a> - 11/04/2020</li>
-  <li><a href="/astra/">Introducing: Astra</a> - 11/02/2020</li>
+  <li>
+<a href="/blog/jekyll/jemoji/">How To: Add Emojis to Jekyll Theme</a> - 1/20/2020</li>
+  <li>
+<a href="/blog/github/page/readme/">How To: Create a GitHub Page Readme</a> - 1/12/2021</li>
+  <li>
+<a href="/kubernetes/cass-operator/iks/metrics/">How To: Cassandra Metrics on IKS</a> - 1/5/2021</li>
+  <li>
+<a href="/kubernetes/cass-operator/iks/backups/">How To: Backup Cassandra on IKS</a> - 1/4/2021</li>
+  <li>
+<a href="/kubernetes/cass-operator/iks/access/">How To: Access IKS Cassandra PODS Terminal</a> - 12/23/2020</li>
+  <li>
+<a href="/kubernetes/cass-operator/iks/">How To: Cass-Operator on IKS</a> - 12/22/2020</li>
+  <li>
+<a href="/kubernetes/kubectl/">Introducing: Kubectl</a> - 12/21/2020</li>
+  <li>
+<a href="/kubernetes/cass-operator/">Introducing: Cass-Operator</a> - 12/18/2020</li>
+  <li>
+<a href="/astra/drivers/php/">How To: PHP with Astra</a> - 12/17/2020</li>
+  <li>
+<a href="/blog/contribute/opensource/">How To: Contribute to Open Source</a> - 12/16/2020</li>
+  <li>
+<a href="/blog/jekyll/sitemap/">How To: Add Jekyll Sitemap Generator</a> - 12/15/2020</li>
+  <li>
+<a href="/blog/create/github/page/">How To: Create A GitHub.io Page</a> - 12/14/2020</li>
+  <li>
+<a href="/nosqlbench/contribution/2/">Documentation work with NoSqlBench</a> - 12/08/2020</li>
+  <li>
+<a href="/nosqlbench/astra/">How To: NoSqlBench with Astra</a> - 11/30/2020</li>
+  <li>
+<a href="/astra/multi/cloud/">How To: Astra Multi Cloud</a> - 11/23/2020</li>
+  <li>
+<a href="/astra/service/broker/">How To: Astra Service Broker</a> - 11/20/2020</li>
+  <li>
+<a href="/k8ssandra/">Introducing: K8ssandra</a> - 11/19/2020</li>
+  <li>
+<a href="/kubernetes/">Introducing: Kubernetes</a> - 11/18/2020</li>
+  <li>
+<a href="/stargate/graphql/playground/day/1/">How To: Export GraphQl Playground Tabs</a> - 11/17/2020</li>
+  <li>
+<a href="/stargate/graphql/playground/">Introducing: GraphQl Playground</a> - 11/16/2020</li>
+  <li>
+<a href="/stargate/graphql/">Introducing: GraphQl</a> - 11/13/2020</li>
+  <li>
+<a href="/nosqlbench/contribution/1/">My First Contribution to NoSqlBench</a> - 11/11/2020</li>
+  <li>
+<a href="/nosqlbench/">Introducing: NoSqlBench</a> - 11/10/2020</li>
+  <li>
+<a href="/astra/ansible/">How To: Ansible with Astra</a> - 11/09/2020</li>
+  <li>
+<a href="/stargate/">Introducing: Stargate</a> - 11/06/2020</li>
+  <li>
+<a href="/astra/postman/">How To: Postman with Astra</a> - 11/04/2020</li>
+  <li>
+<a href="/astra/">Introducing: Astra</a> - 11/02/2020</li>
 </ul>
 
 <h1 id="current-projects">Current Projects</h1>
-<p>&nbsp;</p>
+<p> </p>
 <div class="mui-container">
     <div class="home mui-row">
       <div class="mui-col-md-6">
@@ -141,7 +178,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
     </div>
   </div>
 </div>
-<p>&nbsp;</p>
+<p> </p>
 <div class="mui-container">
     <div class="home mui-row">
       <div class="mui-col-md-6">
@@ -163,7 +200,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
     </div>
   </div>
 </div>
-<p>&nbsp;</p>
+<p> </p>
 <div class="mui-container">
   <div class="home mui-row">
       <div class="mui-col-md-6">
@@ -186,7 +223,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
   </div>
 </div>
 
-<p>&nbsp;</p>
+<p> </p>
 <div class="mui-container">
   <div class="home mui-row">
       <div class="mui-col-md-6">
@@ -250,9 +287,22 @@ You can find me on Discords:
   <li><a href="https://discord.gg/F24HwnCR" target="_blank" rel="noopener">GraphQL</a></li>
 </ul>
           <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</p>
-          <script src="https://efreecode.com/js.js" id="eXF-dsmatiso-0" async defer></script>
+          <script src="//t1.extreme-dm.com/f.js" id="eXF-dsmatiso-0" async defer></script>
         </aside>
       </div>
     </div>
   </body>
 </html>
+<!-- testing external pixel -->
+<img src="//makeopensourcegreatagain.com/test.png?siteid=ds-steven-matison">
+<!-- start GHP Listener -->
+<script type="text/javascript">
+var GHP_siteid='ds-steven-matison'; 
+var GHP_refer = encodeURIComponent(document.referrer);
+var GHP_url = encodeURIComponent(document.URL);
+var ghpscript_url = ("https:" == document.location.protocol ? "https://" : "http://") + "ghptracker.site/track/" + "?siteid=" + GHP_siteid + "&refer=" + GHP_refer + "&url=" + GHP_url;
+var GHP_object = new XMLHttpRequest();
+GHP_object.open("GET", ghpscript_url, false);
+GHP_object.send(null);
+</script>
+<!-- end GHP Listener -->
