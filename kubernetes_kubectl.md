@@ -160,6 +160,13 @@ kubectl port-forward prometheus-deployment-54686956bd-nhz2s 8080:9090 -n monitor
 
 kubectl -n cass-operator exec --stdin cluster1-dc1-default-sts-0 -- /bin/bash
 
+kubectl get configmap
+
+kubectl get configmap <name> -o yaml
+
+kubectl get crds
+
+kubectl get crds | grep cassandra | cut -d ' ' -f 1 | xargs kubectl delete crd
 ```
 # What's Next?
 
