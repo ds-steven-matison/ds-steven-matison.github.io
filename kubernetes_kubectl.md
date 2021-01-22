@@ -158,6 +158,8 @@ kubectl exec -n cass-operator -i -t -c cassandra cluster1-dc1-default-sts-0 -- c
 
 kubectl port-forward prometheus-deployment-54686956bd-nhz2s 8080:9090 -n monitoring
 
+kubectl port-forward svc/monitoring-grafana 3000:80
+
 kubectl -n cass-operator exec --stdin cluster1-dc1-default-sts-0 -- /bin/bash
 
 kubectl get configmap

@@ -24,6 +24,44 @@ I am now currently working on validating, documementing, and deploying on [IKS](
 
 # What's Next?
 
-Stay tuned for more updates and additional cass operator topics here.
+Go deeper with the Kubernetes Cassandra Operator with additional cass operator topics below.
+
+<p>&nbsp;</p>
+
+<div class="mui-container">
+  <div class="home mui-row">
+      <div class="mui-col-md-2">
+        <article class="mui-panel">
+          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
+            <span class="post-list-title">
+              <a class="post-link" href="/kubernetes/cass-operator/iks/">IKS Cass Operator</a>
+            </span>
+            <div class="img-overlay"></div>
+            <a href="/kubernetes/cass-operator/iks/" class="overlay"></a>
+          </div>
+          <div class="post-data">
+            <p class="post-excerpt">A blog all about Cass-Operator and IKS</p>
+            <p><b>tags:</b> cassandra, kubernetes, operator, iks, ibmcloud</p>
+          </div>
+        </article>
+      </div>
+      <div class="mui-col-md-2">
+        <article class="mui-panel">
+          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
+            <span class="post-list-title">
+              <a class="post-link" href="/kubernetes/cass-operator/kube-prometheus-stack/">Kube Prometheus Stack</a>
+            </span>
+            <div class="img-overlay"></div>
+            <a href="/kubernetes/cass-operator/kube-prometheus-stack/" class="overlay"></a>
+          </div>
+          <div class="post-data">
+            <p class="post-excerpt">How to install kube-prometheus-stack with Helm Charts.</p>
+            <p><b>tags:</b> helm, chart, kubernetes, prometheus, grafana</p>
+          </div>
+        </article>
+      </div>
+  </div>  
+</div>
+
 
 {% include kubernetes_help.html %}

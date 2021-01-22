@@ -19,10 +19,14 @@ I am currently working in the following technologies: cassandra, astra, stargate
 <p>&nbsp;</p>
 # DataStax News
 
-*	[RIP Open Source Elastic](https://www.elastic.co/blog/why-license-change-AWS) - 1/19/2020
+*	[Cass Operator V 1.5.1 Released](https://docs.datastax.com/en/cass-operator/doc/cass-operator/cassOperatorReleaseNotes.html) - 1/21/2021
+<br>&nbsp; Lots of updates to docs [here](https://docs.datastax.com/en/cass-operator/doc/cass-operator/cassOperatorTOC.html).
+*	[Holiday Hackathon Extended](https://datastaxastra.hackerearth.com/) - 1/20/2021
+<br>&nbsp; Submissions now accepted til 1/25/2021.  Please sign up [here](https://datastaxastra.hackerearth.com/).
+*	[RIP Open Source Elastic](https://www.elastic.co/blog/why-license-change-AWS) - 1/19/2021
 <br>&nbsp; :cry: one of my favorite stacks, the elk stack, now moves away from open source apache license. 
-*	[Holiday Hackathon](https://datastaxastra.hackerearth.com/) - 1/7/2020
-<br>&nbsp; Going off til 1/18/2020 with top prize $10,000.  Please sign up [here](https://datastaxastra.hackerearth.com/).
+*	[Holiday Hackathon](https://datastaxastra.hackerearth.com/) - 1/7/2021
+<br>&nbsp; Going off til 1/18/2021 with top prize $10,000.  Please sign up [here](https://datastaxastra.hackerearth.com/).
 *	[Cassandra 4.0-beta4 Released](https://gitbox.apache.org/repos/asf?p=cassandra.git;a=blob_plain;f=CHANGES.txt;hb=refs/tags/cassandra-4.0-beta4) - 12/30/2020
 <br>&nbsp; [Cassandra](http://cassandra.apache.org/) is getting closer and closer to 4.0 Stable Release.  Download [here](http://cassandra.apache.org/download/) and check out jira [here](https://issues.apache.org/jira/browse/CASSANDRA).  
 *	[Fresh DataStax Branding](https://datastax.com/) - 12/17/2020
@@ -35,7 +39,9 @@ I am currently working in the following technologies: cassandra, astra, stargate
 <br>&nbsp; This is an exciting nerdy launch week here with Spacex, ULA, Virgin Galactic, and [Stargate 1.0](/stargate/) launching into orbit.
 
 # Recent Posts
-*   <a href="/blog/jekyll/jemoji/">How To: Add Emojis to Jekyll Theme</a> - 1/20/2020
+
+*	[How To: Install Kube-Prometheus-Stack](/kubernetes/cass-operator/kube-prometheus-stack/) - 1/22/2020
+*   [How To: Add Emojis to Jekyll Theme](/blog/jekyll/jemoji/) - 1/20/2020
 *	[How To: Create a GitHub Page Readme](/blog/github/page/readme/) - 1/12/2021
 *	[How To: Cassandra Metrics on IKS](/kubernetes/cass-operator/iks/metrics/) - 1/5/2021
 *	[How To: Backup Cassandra on IKS](/kubernetes/cass-operator/iks/backups/) - 1/4/2021

@@ -211,6 +211,8 @@
 
 <span class="nx">kubectl</span> <span class="nx">port</span><span class="o">-</span><span class="nx">forward</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">deployment</span><span class="o">-</span><span class="mi">54686956</span><span class="nx">bd</span><span class="o">-</span><span class="nx">nhz2s</span> <span class="mi">8080</span><span class="p">:</span><span class="mi">9090</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">monitoring</span>
 
+<span class="nx">kubectl</span> <span class="nx">port</span><span class="o">-</span><span class="nx">forward</span> <span class="nx">svc</span><span class="o">/</span><span class="nx">monitoring</span><span class="o">-</span><span class="nx">grafana</span> <span class="mi">3000</span><span class="p">:</span><span class="mi">80</span>
+
 <span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="nx">exec</span> <span class="o">--</span><span class="nx">stdin</span> <span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">0</span> <span class="o">--</span> <span class="sr">/bin/</span><span class="nx">bash</span>
 
 <span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">configmap</span>
