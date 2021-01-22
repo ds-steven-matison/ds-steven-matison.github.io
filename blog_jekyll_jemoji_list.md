@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Jekyll Emoji List
-description: Emojis you can us in Jekyll
+description: Emojis you can use in Jekyll
 permalink: /blog/jekyll/jemoji/list/
 ---
 
