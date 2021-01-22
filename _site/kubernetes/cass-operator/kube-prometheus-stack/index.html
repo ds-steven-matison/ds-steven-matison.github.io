@@ -23,19 +23,19 @@
     <![endif]-->
 
 <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Kube Prometheus Stack | Data Architect</title>
+<title>Kubernetes Prometheus Stack | Data Architect</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Kube Prometheus Stack" />
+<meta property="og:title" content="Kubernetes Prometheus Stack" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="A blog all about Kube Prometheus Stack" />
-<meta property="og:description" content="A blog all about Kube Prometheus Stack" />
+<meta name="description" content="A blog all about Kubernetes Prometheus Stack" />
+<meta property="og:description" content="A blog all about Kubernetes Prometheus Stack" />
 <link rel="canonical" href="http://localhost:4000/kubernetes/cass-operator/kube-prometheus-stack/" />
 <meta property="og:url" content="http://localhost:4000/kubernetes/cass-operator/kube-prometheus-stack/" />
 <meta property="og:site_name" content="Data Architect" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Kube Prometheus Stack" />
+<meta property="twitter:title" content="Kubernetes Prometheus Stack" />
 <script type="application/ld+json">
-{"headline":"Kube Prometheus Stack","url":"http://localhost:4000/kubernetes/cass-operator/kube-prometheus-stack/","description":"A blog all about Kube Prometheus Stack","@type":"WebPage","@context":"https://schema.org"}</script>
+{"headline":"Kubernetes Prometheus Stack","url":"http://localhost:4000/kubernetes/cass-operator/kube-prometheus-stack/","description":"A blog all about Kubernetes Prometheus Stack","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -44,9 +44,9 @@
     <header>
       <div class="inner">
         <a href="http://localhost:4000/">
-          <h1> Kube Prometheus Stack </h1>
+          <h1> Kubernetes Prometheus Stack </h1>
         </a>
-        <h2> A blog all about Kube Prometheus Stack </h2>
+        <h2> A blog all about Kubernetes Prometheus Stack </h2>
           <br>
           <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
           <a href="/astra/"><button type="button" class="btn btn-primary">Astra</button></a>
@@ -66,7 +66,7 @@
 
 <p>In the previous article I introduced the <a href="/kubernetes/cass-operator/">Cass Operator</a> and then went deeper into the <a href="/kubernetes/cass-operator/iks/">Cass Operator with IKS</a>.  While working with <a href="/kubernetes/cass-operator/iks/metrics/">Prometheus and Grafana on IKS</a> I ran into some sharp edges with connecting Cassanrda Metrics to Prometheus and Grafana.   In this article I am going to show how to easily create the Kubernetes Prometheus Stack with everything completely wired up.   With a working sample base, without conflicts between service names, pods, and cassandra it is now possible to better understand wiring this up manually.</p>
 
-<h1 id="what-is-kube-promethus-stack">What is Kube-Promethus-Stack?</h1>
+<h1 id="what-is-kube-prometheus-stack">What is Kube-Prometheus-Stack?</h1>
 
 <p>The kube-prometheus-stack is a helm chart that reduces the friction of manually installing <a href="https://prometheus.io/">Prometheus</a> and <a href="https://grafana.com/">Grafana</a>, connecting to cassandra metrics collectors, and installing dashboards to view cassandra metrics.  Thanks to my Cass-Op partner in crime <a href="https://github.com/bradfordcp">bradfordcp</a> we can find all of the sample files and documentation <a href="https://github.com/bradfordcp/k8s-cassandra-example">here</a>.  Using this K8s Cassandra Example I can quickly get a grafana dashboard hooked up to Cassandra Cluster Metrics.</p>
 
@@ -97,7 +97,7 @@
 
 <ul>
   <li>I had to get the default admin password using base64 decode for values found in helm template command.  BTW the password is prom-operator.</li>
-  <li>No other issues.  With k3d, docker, helm, and kube-prometheus-stack, this has zero friction</li>
+  <li>No other issues.  With k3d, docker, helm, and kube-prometheus-stack, this has zero friction.</li>
 </ul>
 
 <h1 id="what-are-lessons-learned">What Are Lessons Learned?</h1>

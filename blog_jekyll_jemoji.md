@@ -41,6 +41,8 @@ I give this plugin two :+1:!
 ```
 I give this plugin two :+1:!
 
+You can find the full of Emojis [here](/blog/jekyll/jemoji/list/).  Copy the one you want, and paste it into markdown!
+
 # Customizing Emoji Images Locally
 
 By default the emojis are github cdn provided,  to host your own images just add this to your _config.yml file:
