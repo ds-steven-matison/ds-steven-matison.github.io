@@ -40,6 +40,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
 
 # Recent Posts
 
+*	[How To: Log Ingestion to Astra with NiFi](/astra/nifi/) - 1/26/2020
 *	[How To: Install Kube-Prometheus-Stack](/kubernetes/cass-operator/kube-prometheus-stack/) - 1/22/2020
 *   [How To: Add Emojis to Jekyll Theme](/blog/jekyll/jemoji/) - 1/20/2020
 *	[How To: Create a GitHub Page Readme](/blog/github/page/readme/) - 1/12/2021
