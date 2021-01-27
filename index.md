@@ -19,6 +19,8 @@ I am currently working in the following technologies: cassandra, astra, stargate
 <p>&nbsp;</p>
 # DataStax News
 
+* 	[Datastax + Pulsar = Luna Streaming](https://www.datastax.com/products/luna-streaming) - 1/27/2021
+<br>&nbsp; Not new to streams, Datastax jumps in full stream ahead with Apache Pulsar.
 *	[Cass Operator V 1.5.1 Released](https://docs.datastax.com/en/cass-operator/doc/cass-operator/cassOperatorReleaseNotes.html) - 1/21/2021
 <br>&nbsp; Lots of updates to docs [here](https://docs.datastax.com/en/cass-operator/doc/cass-operator/cassOperatorTOC.html).
 *	[Holiday Hackathon Extended](https://datastaxastra.hackerearth.com/) - 1/20/2021
