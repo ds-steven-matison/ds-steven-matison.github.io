@@ -17,7 +17,7 @@ You can find my official NiFi Astra Cassandra templates [here](https://github.co
 
 # How To: Log Ingestion to Astra with NiFi
 
-In this blog I am going to show you how to ingest raw log data into cassandra using NiFi and Astra.   With NiFi ingesting data from any source is super easy.   With Astra and Cassandra ingesting raw data can be a challenge due to data model constraints.  In this demo I am going to remove that constraint and ingest all raw data using Astra/Stargate Document API which is accepting of schemaless JSON data.   Although not a focus off this blog, it is fully possible to build a cassandra data model and do this log ingestion using NiFi Cassandra Processors against standard cassandra database tables.  In this demo we are going to communicate with Astra via Stargate APIs.
+In this blog I am going to show you how to ingest raw log data into cassandra using NiFi and Astra.   With NiFi ingesting data from any source is super easy.   With Astra and Cassandra ingesting raw data can be a challenge due to data model constraints (primary keys and clustering columns).  In this demo I am going to remove that constraint and ingest all raw data using Astra & Stargate Document API which is accepting of schemaless JSON data.   Although not a focus off this blog, it is fully possible to build a cassandra data model and do this log ingestion using NiFi Cassandra Processors or Astra REST API against standard cassandra database tables.  In this demo we are going to communicate with Astra via Stargate's Documement APIs.
 
 ## Part One:  Get NiFi Authorized for Astra Calls
 
@@ -72,7 +72,7 @@ And the output of the JSON Writer is as follows:
 {"http_status":"200","access_url":"/INTROV8.mp3","ip":"115.164.45.55","apachetime":"2021-01-26 14:16:58"}
 ```
 
-:warning: Notice this JSON structure is exactly what we need to insert into Astra. We do not have to create the collection or schema ahead of time.  This collection creation will automatically happen with the delivery of the first document.
+:warning: Notice this JSON structure is exactly what we need to insert into Astra. We do not have to create the collection or schema ahead of time.  This collection creation will automatically happen with the delivery of the first document. :bulb:
 
 ### Things to Note:
 
@@ -80,7 +80,7 @@ And the output of the JSON Writer is as follows:
 *	Some of the NiFi Variables from above template are referenced in this template.  Adjust your flow accordingly with root level variables or import this template into same Process Group above.
 
 
-## Part Three: Verify Log Data In With Datastax Studio
+## Part Three: Verify Log Data With Datastax Studio
 
 Login to the Astra UI and navigate to your Studio and execute the following query:
 
@@ -93,6 +93,6 @@ select count(*) FROM apache_log;
 
 ## What's Next
 
-We can now use Stargate API to query this data source and even search into the JSON Object.  We can have conversations about the raw data, build cassandra data models, and investigate how this log data can be used downtream from cassandra.   Stay tuned as I add other Log Ingestion Use Cases, a UUID Generator, and more Astra NiFi content here.
+We can now use Stargate Document API to query this data source and even search into the JSON Object.  We can have conversations about the raw data, build cassandra data models, and investigate how this log data can be used downtream from cassandra.   Stay tuned as I add other Log Ingestion Use Cases, a UUID Generator, and more Astra NiFi content here.
 
 {% include astra_help.html %}

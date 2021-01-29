@@ -22,7 +22,7 @@ The [IBM Cloud UI](https://cloud.ibm.com/) was super easy to use.  I was able to
 # What Commands Did I Run?
 
 ```js
-ibmcloud login -u <username> -p <password> -a cloud.ibm.com -r us-south -g default
+ibmcloud login -u <username> -p <password> -a cloud.ibm.com -r us-south -g Default
 ibmcloud ks cluster config --cluster mycluster-dal12-b3c.4x16
 helm repo add iks-charts https://icr.io/helm/iks-charts
 helm repo update
