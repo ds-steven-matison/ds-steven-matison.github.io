@@ -27,7 +27,9 @@ helm repo add iks-charts https://icr.io/helm/iks-charts
 helm repo update
 helm install block-storage-plugin iks-charts/ibmcloud-block-storage-plugin -n cass-operator
 kubectl create -f https://raw.githubusercontent.com/ds-steven-matison/cass-operator/master/operator/k8s-flavors/iks/storage-block.yaml
-cd ~/Documents/GitHub/k8s-cassandra-example
+cd ~/Documents/GitHub 
+git clone https://github.com/bradfordcp/k8s-cassandra-example.git 
+cd k8s-cassandra-example
 helm repo add datastax https://datastax.github.io/charts
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
@@ -51,6 +53,7 @@ kubectl port-forward cluster1-dc1-default-sts-0 9042:9042
 
 *   I needed to remove my old cass-operator and replace with new operator
 *   I needed to apply some changes to my cluster yaml
+*	I needed to work in new environment test cycles with full fresh clusters to reduce friction from previous test cycles
 
 # What Are Lessons Learned?
 
@@ -82,6 +85,43 @@ default       monitoring-prometheus-node-exporter-skwwb
 default       prometheus-monitoring-kube-prometheus-prometheus-0
 ```
 
+cluster-iks.yaml
+```js
+apiVersion: cassandra.datastax.com/v1beta1
+kind: CassandraDatacenter
+metadata:
+  name: dc1
+spec:
+  clusterName: cluster1
+  serverType: dse
+  serverVersion: "6.8.4"
+  managementApiAuth:
+    insecure: {}
+  size: 3
+  storageConfig:
+    cassandraDataVolumeClaimSpec:
+      storageClassName: server-storage
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 25Gi
+  config:    
+    cassandra-yaml:
+      authenticator: org.apache.cassandra.auth.PasswordAuthenticator
+      authorizer: org.apache.cassandra.auth.CassandraAuthorizer
+      role_manager: org.apache.cassandra.auth.CassandraRoleManager
+    jvm-server-options:
+      initial_heap_size: "800M"
+      max_heap_size: "800M"
+      additional-jvm-opts:
+        # As the database comes up for the first time, set system keyspaces to RF=3
+        - "-Ddse.system_distributed_replication_dc_names=dc1"
+        - "-Ddse.system_distributed_replication_per_dc=3"
+```
+
 # What's Next?
 
 Stay tuned for more updates [here](/kubernetes/cass-operator/) for additional kubernetes cassandra operator topics as I dig in even more with the Datastax Cassandra Operator. 
+
+{% include kubernetes_help.html %}
