@@ -81,9 +81,9 @@ Use "kubectl <command> --help" for more information about a given command.
 Use "kubectl options" for a list of global command-line options (applies to all commands).
 ```
 
-# How Do I Use kubectl?
+# How Do I Use Kubectl?
 
-I am working with kubectl as I learn more about [kubernetes](/kubernetes/cass-operator/), [k8ssandra](/k8ssandra/), and [Astra Service Broker](/astra/service/broker/).  Normally I keep a personal document of commands I can reference quickly, but now with this blog, I can use this page for those future references.  Now so can you!
+I am working with kubectl as I learn more about [kubernetes](/kubernetes/cass-operator/), [k8ssandra](/k8ssandra/), [Astra Service Broker](/astra/service/broker/), and [DataStax Kubernetes Operator for Apache Cassandra](/kubernetes/cass-operator/).  Normally I keep a personal document of commands I can reference quickly, but now with this blog, I can use this page for those future references.  Now so can you!
 
 Check out some commands I have used recently:
 
