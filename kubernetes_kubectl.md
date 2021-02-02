@@ -170,6 +170,15 @@ kubectl get crds
 
 kubectl get crds | grep cassandra | cut -d ' ' -f 1 | xargs kubectl delete crd
 ```
+
+# How Do I Make Kubectl Colorful?
+
+Today I found this very kewl github repo [kubecolor](https://github.com/dty1er/kubecolor) which makes the output of your kubectl commands colorful. :rainbow:  How Cool!!
+
+![Kubecolor](/assets/images/kubecolor.png)
+
+Kubecolor is super easy to install and super easy to use!   Thank you: [dty1er](https://github.com/dty1er) and kubecolor [contributors](https://github.com/dty1er/kubecolor/graphs/contributors) for your amazing efforts.  :clap: :clap: :clap: 
+
 # What's Next?
 
 Have some commands I am missing?  I would love to see what you got.  Reach out and lets talk kubectl!
