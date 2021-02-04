@@ -9,6 +9,8 @@ permalink: /kubernetes/kubectl/
 
 The kubectl, pronounced "kube-cuddle", is the command line tool to control your Kubernetes clusters.  Be sure to study the official [kubernetes.io](https://kubernetes.io/docs/home/) documentation for kubectl [here](https://kubernetes.io/docs/reference/kubectl/overview/).
 
+Be sure to bookmark this awesome cheat sheet:  [Kubernetes Kubectl Cheat Sheat](https://kubernetes.io/docs/reference/kubectl/cheatsheet/).
+
 First lets learn to read the manual:
 ```js 
 kubectl
@@ -92,6 +94,8 @@ kubectl version
 
 kubectl cluster-info
 
+kubectl describe pods operatorhubio-catalog-tzv5l -n olm
+
 kubectl get pods --all-namespaces
 
 kubectl -n <namespace> get pods
@@ -139,6 +143,8 @@ kubectl logs -n cass-operator cluster1-dc1-default-sts-0 -c server-config-init
 kubectl logs -n cass-operator cluster1-dc1-default-sts-0 -c server-system-logger
 
 kubectl logs -n cass-operator cluster1-dc1-default-sts-0 -c cassandra
+
+kubectl logs -n olm -p operatorhubio-catalog-tzv5l
 
 kubectl -n <namespace> exec <pod> -- keytool -list -keystore keystore.jks -storepass dc1
 
