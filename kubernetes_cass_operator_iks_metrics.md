@@ -137,13 +137,11 @@ The terminal commands I ran:
 kubectl create namespace ingress-nginx
 kubectl get svc -n ingress-nginx
 kubectl apply --kustomize github.com/kubernetes/ingress-nginx/deploy/prometheus/
-helm install my-release ingress-nginx/ingress-nginx
+helm install my-release ingress-nginx/ingress-nginx -n ingress-nginx
 POD_NAME=$(kubectl get pods -l app.kubernetes.io/name=ingress-nginx -o jsonpath='{.items[0].metadata.name}')\
 kubectl exec -it $POD_NAME -- /nginx-ingress-controller --version
 kubectl get pods --all-namespaces
 kubectl get svc -n default
-helm install my-release ingress-nginx/ingress-nginx -n ingress-nginx
-kubectl apply --kustomize github.com/kubernetes/ingress-nginx/deploy/prometheus/
 kubectl get svc -n ingress-nginx
 kubectl get nodes -o wide
 kubectl apply --kustomize github.com/kubernetes/ingress-nginx/deploy/grafana/
