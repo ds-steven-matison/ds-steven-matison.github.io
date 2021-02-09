@@ -44,6 +44,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
 
 # Recent Posts
 
+* 	[Introducing: Astra Compatible Frameworks](/astra/application/frameworks/) - 2/9/2021
 *	[How To: Kube-Prometheus-Stack on IKS](/kubernetes/cass-operator/iks/kube-prometheus-stack/) - 2/1/2020
 *	[How To: Log Ingestion to Astra with NiFi](/astra/nifi/) - 1/26/2020
 *	[How To: Install Kube-Prometheus-Stack](/kubernetes/cass-operator/kube-prometheus-stack/) - 1/22/2020
