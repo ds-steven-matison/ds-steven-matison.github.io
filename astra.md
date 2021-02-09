@@ -22,6 +22,21 @@ Astra's main goal is to meet developers were they are comfortable (with many API
         <article class="mui-panel">
           <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
             <span class="post-list-title">
+              <a class="post-link" href="/astra/application/frameworks/">Astra Frameworks</a>
+            </span>
+            <div class="img-overlay"></div>
+            <a href="/astra/application/frameworks/" class="overlay"></a>
+          </div>
+          <div class="post-data">
+            <p class="post-excerpt">Astra Compatible Frameworks</p>
+            <p><b>tags:</b> astra, framework, java, python, php</p>
+          </div>
+        </article>
+      </div>
+      <div class="mui-col-md-2">
+        <article class="mui-panel">
+          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
+            <span class="post-list-title">
               <a class="post-link" href="/astra/service/broker/">Astra Service Broker</a>
             </span>
             <div class="img-overlay"></div>
