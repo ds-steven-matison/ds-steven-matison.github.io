@@ -33,7 +33,7 @@ cd k8s-cassandra-example
 helm repo add datastax https://datastax.github.io/charts
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
-helm install monitoring prometheus-community/kube-prometheus-stack -f monitoring.values.yaml
+helm install monitoring prometheus-community/kube-prometheus-stack
 helm install cass-operator datastax/cass-operator
 kubectl get svc
 kubectl apply -f cluster-iks.yaml
@@ -52,13 +52,13 @@ kubectl port-forward cluster1-dc1-default-sts-0 9042:9042
 # What Were The Sharp Edges?
 
 *   I needed to remove my old cass-operator and replace with new operator
-*   I needed to apply some changes to my cluster yaml
+*   I needed to apply some changes to my cluster yaml (auth and prometheus configs)
 *	I needed to work in new environment test cycles with full fresh clusters to reduce friction from previous test cycles
 
 # What Are Lessons Learned?
 
 *   I learned to complete documented dev sample in simple k3ds environment and firmly know it works before attempting in other environments
-*   I learned to repeatedly monitor git repos documentations due to the rapid pace of Cass-Operator and Kube-Prometheus-Stack
+*   I learned to repeatedly monitor git repos documentations due to the rapid pace of Cass-Operator and Kube-Prometheus-Stack repo changes
 *   I learned all of the pieces required to wire cassandra metrics to promethesus and grafana
 
 # What Does Cluster Look Like?
@@ -107,6 +107,11 @@ spec:
         requests:
           storage: 25Gi
   config:    
+    # Enable the DSE metrics collector, and stand up collectd for prometheus to scrape
+    10-write-prom-conf:
+      enabled: true
+      port: 9103
+      staleness-delta: 300
     cassandra-yaml:
       authenticator: org.apache.cassandra.auth.PasswordAuthenticator
       authorizer: org.apache.cassandra.auth.CassandraAuthorizer
