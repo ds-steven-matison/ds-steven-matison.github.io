@@ -20,7 +20,7 @@ There are many application frameworks that use Apache Cassandra as a backend dat
 * [Node](https://nodejs.org/en/)
 * [Entity](https://docs.microsoft.com/en-us/ef/)
 * [Play](https://www.playframework.com/)
-* [Micronaut](https://micronaut.io/) https://github.com/micronaut-projects
+* [Micronaut](https://micronaut.io/)
 * [Django](https://www.djangoproject.com/)
 * [Yii](https://www.yiiframework.com/)
 * [Symfony](https://symfony.com/)
