@@ -25,7 +25,7 @@ ibmcloud login -u steven.matison@datastax.com -p [password] -a cloud.ibm.com -r 
 ibmcloud ks cluster config --cluster mycluster-dal12-b3c.4x16
 helm repo add iks-charts https://icr.io/helm/iks-charts
 helm repo update
-helm install block-storage-plugin iks-charts/ibmcloud-block-storage-plugin -n cass-operator
+helm install block-storage-plugin iks-charts/ibmcloud-block-storage-plugin
 kubectl create -f https://raw.githubusercontent.com/ds-steven-matison/cass-operator/master/operator/k8s-flavors/iks/storage-block.yaml
 cd ~/Documents/GitHub 
 git clone https://github.com/bradfordcp/k8s-cassandra-example.git 
