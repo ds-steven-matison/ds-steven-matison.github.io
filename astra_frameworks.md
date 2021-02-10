@@ -9,7 +9,7 @@ permalink: /astra/application/frameworks/
 
 [Wiki](https://en.wikipedia.org/wiki/Application_framework) - "In computer programming, an application framework consists of a software framework used by software developers to implement the standard structure of application software."
 
-There are many application frameworks that use Apache Cassandra as a backend data storage solution.  Any of these applications using cassandra drivers (java,python,php) are 100% compatible with Astra. Any application frameworks allowing REST Api calls are allso 100% compatible with Astra.
+There are many application frameworks that use Apache Cassandra as a backend data storage solution.  Any of these applications using cassandra drivers (java,python,php) are compatible with Astra. Any application frameworks allowing REST API calls are also compatible with Astra.
 
 # What Frameworks Are Compatible With Astra?
 
@@ -29,6 +29,6 @@ There are many application frameworks that use Apache Cassandra as a backend dat
 
 # What's Next?
 
-Have a cassandra based application framework not listed above?  Reach out and tell me more about your framework and I will complete a free astra compatability test.  If this framework works with Astra I will happily add it here and feature your framework on my blog. 
+Have a cassandra based application framework not listed above?  Need help migrating your application to Astra?  Reach out and tell me more about your framework and I will complete a free astra compatability test.  If this framework works with Astra I will happily add it here and feature your framework on my blog. 
 
 {% include astra_help.html %}
