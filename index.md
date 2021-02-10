@@ -19,6 +19,8 @@ I am currently working in the following technologies: cassandra, astra, stargate
 <p>&nbsp;</p>
 # DataStax News
 
+*	[Stargate on Datastax Enterprise](https://www.datastax.com/blog/2021/02/turbocharge-app-development-dse-stargate-support-modern-data-apis) - 2/10/2021
+<br>&nbsp; Stargate support for DSE is here! REST, GraphQL, and schemaless Document APIs for Cassandra
 *	[Astra SOC 2 Type 2 Compliance](https://www.datastax.com/resources/whitepaper/astra-architecture-security) - 1/29/2021
 <br>&nbsp; Astra, the premier Cassandra-as-a-Service from Datastax, now has SOC 2 Type II certification.
 * 	[Datastax + Pulsar = Luna Streaming](https://www.datastax.com/products/luna-streaming) - 1/27/2021
