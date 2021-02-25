@@ -19,7 +19,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
 <p>&nbsp;</p>
 # DataStax News
 
-*	[Astra Serverless](https://www.datastax.com/press-release/datastax-astra-shatters-serverless-database-service-barrier) - 1/19/2021
+*	[Astra Serverless](https://www.datastax.com/press-release/datastax-astra-shatters-serverless-database-service-barrier) - 2/25/2021
 <br>&nbsp; :fire: :boom: Serverless is now GA on Astra!!
 *	[Stargate on Datastax Enterprise](https://www.datastax.com/blog/2021/02/turbocharge-app-development-dse-stargate-support-modern-data-apis) - 2/10/2021
 <br>&nbsp; Stargate support for DSE is here! REST, GraphQL, and schemaless Document APIs for Cassandra
