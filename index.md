@@ -19,6 +19,8 @@ I am currently working in the following technologies: cassandra, astra, stargate
 <p>&nbsp;</p>
 # DataStax News
 
+*	[Astra Serverless](https://www.datastax.com/press-release/datastax-astra-shatters-serverless-database-service-barrier) - 1/19/2021
+<br>&nbsp; :fire: :boom: Serverless is now GA on Astra!!
 *	[Stargate on Datastax Enterprise](https://www.datastax.com/blog/2021/02/turbocharge-app-development-dse-stargate-support-modern-data-apis) - 2/10/2021
 <br>&nbsp; Stargate support for DSE is here! REST, GraphQL, and schemaless Document APIs for Cassandra
 *	[Astra SOC 2 Type 2 Compliance](https://www.datastax.com/resources/whitepaper/astra-architecture-security) - 1/29/2021
@@ -29,8 +31,6 @@ I am currently working in the following technologies: cassandra, astra, stargate
 <br>&nbsp; Lots of updates to docs [here](https://docs.datastax.com/en/cass-operator/doc/cass-operator/cassOperatorTOC.html).
 *	[Holiday Hackathon Extended](https://datastaxastra.hackerearth.com/) - 1/20/2021
 <br>&nbsp; Submissions now accepted til 1/25/2021.  Please sign up [here](https://datastaxastra.hackerearth.com/).
-*	[RIP Open Source Elastic](https://www.elastic.co/blog/why-license-change-AWS) - 1/19/2021
-<br>&nbsp; :cry: one of my favorite stacks, the elk stack, now moves away from open source apache license. 
 *	[Holiday Hackathon](https://datastaxastra.hackerearth.com/) - 1/7/2021
 <br>&nbsp; Going off til 1/18/2021 with top prize $10,000.  Please sign up [here](https://datastaxastra.hackerearth.com/).
 *	[Cassandra 4.0-beta4 Released](https://gitbox.apache.org/repos/asf?p=cassandra.git;a=blob_plain;f=CHANGES.txt;hb=refs/tags/cassandra-4.0-beta4) - 12/30/2020
