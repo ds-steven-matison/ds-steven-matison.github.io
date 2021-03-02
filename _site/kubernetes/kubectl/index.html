@@ -35,7 +35,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Kubectl" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/kubernetes/kubectl/","headline":"Kubectl","description":"A blog all about kubectl","@type":"WebPage","@context":"https://schema.org"}</script>
+{"headline":"Kubectl","url":"http://localhost:4000/kubernetes/kubectl/","description":"A blog all about kubectl","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -53,6 +53,8 @@
           <a href="/kubernetes/"><button type="button" class="btn btn-primary">Kubernetes</button></a>
           <a href="/nosqlbench/"><button type="button" class="btn btn-primary">NoSqlBench</button></a>
           <a href="/stargate/"><button type="button" class="btn btn-primary">Stargate</button></a>
+          <p></p>
+<div id="GHP_counter"></div>          
         <a href="" class="button"><small>Follow me on</small> GitHub</a>
       </div>
     </header>
@@ -63,6 +65,8 @@
           <h1 id="what-is-kubectl">What is Kubectl?</h1>
 
 <p>The kubectl, pronounced “kube-cuddle”, is the command line tool to control your Kubernetes clusters.  Be sure to study the official <a href="https://kubernetes.io/docs/home/">kubernetes.io</a> documentation for kubectl <a href="https://kubernetes.io/docs/reference/kubectl/overview/">here</a>.</p>
+
+<p>Be sure to bookmark this awesome cheat sheet:  <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">Kubernetes Kubectl Cheat Sheat</a>.</p>
 
 <p>First lets learn to read the manual:</p>
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span>
@@ -135,15 +139,17 @@
 <span class="nx">Use</span> <span class="dl">"</span><span class="s2">kubectl options</span><span class="dl">"</span> <span class="k">for</span> <span class="nx">a</span> <span class="nx">list</span> <span class="k">of</span> <span class="nb">global</span> <span class="nx">command</span><span class="o">-</span><span class="nx">line</span> <span class="nx">options</span> <span class="p">(</span><span class="nx">applies</span> <span class="nx">to</span> <span class="nx">all</span> <span class="nx">commands</span><span class="p">).</span>
 </code></pre></div></div>
 
-<h1 id="how-do-i-use-kubectl">How Do I Use kubectl?</h1>
+<h1 id="how-do-i-use-kubectl">How Do I Use Kubectl?</h1>
 
-<p>I am working with kubectl as I learn more about <a href="/kubernetes/cass-operator/">kubernetes</a>, <a href="/k8ssandra/">k8ssandra</a>, and <a href="/astra/service/broker/">Astra Service Broker</a>.  Normally I keep a personal document of commands I can reference quickly, but now with this blog, I can use this page for those future references.  Now so can you!</p>
+<p>I am working with kubectl as I learn more about <a href="/kubernetes/cass-operator/">kubernetes</a>, <a href="/k8ssandra/">k8ssandra</a>, <a href="/astra/service/broker/">Astra Service Broker</a>, and <a href="/kubernetes/cass-operator/">DataStax Kubernetes Operator for Apache Cassandra</a>.  Normally I keep a personal document of commands I can reference quickly, but now with this blog, I can use this page for those future references.  Now so can you!</p>
 
 <p>Check out some commands I have used recently:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span> <span class="nx">version</span>
 
 <span class="nx">kubectl</span> <span class="nx">cluster</span><span class="o">-</span><span class="nx">info</span>
+
+<span class="nx">kubectl</span> <span class="nx">describe</span> <span class="nx">pods</span> <span class="nx">operatorhubio</span><span class="o">-</span><span class="nx">catalog</span><span class="o">-</span><span class="nx">tzv5l</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">olm</span>
 
 <span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">pods</span> <span class="o">--</span><span class="nx">all</span><span class="o">-</span><span class="nx">namespaces</span>
 
@@ -193,6 +199,8 @@
 
 <span class="nx">kubectl</span> <span class="nx">logs</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">0</span> <span class="o">-</span><span class="nx">c</span> <span class="nx">cassandra</span>
 
+<span class="nx">kubectl</span> <span class="nx">logs</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">olm</span> <span class="o">-</span><span class="nx">p</span> <span class="nx">operatorhubio</span><span class="o">-</span><span class="nx">catalog</span><span class="o">-</span><span class="nx">tzv5l</span>
+
 <span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="o">&lt;</span><span class="nx">namespace</span><span class="o">&gt;</span> <span class="nx">exec</span> <span class="o">&lt;</span><span class="nx">pod</span><span class="o">&gt;</span> <span class="o">--</span> <span class="nx">keytool</span> <span class="o">-</span><span class="nx">list</span> <span class="o">-</span><span class="nx">keystore</span> <span class="nx">keystore</span><span class="p">.</span><span class="nx">jks</span> <span class="o">-</span><span class="nx">storepass</span> <span class="nx">dc1</span>
 
 <span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">serviceinstances</span> <span class="nx">devdb</span>
@@ -223,13 +231,22 @@
 
 <span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">crds</span> <span class="o">|</span> <span class="nx">grep</span> <span class="nx">cassandra</span> <span class="o">|</span> <span class="nx">cut</span> <span class="o">-</span><span class="nx">d</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span> <span class="o">-</span><span class="nx">f</span> <span class="mi">1</span> <span class="o">|</span> <span class="nx">xargs</span> <span class="nx">kubectl</span> <span class="k">delete</span> <span class="nx">crd</span>
 </code></pre></div></div>
+
+<h1 id="how-do-i-make-kubectl-colorful">How Do I Make Kubectl Colorful?</h1>
+
+<p>Today I found this very kewl github repo <a href="https://github.com/dty1er/kubecolor">kubecolor</a> which makes the output of your kubectl commands colorful. <img class="emoji" title=":rainbow:" alt=":rainbow:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f308.png" height="20" width="20">  How Cool!!</p>
+
+<p><img src="/assets/images/kubecolor.png" alt="Kubecolor"></p>
+
+<p>Kubecolor is super easy to install and super easy to use!   Thank you: <a href="https://github.com/dty1er">dty1er</a> and kubecolor <a href="https://github.com/dty1er/kubecolor/graphs/contributors">contributors</a> for your amazing efforts.  <img class="emoji" title=":clap:" alt=":clap:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20"> <img class="emoji" title=":clap:" alt=":clap:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20"> <img class="emoji" title=":clap:" alt=":clap:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20"></p>
+
 <h1 id="whats-next">What’s Next?</h1>
 
 <p>Have some commands I am missing?  I would love to see what you got.  Reach out and lets talk kubectl!</p>
 
 <h1 id="how-can-i-help-you-with-kubernetes">How can I help you with Kubernetes?</h1>
 
-<p><img src="/assets/images/SRM.png" alt="SRM" height="100" width="100" style="float: left; padding: 10px" /></p>
+<p><img src="/assets/images/SRM.png" alt="SRM" height="100" width="100" style="float: left; padding: 10px"></p>
 
 <p>Find me over on the <a href="https://community.datastax.com/index.html">DataStax Community</a> to ask me any questions about Cassandra and Kubernetes.  Also let’s chat if you have something kewl you did with Cassandra and Kubernetes and you want me to feature it in my blog.  Look below or to the right for more ways to find me.</p>
 
@@ -292,3 +309,13 @@ GHP_object.open("GET", ghpscript_url, false);
 GHP_object.send(null);
 </script>
 <!-- end GHP Listener -->
+<!-- end GHP Counter -->
+<script type="text/javascript">
+var widget_url = ("https:" == document.location.protocol ? "https://" : "http://") + "ghptracker.site/widget/?siteid=ds-steven-matison";
+var GHP_object = new XMLHttpRequest();
+GHP_object.open("GET", widget_url, false);
+GHP_object.send(null);
+var obj = JSON.parse(GHP_object.response);
+document.getElementById("GHP_counter").innerHTML += '<img src="//img.shields.io/badge/views-' + obj.counter.value + '-blue">';
+</script>
+<!-- end GHP Counter -->

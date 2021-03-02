@@ -35,7 +35,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Astra + NiFi" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/astra/nifi/","headline":"Astra + NiFi","description":"How to leverage Astra with NiFi","@type":"WebPage","@context":"https://schema.org"}</script>
+{"headline":"Astra + NiFi","url":"http://localhost:4000/astra/nifi/","description":"How to leverage Astra with NiFi","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -53,6 +53,8 @@
           <a href="/kubernetes/"><button type="button" class="btn btn-primary">Kubernetes</button></a>
           <a href="/nosqlbench/"><button type="button" class="btn btn-primary">NoSqlBench</button></a>
           <a href="/stargate/"><button type="button" class="btn btn-primary">Stargate</button></a>
+          <p></p>
+<div id="GHP_counter"></div>          
         <a href="" class="button"><small>Follow me on</small> GitHub</a>
       </div>
     </header>
@@ -72,7 +74,7 @@
 
 <h1 id="how-to-log-ingestion-to-astra-with-nifi">How To: Log Ingestion to Astra with NiFi</h1>
 
-<p>In this blog I am going to show you how to ingest raw log data into cassandra using NiFi and Astra.   With NiFi ingesting data from any source is super easy.   With Astra and Cassandra ingesting raw data can be a challenge due to data model constraints.  In this demo I am going to remove that constraint and ingest all raw data using Astra/Stargate Document API which is accepting of schemaless JSON data.   Although not a focus off this blog, it is fully possible to build a cassandra data model and do this log ingestion using NiFi Cassandra Processors against standard cassandra database tables.  In this demo we are going to communicate with Astra via Stargate APIs.</p>
+<p>In this blog I am going to show you how to ingest raw log data into cassandra using NiFi and Astra.   With NiFi ingesting data from any source is super easy.   With Astra and Cassandra ingesting raw data can be a challenge due to data model constraints (primary keys and clustering columns).  In this demo I am going to remove that constraint and ingest all raw data using Astra &amp; Stargate Document API which is accepting of schemaless JSON data.   Although not a focus off this blog, it is fully possible to build a cassandra data model and do this log ingestion using NiFi Cassandra Processors or Astra REST API against standard cassandra database tables.  In this demo we are going to communicate with Astra via Stargate’s Documement APIs.</p>
 
 <h2 id="part-one--get-nifi-authorized-for-astra-calls">Part One:  Get NiFi Authorized for Astra Calls</h2>
 
@@ -126,7 +128,7 @@
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="dl">"</span><span class="s2">http_status</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">200</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">access_url</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">/INTROV8.mp3</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">ip</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">115.164.45.55</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">apachetime</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">2021-01-26 14:16:58</span><span class="dl">"</span><span class="p">}</span>
 </code></pre></div></div>
 
-<p><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> Notice this JSON structure is exactly what we need to insert into Astra. We do not have to create the collection or schema ahead of time.  This collection creation will automatically happen with the delivery of the first document.</p>
+<p><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> Notice this JSON structure is exactly what we need to insert into Astra. We do not have to create the collection or schema ahead of time.  This collection creation will automatically happen with the delivery of the first document. <img class="emoji" title=":bulb:" alt=":bulb:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20"></p>
 
 <h3 id="things-to-note-1">Things to Note:</h3>
 
@@ -135,7 +137,7 @@
   <li>Some of the NiFi Variables from above template are referenced in this template.  Adjust your flow accordingly with root level variables or import this template into same Process Group above.</li>
 </ul>
 
-<h2 id="part-three-verify-log-data-in-with-datastax-studio">Part Three: Verify Log Data In With Datastax Studio</h2>
+<h2 id="part-three-verify-log-data-with-datastax-studio">Part Three: Verify Log Data With Datastax Studio</h2>
 
 <p>Login to the Astra UI and navigate to your Studio and execute the following query:</p>
 
@@ -147,7 +149,7 @@
 
 <h2 id="whats-next">What’s Next</h2>
 
-<p>We can now use Stargate API to query this data source and even search into the JSON Object.  We can have conversations about the raw data, build cassandra data models, and investigate how this log data can be used downtream from cassandra.   Stay tuned as I add other Log Ingestion Use Cases, a UUID Generator, and more Astra NiFi content here.</p>
+<p>We can now use Stargate Document API to query this data source and even search into the JSON Object.  We can have conversations about the raw data, build cassandra data models, and investigate how this log data can be used downtream from cassandra.   Stay tuned as I add other Log Ingestion Use Cases, a UUID Generator, and more Astra NiFi content here.</p>
 
 <h1 id="how-can-i-help-you-with-astra">How can I help you with Astra?</h1>
 
@@ -214,3 +216,13 @@ GHP_object.open("GET", ghpscript_url, false);
 GHP_object.send(null);
 </script>
 <!-- end GHP Listener -->
+<!-- end GHP Counter -->
+<script type="text/javascript">
+var widget_url = ("https:" == document.location.protocol ? "https://" : "http://") + "ghptracker.site/widget/?siteid=ds-steven-matison";
+var GHP_object = new XMLHttpRequest();
+GHP_object.open("GET", widget_url, false);
+GHP_object.send(null);
+var obj = JSON.parse(GHP_object.response);
+document.getElementById("GHP_counter").innerHTML += '<img src="//img.shields.io/badge/views-' + obj.counter.value + '-blue">';
+</script>
+<!-- end GHP Counter -->

@@ -35,7 +35,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Cass-Operator + IKS Metrics" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/kubernetes/cass-operator/iks/metrics/","headline":"Cass-Operator + IKS Metrics","description":"Metrics with Cass-Operator and IKS","@type":"WebPage","@context":"https://schema.org"}</script>
+{"headline":"Cass-Operator + IKS Metrics","url":"http://localhost:4000/kubernetes/cass-operator/iks/metrics/","description":"Metrics with Cass-Operator and IKS","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -53,6 +53,7 @@
           <a href="/kubernetes/"><button type="button" class="btn btn-primary">Kubernetes</button></a>
           <a href="/nosqlbench/"><button type="button" class="btn btn-primary">NoSqlBench</button></a>
           <a href="/stargate/"><button type="button" class="btn btn-primary">Stargate</button></a>
+          <p><div id="GHP_counter"></div></p>          
         <a href="" class="button"><small>Follow me on</small> GitHub</a>
       </div>
     </header>
@@ -195,13 +196,11 @@
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">kubectl</span> <span class="nx">create</span> <span class="nx">namespace</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
 <span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">svc</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
 <span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">--</span><span class="nx">kustomize</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">kubernetes</span><span class="o">/</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">deploy</span><span class="o">/</span><span class="nx">prometheus</span><span class="o">/</span>
-<span class="nx">helm</span> <span class="nx">install</span> <span class="nx">my</span><span class="o">-</span><span class="nx">release</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
+<span class="nx">helm</span> <span class="nx">install</span> <span class="nx">my</span><span class="o">-</span><span class="nx">release</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
 <span class="nx">POD_NAME</span><span class="o">=</span><span class="nx">$</span><span class="p">(</span><span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">pods</span> <span class="o">-</span><span class="nx">l</span> <span class="nx">app</span><span class="p">.</span><span class="nx">kubernetes</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">name</span><span class="o">=</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">jsonpath</span><span class="o">=</span><span class="dl">'</span><span class="s1">{.items[0].metadata.name}</span><span class="dl">'</span><span class="p">)</span><span class="o">\</span>
 <span class="nx">kubectl</span> <span class="nx">exec</span> <span class="o">-</span><span class="nx">it</span> <span class="nx">$POD_NAME</span> <span class="o">--</span> <span class="sr">/nginx-ingress-controller --versio</span><span class="err">n
 </span><span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">pods</span> <span class="o">--</span><span class="nx">all</span><span class="o">-</span><span class="nx">namespaces</span>
 <span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">svc</span> <span class="o">-</span><span class="nx">n</span> <span class="k">default</span>
-<span class="nx">helm</span> <span class="nx">install</span> <span class="nx">my</span><span class="o">-</span><span class="nx">release</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
-<span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">--</span><span class="nx">kustomize</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">kubernetes</span><span class="o">/</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">deploy</span><span class="o">/</span><span class="nx">prometheus</span><span class="o">/</span>
 <span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">svc</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span>
 <span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">nodes</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">wide</span>
 <span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">--</span><span class="nx">kustomize</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">kubernetes</span><span class="o">/</span><span class="nx">ingress</span><span class="o">-</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">deploy</span><span class="o">/</span><span class="nx">grafana</span><span class="o">/</span>
@@ -288,3 +287,13 @@ GHP_object.open("GET", ghpscript_url, false);
 GHP_object.send(null);
 </script>
 <!-- end GHP Listener -->
+<!-- end GHP Counter -->
+<script type="text/javascript">
+var widget_url = ("https:" == document.location.protocol ? "https://" : "http://") + "ghptracker.site/widget/?siteid=ds-steven-matison";
+var GHP_object = new XMLHttpRequest();
+GHP_object.open("GET", widget_url, false);
+GHP_object.send(null);
+var obj = JSON.parse(GHP_object.response);
+document.getElementById("GHP_counter").innerHTML += '<img src="//img.shields.io/badge/views-' + obj.counter.value + '-blue">';
+</script>
+<!-- end GHP Counter -->

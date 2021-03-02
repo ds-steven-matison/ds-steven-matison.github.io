@@ -35,7 +35,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Cass-Operator + IKS" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/kubernetes/cass-operator/iks/","headline":"Cass-Operator + IKS","description":"A blog all about Cass-Operator and IKS","@type":"WebPage","@context":"https://schema.org"}</script>
+{"headline":"Cass-Operator + IKS","url":"http://localhost:4000/kubernetes/cass-operator/iks/","description":"A blog all about Cass-Operator and IKS","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -53,6 +53,7 @@
           <a href="/kubernetes/"><button type="button" class="btn btn-primary">Kubernetes</button></a>
           <a href="/nosqlbench/"><button type="button" class="btn btn-primary">NoSqlBench</button></a>
           <a href="/stargate/"><button type="button" class="btn btn-primary">Stargate</button></a>
+          <p><div id="GHP_counter"></div></p>          
         <a href="" class="button"><small>Follow me on</small> GitHub</a>
       </div>
     </header>
@@ -76,7 +77,7 @@
 
 <h1 id="what-commands-did-i-run">What Commands Did I Run?</h1>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ibmcloud</span> <span class="nx">login</span> <span class="o">-</span><span class="nx">u</span> <span class="o">&lt;</span><span class="nx">username</span><span class="o">&gt;</span> <span class="o">-</span><span class="nx">p</span> <span class="o">&lt;</span><span class="nx">password</span><span class="o">&gt;</span> <span class="o">-</span><span class="nx">a</span> <span class="nx">cloud</span><span class="p">.</span><span class="nx">ibm</span><span class="p">.</span><span class="nx">com</span> <span class="o">-</span><span class="nx">r</span> <span class="nx">us</span><span class="o">-</span><span class="nx">south</span> <span class="o">-</span><span class="nx">g</span> <span class="k">default</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ibmcloud</span> <span class="nx">login</span> <span class="o">-</span><span class="nx">u</span> <span class="o">&lt;</span><span class="nx">username</span><span class="o">&gt;</span> <span class="o">-</span><span class="nx">p</span> <span class="o">&lt;</span><span class="nx">password</span><span class="o">&gt;</span> <span class="o">-</span><span class="nx">a</span> <span class="nx">cloud</span><span class="p">.</span><span class="nx">ibm</span><span class="p">.</span><span class="nx">com</span> <span class="o">-</span><span class="nx">r</span> <span class="nx">us</span><span class="o">-</span><span class="nx">south</span> <span class="o">-</span><span class="nx">g</span> <span class="nx">Default</span>
 <span class="nx">ibmcloud</span> <span class="nx">ks</span> <span class="nx">cluster</span> <span class="nx">config</span> <span class="o">--</span><span class="nx">cluster</span> <span class="nx">mycluster</span><span class="o">-</span><span class="nx">dal12</span><span class="o">-</span><span class="nx">b3c</span><span class="p">.</span><span class="mi">4</span><span class="nx">x16</span>
 <span class="nx">helm</span> <span class="nx">repo</span> <span class="nx">add</span> <span class="nx">iks</span><span class="o">-</span><span class="nx">charts</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//icr.io/helm/iks-charts</span>
 <span class="nx">helm</span> <span class="nx">repo</span> <span class="nx">update</span>
@@ -159,6 +160,21 @@
           </div>
         </article>
       </div>
+      <div class="mui-col-md-2">
+        <article class="mui-panel">
+          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
+            <span class="post-list-title">
+              <a class="post-link" href="/kubernetes/cass-operator/iks/kube-prometheus-stack/">IKS Prometheus Stack</a>
+            </span>
+            <div class="img-overlay"></div>
+            <a href="/kubernetes/cass-operator/iks/kube-prometheus-stack/" class="overlay"></a>
+          </div>
+          <div class="post-data">
+            <p class="post-excerpt">Kubernetes Prometheus &amp; Graphana Stack</p>
+            <p><b>tags:</b> grafana, prometheus, iks, cassandra, metrics</p>
+          </div>
+        </article>
+      </div>
   </div>  
 </div>
 
@@ -231,3 +247,13 @@ GHP_object.open("GET", ghpscript_url, false);
 GHP_object.send(null);
 </script>
 <!-- end GHP Listener -->
+<!-- end GHP Counter -->
+<script type="text/javascript">
+var widget_url = ("https:" == document.location.protocol ? "https://" : "http://") + "ghptracker.site/widget/?siteid=ds-steven-matison";
+var GHP_object = new XMLHttpRequest();
+GHP_object.open("GET", widget_url, false);
+GHP_object.send(null);
+var obj = JSON.parse(GHP_object.response);
+document.getElementById("GHP_counter").innerHTML += '<img src="//img.shields.io/badge/views-' + obj.counter.value + '-blue">';
+</script>
+<!-- end GHP Counter -->

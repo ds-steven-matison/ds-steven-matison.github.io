@@ -35,7 +35,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Astra + Ansible" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/astra/ansible/data/","headline":"Astra + Ansible","description":"Astra Data API with Ansible","@type":"WebPage","@context":"https://schema.org"}</script>
+{"headline":"Astra + Ansible","url":"http://localhost:4000/astra/ansible/data/","description":"Astra Data API with Ansible","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -53,6 +53,7 @@
           <a href="/kubernetes/"><button type="button" class="btn btn-primary">Kubernetes</button></a>
           <a href="/nosqlbench/"><button type="button" class="btn btn-primary">NoSqlBench</button></a>
           <a href="/stargate/"><button type="button" class="btn btn-primary">Stargate</button></a>
+          <p><div id="GHP_counter"></div></p>          
         <a href="" class="button"><small>Follow me on</small> GitHub</a>
       </div>
     </header>
@@ -631,3 +632,13 @@ GHP_object.open("GET", ghpscript_url, false);
 GHP_object.send(null);
 </script>
 <!-- end GHP Listener -->
+<!-- end GHP Counter -->
+<script type="text/javascript">
+var widget_url = ("https:" == document.location.protocol ? "https://" : "http://") + "ghptracker.site/widget/?siteid=ds-steven-matison";
+var GHP_object = new XMLHttpRequest();
+GHP_object.open("GET", widget_url, false);
+GHP_object.send(null);
+var obj = JSON.parse(GHP_object.response);
+document.getElementById("GHP_counter").innerHTML += '<img src="//img.shields.io/badge/views-' + obj.counter.value + '-blue">';
+</script>
+<!-- end GHP Counter -->

@@ -20,7 +20,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
 # DataStax News
 
 *	[Astra Serverless](https://www.datastax.com/press-release/datastax-astra-shatters-serverless-database-service-barrier) - 2/25/2021
-<br>&nbsp; :fire: :boom: Serverless is now GA on Astra!!
+<br>&nbsp; :fire: :boom: Astra is now Serverless!!
 *	[Stargate on Datastax Enterprise](https://www.datastax.com/blog/2021/02/turbocharge-app-development-dse-stargate-support-modern-data-apis) - 2/10/2021
 <br>&nbsp; Stargate support for DSE is here! REST, GraphQL, and schemaless Document APIs for Cassandra
 *	[Astra SOC 2 Type 2 Compliance](https://www.datastax.com/resources/whitepaper/astra-architecture-security) - 1/29/2021
@@ -46,6 +46,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
 
 # Recent Posts
 
+*	[How To: React App + Astra](/astra/application/frameworks/react/) - 3/2/2021
 * 	[Introducing: Astra Compatible Frameworks](/astra/application/frameworks/) - 2/9/2021
 *	[How To: Kube-Prometheus-Stack on IKS](/kubernetes/cass-operator/iks/kube-prometheus-stack/) - 2/1/2020
 *	[How To: Log Ingestion to Astra with NiFi](/astra/nifi/) - 1/26/2020
