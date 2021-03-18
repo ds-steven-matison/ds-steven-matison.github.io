@@ -45,7 +45,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
 <br>&nbsp; This is an exciting nerdy launch week here with Spacex, ULA, Virgin Galactic, and [Stargate 1.0](/stargate/) launching into orbit.
 
 # Recent Posts
-
+*	[How To: Lagom App + Astra](/astra/application/frameworks/lagom/) - 3/18/2021
 *	[How To: React App + Astra](/astra/application/frameworks/react/) - 3/2/2021
 * 	[Introducing: Astra Compatible Frameworks](/astra/application/frameworks/) - 2/9/2021
 *	[How To: Kube-Prometheus-Stack on IKS](/kubernetes/cass-operator/iks/kube-prometheus-stack/) - 2/1/2020

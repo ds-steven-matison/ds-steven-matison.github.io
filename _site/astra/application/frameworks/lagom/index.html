@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CTPEBJMK1C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-CTPEBJMK1C');
+    </script>
+    <meta charset='utf-8'>
+    <meta name="referrer" content="no-referrer-when-downgrade"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=" media="screen" type="text/css">
+    <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
+    <link rel="stylesheet" href="/assets/css/mui.css">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Astra + Lagom | Data Architect</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Astra + Lagom" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Connect your existing Lagom app to Astra" />
+<meta property="og:description" content="Connect your existing Lagom app to Astra" />
+<link rel="canonical" href="http://localhost:4000/astra/application/frameworks/lagom/" />
+<meta property="og:url" content="http://localhost:4000/astra/application/frameworks/lagom/" />
+<meta property="og:site_name" content="Data Architect" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Astra + Lagom" />
+<script type="application/ld+json">
+{"headline":"Astra + Lagom","url":"http://localhost:4000/astra/application/frameworks/lagom/","description":"Connect your existing Lagom app to Astra","@type":"WebPage","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <a href="http://localhost:4000/">
+          <h1> Astra + Lagom </h1>
+        </a>
+        <h2> Connect your existing Lagom app to Astra </h2>
+          <br>
+          <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
+          <a href="/astra/"><button type="button" class="btn btn-primary">Astra</button></a>
+          <a href="/kubernetes/"><button type="button" class="btn btn-primary">Kubernetes</button></a>
+          <a href="/nosqlbench/"><button type="button" class="btn btn-primary">NoSqlBench</button></a>
+          <a href="/stargate/"><button type="button" class="btn btn-primary">Stargate</button></a>
+          <p><div id="GHP_counter"></div></p>          
+        <a href="" class="button"><small>Follow me on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1 id="how-i-connected-a-lagom-app-to-astra">How I Connected A Lagom App To Astra</h1>
+
+<p>Lagom was actually the first framework migration I was involved with here at Datastax.  Following <a href="https://github.com/Ankitp1342">ankitp1342</a> lead I supported the full migration from a single 3 node Datastax Enterprise on-prem to multi-cluster multi-tentant infrastructure on Astra.  This application has been migrated and running on Astra (AWS) for over 3 months now.   Recently however a few Lagom developers responded on a <a href="https://github.com/lagom/lagom/issues/3048">GitHub Issue</a> I created to ask Lagom to update their base driver version to 3.8 or higher.  Java based cassandra applications need the cassandra 3.8 or hire driver to connect to Astra.
+Thank you <a href="https://github.com/vcanuel">vcanuel</a> for the change details and motivation to add this blog page.</p>
+
+<p>First we must update dependencies in pom.xml:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">&lt;</span><span class="nx">dependency</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">groupId</span><span class="o">&gt;</span><span class="nx">com</span><span class="p">.</span><span class="nx">lightbend</span><span class="p">.</span><span class="nx">lagom</span><span class="o">&lt;</span><span class="sr">/groupId</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">artifactId</span><span class="o">&gt;</span><span class="nx">lagom</span><span class="o">-</span><span class="nx">javadsl</span><span class="o">-</span><span class="nx">persistence</span><span class="o">-</span><span class="nx">cassandra_$</span><span class="p">{</span><span class="nx">scala</span><span class="p">.</span><span class="nx">binary</span><span class="p">.</span><span class="nx">version</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/artifactId</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">exclusions</span><span class="o">&gt;</span>
+              <span class="o">&lt;</span><span class="nx">exclusion</span><span class="o">&gt;</span>
+                  <span class="o">&lt;</span><span class="nx">groupId</span><span class="o">&gt;</span><span class="nx">com</span><span class="p">.</span><span class="nx">datastax</span><span class="p">.</span><span class="nx">cassandra</span><span class="o">&lt;</span><span class="sr">/groupId</span><span class="err">&gt;
+</span>                  <span class="o">&lt;</span><span class="nx">artifactId</span><span class="o">&gt;</span><span class="nx">cassandra</span><span class="o">-</span><span class="nx">driver</span><span class="o">-</span><span class="nx">core</span><span class="o">&lt;</span><span class="sr">/artifactId</span><span class="err">&gt;
+</span>              <span class="o">&lt;</span><span class="sr">/exclusion</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/exclusions</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/dependency</span><span class="err">&gt;
+</span>
+      <span class="c">&lt;!--</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//mvnrepository.com/artifact/com.datastax.cassandra/cassandra-driver-core --&gt;</span>
+      <span class="o">&lt;</span><span class="nx">dependency</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">groupId</span><span class="o">&gt;</span><span class="nx">com</span><span class="p">.</span><span class="nx">datastax</span><span class="p">.</span><span class="nx">cassandra</span><span class="o">&lt;</span><span class="sr">/groupId</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">artifactId</span><span class="o">&gt;</span><span class="nx">cassandra</span><span class="o">-</span><span class="nx">driver</span><span class="o">-</span><span class="nx">core</span><span class="o">&lt;</span><span class="sr">/artifactId</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">version</span><span class="o">&gt;</span><span class="mf">3.8</span><span class="p">.</span><span class="mi">0</span><span class="o">&lt;</span><span class="sr">/version</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/dependency</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<p>Next we need to unpack the Astra Secure Bundle and gather some connection details found within:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">cassandra</span><span class="o">-</span><span class="nx">snapshot</span><span class="o">-</span><span class="nx">store</span> <span class="p">{</span>
+  <span class="nx">authentication</span><span class="p">.</span><span class="nx">username</span> <span class="o">=</span> <span class="nx">$</span><span class="p">{</span><span class="nx">cassandra</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="nx">authentication</span><span class="p">.</span><span class="nx">username</span><span class="p">}</span>
+  <span class="nx">authentication</span><span class="p">.</span><span class="nx">password</span> <span class="o">=</span> <span class="nx">$</span><span class="p">{</span><span class="nx">cassandra</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="nx">authentication</span><span class="p">.</span><span class="nx">password</span><span class="p">}</span>
+  <span class="nx">ssl</span><span class="p">.</span><span class="nx">truststore</span><span class="p">.</span><span class="nx">path</span> <span class="o">=</span> <span class="nx">$</span><span class="p">{</span><span class="nx">cassandra</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="nx">ssl</span><span class="p">.</span><span class="nx">truststore</span><span class="p">.</span><span class="nx">path</span><span class="p">}</span>
+  <span class="nx">ssl</span><span class="p">.</span><span class="nx">truststore</span><span class="p">.</span><span class="nx">password</span> <span class="o">=</span> <span class="nx">$</span><span class="p">{</span><span class="nx">cassandra</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="nx">ssl</span><span class="p">.</span><span class="nx">truststore</span><span class="p">.</span><span class="nx">password</span><span class="p">}</span>
+  <span class="nx">ssl</span><span class="p">.</span><span class="nx">keystore</span><span class="p">.</span><span class="nx">path</span> <span class="o">=</span> <span class="nx">$</span><span class="p">{</span><span class="nx">cassandra</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="nx">ssl</span><span class="p">.</span><span class="nx">keystore</span><span class="p">.</span><span class="nx">path</span><span class="p">}</span>
+  <span class="nx">ssl</span><span class="p">.</span><span class="nx">keystore</span><span class="p">.</span><span class="nx">password</span> <span class="o">=</span> <span class="nx">$</span><span class="p">{</span><span class="nx">cassandra</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="nx">ssl</span><span class="p">.</span><span class="nx">keystore</span><span class="p">.</span><span class="nx">password</span><span class="p">}</span>
+  <span class="nx">keyspace</span> <span class="o">=</span> <span class="nx">$</span><span class="p">{</span><span class="kr">package</span><span class="p">.</span><span class="nx">cassandra</span><span class="p">.</span><span class="nx">keyspace</span><span class="p">}</span>
+  <span class="nx">keyspace</span><span class="o">-</span><span class="nx">autocreate</span> <span class="o">=</span> <span class="kc">true</span>
+  <span class="nx">tables</span><span class="o">-</span><span class="nx">autocreate</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="how-can-i-help-you-with-astra">How can I help you with Astra?</h1>
+
+<p><img src="/assets/images/SRM.png" alt="SRM" height="100" width="100" style="float: left; padding: 10px" /></p>
+
+<p>Find me over on the <a href="https://datastax.slack.com/archives/CP189L0HF">Astra Slack</a> to ask me any questions about Astra.  Also let’s chat if you have something kewl you did with Astra and you want me to feature it in my blog.  Look below or to the right for more ways to find me.</p>
+
+        </section>
+
+        <aside id="sidebar">
+	
+
+<h1 id="find-me">Find Me</h1>
+
+You can find me on Slacks:
+<ul>
+  <li><a href="https://datastax.slack.com" target="_blank" rel="noopener">DataStax Slack</a></li>
+  <li><a href="https://the-asf.slack.com" target="_blank" rel="noopener">The ASF Slack</a></li>
+  <li><a href="https://apachenifi.slack.com" target="_blank" rel="noopener">Apache NiFi Slack</a></li>
+  <li><a href="https://nosqlbench.slack.com" target="_blank" rel="noopener">NoSqlBench Slack</a></li>
+  <li><a href="https://datastax.slack.com/archives/CP189L0HF" target="_blank" rel="noopener">Astra Slack</a></li>
+  <li><a href="https://join.slack.com/t/ibm-cloud-success/shared_invite/zt-ki1gmwe9-M0bFaI_nMSAF1RzDMqw_wg" target="_blank" rel="noopener">IBM Cloud Slack</a></li>
+</ul>
+
+You can find me on Stacks:
+<ul>
+  <li><a href="https://stackoverflow.com/users/14215291/ds-steven-matison" target="_blank" rel="noopener">ds-steven-matison</a></li>
+  <li><a href="https://stackoverflow.com/users/4253286/steven-matison" target="_blank" rel="noopener">steven-matison</a></li>
+</ul>
+
+You can find me on Communities:
+<ul>
+  <li><a href="https://community.datastax.com/users/3254/ds-steven-matison.html" target="_blank" rel="noopener">DataStax Community</a></li>
+  <li><a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/60150" target="_blank" rel="noopener">Cloudera Community</a></li>
+</ul>
+You can find me on Socials:
+<ul>
+  <li><a href="https://www.linkedin.com/in/steven-matison/" target="_blank" rel="noopener">LinkedIn</a></li>
+  <li><a href="https://twitter.com/DsMatison" target="_blank" rel="noopener">Twitter</a></li>
+</ul>
+You can find me on Discords:
+<ul>
+  <li><a href="https://discord.gg/4e4UNVjD" target="_blank" rel="noopener">Stargate</a></li>
+  <li><a href="https://discord.gg/pPjPcZN" target="_blank" rel="noopener">FOTCR</a></li>
+  <li><a href="https://discord.gg/F24HwnCR" target="_blank" rel="noopener">GraphQL</a></li>
+</ul>
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</p>
+          <script src="//t1.extreme-dm.com/f.js" id="eXF-dsmatiso-0" async defer></script>
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>
+<!-- testing external pixel -->
+<img src="//makeopensourcegreatagain.com/test.png?siteid=ds-steven-matison">
+<!-- start GHP Listener -->
+<script type="text/javascript">
+var GHP_siteid='ds-steven-matison'; 
+var GHP_refer = encodeURIComponent(document.referrer);
+var GHP_url = encodeURIComponent(document.URL);
+var ghpscript_url = ("https:" == document.location.protocol ? "https://" : "http://") + "ghptracker.site/track/" + "?siteid=" + GHP_siteid + "&refer=" + GHP_refer + "&url=" + GHP_url;
+var GHP_object = new XMLHttpRequest();
+GHP_object.open("GET", ghpscript_url, false);
+GHP_object.send(null);
+</script>
+<!-- end GHP Listener -->
+<!-- end GHP Counter -->
+<script type="text/javascript">
+var widget_url = ("https:" == document.location.protocol ? "https://" : "http://") + "ghptracker.site/widget/?siteid=ds-steven-matison";
+var GHP_object = new XMLHttpRequest();
+GHP_object.open("GET", widget_url, false);
+GHP_object.send(null);
+var obj = JSON.parse(GHP_object.response);
+document.getElementById("GHP_counter").innerHTML += '<img src="//img.shields.io/badge/views-' + obj.counter.value + '-blue">';
+</script>
+<!-- end GHP Counter -->

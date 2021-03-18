@@ -26,11 +26,27 @@ There are many application frameworks that use Apache Cassandra as a backend dat
 * [Symfony](https://symfony.com/)
 * [Laravel](https://laravel.com/)
 * [Ruby / Rails](https://rubyonrails.org/)
+* [JNoSql](http://www.jnosql.org/)
 
 # Astra Framework Integrations
 
 <div class="mui-container">
   <div class="home mui-row">
+      <div class="mui-col-md-2">
+        <article class="mui-panel">
+          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
+            <span class="post-list-title">
+              <a class="post-link" href="/astra/application/frameworks/lagom/">Astra + Lagom</a>
+            </span>
+            <div class="img-overlay"></div>
+            <a href="/astra/application/frameworks/lagom/" class="overlay"></a>
+          </div>
+          <div class="post-data">
+            <p class="post-excerpt">Astra with Lagom</p>
+            <p><b>tags:</b> astra, framework, java, lagom</p>
+          </div>
+        </article>
+      </div>
       <div class="mui-col-md-2">
         <article class="mui-panel">
           <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
@@ -48,6 +64,7 @@ There are many application frameworks that use Apache Cassandra as a backend dat
       </div>
   </div>
 </div>
+
 
 # What's Next?
 
