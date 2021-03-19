@@ -35,17 +35,41 @@ First we must update dependencies in pom.xml:
 Next we need to unpack the Astra Secure Bundle and gather some connection details found within:
 
 ```js
-cassandra-snapshot-store {
-  authentication.username = ${cassandra.default.authentication.username}
-  authentication.password = ${cassandra.default.authentication.password}
-  ssl.truststore.path = ${cassandra.default.ssl.truststore.path}
-  ssl.truststore.password = ${cassandra.default.ssl.truststore.password}
-  ssl.keystore.path = ${cassandra.default.ssl.keystore.path}
-  ssl.keystore.password = ${cassandra.default.ssl.keystore.password}
-  keyspace = ${package.cassandra.keyspace}
-  keyspace-autocreate = true
-  tables-autocreate = true
+stevenmatison@smatison-rmbp16 secure-connect-12413de1-f1a2-4171-9dfb-7df93b64cb55 % ls -al          
+total 64
+drwxr-xr-x@  10 stevenmatison  staff    320 Nov 24 09:25 .
+drwx------@ 431 stevenmatison  staff  13792 Mar 19 08:55 ..
+-rw-------@   1 stevenmatison  staff   1460 Nov 24 08:34 ca.crt
+-rw-------@   1 stevenmatison  staff   1464 Nov 24 08:34 cert
+-rw-r--r--@   1 stevenmatison  staff   3719 Nov 24 08:34 cert.pfx
+-rw-r--r--@   1 stevenmatison  staff    476 Nov 24 08:34 config.json
+-rw-r--r--@   1 stevenmatison  staff    193 Nov 24 08:34 cqlshrc
+-rw-r--r--@   1 stevenmatison  staff   2812 Nov 24 08:34 identity.jks
+-rw-------@   1 stevenmatison  staff   1675 Nov 24 08:34 key
+-rw-r--r--@   1 stevenmatison  staff   1522 Nov 24 08:34 trustStore.jks
+
+```
+
+Next checkout the contents of config.json:
+
+```js
+stevenmatison@smatison-rmbp16 secure-connect-12413de1-f1a2-4171-9dfb-7df93b64cb55 % cat config.json 
+{
+  "host": "2703f654-cea5-48e5-98d2-373f2a323d5f-us-east1.db.astra.datastax.com",
+  "port": 32220,
+  "keyspace": "petclinic",
+  "localDC": "dc-1",
+  "caCertLocation": "./ca.crt",
+  "keyLocation": "./key",
+  "certLocation": "./cert",
+  "keyStoreLocation": "./identity.jks",
+  "keyStorePassword": "iT4MjPX78Rcxm9W0n",
+  "trustStoreLocation": "./trustStore.jks",
+  "trustStorePassword": "4wv2UDpH5CN7yam6M",
+  "csvLocation": "./data",
+  "pfxCertPassword": "myY9e216n8PTDwbJW"
 }
+
 ```
 
 {% include astra_help.html %}
