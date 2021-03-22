@@ -58,4 +58,28 @@ permalink: /kubernetes/
     </div>     
 </div>
 
+# How To: Tail Multiple Pod Logs in Kubernetes?
+
+I had a scenario where I needed to monitor log output from multiple pods in my kubernetes cluster.  This tool allowed me to do just that. Thank you [dougwettlaufer](https://github.com/dougwettlaufer) for sharing Stern.
+
+<div class="mui-container">
+    <div class="home mui-row">
+      <div class="mui-col-md-6">
+        <article class="mui-panel">
+          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
+            <span class="post-list-title">
+              <a class="post-link" href="https://github.com/wercker/stern">GitHub: Stern</a>
+            </span>
+            <div class="img-overlay"></div>
+            <a href="https://github.com/wercker/stern" class="overlay"></a>
+          </div>
+          <div class="post-data">
+            <p class="post-excerpt">Multi pod and container log tailing for Kubernetes</p>
+            GitHub Repo: <a href="https://github.com/wercker/stern">Stern</a>
+          </div>
+        </article>
+    </div>
+  </div>
+</div>
+
 {% include kubernetes_help.html %}
