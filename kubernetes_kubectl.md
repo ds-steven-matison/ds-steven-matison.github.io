@@ -185,6 +185,17 @@ Today I found this very kewl github repo [kubecolor](https://github.com/dty1er/k
 
 Kubecolor is super easy to install and super easy to use!   Thank you: [dty1er](https://github.com/dty1er) and kubecolor [contributors](https://github.com/dty1er/kubecolor/graphs/contributors) for your amazing efforts.  :clap: :clap: :clap: 
 
+# How Do You Change Kubectl Context?
+
+I am often switching from k3ds to gke or iks for testing my command flow in these other environments.  The other day I connected to a gke cluster and needed to get my local terminal's kubectl back to my local k3ds environment.  These are the commands I needed to switch my kubectl context:
+
+```js
+kubectl config get-contexts
+kubectl config use-context k3d-k3s-default
+```
+To learn more about kubectl context check out this [cheatsheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/#kubectl-context-and-configuration).
+
+
 # What's Next?
 
 Have some commands I am missing?  I would love to see what you got.  Reach out and lets talk kubectl!
