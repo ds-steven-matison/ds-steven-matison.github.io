@@ -23,19 +23,19 @@
     <![endif]-->
 
 <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Stargate | Data Architect</title>
+<title>Astra Perseverance | Data Architect</title>
 <meta name="generator" content="Jekyll v4.2.0" />
-<meta property="og:title" content="Stargate" />
+<meta property="og:title" content="Astra Perseverance" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="A blog all about Stargate" />
-<meta property="og:description" content="A blog all about Stargate" />
-<link rel="canonical" href="https://ds-steven-matison.github.io/stargate/" />
-<meta property="og:url" content="https://ds-steven-matison.github.io/stargate/" />
+<meta name="description" content="How to Astra Perseverance" />
+<meta property="og:description" content="How to Astra Perseverance" />
+<link rel="canonical" href="https://ds-steven-matison.github.io/astra/perseverance/" />
+<meta property="og:url" content="https://ds-steven-matison.github.io/astra/perseverance/" />
 <meta property="og:site_name" content="Data Architect" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Stargate" />
+<meta property="twitter:title" content="Astra Perseverance" />
 <script type="application/ld+json">
-{"description":"A blog all about Stargate","headline":"Stargate","url":"https://ds-steven-matison.github.io/stargate/","@type":"WebPage","@context":"https://schema.org"}</script>
+{"description":"How to Astra Perseverance","headline":"Astra Perseverance","url":"https://ds-steven-matison.github.io/astra/perseverance/","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -44,16 +44,17 @@
     <header>
       <div class="inner">
         <a href="https://ds-steven-matison.github.io/">
-          <h1> Stargate </h1>
+          <h1> Astra Perseverance </h1>
         </a>
-        <h2> A blog all about Stargate </h2>
+        <h2> How to Astra Perseverance </h2>
           <br>
           <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
           <a href="/astra/"><button type="button" class="btn btn-primary">Astra</button></a>
           <a href="/kubernetes/"><button type="button" class="btn btn-primary">Kubernetes</button></a>
           <a href="/nosqlbench/"><button type="button" class="btn btn-primary">NoSqlBench</button></a>
           <a href="/stargate/"><button type="button" class="btn btn-primary">Stargate</button></a>
-          <p><div id="GHP_counter"></div></p>          
+          <p></p>
+<div id="GHP_counter"></div>          
         <a href="" class="button"><small>Follow me on</small> GitHub</a>
       </div>
     </header>
@@ -61,85 +62,33 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h1 id="what-is-stargate">What is Stargate?</h1>
+          <h1 id="how-to-evaluate-dse-cassandra-clusters-for-astra-migration">How To: Evaluate DSE Cassandra Clusters for Astra Migration</h1>
 
-<p>Stargate is an open source api framework for data which makes the database administration task for any application more accessible by adding developer level support for all turnkey database operations.  Check out the <a href="https://stargate.io/">Stargate Website</a>, the <a href="https://github.com/stargate/stargate">Stargate Github</a>, and the <a href="https://stargate.io/docs/stargate/0.1/quickstart/quickstart.html">Stargate Documentation</a>.  If you are chatty they even have a 
-<a href="https://discord.com/invite/33mKDHHFUE">Discord</a>.</p>
+<p>One of my co-works <a href="https://github.com/ssdatastax">ssdatastax</a>recently built a python tool called Astra Perseverance which executes against a diagnostic tarball from DSE Opscenter and provides some information needed for astra sizing.   You can find the tool <a href="https://github.com/ssdatastax/astra-perseverance#getting-started">here</a>.  In this short how to I am going to show you how to setup your macbook environment and execute this script.</p>
 
-<h1 id="why-use-stargate">Why use Stargate?</h1>
+<p>First setup your environment:</p>
 
-<p>Mostly because it is a portal to another future data world,  I use Stargate specifically for two futuristic use cases:</p>
-<ul>
-  <li>GraphQL + Cassandra</li>
-  <li>JSON Document Database</li>
-</ul>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">brew</span> <span class="nx">install</span> <span class="nx">python3</span>
+<span class="nx">pip3</span> <span class="nx">install</span> <span class="nx">pandas</span> 
+<span class="nx">pip3</span> <span class="nx">install</span> <span class="nx">xlsxwriter</span>
+</code></pre></div></div>
+<p>Next install the tool:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">git</span> <span class="nx">clone</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//github.com/ssdatastax/astra-perseverance.git</span>
+</code></pre></div></div>
+<p>Now execute the tool:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">cd</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">perseverance</span>
+<span class="nx">python3</span> <span class="nx">explore</span><span class="p">.</span><span class="nx">py</span> <span class="o">-</span><span class="nx">p</span> <span class="o">/</span><span class="nx">Users</span><span class="o">/</span><span class="nx">stevenmatison</span><span class="o">/</span><span class="nx">Downloads</span><span class="o">/</span><span class="nx">test</span><span class="o">/</span><span class="nx">Cluster_1</span> <span class="o">-</span><span class="nx">p</span> <span class="o">/</span><span class="nx">Users</span><span class="o">/</span><span class="nx">stevenmatison</span><span class="o">/</span><span class="nx">Downloads</span><span class="o">/</span><span class="nx">test</span><span class="o">/</span><span class="nx">Cluster_2</span> <span class="o">-</span><span class="nx">p</span> <span class="o">/</span><span class="nx">Users</span><span class="o">/</span><span class="nx">stevenmatison</span><span class="o">/</span><span class="nx">Downloads</span><span class="o">/</span><span class="nx">test</span><span class="o">/</span><span class="nx">Cluster_3</span>
+</code></pre></div></div>
 
-<h1 id="learning-stargate">Learning Stargate</h1>
+<p>After execution an Excel Spreadsheet will be located in each folder.</p>
 
-<p>The best way for me to learn any new API is to read the documentation and build the samples.  Stargate was no exception with 3 different APIs I need to learn:</p>
+<p><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> Notice I use python3 and pip3 here instead of documented python and pip.  I had issues with existing python2 install not taking pandas or xlsxwriter.</p>
 
-<ol>
-  <li>The REST API for CRUD calls such as: Create, Update, Read, Delete.</li>
-  <li>The Document API for CRUD access to Documents Data in JSON.</li>
-  <li>The GraphQL API for interacting with Stargate using entire Graph Query Language feature.</li>
-</ol>
+<h1 id="how-can-i-help-you-with-astra">How can I help you with Astra?</h1>
 
-<p>To give you a head start I have already created and tested everything in Postman.</p>
+<p><img src="/assets/images/SRM.png" alt="SRM" height="100" width="100" style="float: left; padding: 10px"></p>
 
-<h1 id="check-out-my-github-repo">Check Out My Github Repo</h1>
-<p>Before getting started with Stargate &amp; Postman download, fork, or clone my github repo which contains a Postman Environment and all of the sample calls you will find in the Stargate Documentation.   There is even a folder of sample calls for GraphQl.</p>
-
-<div class="mui-container">
-    <div class="home mui-row">
-
-      <div class="mui-col-md-6">
-        <article class="mui-panel">
-          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
-            <span class="post-list-title">
-              <a class="post-link" href="https://github.com/ds-steven-matison/stargate-postman-demo">GitHub: Stargate Postman Demo</a>
-            </span>
-            <div class="img-overlay"></div>
-            <a href="https://github.com/ds-steven-matison/stargate-postman-demo" class="overlay"></a>
-          </div>
-          <div class="post-data">
-            <p class="post-excerpt">My GitHub repo which contains a Postman Environment and a Postman Collection for all the Stargate APIs.</p>
-            GitHub Repo: <a href="https://github.com/ds-steven-matison/stargate-postman-demo">astra-postman-demo</a>
-          </div>
-        </article>
-    </div>
-  </div>
-</div>
-
-<h1 id="graphql">GraphQL</h1>
-<p>One of the features I like the best about Stargate is the GraphQL capabilities.  I will come back here more with a /graphql/ page and more detail about the graphQL Api later.</p>
-
-<h1 id="graphql-playground">GraphQl Playground</h1>
-<p>Bundled within the docker stargate is an instance of <a href="https://github.com/graphql/graphql-playground">GraphQL Playground</a>.  This UI provides a user interface (IDE UI) to execute GraphQL queries against Stargate GraphQL APIs.</p>
-
-<div class="mui-container">
-    <div class="home mui-row">
-      <div class="mui-col-md-6">
-        <article class="mui-panel">
-          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
-            <span class="post-list-title">
-              <a class="post-link" href="/stargate/graphql/playground/">GraphQL Playground</a>
-            </span>
-            <div class="img-overlay"></div>
-            <a href="/stargate/graphql/playground/" class="overlay"></a>
-          </div>
-          <div class="post-data">
-            <p class="post-excerpt">My datastax experiences with GraphQL Playground</p>
-          </div>
-        </article>
-    </div>
-  </div>
-</div>
-
-<h1 id="how-can-i-help-you-with-stargate">How can I help you with Stargate?</h1>
-
-<p><img src="/assets/images/SRM.png" alt="SRM" height="100" width="100" style="float: left; padding: 10px" /></p>
-
-<p>Find me over on the <a href="https://discord.gg/33mKDHHFUE">Stargate Discord</a> to ask me any questions about Stargate.  Also let’s chat if you have something kewl you did with Stargate and you want me to feature it in my blog.  Look below or to the right for more ways to find me.</p>
+<p>Find me over on the <a href="https://datastax.slack.com/archives/CP189L0HF">Astra Slack</a> to ask me any questions about Astra.  Also let’s chat if you have something kewl you did with Astra and you want me to feature it in my blog.  Look below or to the right for more ways to find me.</p>
 
         </section>
 

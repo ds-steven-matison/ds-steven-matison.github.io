@@ -24,18 +24,18 @@
 
 <!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Astra Service Broker | Data Architect</title>
-<meta name="generator" content="Jekyll v4.1.1" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Astra Service Broker" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="How use Astra Service Broker" />
 <meta property="og:description" content="How use Astra Service Broker" />
-<link rel="canonical" href="http://localhost:4000/astra/service/broker/" />
-<meta property="og:url" content="http://localhost:4000/astra/service/broker/" />
+<link rel="canonical" href="https://ds-steven-matison.github.io/astra/service/broker/" />
+<meta property="og:url" content="https://ds-steven-matison.github.io/astra/service/broker/" />
 <meta property="og:site_name" content="Data Architect" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Astra Service Broker" />
 <script type="application/ld+json">
-{"headline":"Astra Service Broker","url":"http://localhost:4000/astra/service/broker/","description":"How use Astra Service Broker","@type":"WebPage","@context":"https://schema.org"}</script>
+{"description":"How use Astra Service Broker","headline":"Astra Service Broker","url":"https://ds-steven-matison.github.io/astra/service/broker/","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -43,7 +43,7 @@
   <body>
     <header>
       <div class="inner">
-        <a href="http://localhost:4000/">
+        <a href="https://ds-steven-matison.github.io/">
           <h1> Astra Service Broker </h1>
         </a>
         <h2> How use Astra Service Broker </h2>
@@ -76,7 +76,7 @@
 <h2 id="create-cluster--get-access-credentials">Create Cluster &amp; Get Access Credentials</h2>
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">k3d</span> <span class="nx">cluster</span> <span class="nx">create</span>
 <span class="nx">helm</span> <span class="nx">install</span> <span class="nx">catalog</span> <span class="nx">svc</span><span class="o">-</span><span class="nx">cat</span><span class="o">/</span><span class="nx">catalog</span> <span class="o">--</span><span class="nx">namespace</span> <span class="nx">catalog</span> <span class="o">--</span><span class="nx">create</span><span class="o">-</span><span class="nx">namespace</span>
-<span class="nx">kubectl</span> <span class="nx">create</span> <span class="nx">secret</span> <span class="nx">generic</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">creds</span> <span class="o">--</span><span class="k">from</span><span class="o">-</span><span class="nx">literal</span><span class="o">=</span><span class="nx">username</span><span class="o">=</span><span class="nx">unused</span> <span class="o">--</span><span class="k">from</span><span class="o">-</span><span class="nx">literal</span><span class="o">=</span><span class="nx">password</span><span class="o">=</span><span class="s2">`</span><span class="err">echo '[Astra Service Account Credential JSON]'| base64</span><span class="s2">`</span>
+<span class="nx">kubectl</span> <span class="nx">create</span> <span class="nx">secret</span> <span class="nx">generic</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">creds</span> <span class="o">--</span><span class="k">from</span><span class="o">-</span><span class="nx">literal</span><span class="o">=</span><span class="nx">username</span><span class="o">=</span><span class="nx">unused</span> <span class="o">--</span><span class="k">from</span><span class="o">-</span><span class="nx">literal</span><span class="o">=</span><span class="nx">password</span><span class="o">=</span><span class="s2">`echo '[Astra Service Account Credential JSON]'| base64`</span>
 <span class="nx">kubectl</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">service</span><span class="o">-</span><span class="nx">broker</span><span class="p">.</span><span class="nx">yaml</span>
 <span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">service</span><span class="o">-</span><span class="nx">instance</span><span class="p">.</span><span class="nx">yaml</span>
 <span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">service</span><span class="o">-</span><span class="nx">binding</span><span class="p">.</span><span class="nx">yaml</span>
@@ -177,6 +177,7 @@ You can find me on Discords:
   <li><a href="https://discord.gg/4e4UNVjD" target="_blank" rel="noopener">Stargate</a></li>
   <li><a href="https://discord.gg/pPjPcZN" target="_blank" rel="noopener">FOTCR</a></li>
   <li><a href="https://discord.gg/F24HwnCR" target="_blank" rel="noopener">GraphQL</a></li>
+  <li><a href="https://discord.gg/dBHRakusMN" target="_blank" rel="noopener">NoSqlBench</a></li>
 </ul>
           <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</p>
           <script src="//t1.extreme-dm.com/f.js" id="eXF-dsmatiso-0" async defer></script>

@@ -24,18 +24,18 @@
 
 <!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Astra + React | Data Architect</title>
-<meta name="generator" content="Jekyll v4.1.1" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Astra + React" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Connect your existing react app to Astra" />
 <meta property="og:description" content="Connect your existing react app to Astra" />
-<link rel="canonical" href="http://localhost:4000/astra/application/frameworks/react/" />
-<meta property="og:url" content="http://localhost:4000/astra/application/frameworks/react/" />
+<link rel="canonical" href="https://ds-steven-matison.github.io/astra/application/frameworks/react/" />
+<meta property="og:url" content="https://ds-steven-matison.github.io/astra/application/frameworks/react/" />
 <meta property="og:site_name" content="Data Architect" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Astra + React" />
 <script type="application/ld+json">
-{"headline":"Astra + React","url":"http://localhost:4000/astra/application/frameworks/react/","description":"Connect your existing react app to Astra","@type":"WebPage","@context":"https://schema.org"}</script>
+{"description":"Connect your existing react app to Astra","headline":"Astra + React","url":"https://ds-steven-matison.github.io/astra/application/frameworks/react/","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -43,7 +43,7 @@
   <body>
     <header>
       <div class="inner">
-        <a href="http://localhost:4000/">
+        <a href="https://ds-steven-matison.github.io/">
           <h1> Astra + React </h1>
         </a>
         <h2> Connect your existing react app to Astra </h2>
@@ -78,7 +78,7 @@
 <p>First I needed to create my version of getOrcreateAuthToken.js:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">cross-fetch</span><span class="dl">'</span><span class="p">)</span>
-<span class="kd">const</span> <span class="nx">ENDPOINT</span> <span class="o">=</span> <span class="s2">`</span><span class="err">https://</span><span class="p">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_ASTRA_DB_ID</span><span class="p">}</span><span class="err">-</span><span class="p">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_ASTRA_DB_REGION</span><span class="p">}</span><span class="err">.apps.astra.datastax.com/api/rest/v1</span><span class="s2">`</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">ENDPOINT</span> <span class="o">=</span> <span class="s2">`https://</span><span class="p">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_ASTRA_DB_ID</span><span class="p">}</span><span class="s2">-</span><span class="p">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_ASTRA_DB_REGION</span><span class="p">}</span><span class="s2">.apps.astra.datastax.com/api/rest/v1`</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">REACT_APP_ASTRA_DB_USERNAME</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_ASTRA_DB_USERNAME</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">REACT_APP_ASTRA_DB_PASSWORD</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_ASTRA_DB_PASSWORD</span><span class="p">;</span>
 
@@ -96,7 +96,7 @@
   <span class="p">}</span>
   <span class="k">try</span> <span class="p">{</span>
     <span class="c1">//console.log(ENDPOINT)</span>
-    <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">ENDPOINT</span><span class="p">}</span><span class="err">/auth</span><span class="s2">`</span><span class="p">,</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">ENDPOINT</span><span class="p">}</span><span class="s2">/auth`</span><span class="p">,</span> <span class="p">{</span>
       <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
       <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
         <span class="dl">'</span><span class="s1">content-type</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
@@ -122,13 +122,13 @@
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">getMemes</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">sessionId</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 
   <span class="kd">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">cross-fetch</span><span class="dl">'</span><span class="p">);</span>
-  <span class="kd">const</span> <span class="nx">ENDPOINT</span> <span class="o">=</span> <span class="s2">`</span><span class="err">https://</span><span class="p">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_ASTRA_DB_ID</span><span class="p">}</span><span class="err">-</span><span class="p">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_ASTRA_DB_REGION</span><span class="p">}</span><span class="err">.apps.astra.datastax.com/api/rest/v1</span><span class="s2">`</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">ENDPOINT</span> <span class="o">=</span> <span class="s2">`https://</span><span class="p">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_ASTRA_DB_ID</span><span class="p">}</span><span class="s2">-</span><span class="p">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_ASTRA_DB_REGION</span><span class="p">}</span><span class="s2">.apps.astra.datastax.com/api/rest/v1`</span><span class="p">;</span>
   <span class="kd">const</span> <span class="nx">REACT_APP_ASTRA_DB_KEYSPACE</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_ASTRA_DB_KEYSPACE</span><span class="p">;</span>
   <span class="kd">const</span> <span class="nx">TABLE_NAME</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">memegen</span><span class="dl">'</span><span class="p">;</span>
   <span class="kd">const</span> <span class="p">{</span><span class="nx">authToken</span><span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getOrCreateAuthToken</span><span class="p">();</span>
 
   <span class="k">try</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">ENDPOINT</span><span class="p">}</span><span class="err">/keyspaces/</span><span class="p">${</span><span class="nx">REACT_APP_ASTRA_DB_KEYSPACE</span><span class="p">}</span><span class="err">/tables/</span><span class="p">${</span><span class="nx">TABLE_NAME</span><span class="p">}</span><span class="err">/rows</span><span class="s2">`</span><span class="p">,</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">ENDPOINT</span><span class="p">}</span><span class="s2">/keyspaces/</span><span class="p">${</span><span class="nx">REACT_APP_ASTRA_DB_KEYSPACE</span><span class="p">}</span><span class="s2">/tables/</span><span class="p">${</span><span class="nx">TABLE_NAME</span><span class="p">}</span><span class="s2">/rows`</span><span class="p">,</span> <span class="p">{</span>
       <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
         <span class="dl">'</span><span class="s1">x-cassandra-token</span><span class="dl">'</span><span class="p">:</span> <span class="nx">authToken</span>
       <span class="p">}</span>
@@ -208,6 +208,7 @@ You can find me on Discords:
   <li><a href="https://discord.gg/4e4UNVjD" target="_blank" rel="noopener">Stargate</a></li>
   <li><a href="https://discord.gg/pPjPcZN" target="_blank" rel="noopener">FOTCR</a></li>
   <li><a href="https://discord.gg/F24HwnCR" target="_blank" rel="noopener">GraphQL</a></li>
+  <li><a href="https://discord.gg/dBHRakusMN" target="_blank" rel="noopener">NoSqlBench</a></li>
 </ul>
           <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</p>
           <script src="//t1.extreme-dm.com/f.js" id="eXF-dsmatiso-0" async defer></script>
