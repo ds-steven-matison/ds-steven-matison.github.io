@@ -13,12 +13,12 @@ layout: default
 ![SRM](/assets/images/SRM.png){:height="100" width="100" style="float: left; padding: 10px"}
  
 My name is Steven Matison and I am a Data Architect at DataStax. I began my journey at Datastax on 8/28/2020. 
-I am currently working in the following technologies: cassandra, astra, stargate, graph, graphql, nosqlbench, java, maven, docker, ansible, k8ssanrda, kubernetes, spark, nifi, kafka.
+I am currently working in the following technologies: cassandra, astra, stargate, graph, graphql, nosqlbench, java, maven, docker, ansible, k8ssanrda, kubernetes, spark, nifi, kafka, and pulsar.
 
 <div style="clear: both"></div>
 <p>&nbsp;</p>
 # DataStax News
-
+*	[Astra Streaming: BETA](https://docs.datastax.com/en/astra/docs/astream-quick-start.html) - 4/23/2021
 *	[Astra Serverless](https://www.datastax.com/press-release/datastax-astra-shatters-serverless-database-service-barrier) - 2/25/2021
 <br>&nbsp; :fire: :boom: Astra is now Serverless!!
 *	[Stargate on Datastax Enterprise](https://www.datastax.com/blog/2021/02/turbocharge-app-development-dse-stargate-support-modern-data-apis) - 2/10/2021
@@ -45,6 +45,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
 <br>&nbsp; This is an exciting nerdy launch week here with Spacex, ULA, Virgin Galactic, and [Stargate 1.0](/stargate/) launching into orbit.
 
 # Recent Posts
+*	[Introducing: Astra + DSBulk](/astra/dsbulk/) - 4/23/2021 
 *	[How To: Evaluate DSE Cassandra Clusters for Astra Migration](/astra/perseverance/) - 4/13/2021 
 *	[How To: Lagom App + Astra](/astra/application/frameworks/lagom/) - 3/18/2021
 *	[How To: React App + Astra](/astra/application/frameworks/react/) - 3/2/2021
