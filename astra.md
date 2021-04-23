@@ -98,6 +98,9 @@ Astra's main goal is to meet developers were they are comfortable (with many API
         </article>
       </div>
   </div>
+</div>
+
+<div class="mui-container">
   <div class="home mui-row">
       <div class="mui-col-md-2">
         <article class="mui-panel">

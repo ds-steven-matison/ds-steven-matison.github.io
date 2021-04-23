@@ -14,14 +14,14 @@ DSBulk is an amazing tool we use here at DataStax to both unload and load data f
 The first thing we need to do is learn the dsbulk unload command:
 
 ```js
-dsbulk unload -url [outputfile].csv -k [keyspace -t [table] -b "~/Downloads/secure-connect-bundle.zip" -u [clientID] -p [clientSecret]
+dsbulk unload -url [outputfile].csv -k [keyspace] -t [table] -b "~/Downloads/secure-connect-bundle.zip" -u [clientID] -p [clientSecret]
 ```
- :bulb: This example is for unload from Astra, to unload from another cluster, just include -u, -p, and -h (host), -port, and remove -b (bundle).
+ :bulb: This example is for unload from Astra, to unload from another cluster, just include -u, -p, and -h (host), -port, and remove -b (bundle). The official dsbulk manual is found [here](https://docs.datastax.com/en/dsbulk/doc/dsbulk/reference/dsbulkCmd.html).
 
 Next we need to learn the dsbulk load command:
 
 ```js
-dsbulk load -url [outputfile].csv -k [keyspace -t [table] -b "~/Downloads/secure-connect-bundle.zip" -u [clientID] -p [clientSecret] -header true
+dsbulk load -url [outputfile].csv -k [keyspace] -t [table] -b "~/Downloads/secure-connect-bundle.zip" -u [clientID] -p [clientSecret] -header true
 ```
 
 Now that we have a working example of each, lets create a script which will iterate through a list of tables and execute each command.

@@ -19,6 +19,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
 <p>&nbsp;</p>
 # DataStax News
 *	[Astra Streaming: BETA](https://docs.datastax.com/en/astra/docs/astream-quick-start.html) - 4/23/2021
+<br>&nbsp; :dizzy: join the beta list [here](https://docs.datastax.com/en/astra/docs/astream-quick-start.html#join-waitlist).
 *	[Astra Serverless](https://www.datastax.com/press-release/datastax-astra-shatters-serverless-database-service-barrier) - 2/25/2021
 <br>&nbsp; :fire: :boom: Astra is now Serverless!!
 *	[Stargate on Datastax Enterprise](https://www.datastax.com/blog/2021/02/turbocharge-app-development-dse-stargate-support-modern-data-apis) - 2/10/2021
