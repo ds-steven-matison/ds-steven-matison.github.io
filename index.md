@@ -22,7 +22,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
 <br>&nbsp; :rotating_light: Cass 4.0 GA Coming Soon!
 *	[Astra Streaming: BETA](https://docs.datastax.com/en/astra/docs/astream-quick-start.html) - 4/23/2021
 <br>&nbsp; :dizzy: join the beta list [here](https://docs.datastax.com/en/astra/docs/astream-quick-start.html#join-waitlist).
-*	[Cassandra 4.0 Word Party](https://hopin.com/events/apache-cassandra-4-0-world-party ) - 4/20/2021
+*	[Cassandra 4.0 Word Party](https://hopin.com/events/apache-cassandra-4-0-world-party) - 4/20/2021
 <br>&nbsp; :blue_heart: :earth_africa: :earth_americas: :earth_asia: A party for the Apache Cassandra™ Community.
 *	[Astra Serverless](https://www.datastax.com/press-release/datastax-astra-shatters-serverless-database-service-barrier) - 2/25/2021
 <br>&nbsp; :fire: :boom: Astra is now Serverless!!

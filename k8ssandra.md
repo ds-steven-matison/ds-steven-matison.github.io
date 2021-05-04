@@ -15,7 +15,7 @@ For now do some reasearch:
 
 ![Branching](/assets/images/k8ssandra-horizontal.jpg)
 
-| [Website](https://k8ssandra.io/)        | [Github Repo](https://github.com/k8ssandra)          | [Docs](https://k8ssandra.io/docs/) |
+| [Website](https://k8ssandra.io/)        | [Community](https://forum.k8ssandra.io/)        | [Github Repo](https://github.com/k8ssandra)          | [Docs](https://docs.k8ssandra.io/) |
 
 <p>&nbsp;</p>
 
