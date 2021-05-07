@@ -76,6 +76,6 @@ At least 1 record does not match the provided schema.mapping or schema.query. Pl
 
 # What's Next?
 
-Now that I have all my DSE tables loaded to Astra we can begin to test our application against Astra.
+Now that I have all my DSE tables loaded to Astra we can begin to test our application against Astra.  If you are looking for more reference examples for DSBulk check out [msmygit's](https://github.com/msmygit) repo for a much deeper dive into [DSBulk](https://github.com/msmygit/dse-titbits/blob/master/documents/datastax_bulk_loader.md). 
 
 {% include astra_help.html %}

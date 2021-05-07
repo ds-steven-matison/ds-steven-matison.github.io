@@ -82,4 +82,8 @@ There are 2 different Astra APIs.  The DevOps API for creating databases, keyspa
   </div>
 </div>
 
+# What's Next?
+
+Check out [msmygit's](https://github.com/msmygit) repo for a much deeper dive into [Astra + Ansible](https://github.com/msmygit/dse-titbits/blob/master/documents/Working_with_DataStax_Astra_API_Ansible.md). 
+
 {% include astra_help.html %}
