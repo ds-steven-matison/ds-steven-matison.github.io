@@ -50,6 +50,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
 <br>&nbsp; This is an exciting nerdy launch week here with Spacex, ULA, Virgin Galactic, and [Stargate 1.0](/stargate/) launching into orbit.
 
 # Recent Posts
+*	[How To: Deploy a docker app in k8ssandra](/k8ssandra/) - 6/4/2021
 *	[Introducing: Astra + DSBulk](/astra/dsbulk/) - 4/23/2021 
 *	[How To: Evaluate DSE Cassandra Clusters for Astra Migration](/astra/perseverance/) - 4/13/2021 
 *	[How To: Lagom App + Astra](/astra/application/frameworks/lagom/) - 3/18/2021

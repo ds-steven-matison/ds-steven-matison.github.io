@@ -19,6 +19,30 @@ For now do some reasearch:
 
 <p>&nbsp;</p>
 
+# How To: Deploy a docker app in k8ssandra
+
+For an upcoming hackathon I needed a framework and foundation to deploy a new app in a k8ssandra cluster.   To create this foundation I used the basics I learned in my MemgeGen Project (see below) to create a new k8ssandra-docker repo.
+
+<div class="mui-container">
+    <div class="home mui-row">
+      <div class="mui-col-md-6">
+        <article class="mui-panel">
+          <div class="bg-holder bg-deep-purple" style="background:url(/assets/images/database.jpg) no-repeat center center">
+            <span class="post-list-title">
+              <a class="post-link" href="https://github.com/ds-steven-matison/k8ssandra-docker">GitHub: k8ssandra-docker</a>
+            </span>
+            <div class="img-overlay"></div>
+            <a href="https://github.com/ds-steven-matison/k8ssandra-docker" class="overlay"></a>
+          </div>
+          <div class="post-data">
+            <p class="post-excerpt">My GitHub repo useful to deploy a docker app in k8ssandra.</p>
+            GitHub Repo: <a href="https://github.com/ds-steven-matison/k8ssandra-docker">k8ssandra-docker</a>
+          </div>
+        </article>
+    </div>
+  </div>
+</div>
+
 # Check out my k8ssandra MemeGen Project
 
 I have been working on Meme Generator demos with a partner and this latest one is a full k8ssandra platform running the app with cassandra 4.0 backend.  In order to provide a backend interface for this web app I built a simple /api/ with php.  The /api/ originated from [jeromatron](https://github.com/jeromatron) repo [astra-php-bank](https://github.com/jeromatron/astra-php-bank) which is a sample of php auth mechanism and curl to communicate with astra.  I dev'd this on Astra for awhile before migrating it to Cassandra 4.0 + Stargate in k8ssandra.  Stay tuned here as this becomes a more official project and associated assets.
