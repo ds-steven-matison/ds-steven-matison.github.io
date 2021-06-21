@@ -72,4 +72,30 @@ stevenmatison@smatison-rmbp16 secure-connect-12413de1-f1a2-4171-9dfb-7df93b64cb5
 
 ```
 
+Apply values in lagom configs:
+
+```js
+
+cassandra.default {
+
+  contact-points = ${?CASSANDRA_CONTACT_POINTS}
+
+  authentication {
+    username = ${?CASSANDRA_USERNAME}
+    password = ${?CASSANDRA_PASSWORD}
+  }
+
+  ssl {
+    truststore.path = ${?CASSANDRA_TRUSTSTORE_PATH}
+    truststore.password = ${?CASSANDRA_TRUSTSTORE_PASSWORD}
+    keystore.path = ${?CASSANDRA_KEYSTORE_PATH}
+    keystore.password = ${?CASSANDRA_KEYSTORE_PASSWORD}
+  }
+}
+
+//Those values are environment variables
+// for example: CASSANDRA_CONTACT_POINTS= http://[host]:[port] where host/port is from config.json above
+```
+
+
 {% include astra_help.html %}

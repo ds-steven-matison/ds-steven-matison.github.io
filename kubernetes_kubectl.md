@@ -96,6 +96,8 @@ kubectl cluster-info
 
 kubectl describe pods operatorhubio-catalog-tzv5l -n olm
 
+kubectl describe CassandraDataCenter dc1
+
 kubectl get pods --all-namespaces
 
 kubectl -n <namespace> get pods
@@ -126,6 +128,18 @@ kubectl get sc
 
 kubectl get deployments --namespace=monitoring
 
+kubectl get cassandradatacenters
+
+kubectl get serviceinstances devdb
+
+kubectl get configmap
+
+kubectl get configmap <name> -o yaml
+
+kubectl get crds
+
+kubectl get crds | grep cassandra | cut -d ' ' -f 1 | xargs kubectl delete crd
+
 kubectl -n cass-operator get pods --selector name=cass-operator -o yaml
 
 kubectl -n cass-operator get pods
@@ -148,8 +162,6 @@ kubectl logs -n olm -p operatorhubio-catalog-tzv5l
 
 kubectl -n <namespace> exec <pod> -- keytool -list -keystore keystore.jks -storepass dc1
 
-kubectl get serviceinstances devdb
-
 kubectl apply -f astra-service-binding.yaml
 
 kubectl create -f astra-service-broker.yaml
@@ -160,6 +172,8 @@ kubectl delete servicebinding devdb-azure
 
 kubectl delete serviceinstance devdb-azure
 
+kubectl delete -n kube-system pod traefik-5dd496474-q7fzk
+
 kubectl exec -n cass-operator -i -t -c cassandra cluster1-dc1-default-sts-0 -- cqlsh -u cluster1-superuser -p <password>
 
 kubectl port-forward prometheus-deployment-54686956bd-nhz2s 8080:9090 -n monitoring
@@ -168,13 +182,6 @@ kubectl port-forward svc/monitoring-grafana 3000:80
 
 kubectl -n cass-operator exec --stdin cluster1-dc1-default-sts-0 -- /bin/bash
 
-kubectl get configmap
-
-kubectl get configmap <name> -o yaml
-
-kubectl get crds
-
-kubectl get crds | grep cassandra | cut -d ' ' -f 1 | xargs kubectl delete crd
 ```
 
 # How Do I Make Kubectl Colorful?
