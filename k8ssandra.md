@@ -8,7 +8,7 @@ permalink: /k8ssandra/
 # What is K8ssandra?
 <br>
 
-<b><i>Kubernetes + Cassandra = k8ssandra</i></b>
+<b><i>Kubernetes + Cassandra = k8ssandra: </i></b> the best database on kubernetes...
 
 
 For now do some reasearch:
