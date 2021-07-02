@@ -108,6 +108,8 @@ kubectl get secrets -n cass-operator
 
 kubectl get secrets devdb -o yaml
 
+kubectl get service --all-namespaces
+
 kubectl get serviceinstances
 
 kubectl get serviceinstances devdb
