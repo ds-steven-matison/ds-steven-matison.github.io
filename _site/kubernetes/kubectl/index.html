@@ -35,7 +35,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Kubectl" />
 <script type="application/ld+json">
-{"description":"A blog all about kubectl","headline":"Kubectl","url":"https://ds-steven-matison.github.io/kubernetes/kubectl/","@type":"WebPage","@context":"https://schema.org"}</script>
+{"headline":"Kubectl","description":"A blog all about kubectl","url":"https://ds-steven-matison.github.io/kubernetes/kubectl/","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -151,6 +151,8 @@
 
 <span class="nx">kubectl</span> <span class="nx">describe</span> <span class="nx">pods</span> <span class="nx">operatorhubio</span><span class="o">-</span><span class="nx">catalog</span><span class="o">-</span><span class="nx">tzv5l</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">olm</span>
 
+<span class="nx">kubectl</span> <span class="nx">describe</span> <span class="nx">CassandraDataCenter</span> <span class="nx">dc1</span>
+
 <span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">pods</span> <span class="o">--</span><span class="nx">all</span><span class="o">-</span><span class="nx">namespaces</span>
 
 <span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="o">&lt;</span><span class="nx">namespace</span><span class="o">&gt;</span> <span class="kd">get</span> <span class="nx">pods</span>
@@ -160,6 +162,8 @@
 <span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">secrets</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span>
 
 <span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">secrets</span> <span class="nx">devdb</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">yaml</span>
+
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">service</span> <span class="o">--</span><span class="nx">all</span><span class="o">-</span><span class="nx">namespaces</span>
 
 <span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">serviceinstances</span>
 
@@ -180,6 +184,18 @@
 <span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">sc</span>
 
 <span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">deployments</span> <span class="o">--</span><span class="nx">namespace</span><span class="o">=</span><span class="nx">monitoring</span>
+
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">cassandradatacenters</span>
+
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">serviceinstances</span> <span class="nx">devdb</span>
+
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">configmap</span>
+
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">configmap</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">yaml</span>
+
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">crds</span>
+
+<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">crds</span> <span class="o">|</span> <span class="nx">grep</span> <span class="nx">cassandra</span> <span class="o">|</span> <span class="nx">cut</span> <span class="o">-</span><span class="nx">d</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span> <span class="o">-</span><span class="nx">f</span> <span class="mi">1</span> <span class="o">|</span> <span class="nx">xargs</span> <span class="nx">kubectl</span> <span class="k">delete</span> <span class="nx">crd</span>
 
 <span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="kd">get</span> <span class="nx">pods</span> <span class="o">--</span><span class="nx">selector</span> <span class="nx">name</span><span class="o">=</span><span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">yaml</span>
 
@@ -203,8 +219,6 @@
 
 <span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="o">&lt;</span><span class="nx">namespace</span><span class="o">&gt;</span> <span class="nx">exec</span> <span class="o">&lt;</span><span class="nx">pod</span><span class="o">&gt;</span> <span class="o">--</span> <span class="nx">keytool</span> <span class="o">-</span><span class="nx">list</span> <span class="o">-</span><span class="nx">keystore</span> <span class="nx">keystore</span><span class="p">.</span><span class="nx">jks</span> <span class="o">-</span><span class="nx">storepass</span> <span class="nx">dc1</span>
 
-<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">serviceinstances</span> <span class="nx">devdb</span>
-
 <span class="nx">kubectl</span> <span class="nx">apply</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">service</span><span class="o">-</span><span class="nx">binding</span><span class="p">.</span><span class="nx">yaml</span>
 
 <span class="nx">kubectl</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">astra</span><span class="o">-</span><span class="nx">service</span><span class="o">-</span><span class="nx">broker</span><span class="p">.</span><span class="nx">yaml</span>
@@ -215,6 +229,8 @@
 
 <span class="nx">kubectl</span> <span class="k">delete</span> <span class="nx">serviceinstance</span> <span class="nx">devdb</span><span class="o">-</span><span class="nx">azure</span>
 
+<span class="nx">kubectl</span> <span class="k">delete</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">kube</span><span class="o">-</span><span class="nx">system</span> <span class="nx">pod</span> <span class="nx">traefik</span><span class="o">-</span><span class="mi">5</span><span class="nx">dd496474</span><span class="o">-</span><span class="nx">q7fzk</span>
+
 <span class="nx">kubectl</span> <span class="nx">exec</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="o">-</span><span class="nx">i</span> <span class="o">-</span><span class="nx">t</span> <span class="o">-</span><span class="nx">c</span> <span class="nx">cassandra</span> <span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">0</span> <span class="o">--</span> <span class="nx">cqlsh</span> <span class="o">-</span><span class="nx">u</span> <span class="nx">cluster1</span><span class="o">-</span><span class="nx">superuser</span> <span class="o">-</span><span class="nx">p</span> <span class="o">&lt;</span><span class="nx">password</span><span class="o">&gt;</span>
 
 <span class="nx">kubectl</span> <span class="nx">port</span><span class="o">-</span><span class="nx">forward</span> <span class="nx">prometheus</span><span class="o">-</span><span class="nx">deployment</span><span class="o">-</span><span class="mi">54686956</span><span class="nx">bd</span><span class="o">-</span><span class="nx">nhz2s</span> <span class="mi">8080</span><span class="p">:</span><span class="mi">9090</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">monitoring</span>
@@ -223,13 +239,6 @@
 
 <span class="nx">kubectl</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">cass</span><span class="o">-</span><span class="nx">operator</span> <span class="nx">exec</span> <span class="o">--</span><span class="nx">stdin</span> <span class="nx">cluster1</span><span class="o">-</span><span class="nx">dc1</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="nx">sts</span><span class="o">-</span><span class="mi">0</span> <span class="o">--</span> <span class="sr">/bin/</span><span class="nx">bash</span>
 
-<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">configmap</span>
-
-<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">configmap</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">yaml</span>
-
-<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">crds</span>
-
-<span class="nx">kubectl</span> <span class="kd">get</span> <span class="nx">crds</span> <span class="o">|</span> <span class="nx">grep</span> <span class="nx">cassandra</span> <span class="o">|</span> <span class="nx">cut</span> <span class="o">-</span><span class="nx">d</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span> <span class="o">-</span><span class="nx">f</span> <span class="mi">1</span> <span class="o">|</span> <span class="nx">xargs</span> <span class="nx">kubectl</span> <span class="k">delete</span> <span class="nx">crd</span>
 </code></pre></div></div>
 
 <h1 id="how-do-i-make-kubectl-colorful">How Do I Make Kubectl Colorful?</h1>
@@ -271,9 +280,6 @@ You can find me on Slacks:
   <li><a href="https://datastax.slack.com" target="_blank" rel="noopener">DataStax Slack</a></li>
   <li><a href="https://the-asf.slack.com" target="_blank" rel="noopener">The ASF Slack</a></li>
   <li><a href="https://apachenifi.slack.com" target="_blank" rel="noopener">Apache NiFi Slack</a></li>
-  <li><a href="https://nosqlbench.slack.com" target="_blank" rel="noopener">NoSqlBench Slack</a></li>
-  <li><a href="https://datastax.slack.com/archives/CP189L0HF" target="_blank" rel="noopener">Astra Slack</a></li>
-  <li><a href="https://join.slack.com/t/ibm-cloud-success/shared_invite/zt-ki1gmwe9-M0bFaI_nMSAF1RzDMqw_wg" target="_blank" rel="noopener">IBM Cloud Slack</a></li>
 </ul>
 
 You can find me on Stacks:
@@ -284,6 +290,7 @@ You can find me on Stacks:
 
 You can find me on Communities:
 <ul>
+  <li><a href="https://forum.k8ssandra.io/" target="_blank" rel="noopener">k8ssandra Community</a></li>
   <li><a href="https://community.datastax.com/users/3254/ds-steven-matison.html" target="_blank" rel="noopener">DataStax Community</a></li>
   <li><a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/60150" target="_blank" rel="noopener">Cloudera Community</a></li>
 </ul>
@@ -294,6 +301,7 @@ You can find me on Socials:
 </ul>
 You can find me on Discords:
 <ul>
+  <li><a href="https://discord.com/invite/qP5tAt6Uwt" target="_blank" rel="noopener">k8ssandra</a></li>
   <li><a href="https://discord.gg/4e4UNVjD" target="_blank" rel="noopener">Stargate</a></li>
   <li><a href="https://discord.gg/pPjPcZN" target="_blank" rel="noopener">FOTCR</a></li>
   <li><a href="https://discord.gg/F24HwnCR" target="_blank" rel="noopener">GraphQL</a></li>
