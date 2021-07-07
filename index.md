@@ -13,16 +13,18 @@ My name is Steven Matison and I am a Data Architect at DataStax. I began my jour
 I am currently working in the following technologies: cassandra, astra, stargate, graph, graphql, nosqlbench, java, python, maven, docker, ansible, k8ssanrda, kubernetes, spark, nifi, kafka, and pulsar.
 
 ![badge1](/assets/images/DS101 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
-![badge1](/assets/images/DS201 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
-![badge1](/assets/images/DS210 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
-![badge1](/assets/images/DS220 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
-![badge1](/assets/images/DS310 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
-![badge1](/assets/images/DS320 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
-![badge1](/assets/images/DSDEV Completion Badge.png){:height="100" style="float: left; padding: 10px"}
-![badge1](/assets/images/DSADMIN Completion Badge.png){:height="100" style="float: left; padding: 10px"}
-![badge1](/assets/images/DSK8ssandra Completion Badge.jpeg){:height="100" style="float: left; padding: 10px"}
-![badge1](/assets/images/DSTikTok Completion Badge.jpeg){:height="100" style="float: left; padding: 10px"}
-![badge1](/assets/images/DSSpringCassandra Completion Badge.jpeg){:height="100" style="float: left; padding: 10px"}
+![badge2](/assets/images/DS201 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
+![badge3](/assets/images/DS210 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
+![badge4](/assets/images/DS220 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
+![badge5](/assets/images/DS310 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
+![badge6](/assets/images/DS320 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
+![badge7](/assets/images/DSDEV Completion Badge.png){:height="100" style="float: left; padding: 10px"}
+![badge8](/assets/images/DSADMIN Completion Badge.png){:height="100" style="float: left; padding: 10px"}
+![badge9](/assets/images/DS330 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
+![badge10](/assets/images/DS332 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
+![badge11](/assets/images/DSK8ssandra Completion Badge.jpeg){:height="100" style="float: left; padding: 10px"}
+![badge12](/assets/images/DSTikTok Completion Badge.jpeg){:height="100" style="float: left; padding: 10px"}
+![badge13](/assets/images/DSSpringCassandra Completion Badge.jpeg){:height="100" style="float: left; padding: 10px"}
 
 <div style="clear: both"></div>
 <p>&nbsp;</p>
