@@ -32,7 +32,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
 ![badge12](/assets/images/DSTikTok Completion Badge.jpeg){:height="100" style="float: left; padding: 13px"}
 ![badge13](/assets/images/DSSpringCassandra Completion Badge.jpeg){:height="100" style="float: left; padding: 13px"}
 ![badge14](/assets/images/DSIntroToCassandra.png){:height="100" style="float: left; padding: 13px"}
-![badge15](/assets/images/DSSqlToNosql.png){:height="100" style="float: left; padding: 13px"}
+![badge15](/assets/images/DSSqlToNoSql.png){:height="100" style="float: left; padding: 13px"}
 
 <div style="clear: both"></div>
 
