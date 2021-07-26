@@ -17,14 +17,28 @@ I am currently working in the following technologies: cassandra, astra, stargate
 ![badge3](/assets/images/DS210 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
 ![badge4](/assets/images/DS220 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
 ![badge5](/assets/images/DS310 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
+
+<div style="clear: both"></div>
+
 ![badge6](/assets/images/DS320 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
 ![badge7](/assets/images/DSDEV Completion Badge.png){:height="100" style="float: left; padding: 10px"}
 ![badge8](/assets/images/DSADMIN Completion Badge.png){:height="100" style="float: left; padding: 10px"}
 ![badge9](/assets/images/DS330 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
 ![badge10](/assets/images/DS332 Completion Badge.png){:height="100" style="float: left; padding: 10px"}
-![badge11](/assets/images/DSK8ssandra Completion Badge.jpeg){:height="100" style="float: left; padding: 10px"}
-![badge12](/assets/images/DSTikTok Completion Badge.jpeg){:height="100" style="float: left; padding: 10px"}
-![badge13](/assets/images/DSSpringCassandra Completion Badge.jpeg){:height="100" style="float: left; padding: 10px"}
+
+<div style="clear: both"></div>
+
+![badge11](/assets/images/DSK8ssandra Completion Badge.jpeg){:height="100" style="float: left; padding: 13px"}
+![badge12](/assets/images/DSTikTok Completion Badge.jpeg){:height="100" style="float: left; padding: 13px"}
+![badge13](/assets/images/DSSpringCassandra Completion Badge.jpeg){:height="100" style="float: left; padding: 13px"}
+![badge14](/assets/images/DSIntroToCassandra.png){:height="100" style="float: left; padding: 13px"}
+![badge15](/assets/images/DSSqlToNosql.png){:height="100" style="float: left; padding: 13px"}
+
+<div style="clear: both"></div>
+
+![badge16](/assets/images/DSIntroToNosql.png){:height="100" style="float: left; padding: 10px"}
+![badge17](/assets/images/DSNetflixClone.png){:height="100" style="float: left; padding: 10px"}
+
 
 <div style="clear: both"></div>
 <p>&nbsp;</p>
