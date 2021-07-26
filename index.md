@@ -36,9 +36,9 @@ I am currently working in the following technologies: cassandra, astra, stargate
 
 <div style="clear: both"></div>
 
-![badge16](/assets/images/DSIntroToNosql.png){:height="100" style="float: left; padding: 10px"}
-![badge17](/assets/images/DSNetflixClone.png){:height="100" style="float: left; padding: 10px"}
-![badge18](/assets/images/DSToDoApp.png){:height="100" style="float: left; padding: 10px"}
+![badge16](/assets/images/DSIntroToNosql.png){:height="100" style="float: left; padding: 13px"}
+![badge17](/assets/images/DSNetflixClone.png){:height="100" style="float: left; padding: 13px"}
+![badge18](/assets/images/DSToDoApp.png){:height="100" style="float: left; padding: 13px"}
 
 <div style="clear: both"></div>
 <p>&nbsp;</p>
