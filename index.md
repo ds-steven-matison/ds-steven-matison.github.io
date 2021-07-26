@@ -38,7 +38,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
 
 ![badge16](/assets/images/DSIntroToNosql.png){:height="100" style="float: left; padding: 10px"}
 ![badge17](/assets/images/DSNetflixClone.png){:height="100" style="float: left; padding: 10px"}
-
+![badge18](/assets/images/DSToDoApp.png){:height="100" style="float: left; padding: 10px"}
 
 <div style="clear: both"></div>
 <p>&nbsp;</p>
