@@ -88,9 +88,13 @@ I am currently working in the following technologies: cassandra, astra, stargate
 
 <div style="clear: both"></div>
 <p>&nbsp;</p>
+*	[Apache Cassandra 4.0 Released](http://cassandra.apache.org/download/) - 7/26/2021
+<br>&nbsp; :rotating_light: Cass 4.0 GA!
 # DataStax News
 *	[New Hackathon](https://buildamoderndataapp.com/) - 7/26/2021
 <br>&nbsp; Build a Modern Data App is a 3-day virtual hackathon 3-5 September 2021
+*	[Astra Streaming: LIVE](https://www.datastax.com/products/astra-streaming) - 6/15/2021
+<br>&nbsp; :dizzy: Start using Astra Streaming Now!
 *	[Apache Cassandra 4.0-rc1 Released](http://cassandra.apache.org/download/) - 4/25/2021
 <br>&nbsp; :rotating_light: Cass 4.0 GA Coming Soon!
 *	[Astra Streaming: BETA](https://docs.datastax.com/en/astra/docs/astream-quick-start.html) - 4/23/2021
