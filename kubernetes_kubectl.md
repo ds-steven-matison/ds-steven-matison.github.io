@@ -118,6 +118,8 @@ kubectl get serviceinstances devdb
 
 kubectl get servicebindings
 
+kubectl get svc
+
 kubectl get events
 
 kubectl -n cass-operator get events
