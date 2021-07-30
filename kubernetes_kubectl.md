@@ -100,6 +100,8 @@ kubectl describe CassandraDataCenter dc1
 
 kubectl get pods --all-namespaces
 
+kubectl get pods --all-namespaces -o wide
+
 kubectl -n <namespace> get pods
 
 kubectl get nodes -o wide
