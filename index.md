@@ -28,19 +28,19 @@ I am currently working in the following technologies: cassandra, astra, stargate
 
 <div style="clear: both"></div>
 
-![badge11](/assets/images/DSK8ssandra Completion Badge.jpeg){:height="100" style="float: left; padding: 13px"}
-![badge12](/assets/images/DSTikTok Completion Badge.jpeg){:height="100" style="float: left; padding: 13px"}
-![badge13](/assets/images/DSSpringCassandra Completion Badge.jpeg){:height="100" style="float: left; padding: 13px"}
-![badge14](/assets/images/DSIntroToCassandra.png){:height="100" style="float: left; padding: 13px"}
-![badge15](/assets/images/DSSqlToNoSql.png){:height="100" style="float: left; padding: 13px"}
+![badge11](/assets/images/DSK8ssandra Completion Badge.jpeg){:height="100" style="float: left; padding: 14px"}
+![badge12](/assets/images/DSTikTok Completion Badge.jpeg){:height="100" style="float: left; padding: 14px"}
+![badge13](/assets/images/DSSpringCassandra Completion Badge.jpeg){:height="100" style="float: left; padding: 14px"}
+![badge14](/assets/images/DSIntroToCassandra.png){:height="100" style="float: left; padding: 14px"}
+![badge15](/assets/images/DSSqlToNoSql.png){:height="100" style="float: left; padding: 14px"}
 
 <div style="clear: both"></div>
 
-![badge16](/assets/images/DSIntroToNosql.png){:height="100" style="float: left; padding: 13px"}
-![badge17](/assets/images/DSNetflixClone.png){:height="100" style="float: left; padding: 13px"}
-![badge18](/assets/images/DSToDoApp.png){:height="100" style="float: left; padding: 13px"}
-![badge19](/assets/images/DSAppDevGold.png){:height="100" style="float: left; padding: 13px"}
-![badge20](/assets/images/DSDataModeling.png){:height="100" style="float: left; padding: 13px"}
+![badge16](/assets/images/DSIntroToNosql.png){:height="95" style="float: left; padding: 13px"}
+![badge17](/assets/images/DSNetflixClone.png){:height="95" style="float: left; padding: 13px"}
+![badge18](/assets/images/DSToDoApp.png){:height="95" style="float: left; padding: 13px"}
+![badge19](/assets/images/DSAppDevGold.png){:height="95" style="float: left; padding: 13px"}
+![badge20](/assets/images/DSDataModeling.png){:height="95" style="float: left; padding: 13px"}
 
 
 <div style="clear: both"></div>
