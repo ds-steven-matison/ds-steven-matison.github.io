@@ -40,6 +40,7 @@ I am currently working in the following technologies: cassandra, astra, stargate
 ![badge17](/assets/images/DSNetflixClone.png){:height="100" style="float: left; padding: 13px"}
 ![badge18](/assets/images/DSToDoApp.png){:height="100" style="float: left; padding: 13px"}
 ![badge19](/assets/images/DSAppDevGold.png){:height="100" style="float: left; padding: 13px"}
+![badge20](/assets/images/DSDataModeling.png){:height="100" style="float: left; padding: 13px"}
 
 
 <div style="clear: both"></div>
