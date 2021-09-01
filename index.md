@@ -36,12 +36,12 @@ I am currently working in the following technologies: cassandra, astra, stargate
 
 <div style="clear: both"></div>
 
-![badge16](/assets/images/DSIntroToNosql.png){:height="95" style="float: left; padding: 13px"}
-![badge17](/assets/images/DSNetflixClone.png){:height="95" style="float: left; padding: 13px"}
-![badge18](/assets/images/DSToDoApp.png){:height="95" style="float: left; padding: 13px"}
-![badge19](/assets/images/DSAppDevGold.png){:height="95" style="float: left; padding: 13px"}
-![badge20](/assets/images/DSDataModeling.png){:height="95" style="float: left; padding: 13px"}
-
+![badge16](/assets/images/DSIntroToNosql.png){:height="90" style="float: left; padding: 5px"}
+![badge17](/assets/images/DSNetflixClone.png){:height="90" style="float: left; padding: 5px"}
+![badge18](/assets/images/DSToDoApp.png){:height="90" style="float: left; padding: 5px"}
+![badge19](/assets/images/DSDataModeling.png){:height="90" style="float: left; padding: 5px"}
+![badge20](/assets/images/DSAppDevGold.png){:height="90" style="float: left; padding: 5px"}
+![badge21](/assets/images/DSEventStreaming.png){:height="90" style="float: left; padding: 5px"}
 
 <div style="clear: both"></div>
 <p>&nbsp;</p>
@@ -89,9 +89,11 @@ I am currently working in the following technologies: cassandra, astra, stargate
 
 <div style="clear: both"></div>
 <p>&nbsp;</p>
+# DataStax News
+*	[DSE 6.8.15 on Centos 8, RHEL 8, Oracle Linux 8 Released](https://github.com/datastax/release-notes/blob/master/DSE_6.8_Release_Notes.md) - 8/31/2021
+<br>&nbsp; :rotating_light: Cass 4.0 GA!
 *	[Apache Cassandra 4.0 Released](http://cassandra.apache.org/download/) - 7/26/2021
 <br>&nbsp; :rotating_light: Cass 4.0 GA!
-# DataStax News
 *	[New Hackathon](https://buildamoderndataapp.com/) - 7/26/2021
 <br>&nbsp; Build a Modern Data App is a 3-day virtual hackathon 3-5 September 2021
 *	[Astra Streaming: LIVE](https://www.datastax.com/products/astra-streaming) - 6/15/2021
