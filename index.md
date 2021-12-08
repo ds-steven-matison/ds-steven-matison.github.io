@@ -36,12 +36,19 @@ I am currently working in the following technologies: cassandra, astra, stargate
 
 <div style="clear: both"></div>
 
-![badge16](/assets/images/DSIntroToNosql.png){:height="90" style="float: left; padding: 5px"}
-![badge17](/assets/images/DSNetflixClone.png){:height="90" style="float: left; padding: 5px"}
-![badge18](/assets/images/DSToDoApp.png){:height="90" style="float: left; padding: 5px"}
-![badge19](/assets/images/DSDataModeling.png){:height="90" style="float: left; padding: 5px"}
-![badge20](/assets/images/DSAppDevGold.png){:height="90" style="float: left; padding: 5px"}
-![badge21](/assets/images/DSEventStreaming.png){:height="90" style="float: left; padding: 5px"}
+![badge16](/assets/images/DSIntroToNosql.png){:height="100" style="float: left; padding: 14px"}
+![badge17](/assets/images/DSNetflixClone.png){:height="100" style="float: left; padding: 14px"}
+![badge18](/assets/images/DSToDoApp.png){:height="100" style="float: left; padding: 14px"}
+![badge19](/assets/images/DSDataModeling.png){:height="100" style="float: left; padding: 14px"}
+![badge20](/assets/images/DSAppDevGold.png){:height="100" style="float: left; padding: 14px"}
+
+<div style="clear: both"></div>
+
+![badge21](/assets/images/DSEventStreaming.png){:height="100" style="float: left; padding: 14px"}
+![badge21](/assets/images/DSEventStreaming2.png){:height="100" style="float: left; padding: 14px"}
+![badge21](/assets/images/DSQuarkus.png){:height="100" style="float: left; padding: 14px"}
+![badge21](/assets/images/DSReact.png){:height="100" style="float: left; padding: 14px"}
+![badge21](/assets/images/DSBVueJS.png){:height="100" style="float: left; padding: 14px"}
 
 <div style="clear: both"></div>
 <p>&nbsp;</p>
