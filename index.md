@@ -51,6 +51,10 @@ I am currently working in the following technologies: cassandra, astra, stargate
 ![badge25](/assets/images/DSVueJS.png){:height="100" style="float: left; padding: 10px"}
 
 <div style="clear: both"></div>
+
+![badge26](/assets/images/DSGraphQL.png){:height="100" style="float: left; padding: 10px"}
+
+<div style="clear: both"></div>
 <p>&nbsp;</p>
 # Current Projects
 <p>&nbsp;</p>
