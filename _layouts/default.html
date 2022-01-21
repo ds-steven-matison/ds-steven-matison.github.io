@@ -37,8 +37,7 @@
           <a href="/astra/"><button type="button" class="btn btn-primary">Astra</button></a>
           <a href="/kubernetes/"><button type="button" class="btn btn-primary">Kubernetes</button></a>
           <a href="/nosqlbench/"><button type="button" class="btn btn-primary">NoSqlBench</button></a>
-          <a href="/stargate/"><button type="button" class="btn btn-primary">Stargate</button></a>
-          <p><div id="GHP_counter"></div></p>          
+          <a href="/stargate/"><button type="button" class="btn btn-primary">Stargate</button></a>        
         <a href="{{ site.github.owner_url }}" class="button"><small>Follow me on</small> GitHub</a>
       </div>
     </header>
@@ -93,26 +92,3 @@ You can find me on Discords:
     </div>
   </body>
 </html>
-<!-- testing external pixel -->
-<img src="//makeopensourcegreatagain.com/test.png?siteid=ds-steven-matison">
-<!-- start GHP Listener -->
-<script type="text/javascript">
-var GHP_siteid='ds-steven-matison'; 
-var GHP_refer = encodeURIComponent(document.referrer);
-var GHP_url = encodeURIComponent(document.URL);
-var ghpscript_url = ("https:" == document.location.protocol ? "https://" : "http://") + "ghptracker.site/track/" + "?siteid=" + GHP_siteid + "&refer=" + GHP_refer + "&url=" + GHP_url;
-var GHP_object = new XMLHttpRequest();
-GHP_object.open("GET", ghpscript_url, false);
-GHP_object.send(null);
-</script>
-<!-- end GHP Listener -->
-<!-- end GHP Counter -->
-<script type="text/javascript">
-var widget_url = ("https:" == document.location.protocol ? "https://" : "http://") + "ghptracker.site/widget/?siteid=ds-steven-matison";
-var GHP_object = new XMLHttpRequest();
-GHP_object.open("GET", widget_url, false);
-GHP_object.send(null);
-var obj = JSON.parse(GHP_object.response);
-document.getElementById("GHP_counter").innerHTML += '<img src="//img.shields.io/badge/views-' + obj.counter.value + '-blue">';
-</script>
-<!-- end GHP Counter -->
